@@ -118,7 +118,170 @@ This app lets users more easily find ways to engage with social causes in their 
 [This section will be completed in Unit 9]
 ### Models
 [Add table of models]
+#### User
+| Property  | Type    | Description|
+|-----------|---------|------------|
+|objectId   |String   |unique id for the user (default field)| 
+|username   |string   |unique string for identifying user|
+|password   |string   |password for the user account   |
+|email      |string   |email of the user  |
+|friends    |Array of Pointers to Users | reference to all of the user's friends|
+|profileImage |File |profile image file for the user |
+|likedOrgs |Array of Pointers to Organizations| reference to all the organizations the user has been involved with/starred |
+|likedEvents |Array of Pointers to Events |reference to all the events that the user is interested/went to |
+|location| string| city, zipcode, state, country of the user |
+|createdAt | DateTime |date when user was created (default field) |
+
+#### Organization
+| Property  | Type    | Description|
+|-----------|---------|------------|
+|objectId   |String   |unique id for the organization (default field)| 
+|ein |string |Employer Identification Number (EIN) |
+|name |string |charity name |
+|category |string | the category description of the charity |
+|website |string  |link to the organization website |
+|street |string| street address of orgaization|
+|city |string |organization's city location |
+|state |string | organization's state location |
+|zipCode |Number |zipcode of the organization location |
+|missionStatement|string |Organization Mission Statement |
+|acceptingDonations|	string|	Organization Accepts Donations Yes=1, No=0 |
+
+#### Volunteer Events
+| Property  | Type    | Description|
+|-----------|---------|------------|
+|objectId   |String   |unique id for the volunteer events (default field)|
+|title| String|shows the title of the opportunity|
+|availability |string |shows when the opportunity is taking place |
+|beneficiary |string |shows the beneficiary organization of the opportunity |
+|categoryIds |Array of strings | shows the categories associated to this opportunity |
+|contact |string  |contact information |
+|description|string |shows the description of the opportunity |
+| id|string |id the identifier of this event |
+|imageUrl| string | url to image associated with the event |
+|location |string  | location of the URL |
+|requirements |JSON object |shows the requirements as a JSON array |
+|skillsList | JSON object |shows the list of skills as a JSON array |
+|vmUrl |string |url of the opportunity on VolunteerMatch |
+
+#### Created Events
+| Property  | Type    | Description|
+|-----------|---------|------------|
+|objectId   |String   |unique id for the created events (default field)|
+|user |Pointer to User | user that created the event |
+|name |string |name of the created event |
+|time |DateTime | scheduled time of the event |
+|location |String |location of the created event |
+|description |string | details about the event |
+|image |file |image associated with the event |
+|createdAt | DateTime |date when event is created (default field) 
+
+#### Post
+| Property  | Type    | Description|
+|-----------|---------|------------|
+|objectId	|String	|unique id for the user post (default field)|
+|author	|Pointer to User|	post author|
+|organization	|String	|the organization the post is about|
+|event	|String	|the event the post is about|
+|text|	String	|post text by author|
+|createdAt|	DateTime|	date when post is created (default field)|
+|updatedAt|	DateTime|	date when post is last updated (default field)|
 ### Networking
 - [Add list of network requests by screen ]
+- login screen
+    - GET the user associated with the login
+    -  ```objective C
+          [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
+        if (error != nil)
+        {
+            [self.alert setMessage:[NSString stringWithFormat: @"%@", error.description]];
+            [self presentViewController:self.alert animated:YES completion:^{
+                //nobthing
+            }];
+            NSLog(@"User log in failed: %@", error.localizedDescription);
+        }
+        else
+        {
+            NSLog(@"User logged in successfully");
+            [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+        }
+        [self.activityIndicator stopAnimating];
+
+    }];
+         ```
+- home screen/timeline
+    - GET the posts for the timeline
+    ``` objective C
+     PFQuery *postQuery= [PFQuery queryWithClassName:@"Post"];
+    self.postLimit+=20;//get 20 more posts each time
+    postQuery.limit=self.postLimit;//limit 20 posts
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<PFObject *> * _Nullable objects, NSError * _Nullable error) {
+        if(error)
+        {
+            NSLog(@"Error loading posts: %@", error.description);
+        }
+        else
+        {
+            //NSLog(@"Success getting post %@", objects);
+            self.posts=objects;
+            [self.tableView reloadData];
+        }
+        self.isMoreDataLoading=NO;
+        [self.refreshControl endRefreshing];
+    }];
+    ```
+    - DELETE delete existing post
+    ``` objective C
+    PFObject deletePost= self.post
+    [deletePost deleteInBackground]
+    ```
+    - POST create a new post for timeline
+    ```objective c
+    Post *newPost= [Post new];
+    newPost.postText= post.text;
+    newPost.author=[PFUser currentUser];
+    [newPost saveInBackground];
+    ```
+- Create Event screen
+    - POST create a new event for timeline
+    ```objective c
+    Event *newEvent= [Event new];
+    newEvent.eventText= event.text;
+    newEvent.author=[PFUser currentUser];
+    [newEvent saveInBackground];
+    ```
+- Search Page
+    - Get the events/orgs that the user or his/her friends have starred
+        - ??????
+- Profile page
+    - GET current user's profile information
+    ``` objective c
+    PFQuery *profileQuery= [PFQuery queryWithClassName:@"User"];
+    [profileQuery includeKey:@"events"];
+    [profileQuery includeKey:@"organizations"];
+    [profileQuery whereKey:@"author" equalTo:self.user];
+    [profileQuery orderByDescending:@"createdAt"];
+    [profileQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if(error)
+            NSLog(@"Error Loading profile: %@", error.localizedDescription);
+        else{
+            self.posts=objects;
+            self.usernameLabel.text=self.user.username;
+            self.postCount.text=[NSString stringWithFormat:@"%lu", self.posts.count];
+            NSLog(@"Sucess loading profile, %@", self.usernameLabel.text );
+        }
+    }];
+    ```
+    - PUT update current user's information (profile pictures etc) 
+    ```objective c
+    self.user[@"profilePicture"]= [PFFileObject fileObjectWithName:profileImageName data:pImageData];
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self.user saveInBackground];
+    ```
+
 - [Create basic snippets for each Parse network request]
+- 
 - [OPTIONAL: List endpoints if using existing API such as Yelp]

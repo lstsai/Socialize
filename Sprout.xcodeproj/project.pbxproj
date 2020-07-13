@@ -1,0 +1,741 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		71634D24B2F97121BD50AC61 /* Pods_Sprout_SproutUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E3EC0E29B307EF944F558A /* Pods_Sprout_SproutUITests.framework */; };
+		81AB72F45FD1E8B0011E42B5 /* Pods_SproutTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1698646DDBF05D74B80F63 /* Pods_SproutTests.framework */; };
+		96914DC97B5D7FEB18F9ECEA /* Pods_Sprout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C799452D22C3D09EFCAA65B /* Pods_Sprout.framework */; };
+		DC3CF14C24BCB27900C482F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF14B24BCB27900C482F8 /* AppDelegate.m */; };
+		DC3CF14F24BCB27900C482F8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF14E24BCB27900C482F8 /* SceneDelegate.m */; };
+		DC3CF15224BCB27900C482F8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF15124BCB27900C482F8 /* ViewController.m */; };
+		DC3CF15524BCB27900C482F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC3CF15324BCB27900C482F8 /* Main.storyboard */; };
+		DC3CF15724BCB27A00C482F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC3CF15624BCB27A00C482F8 /* Assets.xcassets */; };
+		DC3CF15A24BCB27A00C482F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC3CF15824BCB27A00C482F8 /* LaunchScreen.storyboard */; };
+		DC3CF15D24BCB27A00C482F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF15C24BCB27A00C482F8 /* main.m */; };
+		DC3CF16724BCB27B00C482F8 /* SproutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF16624BCB27B00C482F8 /* SproutTests.m */; };
+		DC3CF17224BCB27B00C482F8 /* SproutUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF17124BCB27B00C482F8 /* SproutUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DC3CF16324BCB27B00C482F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC3CF13F24BCB27900C482F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC3CF14624BCB27900C482F8;
+			remoteInfo = Sprout;
+		};
+		DC3CF16E24BCB27B00C482F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC3CF13F24BCB27900C482F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC3CF14624BCB27900C482F8;
+			remoteInfo = Sprout;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2C799452D22C3D09EFCAA65B /* Pods_Sprout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sprout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		31E3EC0E29B307EF944F558A /* Pods_Sprout_SproutUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sprout_SproutUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E1698646DDBF05D74B80F63 /* Pods_SproutTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SproutTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F4EB687FB326027DDA023F2 /* Pods-SproutTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SproutTests.debug.xcconfig"; path = "Target Support Files/Pods-SproutTests/Pods-SproutTests.debug.xcconfig"; sourceTree = "<group>"; };
+		51A0949A8E7C74CAE4064082 /* Pods-Sprout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sprout.debug.xcconfig"; path = "Target Support Files/Pods-Sprout/Pods-Sprout.debug.xcconfig"; sourceTree = "<group>"; };
+		729CBB20E25699630243856A /* Pods-Sprout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sprout.release.xcconfig"; path = "Target Support Files/Pods-Sprout/Pods-Sprout.release.xcconfig"; sourceTree = "<group>"; };
+		733354DC791A13785ABCB2C4 /* Pods-Sprout-SproutUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sprout-SproutUITests.debug.xcconfig"; path = "Target Support Files/Pods-Sprout-SproutUITests/Pods-Sprout-SproutUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		824BECA0D530B3988AD16333 /* Pods-Sprout-SproutUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sprout-SproutUITests.release.xcconfig"; path = "Target Support Files/Pods-Sprout-SproutUITests/Pods-Sprout-SproutUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A52894B29F3980A550B6F8EC /* Pods-SproutTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SproutTests.release.xcconfig"; path = "Target Support Files/Pods-SproutTests/Pods-SproutTests.release.xcconfig"; sourceTree = "<group>"; };
+		DC3CF14724BCB27900C482F8 /* Sprout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sprout.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC3CF14A24BCB27900C482F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DC3CF14B24BCB27900C482F8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DC3CF14D24BCB27900C482F8 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		DC3CF14E24BCB27900C482F8 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		DC3CF15024BCB27900C482F8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DC3CF15124BCB27900C482F8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DC3CF15424BCB27900C482F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DC3CF15624BCB27A00C482F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DC3CF15924BCB27A00C482F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DC3CF15B24BCB27A00C482F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC3CF15C24BCB27A00C482F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DC3CF16224BCB27B00C482F8 /* SproutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SproutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC3CF16624BCB27B00C482F8 /* SproutTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SproutTests.m; sourceTree = "<group>"; };
+		DC3CF16824BCB27B00C482F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC3CF16D24BCB27B00C482F8 /* SproutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SproutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC3CF17124BCB27B00C482F8 /* SproutUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SproutUITests.m; sourceTree = "<group>"; };
+		DC3CF17324BCB27B00C482F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DC3CF14424BCB27900C482F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96914DC97B5D7FEB18F9ECEA /* Pods_Sprout.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC3CF15F24BCB27B00C482F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81AB72F45FD1E8B0011E42B5 /* Pods_SproutTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC3CF16A24BCB27B00C482F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71634D24B2F97121BD50AC61 /* Pods_Sprout_SproutUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B1A93CD764A4119F07F8C4AA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				51A0949A8E7C74CAE4064082 /* Pods-Sprout.debug.xcconfig */,
+				729CBB20E25699630243856A /* Pods-Sprout.release.xcconfig */,
+				733354DC791A13785ABCB2C4 /* Pods-Sprout-SproutUITests.debug.xcconfig */,
+				824BECA0D530B3988AD16333 /* Pods-Sprout-SproutUITests.release.xcconfig */,
+				4F4EB687FB326027DDA023F2 /* Pods-SproutTests.debug.xcconfig */,
+				A52894B29F3980A550B6F8EC /* Pods-SproutTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		BF3C9DF82977492A3AF8CA22 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2C799452D22C3D09EFCAA65B /* Pods_Sprout.framework */,
+				31E3EC0E29B307EF944F558A /* Pods_Sprout_SproutUITests.framework */,
+				4E1698646DDBF05D74B80F63 /* Pods_SproutTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DC3CF13E24BCB27900C482F8 = {
+			isa = PBXGroup;
+			children = (
+				DC3CF14924BCB27900C482F8 /* Sprout */,
+				DC3CF16524BCB27B00C482F8 /* SproutTests */,
+				DC3CF17024BCB27B00C482F8 /* SproutUITests */,
+				DC3CF14824BCB27900C482F8 /* Products */,
+				B1A93CD764A4119F07F8C4AA /* Pods */,
+				BF3C9DF82977492A3AF8CA22 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		DC3CF14824BCB27900C482F8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF14724BCB27900C482F8 /* Sprout.app */,
+				DC3CF16224BCB27B00C482F8 /* SproutTests.xctest */,
+				DC3CF16D24BCB27B00C482F8 /* SproutUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC3CF14924BCB27900C482F8 /* Sprout */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF14A24BCB27900C482F8 /* AppDelegate.h */,
+				DC3CF14B24BCB27900C482F8 /* AppDelegate.m */,
+				DC3CF14D24BCB27900C482F8 /* SceneDelegate.h */,
+				DC3CF14E24BCB27900C482F8 /* SceneDelegate.m */,
+				DC3CF15024BCB27900C482F8 /* ViewController.h */,
+				DC3CF15124BCB27900C482F8 /* ViewController.m */,
+				DC3CF15324BCB27900C482F8 /* Main.storyboard */,
+				DC3CF15624BCB27A00C482F8 /* Assets.xcassets */,
+				DC3CF15824BCB27A00C482F8 /* LaunchScreen.storyboard */,
+				DC3CF15B24BCB27A00C482F8 /* Info.plist */,
+				DC3CF15C24BCB27A00C482F8 /* main.m */,
+			);
+			path = Sprout;
+			sourceTree = "<group>";
+		};
+		DC3CF16524BCB27B00C482F8 /* SproutTests */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF16624BCB27B00C482F8 /* SproutTests.m */,
+				DC3CF16824BCB27B00C482F8 /* Info.plist */,
+			);
+			path = SproutTests;
+			sourceTree = "<group>";
+		};
+		DC3CF17024BCB27B00C482F8 /* SproutUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF17124BCB27B00C482F8 /* SproutUITests.m */,
+				DC3CF17324BCB27B00C482F8 /* Info.plist */,
+			);
+			path = SproutUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DC3CF14624BCB27900C482F8 /* Sprout */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC3CF17624BCB27B00C482F8 /* Build configuration list for PBXNativeTarget "Sprout" */;
+			buildPhases = (
+				8BAD3649CF95D6F06A4D3030 /* [CP] Check Pods Manifest.lock */,
+				DC3CF14324BCB27900C482F8 /* Sources */,
+				DC3CF14424BCB27900C482F8 /* Frameworks */,
+				DC3CF14524BCB27900C482F8 /* Resources */,
+				6CD7E2B9826A21F5EEEACA56 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Sprout;
+			productName = Sprout;
+			productReference = DC3CF14724BCB27900C482F8 /* Sprout.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DC3CF16124BCB27B00C482F8 /* SproutTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC3CF17924BCB27B00C482F8 /* Build configuration list for PBXNativeTarget "SproutTests" */;
+			buildPhases = (
+				0D2654C628399009199660D2 /* [CP] Check Pods Manifest.lock */,
+				DC3CF15E24BCB27B00C482F8 /* Sources */,
+				DC3CF15F24BCB27B00C482F8 /* Frameworks */,
+				DC3CF16024BCB27B00C482F8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DC3CF16424BCB27B00C482F8 /* PBXTargetDependency */,
+			);
+			name = SproutTests;
+			productName = SproutTests;
+			productReference = DC3CF16224BCB27B00C482F8 /* SproutTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DC3CF16C24BCB27B00C482F8 /* SproutUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC3CF17C24BCB27B00C482F8 /* Build configuration list for PBXNativeTarget "SproutUITests" */;
+			buildPhases = (
+				B26F3A11A2A06D7D9AF19A19 /* [CP] Check Pods Manifest.lock */,
+				DC3CF16924BCB27B00C482F8 /* Sources */,
+				DC3CF16A24BCB27B00C482F8 /* Frameworks */,
+				DC3CF16B24BCB27B00C482F8 /* Resources */,
+				C8C928CA5F1FB0BA72309184 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DC3CF16F24BCB27B00C482F8 /* PBXTargetDependency */,
+			);
+			name = SproutUITests;
+			productName = SproutUITests;
+			productReference = DC3CF16D24BCB27B00C482F8 /* SproutUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DC3CF13F24BCB27900C482F8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1150;
+				ORGANIZATIONNAME = laurentsai;
+				TargetAttributes = {
+					DC3CF14624BCB27900C482F8 = {
+						CreatedOnToolsVersion = 11.5;
+					};
+					DC3CF16124BCB27B00C482F8 = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = DC3CF14624BCB27900C482F8;
+					};
+					DC3CF16C24BCB27B00C482F8 = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = DC3CF14624BCB27900C482F8;
+					};
+				};
+			};
+			buildConfigurationList = DC3CF14224BCB27900C482F8 /* Build configuration list for PBXProject "Sprout" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DC3CF13E24BCB27900C482F8;
+			productRefGroup = DC3CF14824BCB27900C482F8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DC3CF14624BCB27900C482F8 /* Sprout */,
+				DC3CF16124BCB27B00C482F8 /* SproutTests */,
+				DC3CF16C24BCB27B00C482F8 /* SproutUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DC3CF14524BCB27900C482F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC3CF15A24BCB27A00C482F8 /* LaunchScreen.storyboard in Resources */,
+				DC3CF15724BCB27A00C482F8 /* Assets.xcassets in Resources */,
+				DC3CF15524BCB27900C482F8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC3CF16024BCB27B00C482F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC3CF16B24BCB27B00C482F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0D2654C628399009199660D2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SproutTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6CD7E2B9826A21F5EEEACA56 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Sprout/Pods-Sprout-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Sprout/Pods-Sprout-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Sprout/Pods-Sprout-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8BAD3649CF95D6F06A4D3030 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Sprout-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B26F3A11A2A06D7D9AF19A19 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Sprout-SproutUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C8C928CA5F1FB0BA72309184 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Sprout-SproutUITests/Pods-Sprout-SproutUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Sprout-SproutUITests/Pods-Sprout-SproutUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Sprout-SproutUITests/Pods-Sprout-SproutUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DC3CF14324BCB27900C482F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC3CF15224BCB27900C482F8 /* ViewController.m in Sources */,
+				DC3CF14C24BCB27900C482F8 /* AppDelegate.m in Sources */,
+				DC3CF15D24BCB27A00C482F8 /* main.m in Sources */,
+				DC3CF14F24BCB27900C482F8 /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC3CF15E24BCB27B00C482F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC3CF16724BCB27B00C482F8 /* SproutTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC3CF16924BCB27B00C482F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC3CF17224BCB27B00C482F8 /* SproutUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DC3CF16424BCB27B00C482F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DC3CF14624BCB27900C482F8 /* Sprout */;
+			targetProxy = DC3CF16324BCB27B00C482F8 /* PBXContainerItemProxy */;
+		};
+		DC3CF16F24BCB27B00C482F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DC3CF14624BCB27900C482F8 /* Sprout */;
+			targetProxy = DC3CF16E24BCB27B00C482F8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DC3CF15324BCB27900C482F8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC3CF15424BCB27900C482F8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DC3CF15824BCB27A00C482F8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC3CF15924BCB27A00C482F8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DC3CF17424BCB27B00C482F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DC3CF17524BCB27B00C482F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DC3CF17724BCB27B00C482F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51A0949A8E7C74CAE4064082 /* Pods-Sprout.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SL6QTNT4Q5;
+				INFOPLIST_FILE = Sprout/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.laurentsai.Sprout;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DC3CF17824BCB27B00C482F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 729CBB20E25699630243856A /* Pods-Sprout.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SL6QTNT4Q5;
+				INFOPLIST_FILE = Sprout/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.laurentsai.Sprout;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DC3CF17A24BCB27B00C482F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F4EB687FB326027DDA023F2 /* Pods-SproutTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SproutTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.laurentsai.SproutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sprout.app/Sprout";
+			};
+			name = Debug;
+		};
+		DC3CF17B24BCB27B00C482F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A52894B29F3980A550B6F8EC /* Pods-SproutTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SproutTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.laurentsai.SproutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sprout.app/Sprout";
+			};
+			name = Release;
+		};
+		DC3CF17D24BCB27B00C482F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 733354DC791A13785ABCB2C4 /* Pods-Sprout-SproutUITests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SproutUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.laurentsai.SproutUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Sprout;
+			};
+			name = Debug;
+		};
+		DC3CF17E24BCB27B00C482F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 824BECA0D530B3988AD16333 /* Pods-Sprout-SproutUITests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SproutUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.laurentsai.SproutUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Sprout;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DC3CF14224BCB27900C482F8 /* Build configuration list for PBXProject "Sprout" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC3CF17424BCB27B00C482F8 /* Debug */,
+				DC3CF17524BCB27B00C482F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC3CF17624BCB27B00C482F8 /* Build configuration list for PBXNativeTarget "Sprout" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC3CF17724BCB27B00C482F8 /* Debug */,
+				DC3CF17824BCB27B00C482F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC3CF17924BCB27B00C482F8 /* Build configuration list for PBXNativeTarget "SproutTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC3CF17A24BCB27B00C482F8 /* Debug */,
+				DC3CF17B24BCB27B00C482F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC3CF17C24BCB27B00C482F8 /* Build configuration list for PBXNativeTarget "SproutUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC3CF17D24BCB27B00C482F8 /* Debug */,
+				DC3CF17E24BCB27B00C482F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DC3CF13F24BCB27900C482F8 /* Project object */;
+}

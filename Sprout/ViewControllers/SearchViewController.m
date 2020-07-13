@@ -31,7 +31,7 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     OrgCell *orgCell= [tableView dequeueReusableCellWithIdentifier:@"OrgCell"];
     orgCell.org=self.organizations[indexPath.row];
-    orgCell.nameLabel.text=orgCell.org.name;
+    [orgCell loadData];
     return orgCell;
 }
 

@@ -13,9 +13,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    self.nameLabel.text=self.org.name;
 }
-
+-(void) loadData{
+    self.nameLabel.text=self.org.name;
+    self.tagLineLabel.text=self.org.tagLine;
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

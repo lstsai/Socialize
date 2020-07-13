@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SearchViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITextField *locationField;
+@property (strong, nonatomic) NSArray* organizations;
 
 @end
 

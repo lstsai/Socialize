@@ -99,8 +99,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="du5-Om-FA2">
-                                <rect key="frame" x="0.0" y="112" width="414" height="730"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="du5-Om-FA2">
+                                <rect key="frame" x="0.0" y="160" width="414" height="682"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrgCell" rowHeight="112" id="2Op-xF-xjE" customClass="OrgCell">
@@ -146,16 +147,25 @@
                                     <string>Title</string>
                                 </scopeButtonTitles>
                             </searchBar>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yf7-fv-qvs">
+                                <rect key="frame" x="242" y="118" width="152" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nf0-jc-dv9">
+                                <rect key="frame" x="162" y="123" width="71" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="W4I-gt-Dwr" firstAttribute="leading" secondItem="nhh-H8-qeo" secondAttribute="leading" id="TvU-4v-GNj"/>
-                            <constraint firstAttribute="bottom" secondItem="du5-Om-FA2" secondAttribute="bottom" id="abU-N4-daw"/>
                             <constraint firstItem="W4I-gt-Dwr" firstAttribute="top" secondItem="nhh-H8-qeo" secondAttribute="top" id="ayD-W4-Fp5"/>
-                            <constraint firstItem="du5-Om-FA2" firstAttribute="leading" secondItem="nhh-H8-qeo" secondAttribute="leading" id="bJD-fs-7JR"/>
                             <constraint firstItem="W4I-gt-Dwr" firstAttribute="trailing" secondItem="nhh-H8-qeo" secondAttribute="trailing" id="j2T-ra-Tyq"/>
-                            <constraint firstItem="du5-Om-FA2" firstAttribute="trailing" secondItem="nhh-H8-qeo" secondAttribute="trailing" id="liZ-39-g2D"/>
-                            <constraint firstItem="du5-Om-FA2" firstAttribute="top" secondItem="W4I-gt-Dwr" secondAttribute="bottom" id="rjy-0W-nEp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nhh-H8-qeo"/>
                     </view>
@@ -175,6 +185,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="locationField" destination="Yf7-fv-qvs" id="mzV-Mb-bqr"/>
                         <outlet property="searchBar" destination="W4I-gt-Dwr" id="v0F-dz-dIf"/>
                         <outlet property="tableView" destination="du5-Om-FA2" id="Jhv-4j-FUY"/>
                     </connections>

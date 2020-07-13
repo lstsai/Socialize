@@ -20,6 +20,7 @@
 		DC3CF17224BCB27B00C482F8 /* SproutUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF17124BCB27B00C482F8 /* SproutUITests.m */; };
 		DC3CF18424BCC0D700C482F8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF18324BCC0D700C482F8 /* LoginViewController.m */; };
 		DC3CF18724BCC85900C482F8 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF18624BCC85900C482F8 /* SearchViewController.m */; };
+		DC3CF18A24BCCFB300C482F8 /* OrgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF18924BCCFB300C482F8 /* OrgCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		DC3CF18324BCC0D700C482F8 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		DC3CF18524BCC85900C482F8 /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		DC3CF18624BCC85900C482F8 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		DC3CF18824BCCFB300C482F8 /* OrgCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgCell.h; sourceTree = "<group>"; };
+		DC3CF18924BCCFB300C482F8 /* OrgCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrgCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +198,8 @@
 		DC3CF18024BCC0B600C482F8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DC3CF18824BCCFB300C482F8 /* OrgCell.h */,
+				DC3CF18924BCCFB300C482F8 /* OrgCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -446,6 +451,7 @@
 			files = (
 				DC3CF14C24BCB27900C482F8 /* AppDelegate.m in Sources */,
 				DC3CF15D24BCB27A00C482F8 /* main.m in Sources */,
+				DC3CF18A24BCCFB300C482F8 /* OrgCell.m in Sources */,
 				DC3CF18724BCC85900C482F8 /* SearchViewController.m in Sources */,
 				DC3CF14F24BCB27900C482F8 /* SceneDelegate.m in Sources */,
 				DC3CF18424BCC0D700C482F8 /* LoginViewController.m in Sources */,

@@ -10,7 +10,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -98,14 +98,90 @@
                     <view key="view" contentMode="scaleToFill" id="aVk-hb-fNP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="du5-Om-FA2">
+                                <rect key="frame" x="0.0" y="112" width="414" height="730"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrgCell" rowHeight="112" id="2Op-xF-xjE" customClass="OrgCell">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="112"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Op-xF-xjE" id="fak-VI-l6G">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="112"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BBD-79-8iY">
+                                                    <rect key="frame" x="304" y="11" width="90" height="90"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name of org" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nq9-CF-lgB">
+                                                    <rect key="frame" x="20" y="11" width="112" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKA-Ih-uOl">
+                                                    <rect key="frame" x="20" y="43" width="92" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="descriptionLabel" destination="DKA-Ih-uOl" id="rtk-fF-EkC"/>
+                                            <outlet property="nameLabel" destination="Nq9-CF-lgB" id="HyY-fQ-g0x"/>
+                                            <outlet property="orgImage" destination="BBD-79-8iY" id="kv7-hT-7w1"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <searchBar contentMode="redraw" text="" translatesAutoresizingMaskIntoConstraints="NO" id="W4I-gt-Dwr">
+                                <rect key="frame" x="0.0" y="56" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="W4I-gt-Dwr" firstAttribute="leading" secondItem="nhh-H8-qeo" secondAttribute="leading" id="TvU-4v-GNj"/>
+                            <constraint firstAttribute="bottom" secondItem="du5-Om-FA2" secondAttribute="bottom" id="abU-N4-daw"/>
+                            <constraint firstItem="W4I-gt-Dwr" firstAttribute="top" secondItem="nhh-H8-qeo" secondAttribute="top" id="ayD-W4-Fp5"/>
+                            <constraint firstItem="du5-Om-FA2" firstAttribute="leading" secondItem="nhh-H8-qeo" secondAttribute="leading" id="bJD-fs-7JR"/>
+                            <constraint firstItem="W4I-gt-Dwr" firstAttribute="trailing" secondItem="nhh-H8-qeo" secondAttribute="trailing" id="j2T-ra-Tyq"/>
+                            <constraint firstItem="du5-Om-FA2" firstAttribute="trailing" secondItem="nhh-H8-qeo" secondAttribute="trailing" id="liZ-39-g2D"/>
+                            <constraint firstItem="du5-Om-FA2" firstAttribute="top" secondItem="W4I-gt-Dwr" secondAttribute="bottom" id="rjy-0W-nEp"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="nhh-H8-qeo"/>
                     </view>
-                    <navigationItem key="navigationItem" id="myc-cd-rkO"/>
+                    <navigationItem key="navigationItem" id="myc-cd-rkO">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="6hI-Se-Eqp">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IjL-Dw-OuC">
+                                <rect key="frame" x="20" y="13" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="didTapLogout:" destination="h95-5b-sSA" eventType="touchUpInside" id="8K0-7R-Wh8"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="didTapLogout:" destination="h95-5b-sSA" id="zP2-l0-6CC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="W4I-gt-Dwr" id="v0F-dz-dIf"/>
+                        <outlet property="tableView" destination="du5-Om-FA2" id="Jhv-4j-FUY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XbL-KR-4ep" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="38" y="1708"/>
+            <point key="canvasLocation" x="37.681159420289859" y="1707.5892857142856"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="A0V-rC-Ciq">
@@ -126,7 +202,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="4HS-8z-OSv">
             <objects>
-                <tabBarController modalPresentationStyle="fullScreen" id="lAw-cf-oCl" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" modalPresentationStyle="fullScreen" id="lAw-cf-oCl" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="uPs-yN-iMO"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xRD-MR-Bgd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -142,11 +218,11 @@
             </objects>
             <point key="canvasLocation" x="974" y="110"/>
         </scene>
-        <!--Item-->
+        <!--Search-->
         <scene sceneID="tg8-nX-co4">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="64B-ni-n8D" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="28o-o8-kiJ"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="28o-o8-kiJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jb7-bN-sy1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
@@ -181,4 +257,7 @@
             <point key="canvasLocation" x="1812" y="967"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+    </resources>
 </document>

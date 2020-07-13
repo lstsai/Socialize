@@ -24,6 +24,7 @@
 		DC3CF19424BCE2DA00C482F8 /* Organization.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF19324BCE2D900C482F8 /* Organization.m */; };
 		DC3CF19B24BCF28E00C482F8 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF19A24BCF28D00C482F8 /* Location.m */; };
 		DC3CF19E24BD014E00C482F8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3CF19D24BD014E00C482F8 /* MapKit.framework */; };
+		DC3CF1A124BD081300C482F8 /* OrgDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1A024BD081300C482F8 /* OrgDetailsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,8 @@
 		DC3CF19A24BCF28D00C482F8 /* Location.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		DC3CF19C24BCF2AD00C482F8 /* Location.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		DC3CF19D24BD014E00C482F8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		DC3CF19F24BD081300C482F8 /* OrgDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgDetailsViewController.h; sourceTree = "<group>"; };
+		DC3CF1A024BD081300C482F8 /* OrgDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrgDetailsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +204,8 @@
 				DC3CF18324BCC0D700C482F8 /* LoginViewController.m */,
 				DC3CF18524BCC85900C482F8 /* SearchViewController.h */,
 				DC3CF18624BCC85900C482F8 /* SearchViewController.m */,
+				DC3CF19F24BD081300C482F8 /* OrgDetailsViewController.h */,
+				DC3CF1A024BD081300C482F8 /* OrgDetailsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -464,6 +469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC3CF14C24BCB27900C482F8 /* AppDelegate.m in Sources */,
+				DC3CF1A124BD081300C482F8 /* OrgDetailsViewController.m in Sources */,
 				DC3CF15D24BCB27A00C482F8 /* main.m in Sources */,
 				DC3CF18A24BCCFB300C482F8 /* OrgCell.m in Sources */,
 				DC3CF18724BCC85900C482F8 /* SearchViewController.m in Sources */,

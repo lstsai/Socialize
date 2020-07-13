@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *streetAddress; // Text content of tweet
 
 + (instancetype)locationWithDictionary:(NSDictionary *)dictionary;
++ (NSString *)addressFromLocation:(Location*)loc;
 
 @end
 

@@ -23,7 +23,8 @@
         self.missionStatement=dictionary[@"mission"];
         self.name=dictionary[@"charityName"];
         self.tagLine=dictionary[@"tagLine"];
-        self.address= [Location locationWithDictionary:dictionary[@"mailingAddress"]];
+        self.location= [Location locationWithDictionary:dictionary[@"mailingAddress"]];
+        self.website=[NSURL URLWithString:dictionary[@"websiteURL"]];
     }
     return self;
 

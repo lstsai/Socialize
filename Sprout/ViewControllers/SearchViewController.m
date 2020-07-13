@@ -14,6 +14,7 @@
 #import "AFNetworking.h"
 #import "AFHTTPSessionManager.h"
 #import "MBProgressHUD.h"
+#import "OrgDetailsViewController.h"
 @interface SearchViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate>
 
 @end
@@ -77,14 +78,22 @@
 
     }];
 }
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"detailSegue"])
+    {
+        OrgDetailsViewController *orgVC=segue.destinationViewController;
+        UITableViewCell *tappedCell= sender;
+        NSIndexPath *tappedIndex= [self.tableView indexPathForCell:tappedCell];
+        orgVC.org=self.organizations[tappedIndex.row];
+        [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
+    }
 }
-*/
+
 
 @end

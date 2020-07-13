@@ -19,4 +19,8 @@
     loc.streetAddress=dictionary[@"streetAddress1"];
     return loc;
 }
+
++ (NSString *)addressFromLocation:(Location*)loc{
+    return [NSString stringWithFormat:@"%@ \r%@, %@ %@", loc.streetAddress, loc.city, loc.state, loc.postalCode];
+}
 @end

@@ -249,7 +249,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RnK-fK-0Gt">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mAG-bT-6og">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sprout.png" translatesAutoresizingMaskIntoConstraints="NO" id="mAG-bT-6og">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="280.5"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Zbs-dw-NFE">
@@ -315,14 +315,8 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfn-PE-NoV">
-                                                        <rect key="frame" x="210" y="149" width="112.5" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="city and zip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRC-2c-l5Y">
-                                                        <rect key="frame" x="210" y="171" width="112.5" height="20.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfn-PE-NoV">
+                                                        <rect key="frame" x="210" y="149" width="63" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -335,10 +329,8 @@
                                                     <constraint firstItem="dOO-My-ft0" firstAttribute="trailing" secondItem="E3c-lC-Jkl" secondAttribute="trailing" id="76K-SX-wyH"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1tD-iA-ka7" secondAttribute="trailing" constant="20" id="7Cb-4G-Vfa"/>
                                                     <constraint firstItem="Xfn-PE-NoV" firstAttribute="leading" secondItem="4Us-IR-t8d" secondAttribute="leading" id="AQq-Zr-1pO"/>
-                                                    <constraint firstItem="KRC-2c-l5Y" firstAttribute="top" secondItem="Xfn-PE-NoV" secondAttribute="bottom" constant="1.5" id="DHL-9x-vj1"/>
                                                     <constraint firstItem="j7D-Hw-8oR" firstAttribute="leading" secondItem="Zbs-dw-NFE" secondAttribute="leading" constant="20" id="Fhd-UR-rKE"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0Rc-EU-Ybe" secondAttribute="trailing" constant="15" id="FlK-Kp-y4E"/>
-                                                    <constraint firstItem="KRC-2c-l5Y" firstAttribute="leading" secondItem="Xfn-PE-NoV" secondAttribute="leading" id="PSL-6j-fd3"/>
                                                     <constraint firstItem="UbA-yb-tQb" firstAttribute="top" secondItem="E3c-lC-Jkl" secondAttribute="bottom" constant="7.5" id="WmZ-uR-Uc9"/>
                                                     <constraint firstItem="4Us-IR-t8d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="E3c-lC-Jkl" secondAttribute="trailing" constant="20" id="YB6-Va-RUO"/>
                                                     <constraint firstItem="UbA-yb-tQb" firstAttribute="leading" secondItem="oVd-sG-uTL" secondAttribute="leading" id="Yt4-3X-zsu"/>
@@ -361,7 +353,6 @@
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xfn-PE-NoV" secondAttribute="trailing" constant="20" id="trX-AX-5Ut"/>
                                                     <constraint firstItem="j7D-Hw-8oR" firstAttribute="top" secondItem="Zbs-dw-NFE" secondAttribute="top" constant="20" id="uoz-Qm-IjT"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="j7D-Hw-8oR" secondAttribute="trailing" constant="20" id="vTy-X6-cpH"/>
-                                                    <constraint firstItem="KRC-2c-l5Y" firstAttribute="trailing" secondItem="Xfn-PE-NoV" secondAttribute="trailing" id="wEz-zA-fqM"/>
                                                     <constraint firstItem="4Us-IR-t8d" firstAttribute="top" secondItem="oVd-sG-uTL" secondAttribute="top" id="y0d-Ot-4yl"/>
                                                 </constraints>
                                             </view>
@@ -392,13 +383,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="fPz-Ib-d3l"/>
                     <connections>
+                        <outlet property="address" destination="Xfn-PE-NoV" id="BY7-30-15g"/>
                         <outlet property="backdropImage" destination="mAG-bT-6og" id="8PT-hz-tMY"/>
                         <outlet property="category" destination="E3c-lC-Jkl" id="wLg-Us-TaM"/>
                         <outlet property="cause" destination="dOO-My-ft0" id="mhm-SA-GIi"/>
-                        <outlet property="cityStateZip" destination="KRC-2c-l5Y" id="60L-bq-mld"/>
                         <outlet property="mission" destination="6OH-0L-ABM" id="KB7-W3-Fdk"/>
                         <outlet property="name" destination="j7D-Hw-8oR" id="OMY-FG-1J7"/>
-                        <outlet property="streetAddress" destination="Xfn-PE-NoV" id="2wW-CN-fhc"/>
                         <outlet property="tagLine" destination="1tD-iA-ka7" id="VzI-WM-w8y"/>
                         <outlet property="website" destination="0Rc-EU-Ybe" id="Vgn-Z8-8zk"/>
                     </connections>
@@ -484,5 +474,6 @@
     <resources>
         <image name="globe" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="sprout.png" width="401" height="328.5"/>
     </resources>
 </document>

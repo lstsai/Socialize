@@ -7,7 +7,7 @@
 //
 
 #import "OrgDetailsViewController.h"
-
+#import "Location.h"
 @interface OrgDetailsViewController ()
 
 @end
@@ -17,8 +17,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self loadOrgDetails];
 }
-
+-(void) loadOrgDetails{
+    self.name.text=self.org.name;
+    self.category.text=self.org.category;
+    self.cause.text=self.org.cause;
+    self.address.text=[Location addressFromLocation:self.org.location];
+    self.tagLine.text=self.org.tagLine;
+    self.website.text=[self.org.website absoluteString];
+    self.mission.text=self.org.missionStatement;
+    
+}
 /*
 #pragma mark - Navigation
 

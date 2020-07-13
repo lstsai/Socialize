@@ -25,14 +25,18 @@
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.searchBar.delegate=self;
+    [self.tableView reloadData];
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    return [[OrgCell alloc] init];
+    OrgCell *orgCell= [tableView dequeueReusableCellWithIdentifier:@"OrgCell"];
+    orgCell.org=self.organizations[indexPath.row];
+    orgCell.nameLabel.text=orgCell.org.name;
+    return orgCell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.organizations.count;
 }
 
 - (IBAction)didTapLogout:(id)sender {
@@ -50,11 +54,12 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    NSDictionary *params= @{@"user_key": [[NSProcessInfo processInfo] environment][@"user-key"], @"searchTerm": searchText};
+    NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":searchText, @"rated":@"TRUE"};
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:@"https://data.orghunter.com/v1/charitysearch" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"Success getting orgs %@", responseObject);
-        self.organizations=responseObject;
+    [manager GET:@"https://api.data.charitynavigator.org/v2/Organizations" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        self.organizations= [Organization orgsWithArray:responseObject];
+        NSLog(@"Success getting orgs");
+        [self.tableView reloadData];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Error getting orgs: %@", error.localizedDescription);

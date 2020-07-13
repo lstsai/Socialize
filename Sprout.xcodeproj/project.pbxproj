@@ -21,6 +21,8 @@
 		DC3CF18424BCC0D700C482F8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF18324BCC0D700C482F8 /* LoginViewController.m */; };
 		DC3CF18724BCC85900C482F8 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF18624BCC85900C482F8 /* SearchViewController.m */; };
 		DC3CF18A24BCCFB300C482F8 /* OrgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF18924BCCFB300C482F8 /* OrgCell.m */; };
+		DC3CF19424BCE2DA00C482F8 /* Organization.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF19324BCE2D900C482F8 /* Organization.m */; };
+		DC3CF19B24BCF28E00C482F8 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF19A24BCF28D00C482F8 /* Location.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,10 @@
 		DC3CF18624BCC85900C482F8 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		DC3CF18824BCCFB300C482F8 /* OrgCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgCell.h; sourceTree = "<group>"; };
 		DC3CF18924BCCFB300C482F8 /* OrgCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrgCell.m; sourceTree = "<group>"; };
+		DC3CF19224BCE2D900C482F8 /* Organization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Organization.h; sourceTree = "<group>"; };
+		DC3CF19324BCE2D900C482F8 /* Organization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Organization.m; sourceTree = "<group>"; };
+		DC3CF19A24BCF28D00C482F8 /* Location.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		DC3CF19C24BCF2AD00C482F8 /* Location.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +213,10 @@
 		DC3CF18124BCC0BD00C482F8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DC3CF19224BCE2D900C482F8 /* Organization.h */,
+				DC3CF19324BCE2D900C482F8 /* Organization.m */,
+				DC3CF19C24BCF2AD00C482F8 /* Location.h */,
+				DC3CF19A24BCF28D00C482F8 /* Location.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -454,6 +464,8 @@
 				DC3CF18A24BCCFB300C482F8 /* OrgCell.m in Sources */,
 				DC3CF18724BCC85900C482F8 /* SearchViewController.m in Sources */,
 				DC3CF14F24BCB27900C482F8 /* SceneDelegate.m in Sources */,
+				DC3CF19424BCE2DA00C482F8 /* Organization.m in Sources */,
+				DC3CF19B24BCF28E00C482F8 /* Location.m in Sources */,
 				DC3CF18424BCC0D700C482F8 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

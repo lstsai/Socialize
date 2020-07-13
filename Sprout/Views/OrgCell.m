@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.nameLabel.text=self.org.name;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

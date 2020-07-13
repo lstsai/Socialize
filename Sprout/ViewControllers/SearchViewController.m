@@ -13,7 +13,7 @@
 #import "LoginViewController.h"
 #import "AFNetworking.h"
 #import "AFHTTPSessionManager.h"
-@interface SearchViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface SearchViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate>
 
 @end
 
@@ -54,7 +54,14 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":searchText, @"rated":@"TRUE"};
+    [self fetchResults];
+}
+- (IBAction)didChangeLocation:(id)sender {
+    [self fetchResults];
+}
+
+-(void) fetchResults{
+    NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchBar.text, @"rated":@"TRUE", @"state": self.stateField.text, @"city": self.cityField.text};
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:@"https://api.data.charitynavigator.org/v2/Organizations" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         self.organizations= [Organization orgsWithArray:responseObject];
@@ -65,7 +72,6 @@
         NSLog(@"Error getting orgs: %@", error.localizedDescription);
     }];
 }
-
 /*
 #pragma mark - Navigation
 

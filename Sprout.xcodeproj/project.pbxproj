@@ -23,6 +23,7 @@
 		DC3CF18A24BCCFB300C482F8 /* OrgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF18924BCCFB300C482F8 /* OrgCell.m */; };
 		DC3CF19424BCE2DA00C482F8 /* Organization.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF19324BCE2D900C482F8 /* Organization.m */; };
 		DC3CF19B24BCF28E00C482F8 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF19A24BCF28D00C482F8 /* Location.m */; };
+		DC3CF19E24BD014E00C482F8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3CF19D24BD014E00C482F8 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		DC3CF19324BCE2D900C482F8 /* Organization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Organization.m; sourceTree = "<group>"; };
 		DC3CF19A24BCF28D00C482F8 /* Location.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		DC3CF19C24BCF2AD00C482F8 /* Location.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		DC3CF19D24BD014E00C482F8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC3CF19E24BD014E00C482F8 /* MapKit.framework in Frameworks */,
 				96914DC97B5D7FEB18F9ECEA /* Pods_Sprout.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -124,6 +127,7 @@
 		BF3C9DF82977492A3AF8CA22 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DC3CF19D24BD014E00C482F8 /* MapKit.framework */,
 				2C799452D22C3D09EFCAA65B /* Pods_Sprout.framework */,
 				31E3EC0E29B307EF944F558A /* Pods_Sprout_SproutUITests.framework */,
 				4E1698646DDBF05D74B80F63 /* Pods_SproutTests.framework */,

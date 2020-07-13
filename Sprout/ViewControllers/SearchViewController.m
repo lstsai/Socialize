@@ -13,6 +13,7 @@
 #import "LoginViewController.h"
 #import "AFNetworking.h"
 #import "AFHTTPSessionManager.h"
+#import "MBProgressHUD.h"
 @interface SearchViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate>
 
 @end
@@ -61,15 +62,19 @@
 }
 
 -(void) fetchResults{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchBar.text, @"rated":@"TRUE", @"state": self.stateField.text, @"city": self.cityField.text};
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:@"https://api.data.charitynavigator.org/v2/Organizations" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         self.organizations= [Organization orgsWithArray:responseObject];
         NSLog(@"Success getting orgs");
         [self.tableView reloadData];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Error getting orgs: %@", error.localizedDescription);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+
     }];
 }
 /*

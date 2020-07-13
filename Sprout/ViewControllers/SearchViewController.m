@@ -7,8 +7,11 @@
 //
 
 #import "SearchViewController.h"
-
-@interface SearchViewController ()
+#import "OrgCell.h"
+#import <Parse/Parse.h>
+#import "SceneDelegate.h"
+#import "LoginViewController.h"
+@interface SearchViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @end
 
@@ -17,6 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tableView.delegate=self;
+    self.tableView.dataSource=self;
+    self.searchBar.delegate=self;
 }
 
 /*
@@ -28,5 +34,28 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    return [[OrgCell alloc] init];
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (IBAction)didTapLogout:(id)sender {
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        if(error)
+            NSLog(@"Error Logging out: %@", error.description);
+        else
+            NSLog(@"Success Logging out");
+    }];
+    //go back to login
+    SceneDelegate *sceneDelegate = (SceneDelegate *) self.view.window.windowScene.delegate;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    sceneDelegate.window.rootViewController = loginViewController;
+}
+
 
 @end

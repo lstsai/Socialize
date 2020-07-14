@@ -7,7 +7,7 @@
 //
 
 #import "CreateViewController.h"
-
+#import "Constants.h"
 @interface CreateViewController ()
 
 @end
@@ -24,6 +24,7 @@
     UIDatePicker *datePicker = [[UIDatePicker alloc]init];
     [datePicker setDate:[NSDate date]];
     [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
+    [datePicker setMinuteInterval:MINUTE_INTERVAL];
     [datePicker addTarget:self action:@selector(dateTextField:) forControlEvents:UIControlEventValueChanged];
 
     [self.dateField setInputView:datePicker];
@@ -34,7 +35,7 @@
     UIDatePicker *picker = (UIDatePicker*)self.dateField.inputView;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *eventDate = picker.date;
-    [dateFormat setDateFormat:@"MM/dd/yyyy HH:mm"];
+    [dateFormat setDateFormat:@"MM/dd/yy HH:mm"];
     NSString *dateString = [dateFormat stringFromDate:eventDate];
     self.dateField.text = [NSString stringWithFormat:@"%@",dateString];
 }

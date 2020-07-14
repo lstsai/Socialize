@@ -11,4 +11,6 @@
 
 extern const int RESULTS_SIZE;
 
+extern const int MINUTE_INTERVAL;
+
 #endif /* Constants_h */

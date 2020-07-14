@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CreateViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *eventNameField;
 @property (weak, nonatomic) IBOutlet UITextField *dateField;
+@property (weak, nonatomic) IBOutlet UITextField *locationField;
 -(void) setupDatePicker;
 -(void) dateTextField:(id)sender;
 

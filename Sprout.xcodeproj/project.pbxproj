@@ -31,6 +31,7 @@
 		DC3CF1AD24BD590D00C482F8 /* InfiniteScrollActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1AC24BD590D00C482F8 /* InfiniteScrollActivityView.m */; };
 		DC3CF1B024BE046F00C482F8 /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1AF24BE046F00C482F8 /* CreateViewController.m */; };
 		DC3CF1B324BE05BB00C482F8 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1B224BE05BB00C482F8 /* HomeViewController.m */; };
+		DC3CF1BA24BE1D6100C482F8 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1B924BE1D6100C482F8 /* LocationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,8 @@
 		DC3CF1AF24BE046F00C482F8 /* CreateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateViewController.m; sourceTree = "<group>"; };
 		DC3CF1B124BE05BB00C482F8 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		DC3CF1B224BE05BB00C482F8 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		DC3CF1B824BE1D6100C482F8 /* LocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		DC3CF1B924BE1D6100C482F8 /* LocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +184,7 @@
 		DC3CF14924BCB27900C482F8 /* Sprout */ = {
 			isa = PBXGroup;
 			children = (
+				DC3CF1B724BE1C3E00C482F8 /* MISC */,
 				DC3CF18124BCC0BD00C482F8 /* Models */,
 				DC3CF18024BCC0B600C482F8 /* Views */,
 				DC3CF17F24BCC09900C482F8 /* ViewControllers */,
@@ -193,10 +197,6 @@
 				DC3CF15824BCB27A00C482F8 /* LaunchScreen.storyboard */,
 				DC3CF15B24BCB27A00C482F8 /* Info.plist */,
 				DC3CF15C24BCB27A00C482F8 /* main.m */,
-				DC3CF1A224BD23FC00C482F8 /* APIManager.h */,
-				DC3CF1A324BD23FC00C482F8 /* APIManager.m */,
-				DC3CF1A824BD539400C482F8 /* Constants.h */,
-				DC3CF1A924BD53A900C482F8 /* Constants.m */,
 			);
 			path = Sprout;
 			sourceTree = "<group>";
@@ -258,6 +258,19 @@
 				DC3CF19A24BCF28D00C482F8 /* Location.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		DC3CF1B724BE1C3E00C482F8 /* MISC */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF1A224BD23FC00C482F8 /* APIManager.h */,
+				DC3CF1A324BD23FC00C482F8 /* APIManager.m */,
+				DC3CF1A824BD539400C482F8 /* Constants.h */,
+				DC3CF1A924BD53A900C482F8 /* Constants.m */,
+				DC3CF1B824BE1D6100C482F8 /* LocationManager.h */,
+				DC3CF1B924BE1D6100C482F8 /* LocationManager.m */,
+			);
+			path = MISC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -498,6 +511,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC3CF1BA24BE1D6100C482F8 /* LocationManager.m in Sources */,
 				DC3CF1AD24BD590D00C482F8 /* InfiniteScrollActivityView.m in Sources */,
 				DC3CF14C24BCB27900C482F8 /* AppDelegate.m in Sources */,
 				DC3CF1A124BD081300C482F8 /* OrgDetailsViewController.m in Sources */,

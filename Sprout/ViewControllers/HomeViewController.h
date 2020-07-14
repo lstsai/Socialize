@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CreateViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 

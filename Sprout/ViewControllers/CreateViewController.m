@@ -50,6 +50,7 @@
         if(succeeded)
         {
             NSLog(@"Success creating event");
+            [self.delegate didCreateEvent];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         else{
@@ -57,6 +58,9 @@
         }
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
+}
+- (IBAction)didTapCancel:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)didTapImagePicker:(id)sender {

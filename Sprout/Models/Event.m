@@ -37,6 +37,7 @@
     if(image)//no image
     {
         NSData *imageData = UIImagePNGRepresentation(image);
+        eventName=[eventName stringByReplacingOccurrencesOfString:@" " withString:@""];
         NSString* fileName=[eventName stringByAppendingString:@".png"];
         if(imageData)
             return [PFFileObject fileObjectWithName:fileName data:imageData];

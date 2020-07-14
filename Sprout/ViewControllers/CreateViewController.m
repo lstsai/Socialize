@@ -12,7 +12,7 @@
 #import <Parse/Parse.h>
 #import "Event.h"
 #import "MBProgressHUD.h"
-@interface CreateViewController ()
+@interface CreateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end
 
@@ -57,6 +57,32 @@
         }
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
+}
+
+- (IBAction)didTapImagePicker:(id)sender {
+    
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+    //check if this device has a camera before presenting the picker
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else {
+        NSLog(@"Camera 🚫 available so we will use photo library instead");
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    self.eventImage.alpha=1;
+    [self.eventImage setImage:editedImage];
+    
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

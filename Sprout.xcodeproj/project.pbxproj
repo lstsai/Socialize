@@ -25,6 +25,10 @@
 		DC3CF19B24BCF28E00C482F8 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF19A24BCF28D00C482F8 /* Location.m */; };
 		DC3CF19E24BD014E00C482F8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3CF19D24BD014E00C482F8 /* MapKit.framework */; };
 		DC3CF1A124BD081300C482F8 /* OrgDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1A024BD081300C482F8 /* OrgDetailsViewController.m */; };
+		DC3CF1A424BD23FC00C482F8 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1A324BD23FC00C482F8 /* APIManager.m */; };
+		DC3CF1A724BD28DC00C482F8 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1A624BD28DC00C482F8 /* WebViewController.m */; };
+		DC3CF1AA24BD53A900C482F8 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1A924BD53A900C482F8 /* Constants.m */; };
+		DC3CF1AD24BD590D00C482F8 /* InfiniteScrollActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1AC24BD590D00C482F8 /* InfiniteScrollActivityView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +87,14 @@
 		DC3CF19D24BD014E00C482F8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		DC3CF19F24BD081300C482F8 /* OrgDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgDetailsViewController.h; sourceTree = "<group>"; };
 		DC3CF1A024BD081300C482F8 /* OrgDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrgDetailsViewController.m; sourceTree = "<group>"; };
+		DC3CF1A224BD23FC00C482F8 /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
+		DC3CF1A324BD23FC00C482F8 /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
+		DC3CF1A524BD28DC00C482F8 /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		DC3CF1A624BD28DC00C482F8 /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		DC3CF1A824BD539400C482F8 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		DC3CF1A924BD53A900C482F8 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		DC3CF1AB24BD590D00C482F8 /* InfiniteScrollActivityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfiniteScrollActivityView.h; sourceTree = "<group>"; };
+		DC3CF1AC24BD590D00C482F8 /* InfiniteScrollActivityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfiniteScrollActivityView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +187,10 @@
 				DC3CF15824BCB27A00C482F8 /* LaunchScreen.storyboard */,
 				DC3CF15B24BCB27A00C482F8 /* Info.plist */,
 				DC3CF15C24BCB27A00C482F8 /* main.m */,
+				DC3CF1A224BD23FC00C482F8 /* APIManager.h */,
+				DC3CF1A324BD23FC00C482F8 /* APIManager.m */,
+				DC3CF1A824BD539400C482F8 /* Constants.h */,
+				DC3CF1A924BD53A900C482F8 /* Constants.m */,
 			);
 			path = Sprout;
 			sourceTree = "<group>";
@@ -206,6 +222,8 @@
 				DC3CF18624BCC85900C482F8 /* SearchViewController.m */,
 				DC3CF19F24BD081300C482F8 /* OrgDetailsViewController.h */,
 				DC3CF1A024BD081300C482F8 /* OrgDetailsViewController.m */,
+				DC3CF1A524BD28DC00C482F8 /* WebViewController.h */,
+				DC3CF1A624BD28DC00C482F8 /* WebViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -215,6 +233,8 @@
 			children = (
 				DC3CF18824BCCFB300C482F8 /* OrgCell.h */,
 				DC3CF18924BCCFB300C482F8 /* OrgCell.m */,
+				DC3CF1AB24BD590D00C482F8 /* InfiniteScrollActivityView.h */,
+				DC3CF1AC24BD590D00C482F8 /* InfiniteScrollActivityView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -468,15 +488,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC3CF1AD24BD590D00C482F8 /* InfiniteScrollActivityView.m in Sources */,
 				DC3CF14C24BCB27900C482F8 /* AppDelegate.m in Sources */,
 				DC3CF1A124BD081300C482F8 /* OrgDetailsViewController.m in Sources */,
+				DC3CF1A724BD28DC00C482F8 /* WebViewController.m in Sources */,
 				DC3CF15D24BCB27A00C482F8 /* main.m in Sources */,
 				DC3CF18A24BCCFB300C482F8 /* OrgCell.m in Sources */,
+				DC3CF1A424BD23FC00C482F8 /* APIManager.m in Sources */,
 				DC3CF18724BCC85900C482F8 /* SearchViewController.m in Sources */,
 				DC3CF14F24BCB27900C482F8 /* SceneDelegate.m in Sources */,
 				DC3CF19424BCE2DA00C482F8 /* Organization.m in Sources */,
 				DC3CF19B24BCF28E00C482F8 /* Location.m in Sources */,
 				DC3CF18424BCC0D700C482F8 /* LoginViewController.m in Sources */,
+				DC3CF1AA24BD53A900C482F8 /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

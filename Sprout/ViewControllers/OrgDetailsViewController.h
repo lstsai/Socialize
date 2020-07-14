@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Organization.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OrgDetailsViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) Organization *org;
 @property (weak, nonatomic) IBOutlet UIImageView *backdropImage;
 @property (weak, nonatomic) IBOutlet UILabel *name;
@@ -21,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *cause;
 @property (weak, nonatomic) IBOutlet UILabel *website;
 -(void) loadOrgDetails;
+
 
 @end
 

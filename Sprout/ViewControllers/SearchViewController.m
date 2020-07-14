@@ -15,7 +15,7 @@
 #import "AFHTTPSessionManager.h"
 #import "MBProgressHUD.h"
 #import "OrgDetailsViewController.h"
-@interface SearchViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate>
+@interface SearchViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate, UIScrollViewDelegate>
 
 @end
 
@@ -27,6 +27,9 @@
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.searchBar.delegate=self;
+    self.organizations=[[NSMutableArray alloc]init];
+    [self setupLoadingIndicators];
+    
     [self.tableView reloadData];
 }
 
@@ -39,6 +42,21 @@
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.organizations.count;
+}
+
+-(void) setupLoadingIndicators{
+    UIRefreshControl *refreshControl= [[UIRefreshControl alloc] init];//initialize the refresh control
+    [refreshControl addTarget:self action:@selector(fetchResults:) forControlEvents:UIControlEventValueChanged];//add an event listener
+    [self.tableView insertSubview:refreshControl atIndex:0];//add into the storyboard
+    
+    CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+    self.loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
+    self.loadingMoreView.hidden = true;
+    [self.tableView addSubview:self.loadingMoreView];
+    
+    UIEdgeInsets insets = self.tableView.contentInset;
+    insets.bottom += InfiniteScrollActivityView.defaultHeight;
+    self.tableView.contentInset = insets;
 }
 
 - (IBAction)didTapLogout:(id)sender {
@@ -56,25 +74,66 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    [self fetchResults];
+    self.pageNum=1;
+    [self fetchResults:nil];
 }
 - (IBAction)didChangeLocation:(id)sender {
-    [self fetchResults];
+    self.pageNum=1;
+    [self fetchResults:nil];
+}
+-(void) fetchResults:( UIRefreshControl * _Nullable )refreshControl{
+    if(!refreshControl)
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+    NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchBar.text, @"rated":@"TRUE", @"state": self.stateField.text, @"city": self.cityField.text, @"pageNum": @(self.pageNum), @"pageSize":@(RESULTS_SIZE)};
+    [[APIManager shared] getOrganizationsWithCompletion:params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
+        if(error)
+        {
+            NSLog(@"Error getting organizations: %@", error.localizedDescription);
+        }
+        else{
+            self.organizations=[organizations mutableCopy];
+            [self.tableView reloadData];
+            
+            if(refreshControl)
+                [refreshControl endRefreshing];
+            else
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }
+    }];
 }
 
--(void) fetchResults{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchBar.text, @"rated":@"TRUE", @"state": self.stateField.text, @"city": self.cityField.text};
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:@"https://api.data.charitynavigator.org/v2/Organizations" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        self.organizations= [Organization orgsWithArray:responseObject];
-        NSLog(@"Success getting orgs");
-        [self.tableView reloadData];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"Error getting orgs: %@", error.localizedDescription);
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+     if(!self.isMoreDataLoading)
+       {
+           int scrollContentHeight=self.tableView.contentSize.height;
+           int scrollOffsetThreshold = scrollContentHeight - self.tableView.bounds.size.height;
+           
+           if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging)
+           {
+               self.isMoreDataLoading=YES;
+               self.pageNum++;
+               CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+               self.loadingMoreView.frame = frame;
+               [self.loadingMoreView startAnimating];
+               [self loadMoreResults];
+           }
+           
+       }
+}
+-(void) loadMoreResults{
+    NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchBar.text, @"rated":@"TRUE", @"state": self.stateField.text, @"city": self.cityField.text, @"pageNum": @(self.pageNum), @"pageSize":@(RESULTS_SIZE)};
+    [[APIManager shared] getOrganizationsWithCompletion:params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
+        if(error)
+        {
+            NSLog(@"Error getting organizations: %@", error.localizedDescription);
+        }
+        else{
+            [self.organizations addObjectsFromArray:organizations];
+            [self.tableView reloadData];
+            [self.loadingMoreView stopAnimating];
+        }
+        self.isMoreDataLoading=NO;
 
     }];
 }

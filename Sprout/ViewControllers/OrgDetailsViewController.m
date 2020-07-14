@@ -8,6 +8,7 @@
 
 #import "OrgDetailsViewController.h"
 #import "Location.h"
+#import "WebViewController.h"
 @interface OrgDetailsViewController ()
 
 @end
@@ -25,18 +26,27 @@
     self.cause.text=self.org.cause;
     self.address.text=[Location addressFromLocation:self.org.location];
     self.tagLine.text=self.org.tagLine;
-    self.website.text=[self.org.website absoluteString];
     self.mission.text=self.org.missionStatement;
-    
+    self.website.text=[self.org.website absoluteString];
+    self.website.textColor=[UIColor linkColor];
 }
-/*
+
+- (IBAction)didTapLink:(id)sender {
+    [self performSegueWithIdentifier:@"webSegue" sender:nil];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"webSegue"])
+    {
+        WebViewController *webVC=segue.destinationViewController;
+        webVC.link=self.org.website;
+    }
 }
-*/
+
 
 @end

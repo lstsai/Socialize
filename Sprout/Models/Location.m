@@ -21,6 +21,6 @@
 }
 
 + (NSString *)addressFromLocation:(Location*)loc{
-    return [NSString stringWithFormat:@"%@ \r%@, %@ %@", loc.streetAddress, loc.city, loc.state, loc.postalCode];
+    return [NSString stringWithFormat:@"%@ \n%@, %@ %@", loc.streetAddress, loc.city, loc.state, loc.postalCode];
 }
 @end

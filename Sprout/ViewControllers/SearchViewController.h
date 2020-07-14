@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "APIManager.h"
+#import "Constants.h"
+#import "InfiniteScrollActivityView.h"
 @import MapKit;
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,10 +18,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITextField *cityField;
 @property (weak, nonatomic) IBOutlet UITextField *stateField;
-@property (strong, nonatomic) NSArray* organizations;
+@property (strong, nonatomic) NSMutableArray* organizations;
 @property (strong, nonatomic) CLLocationManager *locManager;
--(void) fetchResults;
+@property (nonatomic) int pageNum;
+@property (nonatomic) BOOL isMoreDataLoading;
+@property (strong, nonatomic) InfiniteScrollActivityView* loadingMoreView;
 
+
+-(void) fetchResults:(UIRefreshControl * _Nullable)refreshControl;
+-(void) setupLoadingIndicators;
+-(void) loadMoreResults;
 @end
 
 NS_ASSUME_NONNULL_END

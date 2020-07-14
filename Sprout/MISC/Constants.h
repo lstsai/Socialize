@@ -12,5 +12,6 @@
 extern const int RESULTS_SIZE;
 
 extern const int MINUTE_INTERVAL;
+extern const float SEARCH_DELAY;
 
 #endif /* Constants_h */

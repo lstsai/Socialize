@@ -75,18 +75,41 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    
     self.pageNum=1;
-    [self fetchResults:nil];
+    if (self.searchTimer != nil) {
+        [self.searchTimer invalidate];
+        self.searchTimer = nil;
+    }
+
+    // reschedule the search: in 1.0 second, call the searchForKeyword: method on the new textfield content
+    self.searchTimer = [NSTimer scheduledTimerWithTimeInterval: SEARCH_DELAY
+                                                        target: self
+                                                      selector: @selector(fetchResults:)
+                                                      userInfo: nil
+                                                       repeats: NO];
+    self.pageNum=1;
 }
 - (IBAction)didChangeLocation:(id)sender {
     self.pageNum=1;
     [self fetchResults:nil];
 }
 -(void) fetchResults:( UIRefreshControl * _Nullable )refreshControl{
-    if(!refreshControl)
+    if(![refreshControl isKindOfClass:[UIRefreshControl class]])
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
-    NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchBar.text, @"rated":@"TRUE", @"state": self.stateField.text, @"city": self.cityField.text, @"pageNum": @(self.pageNum), @"pageSize":@(RESULTS_SIZE)};
+    
+    NSString* stateSearch, *citySearch;
+    if([self.stateField.text isEqualToString:@""] && [self.cityField.text  isEqualToString:@""])
+        stateSearch=self.locManager.currentPlacemark.administrativeArea;//the state
+        //citySearch=self.locManager.currentPlacemark.locality;
+    else
+        stateSearch=self.stateField.text;
+    
+    citySearch=self.cityField.text;
+    NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchBar.text, @"rated":@"TRUE", @"state": stateSearch, @"city": citySearch, @"pageNum": @(self.pageNum), @"pageSize":@(RESULTS_SIZE)};
+    
+    NSLog(@"%@   %@",stateSearch, citySearch);
+   
     [[APIManager shared] getOrganizationsWithCompletion:params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
         if(error)
         {
@@ -95,12 +118,11 @@
         else{
             self.organizations=[organizations mutableCopy];
             [self.tableView reloadData];
-            
-            if(refreshControl)
-                [refreshControl endRefreshing];
-            else
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
         }
+        if([refreshControl isKindOfClass:[UIRefreshControl class]])
+            [refreshControl endRefreshing];
+        else
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 

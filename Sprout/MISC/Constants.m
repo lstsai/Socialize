@@ -8,3 +8,5 @@
 #import <Foundation/Foundation.h>
 const int RESULTS_SIZE = 20;
 const int MINUTE_INTERVAL = 15;
+const float SEARCH_DELAY=0.5;
+

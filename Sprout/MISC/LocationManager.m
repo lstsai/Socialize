@@ -69,8 +69,7 @@ static LocationManager *sharedManager;
         if(placemarks)
         {
             self.currentPlacemark=[placemarks firstObject];
-            NSLog(@"Current loc %@", self.currentPlacemark.subThoroughfare);
-
+            //NSLog(@"Current loc %@", self.currentPlacemark.subThoroughfare);
         }
         else
             NSLog(@"Error geting location %@", error.localizedDescription);

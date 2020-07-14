@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) int pageNum;
 @property (nonatomic) BOOL isMoreDataLoading;
 @property (strong, nonatomic) InfiniteScrollActivityView* loadingMoreView;
+@property (strong, nonatomic) NSTimer * _Nullable searchTimer;
+
 
 
 -(void) fetchResults:(UIRefreshControl * _Nullable)refreshControl;

@@ -34,7 +34,7 @@
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
         if (error != nil)
         {
-            [self.alert setMessage:[NSString stringWithFormat: @"%@", error.description]];
+            [self.alert setMessage:[NSString stringWithFormat: @"%@", error.localizedDescription]];
             [self presentViewController:self.alert animated:YES completion:^{
                 //nobthing
             }];

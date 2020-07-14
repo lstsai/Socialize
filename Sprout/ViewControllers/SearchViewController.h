@@ -10,6 +10,7 @@
 #import "APIManager.h"
 #import "Constants.h"
 #import "InfiniteScrollActivityView.h"
+#import "LocationManager.h"
 @import MapKit;
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextField *cityField;
 @property (weak, nonatomic) IBOutlet UITextField *stateField;
 @property (strong, nonatomic) NSMutableArray* organizations;
-@property (strong, nonatomic) CLLocationManager *locManager;
+@property (strong, nonatomic) LocationManager *locManager;
 @property (nonatomic) int pageNum;
 @property (nonatomic) BOOL isMoreDataLoading;
 @property (strong, nonatomic) InfiniteScrollActivityView* loadingMoreView;

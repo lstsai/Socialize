@@ -36,7 +36,6 @@ static LocationManager *sharedManager;
     
     currentLocation = [[CLLocation alloc] init];
     geoCoder=[[CLGeocoder alloc] init];
-    currentPlacemark=[[CLPlacemark alloc] init];
     locationManager = [[CLLocationManager alloc] init];
 
     locationManager.delegate = self;
@@ -65,9 +64,14 @@ static LocationManager *sharedManager;
 #pragma mark - Delegate Methods
 -(void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
     self.currentLocation=[locations lastObject];
+
     [self.geoCoder reverseGeocodeLocation:self.currentLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if(placemarks)
+        {
             self.currentPlacemark=[placemarks firstObject];
+            NSLog(@"Current loc %@", self.currentPlacemark.subThoroughfare);
+
+        }
         else
             NSLog(@"Error geting location %@", error.localizedDescription);
     }];

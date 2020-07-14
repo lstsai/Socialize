@@ -29,8 +29,9 @@
     self.searchBar.delegate=self;
     self.organizations=[[NSMutableArray alloc]init];
     [self setupLoadingIndicators];
-    
     [self.tableView reloadData];
+    
+    self.locManager=[LocationManager sharedInstance];
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {

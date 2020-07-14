@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *address;
 @property (weak, nonatomic) IBOutlet UILabel *cause;
 @property (weak, nonatomic) IBOutlet UILabel *website;
+@property (weak, nonatomic) IBOutlet UIView *detailContainerView;
 -(void) loadOrgDetails;
 
 

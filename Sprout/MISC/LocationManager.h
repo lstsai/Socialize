@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
+#import "Constants.h"
 @interface LocationManager : NSObject <CLLocationManagerDelegate> {
     CLLocationManager *locationManager;
     CLLocation *currentLocation;
@@ -23,5 +24,6 @@
 + (LocationManager *)sharedInstance;
 - (void)start;
 - (void)stop;
+- (void)getLocalPlaces:(NSString*)searchTerm completion:(void(^)(NSArray *mapItems, NSError *error))completion;
 
 @end

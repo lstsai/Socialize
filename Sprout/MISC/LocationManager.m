@@ -61,6 +61,24 @@ static LocationManager *sharedManager;
   [locationManager stopUpdatingLocation];
 }
 
+- (void)getLocalPlaces:(NSString*)searchTerm completion:(void(^)(NSArray *mapItems, NSError *error))completion{
+    MKLocalSearchRequest *searchRequest = [[MKLocalSearchRequest alloc] init];
+    searchRequest.naturalLanguageQuery = searchTerm;
+
+    // Set the region to an associated map view's region.
+    searchRequest.region=MKCoordinateRegionMake(self.currentLocation.coordinate, MKCoordinateSpanMake(0.07, 0.07));
+
+    MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:searchRequest];
+    [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
+        if (response) {
+            completion([response mapItems], nil);
+        } else if (error) {
+            // Handle the error.
+            completion(nil, error);
+        }
+    }];
+}
+
 #pragma mark - Delegate Methods
 -(void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
     self.currentLocation=[locations lastObject];

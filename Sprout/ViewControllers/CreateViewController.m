@@ -8,6 +8,10 @@
 
 #import "CreateViewController.h"
 #import "Constants.h"
+#import "LocationManager.h"
+#import <Parse/Parse.h>
+#import "Event.h"
+#import "MBProgressHUD.h"
 @interface CreateViewController ()
 
 @end
@@ -38,6 +42,21 @@
     [dateFormat setDateFormat:@"MM/dd/yy HH:mm"];
     NSString *dateString = [dateFormat stringFromDate:eventDate];
     self.dateField.text = [NSString stringWithFormat:@"%@",dateString];
+}
+- (IBAction)didTapCreate:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    UIDatePicker *picker = (UIDatePicker*)self.dateField.inputView;
+    [Event postEvent:self.eventImage.image withName:self.eventNameField.text withTime:picker.date withLocation:self.locationField.text withDetails:self.detailsTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        if(succeeded)
+        {
+            NSLog(@"Success creating event");
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        else{
+            NSLog(@"Error creating event %@", error.localizedDescription);
+        }
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
 }
 
 /*

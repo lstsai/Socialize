@@ -32,6 +32,7 @@
 		DC3CF1B024BE046F00C482F8 /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1AF24BE046F00C482F8 /* CreateViewController.m */; };
 		DC3CF1B324BE05BB00C482F8 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1B224BE05BB00C482F8 /* HomeViewController.m */; };
 		DC3CF1BA24BE1D6100C482F8 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1B924BE1D6100C482F8 /* LocationManager.m */; };
+		DC3CF1BD24BE500C00C482F8 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1BC24BE500C00C482F8 /* Event.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,8 @@
 		DC3CF1B224BE05BB00C482F8 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		DC3CF1B824BE1D6100C482F8 /* LocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		DC3CF1B924BE1D6100C482F8 /* LocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		DC3CF1BB24BE500C00C482F8 /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		DC3CF1BC24BE500C00C482F8 /* Event.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +259,8 @@
 				DC3CF19324BCE2D900C482F8 /* Organization.m */,
 				DC3CF19C24BCF2AD00C482F8 /* Location.h */,
 				DC3CF19A24BCF28D00C482F8 /* Location.m */,
+				DC3CF1BB24BE500C00C482F8 /* Event.h */,
+				DC3CF1BC24BE500C00C482F8 /* Event.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -517,6 +522,7 @@
 				DC3CF1A124BD081300C482F8 /* OrgDetailsViewController.m in Sources */,
 				DC3CF1A724BD28DC00C482F8 /* WebViewController.m in Sources */,
 				DC3CF15D24BCB27A00C482F8 /* main.m in Sources */,
+				DC3CF1BD24BE500C00C482F8 /* Event.m in Sources */,
 				DC3CF18A24BCCFB300C482F8 /* OrgCell.m in Sources */,
 				DC3CF1A424BD23FC00C482F8 /* APIManager.m in Sources */,
 				DC3CF18724BCC85900C482F8 /* SearchViewController.m in Sources */,

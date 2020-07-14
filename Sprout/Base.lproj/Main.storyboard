@@ -535,6 +535,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" keyboardDismissMode="onDrag" text="Details: " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7cH-OP-luo">
+                                <rect key="frame" x="39" y="482" width="335" height="303"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="koq-Ct-4iL"/>
@@ -556,11 +564,16 @@
                                 <state key="normal" image="square.and.arrow.up" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapCreate:" destination="cvg-p0-8ik" eventType="touchUpInside" id="Efv-Oz-xJC"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="dateField" destination="Aa8-EC-52j" id="xaf-Pz-1vZ"/>
+                        <outlet property="detailsTextView" destination="7cH-OP-luo" id="31A-W2-V9N"/>
+                        <outlet property="eventImage" destination="tIU-qw-dMW" id="W9h-6f-cfk"/>
                         <outlet property="eventNameField" destination="W6S-PV-yAe" id="ACI-A6-Uy7"/>
                         <outlet property="locationField" destination="m8G-lb-Jn5" id="0AT-sJ-zR2"/>
                     </connections>

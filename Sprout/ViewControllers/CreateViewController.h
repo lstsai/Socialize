@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "LocationManager.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CreateViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIImageView *eventImage;
 @property (weak, nonatomic) IBOutlet UITextField *eventNameField;
 @property (weak, nonatomic) IBOutlet UITextField *dateField;
 @property (weak, nonatomic) IBOutlet UITextField *locationField;
+@property (weak, nonatomic) IBOutlet UITextView *detailsTextView;
 -(void) setupDatePicker;
 -(void) dateTextField:(id)sender;
 

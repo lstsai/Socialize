@@ -1,24 +1,20 @@
 //
-//  OrgCell.m
+//  EventCell.m
 //  Sprout
 //
-//  Created by laurentsai on 7/13/20.
+//  Created by laurentsai on 7/15/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
 
-#import "OrgCell.h"
+#import "EventCell.h"
 
-@implementation OrgCell
+@implementation EventCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
--(void) loadData{
-    self.nameLabel.text=self.org.name;
-    if(self.org.tagLine)
-        self.tagLineLabel.text=self.org.tagLine;
-}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

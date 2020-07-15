@@ -11,6 +11,8 @@
 #import "Constants.h"
 #import "InfiniteScrollActivityView.h"
 #import "LocationManager.h"
+#import "EventSearchViewController.h"
+#import "OrgSearchViewController.h"
 @import MapKit;
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,18 +21,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITextField *cityField;
 @property (weak, nonatomic) IBOutlet UITextField *stateField;
-@property (strong, nonatomic) NSMutableArray* organizations;
-@property (strong, nonatomic) LocationManager *locManager;
-@property (nonatomic) int pageNum;
-@property (nonatomic) BOOL isMoreDataLoading;
-@property (strong, nonatomic) InfiniteScrollActivityView* loadingMoreView;
+@property (weak, nonatomic) IBOutlet UIView *eventsView;
+@property (weak, nonatomic) IBOutlet UIView *orgsView;
+@property (weak, nonatomic) IBOutlet EventSearchViewController *eventsVC;
+@property (weak, nonatomic) IBOutlet OrgSearchViewController *orgsVC;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *searchControl;
 @property (strong, nonatomic) NSTimer * _Nullable searchTimer;
 
-
-
 -(void) fetchResults:(UIRefreshControl * _Nullable)refreshControl;
--(void) setupLoadingIndicators;
--(void) loadMoreResults;
+
 @end
 
 NS_ASSUME_NONNULL_END

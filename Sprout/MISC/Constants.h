@@ -10,8 +10,12 @@
 #define Constants_h
 
 extern const int RESULTS_SIZE;
-
 extern const int MINUTE_INTERVAL;
 extern const float SEARCH_DELAY;
+extern NSString* const EVENT_SEARCH_PLACEHOLDER;
+extern NSString* const ORG_SEARCH_PLACEHOLDER;
+extern const int ORG_SEGMENT;
+extern const int EVENT_SEGMENT;
+
 
 #endif /* Constants_h */

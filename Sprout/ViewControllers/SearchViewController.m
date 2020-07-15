@@ -109,14 +109,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-//    if([segue.identifier isEqualToString:@"detailSegue"])
-//    {
-//        OrgDetailsViewController *orgVC=segue.destinationViewController;
-//        UITableViewCell *tappedCell= sender;
-//        NSIndexPath *tappedIndex= [self.tableView indexPathForCell:tappedCell];
-//        orgVC.org=self.organizations[tappedIndex.row];
-//        [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
-//    }
 }
 
 

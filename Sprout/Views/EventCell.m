@@ -13,6 +13,19 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    [self loadData];
+}
+-(void) loadData{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"E, d MMM yyyy HH:mm"];
+    NSString *dateString = [dateFormat stringFromDate:self.event.time];
+    self.dateLabel.text=dateString;
+    
+    self.nameLabel.text=self.event.name;
+    self.locationLabel.text=self.event.location;
+    
+    self.eventImage.file=self.event.image;
+    [self.eventImage loadInBackground];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

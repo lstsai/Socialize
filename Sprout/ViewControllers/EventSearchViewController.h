@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void) getEvents:( UIRefreshControl * _Nullable )refreshControl;
 -(void) loadMoreResults;
+-(void) setupLoadingIndicators;
 @end
 
 NS_ASSUME_NONNULL_END

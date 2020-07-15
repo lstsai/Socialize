@@ -20,6 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tableView.delegate=self;
+    self.tableView.dataSource=self;
+    [self setupLoadingIndicators];
 }
 -(void) setupLoadingIndicators{
     UIRefreshControl *refreshControl= [[UIRefreshControl alloc] init];//initialize the refresh control
@@ -35,24 +38,48 @@
     insets.bottom += InfiniteScrollActivityView.defaultHeight;
     self.tableView.contentInset = insets;
 }
+
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    EventCell *orgCell=[[EventCell alloc] init];
-    return orgCell;
+    EventCell *eventCell=[tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
+    eventCell.event=self.events[indexPath.row];
+    [eventCell loadData];
+    return eventCell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.events.count;
 }
+
 -(void) getEvents:( UIRefreshControl * _Nullable )refreshControl{
     if([self.searchText isEqualToString:@""])
            return;
     if(![refreshControl isKindOfClass:[UIRefreshControl class]])
          [MBProgressHUD showHUDAddedTo:self.view animated:YES];
      
-    PFQuery *eventsQuery=[PFQuery queryWithClassName:@"Event"];
-    [eventsQuery setLimit:RESULTS_SIZE];
+    PFQuery *eventsNameQuery=[PFQuery queryWithClassName:@"Event"];
+    [eventsNameQuery whereKey:@"name" containsString:self.searchText];
+
+    PFQuery *eventsDetailsQuery=[PFQuery queryWithClassName:@"Event"];
+    [eventsDetailsQuery whereKey:@"details" containsString:self.searchText];
+
+    PFQuery *eventsQuery=[PFQuery orQueryWithSubqueries:@[eventsNameQuery,eventsDetailsQuery]];
+
+    if(![self.stateSearch isEqualToString:@""] || ![self.citySearch isEqualToString:@""])
+        [eventsQuery whereKey:@"location" containedIn:@[self.citySearch, self.stateSearch]];
     [eventsQuery includeKey:@"author"];
-    [eventsQuery whereKey:@"name" containsString:self.searchText];
+    [eventsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if(error)
+            NSLog(@"Error getting events %@", error.localizedDescription);
+        else
+        {
+            self.events=[objects mutableCopy];
+            [self.tableView reloadData];
+        }
+        if([refreshControl isKindOfClass:[UIRefreshControl class]])
+            [refreshControl endRefreshing];
+        else
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

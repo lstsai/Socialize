@@ -7,10 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Event.h"
+@import Parse;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface EventCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (weak, nonatomic) IBOutlet  PFImageView *eventImage;
+@property (strong, nonatomic) Event *event;
+
+-(void) loadData;
 
 @end
 

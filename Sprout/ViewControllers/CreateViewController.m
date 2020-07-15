@@ -39,7 +39,7 @@
     UIDatePicker *picker = (UIDatePicker*)self.dateField.inputView;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *eventDate = picker.date;
-    [dateFormat setDateFormat:@"MM/dd/yy HH:mm"];
+    [dateFormat setDateFormat:@"MM/dd/yy h:mm a"];
     NSString *dateString = [dateFormat stringFromDate:eventDate];
     self.dateField.text = [NSString stringWithFormat:@"%@",dateString];
 }

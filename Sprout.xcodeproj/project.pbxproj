@@ -33,6 +33,10 @@
 		DC3CF1B324BE05BB00C482F8 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1B224BE05BB00C482F8 /* HomeViewController.m */; };
 		DC3CF1BA24BE1D6100C482F8 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1B924BE1D6100C482F8 /* LocationManager.m */; };
 		DC3CF1BD24BE500C00C482F8 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1BC24BE500C00C482F8 /* Event.m */; };
+		DC3CF1C024BF644100C482F8 /* OrgSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1BF24BF644100C482F8 /* OrgSearchViewController.m */; };
+		DC3CF1C324BF645300C482F8 /* EventSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1C224BF645300C482F8 /* EventSearchViewController.m */; };
+		DC3CF1C624BF67BB00C482F8 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1C524BF67BB00C482F8 /* EventCell.m */; };
+		DCE6FA4B24BFA447008091A3 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +111,14 @@
 		DC3CF1B924BE1D6100C482F8 /* LocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		DC3CF1BB24BE500C00C482F8 /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		DC3CF1BC24BE500C00C482F8 /* Event.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		DC3CF1BE24BF644100C482F8 /* OrgSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgSearchViewController.h; sourceTree = "<group>"; };
+		DC3CF1BF24BF644100C482F8 /* OrgSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrgSearchViewController.m; sourceTree = "<group>"; };
+		DC3CF1C124BF645300C482F8 /* EventSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventSearchViewController.h; sourceTree = "<group>"; };
+		DC3CF1C224BF645300C482F8 /* EventSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventSearchViewController.m; sourceTree = "<group>"; };
+		DC3CF1C424BF67BB00C482F8 /* EventCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
+		DC3CF1C524BF67BB00C482F8 /* EventCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
+		DCE6FA4924BFA447008091A3 /* EventDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventDetailsViewController.h; sourceTree = "<group>"; };
+		DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +249,12 @@
 				DC3CF1AF24BE046F00C482F8 /* CreateViewController.m */,
 				DC3CF1B124BE05BB00C482F8 /* HomeViewController.h */,
 				DC3CF1B224BE05BB00C482F8 /* HomeViewController.m */,
+				DC3CF1BE24BF644100C482F8 /* OrgSearchViewController.h */,
+				DC3CF1BF24BF644100C482F8 /* OrgSearchViewController.m */,
+				DC3CF1C124BF645300C482F8 /* EventSearchViewController.h */,
+				DC3CF1C224BF645300C482F8 /* EventSearchViewController.m */,
+				DCE6FA4924BFA447008091A3 /* EventDetailsViewController.h */,
+				DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -248,6 +266,8 @@
 				DC3CF18924BCCFB300C482F8 /* OrgCell.m */,
 				DC3CF1AB24BD590D00C482F8 /* InfiniteScrollActivityView.h */,
 				DC3CF1AC24BD590D00C482F8 /* InfiniteScrollActivityView.m */,
+				DC3CF1C424BF67BB00C482F8 /* EventCell.h */,
+				DC3CF1C524BF67BB00C482F8 /* EventCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -521,15 +541,19 @@
 				DC3CF14C24BCB27900C482F8 /* AppDelegate.m in Sources */,
 				DC3CF1A124BD081300C482F8 /* OrgDetailsViewController.m in Sources */,
 				DC3CF1A724BD28DC00C482F8 /* WebViewController.m in Sources */,
+				DC3CF1C024BF644100C482F8 /* OrgSearchViewController.m in Sources */,
 				DC3CF15D24BCB27A00C482F8 /* main.m in Sources */,
 				DC3CF1BD24BE500C00C482F8 /* Event.m in Sources */,
 				DC3CF18A24BCCFB300C482F8 /* OrgCell.m in Sources */,
+				DCE6FA4B24BFA447008091A3 /* EventDetailsViewController.m in Sources */,
 				DC3CF1A424BD23FC00C482F8 /* APIManager.m in Sources */,
 				DC3CF18724BCC85900C482F8 /* SearchViewController.m in Sources */,
 				DC3CF1B324BE05BB00C482F8 /* HomeViewController.m in Sources */,
+				DC3CF1C324BF645300C482F8 /* EventSearchViewController.m in Sources */,
 				DC3CF14F24BCB27900C482F8 /* SceneDelegate.m in Sources */,
 				DC3CF19424BCE2DA00C482F8 /* Organization.m in Sources */,
 				DC3CF1B024BE046F00C482F8 /* CreateViewController.m in Sources */,
+				DC3CF1C624BF67BB00C482F8 /* EventCell.m in Sources */,
 				DC3CF19B24BCF28E00C482F8 /* Location.m in Sources */,
 				DC3CF18424BCC0D700C482F8 /* LoginViewController.m in Sources */,
 				DC3CF1AA24BD53A900C482F8 /* Constants.m in Sources */,

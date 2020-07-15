@@ -99,18 +99,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C1W-l7-6kY">
-                                <rect key="frame" x="0.0" y="196" width="414" height="646"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <segue destination="EJu-ws-m9c" kind="embed" id="Tkc-Vi-sQO"/>
-                                </connections>
-                            </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g7O-1H-6Gz">
                                 <rect key="frame" x="0.0" y="196" width="414" height="646"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="PUu-SD-hja" kind="embed" id="L3Z-zK-m9h"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C1W-l7-6kY">
+                                <rect key="frame" x="0.0" y="196" width="414" height="646"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="EJu-ws-m9c" kind="embed" id="Tkc-Vi-sQO"/>
                                 </connections>
                             </containerView>
                             <searchBar contentMode="redraw" text="" placeholder="Search for a Non-profit" translatesAutoresizingMaskIntoConstraints="NO" id="W4I-gt-Dwr">
@@ -201,7 +201,6 @@
                         <outlet property="searchControl" destination="2qC-uU-w7J" id="PAt-60-sgt"/>
                         <outlet property="stateField" destination="e37-bd-wMa" id="Xmt-EH-cBO"/>
                         <outlet property="tableView" destination="du5-Om-FA2" id="Jhv-4j-FUY"/>
-                        <segue destination="Wv5-VZ-aSd" kind="show" id="np3-gZ-rCj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XbL-KR-4ep" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -797,9 +796,6 @@
             <point key="canvasLocation" x="772" y="2198"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="1Y0-G4-RPs"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="calendar" catalog="system" width="128" height="106"/>
         <image name="globe" catalog="system" width="128" height="121"/>

@@ -36,6 +36,7 @@
 		DC3CF1C024BF644100C482F8 /* OrgSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1BF24BF644100C482F8 /* OrgSearchViewController.m */; };
 		DC3CF1C324BF645300C482F8 /* EventSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1C224BF645300C482F8 /* EventSearchViewController.m */; };
 		DC3CF1C624BF67BB00C482F8 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1C524BF67BB00C482F8 /* EventCell.m */; };
+		DCE6FA4B24BFA447008091A3 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +117,8 @@
 		DC3CF1C224BF645300C482F8 /* EventSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventSearchViewController.m; sourceTree = "<group>"; };
 		DC3CF1C424BF67BB00C482F8 /* EventCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
 		DC3CF1C524BF67BB00C482F8 /* EventCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
+		DCE6FA4924BFA447008091A3 /* EventDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventDetailsViewController.h; sourceTree = "<group>"; };
+		DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +253,8 @@
 				DC3CF1BF24BF644100C482F8 /* OrgSearchViewController.m */,
 				DC3CF1C124BF645300C482F8 /* EventSearchViewController.h */,
 				DC3CF1C224BF645300C482F8 /* EventSearchViewController.m */,
+				DCE6FA4924BFA447008091A3 /* EventDetailsViewController.h */,
+				DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -540,6 +545,7 @@
 				DC3CF15D24BCB27A00C482F8 /* main.m in Sources */,
 				DC3CF1BD24BE500C00C482F8 /* Event.m in Sources */,
 				DC3CF18A24BCCFB300C482F8 /* OrgCell.m in Sources */,
+				DCE6FA4B24BFA447008091A3 /* EventDetailsViewController.m in Sources */,
 				DC3CF1A424BD23FC00C482F8 /* APIManager.m in Sources */,
 				DC3CF18724BCC85900C482F8 /* SearchViewController.m in Sources */,
 				DC3CF1B324BE05BB00C482F8 /* HomeViewController.m in Sources */,

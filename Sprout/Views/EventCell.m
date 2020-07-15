@@ -17,7 +17,7 @@
 }
 -(void) loadData{
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"E, d MMM yyyy HH:mm"];
+    [dateFormat setDateFormat:@"E, d MMM yyyy h:mm a"];
     NSString *dateString = [dateFormat stringFromDate:self.event.time];
     self.dateLabel.text=dateString;
     

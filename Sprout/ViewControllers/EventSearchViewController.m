@@ -10,7 +10,7 @@
 #import "MBProgressHUD.h"
 #import <Parse/Parse.h>
 #import "EventCell.h"
-
+#import "EventDetailsViewController.h"
 @interface EventSearchViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @end
@@ -65,7 +65,7 @@
     PFQuery *eventsQuery=[PFQuery orQueryWithSubqueries:@[eventsNameQuery,eventsDetailsQuery]];
 
     if(![self.stateSearch isEqualToString:@""] || ![self.citySearch isEqualToString:@""])
-        [eventsQuery whereKey:@"location" containedIn:@[self.citySearch, self.stateSearch]];
+    [eventsQuery whereKey:@"location" containedIn:@[self.citySearch, self.stateSearch]];
     [eventsQuery includeKey:@"author"];
     [eventsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)
@@ -104,14 +104,22 @@
     
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"detailSegue"])
+       {
+           EventDetailsViewController *eventVC=segue.destinationViewController;
+           UITableViewCell *tappedCell= sender;
+           NSIndexPath *tappedIndex= [self.tableView indexPathForCell:tappedCell];
+           eventVC.event=self.events[tappedIndex.row];
+           [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
+       }
 }
-*/
+
 
 @end

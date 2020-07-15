@@ -27,6 +27,8 @@
     self.searchBar.delegate=self;
     self.eventsVC=[self.childViewControllers objectAtIndex:EVENT_SEGMENT ];
     self.orgsVC=[self.childViewControllers objectAtIndex:ORG_SEGMENT];
+    [self.eventsView setHidden:YES];
+    [self.orgsView setHidden:NO];
 }
 
 
@@ -63,21 +65,38 @@
 }
 -(void) fetchResults:( UIRefreshControl * _Nullable )refreshControl{
     
-//    if(self.searchControl.selectedSegmentIndex==ORG_SEGMENT)
-//        [self.orgsVC getOrgs:refreshControl];
-//    else if(self.searchControl.selectedSegmentIndex==EVENT_SEGMENT)
-//        [self.eventsVC getEvents:refreshControl];
+    if(self.searchControl.selectedSegmentIndex==ORG_SEGMENT)
+    {
+        self.orgsVC.searchText=self.searchBar.text;
+        self.orgsVC.citySearch=self.cityField.text;
+        self.orgsVC.stateSearch=self.cityField.text;
+        [self.orgsVC getOrgs:refreshControl];
+    }
+    else if(self.searchControl.selectedSegmentIndex==EVENT_SEGMENT){
+        self.eventsVC.searchText=self.searchBar.text;
+        self.eventsVC.citySearch=self.cityField.text;
+        self.eventsVC.stateSearch=self.cityField.text;
+        [self.eventsVC getEvents:refreshControl];
+    }
 }
 
 - (IBAction)didChangeSearch:(id)sender {
     if(self.searchControl.selectedSegmentIndex==ORG_SEGMENT)
     {
+        self.orgsVC.searchText=self.searchBar.text;
+        self.orgsVC.citySearch=self.cityField.text;
+        self.orgsVC.stateSearch=self.cityField.text;
+        [self.orgsVC getOrgs:nil];
         [self.searchBar setPlaceholder:[ORG_SEARCH_PLACEHOLDER mutableCopy]];
         [self.eventsView setHidden:YES];
         [self.orgsView setHidden:NO];
     }
     else if (self.searchControl.selectedSegmentIndex==EVENT_SEGMENT)
     {
+        self.eventsVC.searchText=self.searchBar.text;
+        self.eventsVC.citySearch=self.cityField.text;
+        self.eventsVC.stateSearch=self.cityField.text;
+        [self.eventsVC getEvents:nil];
         [self.searchBar setPlaceholder:[EVENT_SEARCH_PLACEHOLDER mutableCopy]];
         [self.orgsView setHidden:YES];
         [self.eventsView setHidden:NO];

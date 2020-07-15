@@ -14,13 +14,16 @@ NS_ASSUME_NONNULL_BEGIN
 @interface EventSearchViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray* events;
+@property (strong, nonatomic) NSString* searchText;
+@property (strong, nonatomic) NSString* stateSearch;
+@property (strong, nonatomic) NSString* citySearch;
 @property (strong, nonatomic) LocationManager *locManager;
 @property (nonatomic) int pageNum;
 @property (nonatomic) BOOL isMoreDataLoading;
 @property (strong, nonatomic) InfiniteScrollActivityView* loadingMoreView;
 
-//-(void) getEvents:( UIRefreshControl * _Nullable )refreshControl;
-//-(void) loadMoreResults;
+-(void) getEvents:( UIRefreshControl * _Nullable )refreshControl;
+-(void) loadMoreResults;
 @end
 
 NS_ASSUME_NONNULL_END

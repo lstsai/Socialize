@@ -23,8 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL isMoreDataLoading;
 @property (strong, nonatomic) InfiniteScrollActivityView* loadingMoreView;
 
-//-(void) getOrgs:( UIRefreshControl * _Nullable )refreshControl;
-//-(void) loadMoreResults;
+-(void) getOrgs:( UIRefreshControl * _Nullable )refreshControl;
+-(void) loadMoreResults;
 
 @end
 

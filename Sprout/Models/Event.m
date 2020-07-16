@@ -16,6 +16,7 @@
 @dynamic name;
 @dynamic details;
 @dynamic location;
+@dynamic streetAddress;
 @dynamic image;
 @dynamic createdAt;
 @dynamic time;
@@ -23,7 +24,7 @@
 + (nonnull NSString *)parseClassName {
     return @"Event";
 }
-+ (void) postEvent:(UIImage * _Nullable )image withName:(NSString *)name withTime:(NSDate*)time withLocation:(PFGeoPoint*)location withDetails:(NSString*)details withCompletion: (PFBooleanResultBlock  _Nullable)completion{
++ (void) postEvent:(UIImage * _Nullable )image withName:(NSString *)name withTime:(NSDate*)time withLocation:(PFGeoPoint*)location withStreetAdress:(NSString*)streetAddress withDetails:(NSString*)details withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Event *newEvent= [Event new];
     newEvent.name=name;
     newEvent.image= [self getPFFileFromImage:image withName:name];
@@ -31,6 +32,7 @@
     newEvent.author=[PFUser currentUser];
     newEvent.location=location;
     newEvent.time=time;
+    newEvent.streetAddress=streetAddress;
     [newEvent saveInBackgroundWithBlock:completion];
 }
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image withName:(NSString*)eventName {

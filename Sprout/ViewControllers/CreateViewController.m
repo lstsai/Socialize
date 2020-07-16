@@ -46,7 +46,7 @@
 - (IBAction)didTapCreate:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     UIDatePicker *picker = (UIDatePicker*)self.dateField.inputView;
-    [Event postEvent:self.eventImage.image withName:self.eventNameField.text withTime:picker.date withLocation:self.locationPoint withDetails:self.detailsTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Event postEvent:self.eventImage.image withName:self.eventNameField.text withTime:picker.date withLocation:self.locationPoint withStreetAdress:self.locationField.text withDetails:self.detailsTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded)
         {
             NSLog(@"Success creating event");
@@ -108,7 +108,7 @@
 */
 
 - (void)viewController:(nonnull GMSAutocompleteViewController *)viewController didAutocompleteWithPlace:(nonnull GMSPlace *)place {
-    self.locationField.text=place.name;
+    self.locationField.text=place.formattedAddress;
     self.locationPoint= [PFGeoPoint geoPointWithLatitude:place.coordinate.latitude longitude:place.coordinate.longitude];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

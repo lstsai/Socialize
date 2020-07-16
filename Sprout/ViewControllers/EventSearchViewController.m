@@ -66,7 +66,10 @@
     PFQuery *eventsQuery=[PFQuery orQueryWithSubqueries:@[eventsNameQuery,eventsDetailsQuery]];
 
     if(![self.stateSearch isEqualToString:@""] || ![self.citySearch isEqualToString:@""])
-    [eventsQuery whereKey:@"location" containedIn:@[self.citySearch, self.stateSearch]];
+    {
+        [eventsQuery whereKey:@"streetAddress" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.citySearch]];
+        [eventsQuery whereKey:@"streetAddress" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.stateSearch]];
+    }
     [eventsQuery includeKey:@"author"];
     [eventsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)

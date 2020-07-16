@@ -35,6 +35,9 @@
 }
 
 -(void)loadProfile{
+    self.nameLabel.text=self.user.username;
+    self.usernameLabel.text=self.user.username;
+
     if(self.user[@"profilePic"])
     {
         self.profileImage.file=self.user[@"profilePic"];
@@ -52,6 +55,7 @@
     [self getLikedEventInfo];
 }
 -(void)getLikedOrgInfo{
+    
     [[APIManager shared] getOrgsWithEIN:self.user[@"likedOrgs"] completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
         if(error)
             [AppDelegate displayAlert:@"Error getting liked organizations" withMessage:error.localizedDescription on:self];

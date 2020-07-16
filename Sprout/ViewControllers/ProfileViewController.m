@@ -22,17 +22,58 @@
     self.eventCollectionView.dataSource=self;
     self.orgCollectionView.delegate=self;
     self.orgCollectionView.dataSource=self;
+    if(!self.user)
+        self.user=PFUser.currentUser;
+    [self loadProfile];
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)loadProfile{
+    if(self.user[@"profilePic"])
+    {
+        self.profileImage.file=self.user[@"profilePic"];
+        [self.profileImage loadInBackground];
+    }
+    if(self.user[@"backgroundPic"])
+    {
+        self.backgroundImage.file=self.user[@"backgroundPic"];
+        [self.backgroundImage loadInBackground];
+    }
+    self.friendCount.text=[NSString stringWithFormat:@"%lu", ((NSArray*)self.user[@"friends"]).count];
+    self.orgCount.text=[NSString stringWithFormat:@"%lu",((NSArray*)self.user[@"likedOrgs"]).count];
+    self.eventCount.text=[NSString stringWithFormat:@"%lu",((NSArray*)self.user[@"likedEvents"]).count];
+    [self getLikedOrgInfo];
+    [self getLikedEventInfo];
 }
-*/
+-(void)getLikedOrgInfo{
+    [[APIManager shared] getOrgsWithEIN:self.user[@"likedOrgs"] completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
+        if(error)
+            NSLog(@"Error getting liked orgs %@", error.localizedDescription);
+        else{
+            self.likedOrgs=organizations;
+            NSLog(@"Success getting liked orgs %@", organizations);
+
+            [self.orgCollectionView reloadData];
+
+        }
+        
+    }];
+    
+}
+-(void)getLikedEventInfo{
+    PFQuery *eventQuery= [PFQuery queryWithClassName:@"Event"];
+    [eventQuery whereKey:@"objectId" containedIn:self.user[@"likedEvents"]];
+    [eventQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if(error)
+            NSLog(@"Error getting liked events %@", error.localizedDescription);
+        else
+        {
+            self.likedEvents=objects;
+            [self.eventCollectionView reloadData];
+        }
+    }];
+
+}
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     if(collectionView==self.eventCollectionView)
@@ -47,6 +88,20 @@
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    if(collectionView==self.eventCollectionView)
+        return self.likedEvents.count;
+    else
+        return self.likedOrgs.count;
 }
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
 @end

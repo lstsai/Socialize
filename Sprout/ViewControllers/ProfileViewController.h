@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Organization.h"
+#import "Event.h"
+#import "APIManager.h"
+@import Parse;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ProfileViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
-@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
+@property (weak, nonatomic) IBOutlet PFImageView *backgroundImage;
+@property (weak, nonatomic) IBOutlet PFImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *friendCount;
@@ -20,6 +23,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *eventCount;
 @property (weak, nonatomic) IBOutlet UICollectionView *orgCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionView *eventCollectionView;
+@property (strong, nonatomic) PFUser *user;
+@property (strong, nonatomic) NSArray *likedOrgs;
+@property (strong, nonatomic) NSArray *likedEvents;
+
+
+-(void)getLikedOrgInfo;
+-(void)getLikedEventInfo;
+-(void)loadProfile;
 
 @end
 

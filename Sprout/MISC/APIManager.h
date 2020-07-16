@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)shared;
 - (instancetype)init;
 - (void)getOrganizationsWithCompletion:(NSDictionary*)params completion:(void(^)(NSArray *organizations, NSError *error))completion;
+- (void)getOrgsWithEIN:(NSArray*)eins completion:(void(^)(NSArray *organizations, NSError *error))completion;
 
 @end
 

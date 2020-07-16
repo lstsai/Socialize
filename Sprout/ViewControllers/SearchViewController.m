@@ -69,13 +69,13 @@
     {
         self.orgsVC.searchText=self.searchBar.text;
         self.orgsVC.citySearch=self.cityField.text;
-        self.orgsVC.stateSearch=self.cityField.text;
+        self.orgsVC.stateSearch=self.stateField.text;
         [self.orgsVC getOrgs:refreshControl];
     }
     else if(self.searchControl.selectedSegmentIndex==EVENT_SEGMENT){
         self.eventsVC.searchText=self.searchBar.text;
         self.eventsVC.citySearch=self.cityField.text;
-        self.eventsVC.stateSearch=self.cityField.text;
+        self.eventsVC.stateSearch=self.stateField.text;
         [self.eventsVC getEvents:refreshControl];
     }
 }

@@ -1145,6 +1145,9 @@
                                                         <state key="selected" image="star.fill" catalog="system">
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="didTapLike:" destination="awX-v5-WsL" eventType="touchUpInside" id="WeE-MZ-u4L"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1215,6 +1218,7 @@
                         <outlet property="eventLocationLabel" destination="dGg-BF-W5c" id="xPv-WG-OOT"/>
                         <outlet property="eventNameLabel" destination="mgK-8z-I7g" id="TvL-pm-agw"/>
                         <outlet property="eventTimeLabel" destination="Ayc-nq-DVV" id="SOR-2g-F3n"/>
+                        <outlet property="likeButton" destination="ae9-sM-b3O" id="QLj-bz-DII"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PAp-W8-1vB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

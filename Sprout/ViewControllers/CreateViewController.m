@@ -29,13 +29,13 @@
     [datePicker setDate:[NSDate date]];
     [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
     [datePicker setMinuteInterval:MINUTE_INTERVAL];
-    [datePicker addTarget:self action:@selector(dateTextField:) forControlEvents:UIControlEventValueChanged];
+    [datePicker addTarget:self action:@selector(didUpdateDate:) forControlEvents:UIControlEventValueChanged];
 
     [self.dateField setInputView:datePicker];
 
 
 }
--(void) dateTextField:(id)sender{
+-(void) didUpdateDate:(id)sender{
     UIDatePicker *picker = (UIDatePicker*)self.dateField.inputView;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *eventDate = picker.date;

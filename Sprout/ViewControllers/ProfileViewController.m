@@ -27,6 +27,9 @@
     [self loadProfile];
     
 }
+-(void) viewWillAppear:(BOOL)animated{
+    [self loadProfile];
+}
 
 -(void)loadProfile{
     if(self.user[@"profilePic"])

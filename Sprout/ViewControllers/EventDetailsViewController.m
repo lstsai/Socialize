@@ -48,6 +48,22 @@
         self.eventImageView.file=self.event.image;
         [self.eventImageView loadInBackground];
     }
+    if([PFUser.currentUser[@"likedEvents"] containsObject:self.event.objectId])
+        self.likeButton.selected=YES;
+}
+- (IBAction)didTapLike:(id)sender {
+     NSMutableArray *likedEvents= [PFUser.currentUser[@"likedEvents"] mutableCopy];
+       if(!self.likeButton.selected)
+       {
+           self.likeButton.selected=YES;
+           [likedEvents addObject:self.event.objectId];
+       }
+       else{
+           self.likeButton.selected=NO;
+           [likedEvents removeObject:self.event.objectId];
+       }
+       PFUser.currentUser[@"likedEvents"]=likedEvents;
+       [PFUser.currentUser saveInBackground];
 }
 
 

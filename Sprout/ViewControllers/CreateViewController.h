@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) id<CreateViewControllerDelegate> delegate;
 
 -(void) setupDatePicker;
--(void) dateTextField:(id)sender;
+-(void) didUpdateDate:(id)sender;
 
 @end
 

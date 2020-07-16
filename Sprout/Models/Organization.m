@@ -20,14 +20,17 @@
         self.category=dictionary[@"category"][@"categoryName"];
         self.cause=dictionary[@"cause"][@"causeName"];
         self.imageURL= [NSURL URLWithString:dictionary[@"category"][@"image"]];
-        self.missionStatement=dictionary[@"mission"];
         self.name=dictionary[@"charityName"];
+        self.location= [Location locationWithDictionary:dictionary[@"mailingAddress"]];
+
+        if(![dictionary[@"mission"] isEqual:[NSNull null]])
+            self.missionStatement=dictionary[@"mission"];
+            
         if(![dictionary[@"tagLine"] isEqual:[NSNull null]])
             self.tagLine=dictionary[@"tagLine"];
-        else
-            self.tagLine=@"";
-        self.location= [Location locationWithDictionary:dictionary[@"mailingAddress"]];
-        self.website=[NSURL URLWithString:dictionary[@"websiteURL"]];
+        
+        if(![dictionary[@"websiteURL"] isEqual:[NSNull null]])
+            self.website=[NSURL URLWithString:dictionary[@"websiteURL"]];
     }
     return self;
 

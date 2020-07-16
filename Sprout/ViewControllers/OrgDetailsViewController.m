@@ -29,6 +29,8 @@
     self.mission.text=self.org.missionStatement;
     self.website.text=[self.org.website absoluteString];
     self.website.textColor=[UIColor linkColor];
+    if([PFUser.currentUser[@"likedOrgs"] containsObject:self.org.ein])
+        self.likeButton.selected=YES;
 }
 
 - (IBAction)didTapLink:(id)sender {
@@ -43,7 +45,7 @@
         [likedOrgs addObject:self.org.ein];
     }
     else{
-        self.likeButton.selected=YES;
+        self.likeButton.selected=NO;
         [likedOrgs removeObject:self.org.ein];
     }
     PFUser.currentUser[@"likedOrgs"]=likedOrgs;

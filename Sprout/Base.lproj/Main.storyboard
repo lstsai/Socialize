@@ -224,8 +224,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JuS-JZ-pWI">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="199"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sprout.png" translatesAutoresizingMaskIntoConstraints="NO" id="mAG-bT-6og">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mAG-bT-6og">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="199"/>
+                                                        <color key="backgroundColor" red="0.63516895490000003" green="0.77692734770000005" blue="0.66256751579999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -314,6 +315,9 @@
                                                         <rect key="frame" x="365.5" y="20" width="27.5" height="25.5"/>
                                                         <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal" image="star" catalog="system">
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
+                                                        </state>
+                                                        <state key="selected" image="star.fill" catalog="system">
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                                         </state>
                                                     </button>
@@ -524,11 +528,6 @@
                                     <constraint firstAttribute="height" constant="43" id="Rb9-BR-qwx"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m8G-lb-Jn5">
-                                <rect key="frame" x="100" y="425" width="274.5" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date and Time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aa8-EC-52j">
                                 <rect key="frame" x="100" y="369" width="274.5" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -541,6 +540,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m8G-lb-Jn5">
+                                <rect key="frame" x="100" y="425" width="274.5" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="didEditLocation:" destination="cvg-p0-8ik" eventType="editingDidBegin" id="VeG-mS-xO3"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -863,7 +870,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="596"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4lz-S4-Wq5">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="799.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="825"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D0l-97-NnY" customClass="PFImageView">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="198.5"/>
@@ -933,7 +940,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c99-LB-YHX">
-                                                        <rect key="frame" x="40" y="308.5" width="334" height="24"/>
+                                                        <rect key="frame" x="25" y="308.5" width="364" height="24"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <color key="textColor" red="0.20502752590000001" green="0.20502752590000001" blue="0.20502752590000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
@@ -944,14 +951,29 @@
                                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ae9-sM-b3O">
+                                                        <rect key="frame" x="361" y="25" width="27.5" height="25.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="25.5" id="0uJ-Sf-aw1"/>
+                                                            <constraint firstAttribute="width" constant="27.5" id="NYG-5h-Gh5"/>
+                                                        </constraints>
+                                                        <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" image="star" catalog="system">
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
+                                                        </state>
+                                                        <state key="selected" image="star.fill" catalog="system">
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
+                                                        </state>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mgK-8z-I7g" secondAttribute="trailing" constant="40" id="27s-yA-04T"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ae9-sM-b3O" secondAttribute="trailing" constant="25.5" id="0VV-aX-qhc"/>
                                                     <constraint firstItem="c99-LB-YHX" firstAttribute="top" secondItem="dGg-BF-W5c" secondAttribute="bottom" constant="20" id="2jF-2l-TYO"/>
-                                                    <constraint firstItem="c99-LB-YHX" firstAttribute="leading" secondItem="0A7-SH-Kxj" secondAttribute="leading" constant="40" id="2mk-do-y2M"/>
+                                                    <constraint firstItem="c99-LB-YHX" firstAttribute="leading" secondItem="0A7-SH-Kxj" secondAttribute="leading" constant="25" id="2mk-do-y2M"/>
+                                                    <constraint firstItem="ae9-sM-b3O" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mgK-8z-I7g" secondAttribute="trailing" constant="20" id="4It-n2-Ne2"/>
                                                     <constraint firstItem="wSc-eO-98M" firstAttribute="leading" secondItem="RB4-54-CdT" secondAttribute="trailing" constant="4.5" id="4aj-QN-npo"/>
-                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="c99-LB-YHX" secondAttribute="trailing" constant="40" id="5aZ-X4-Fl6"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="c99-LB-YHX" secondAttribute="trailing" constant="25" id="5aZ-X4-Fl6"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ayc-nq-DVV" secondAttribute="trailing" constant="25" id="6ce-ei-GPl"/>
                                                     <constraint firstItem="PYt-Rh-PTM" firstAttribute="top" secondItem="8d7-Jc-JfV" secondAttribute="bottom" constant="-27" id="8UQ-fd-rbb"/>
                                                     <constraint firstAttribute="trailing" secondItem="h05-ro-AFz" secondAttribute="trailing" id="9fR-mI-IwN"/>
@@ -959,6 +981,7 @@
                                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="c99-LB-YHX" secondAttribute="bottom" constant="20" id="E7b-kZ-iCH"/>
                                                     <constraint firstItem="p5R-aE-TbN" firstAttribute="leading" secondItem="xmQ-4a-a3P" secondAttribute="trailing" constant="13" id="LpG-Hf-fQF"/>
                                                     <constraint firstItem="dGg-BF-W5c" firstAttribute="leading" secondItem="p5R-aE-TbN" secondAttribute="leading" id="N4q-KU-nUS"/>
+                                                    <constraint firstItem="ae9-sM-b3O" firstAttribute="top" secondItem="0A7-SH-Kxj" secondAttribute="top" constant="25" id="N9f-2Q-Kna"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wSc-eO-98M" secondAttribute="trailing" constant="40" id="O0s-aG-yaO"/>
                                                     <constraint firstItem="Ayc-nq-DVV" firstAttribute="top" secondItem="8d7-Jc-JfV" secondAttribute="bottom" constant="4" id="TvH-Qo-6md"/>
                                                     <constraint firstItem="xmQ-4a-a3P" firstAttribute="top" secondItem="Ayc-nq-DVV" secondAttribute="bottom" constant="20" id="UQY-OH-Dc4"/>
@@ -979,6 +1002,13 @@
                                                     <constraint firstItem="dGg-BF-W5c" firstAttribute="top" secondItem="p5R-aE-TbN" secondAttribute="bottom" constant="5" id="z2f-uI-tOW"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="goM-Lf-1na">
+                                                <rect key="frame" x="0.0" y="799.5" width="414" height="25.5"/>
+                                                <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" image="star" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
+                                                </state>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -1023,10 +1053,10 @@
         <image name="globe" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="pin" width="256" height="256"/>
-        <image name="sprout.png" width="401" height="328.5"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="square.and.pencil" catalog="system" width="128" height="118"/>
         <image name="star" catalog="system" width="128" height="116"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>
 </document>

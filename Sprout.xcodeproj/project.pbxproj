@@ -310,6 +310,7 @@
 				DC3CF14424BCB27900C482F8 /* Frameworks */,
 				DC3CF14524BCB27900C482F8 /* Resources */,
 				6CD7E2B9826A21F5EEEACA56 /* [CP] Embed Pods Frameworks */,
+				D0C742734531C268E76B2F47 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -348,6 +349,7 @@
 				DC3CF16A24BCB27B00C482F8 /* Frameworks */,
 				DC3CF16B24BCB27B00C482F8 /* Resources */,
 				C8C928CA5F1FB0BA72309184 /* [CP] Embed Pods Frameworks */,
+				EB3E39390CBA6E8AC6287AA0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -527,6 +529,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Sprout-SproutUITests/Pods-Sprout-SproutUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D0C742734531C268E76B2F47 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Sprout/Pods-Sprout-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Sprout/Pods-Sprout-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Sprout/Pods-Sprout-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB3E39390CBA6E8AC6287AA0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Sprout-SproutUITests/Pods-Sprout-SproutUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Sprout-SproutUITests/Pods-Sprout-SproutUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Sprout-SproutUITests/Pods-Sprout-SproutUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

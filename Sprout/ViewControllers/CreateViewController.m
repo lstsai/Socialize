@@ -12,7 +12,9 @@
 #import <Parse/Parse.h>
 #import "Event.h"
 #import "MBProgressHUD.h"
-@interface CreateViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@import GooglePlaces;
+
+@interface CreateViewController ()  <UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMSAutocompleteViewControllerDelegate>
 
 @end
 
@@ -88,8 +90,16 @@
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+- (IBAction)didEditLocation:(id)sender {
+    [self.locationField resignFirstResponder];
+    GMSAutocompleteViewController *gmsAutocompleteVC=[[GMSAutocompleteViewController alloc]init];
+    gmsAutocompleteVC.delegate=self;
+    [self presentViewController:gmsAutocompleteVC animated:YES completion:nil];
+    
+}
 
-/*
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -97,6 +107,20 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
+
+
+- (void)viewController:(nonnull GMSAutocompleteViewController *)viewController didAutocompleteWithPlace:(nonnull GMSPlace *)place {
+    self.locationField.text=place.name;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)viewController:(nonnull GMSAutocompleteViewController *)viewController didFailAutocompleteWithError:(nonnull NSError *)error {
+    NSLog(@"Error autocomplete %@", error.localizedDescription);
+}
+
+- (void)wasCancelled:(nonnull GMSAutocompleteViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end

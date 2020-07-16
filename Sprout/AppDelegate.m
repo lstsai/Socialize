@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+@import GooglePlaces;
 @interface AppDelegate ()
 
 @end
@@ -22,8 +22,8 @@
         configuration.applicationId = @"lt-sprout";
         configuration.server = @"https://lt-sprout.herokuapp.com/parse";
     }];
-    
     [Parse initializeWithConfiguration:config];
+    [GMSPlacesClient provideAPIKey:[[NSProcessInfo processInfo] environment][@"Google-api-key"]];
     return YES;
 }
 

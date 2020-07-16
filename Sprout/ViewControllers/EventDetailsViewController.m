@@ -8,7 +8,8 @@
 //
 
 #import "EventDetailsViewController.h"
-
+@import GooglePlaces;
+@import GoogleMaps;
 @interface EventDetailsViewController ()
 
 @end
@@ -23,7 +24,18 @@
 -(void) loadEventDetails{
     self.eventNameLabel.text=self.event.name;
     self.eventAuthorLabel.text=self.event.author.username;
-    self.eventLocationLabel.text=self.event.location;
+    GMSGeocoder *geocoder= [GMSGeocoder geocoder];
+    CLLocationCoordinate2D cllocation= CLLocationCoordinate2DMake(self.event.location.latitude, self.event.location.longitude);
+    [geocoder reverseGeocodeCoordinate:cllocation completionHandler:^(GMSReverseGeocodeResponse * _Nullable address, NSError * _Nullable error) {
+        if(address)
+        {
+            self.eventLocationLabel.text=[[[address firstResult] lines] componentsJoinedByString:@"\n"];
+        }
+        else{
+            NSLog(@"Error getting location of event %@", error.localizedDescription);
+        }
+
+    }];
     self.eventDetailsLabel.text= self.event.details;
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];

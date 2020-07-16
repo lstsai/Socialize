@@ -15,12 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
     @property (nonatomic, strong) PFUser *author;
     @property (nonatomic, strong) NSString *name;
     @property (nonatomic, strong) NSString *details;
-    @property (nonatomic, strong) NSString *location;
+    @property (nonatomic, strong) PFGeoPoint *location;
     @property (nonatomic, strong) PFFileObject *image;
     @property (nonatomic, strong) NSDate *createdAt;
     @property (nonatomic, strong) NSDate *time;
 
-+ (void) postEvent:(UIImage * _Nullable )image withName:(NSString *)name withTime:(NSDate*)time withLocation:(NSString*)location withDetails:(NSString*)details withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) postEvent:(UIImage * _Nullable )image withName:(NSString *)name withTime:(NSDate*)time withLocation:(PFGeoPoint*)location withDetails:(NSString*)details withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image withName:(NSString*)eventName;
 
     @end

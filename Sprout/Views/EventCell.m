@@ -7,6 +7,7 @@
 //
 
 #import "EventCell.h"
+@import GoogleMaps;
 
 @implementation EventCell
 
@@ -22,7 +23,15 @@
     self.dateLabel.text=dateString;
     
     self.nameLabel.text=self.event.name;
-    self.locationLabel.text=self.event.location;
+    GMSGeocoder *geocoder= [GMSGeocoder geocoder];
+    CLLocationCoordinate2D cllocation= CLLocationCoordinate2DMake(self.event.location.latitude, self.event.location.longitude);
+    [geocoder reverseGeocodeCoordinate:cllocation completionHandler:^(GMSReverseGeocodeResponse * _Nullable address, NSError * _Nullable error) {
+        if(error)
+            NSLog(@"Error getting location of event %@", error.localizedDescription);
+        else
+            self.locationLabel.text=[[address firstResult] locality];
+
+    }];
     
     self.eventImage.file=self.event.image;
     [self.eventImage loadInBackground];

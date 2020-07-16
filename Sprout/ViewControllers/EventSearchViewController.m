@@ -57,10 +57,11 @@
          [MBProgressHUD showHUDAddedTo:self.view animated:YES];
      
     PFQuery *eventsNameQuery=[PFQuery queryWithClassName:@"Event"];
-    [eventsNameQuery whereKey:@"name" containsString:self.searchText];
+    
+    [eventsNameQuery whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchText]];
 
     PFQuery *eventsDetailsQuery=[PFQuery queryWithClassName:@"Event"];
-    [eventsDetailsQuery whereKey:@"details" containsString:self.searchText];
+    [eventsDetailsQuery whereKey:@"details" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchText]];
 
     PFQuery *eventsQuery=[PFQuery orQueryWithSubqueries:@[eventsNameQuery,eventsDetailsQuery]];
 

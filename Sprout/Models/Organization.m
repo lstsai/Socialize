@@ -22,7 +22,10 @@
         self.imageURL= [NSURL URLWithString:dictionary[@"category"][@"image"]];
         self.missionStatement=dictionary[@"mission"];
         self.name=dictionary[@"charityName"];
-        self.tagLine=dictionary[@"tagLine"];
+        if(![dictionary[@"tagLine"] isEqual:[NSNull null]])
+            self.tagLine=dictionary[@"tagLine"];
+        else
+            self.tagLine=@"";
         self.location= [Location locationWithDictionary:dictionary[@"mailingAddress"]];
         self.website=[NSURL URLWithString:dictionary[@"websiteURL"]];
     }

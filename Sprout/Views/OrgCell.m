@@ -16,8 +16,7 @@
 }
 -(void) loadData{
     self.nameLabel.text=self.org.name;
-    if(self.org.tagLine)
-        self.tagLineLabel.text=self.org.tagLine;
+    self.tagLineLabel.text=self.org.tagLine;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

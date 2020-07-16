@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LocationManager.h"
+#import <Parse/Parse.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol CreateViewControllerDelegate
@@ -21,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextField *eventNameField;
 @property (weak, nonatomic) IBOutlet UITextField *dateField;
 @property (weak, nonatomic) IBOutlet UITextField *locationField;
+@property (strong, nonatomic) PFGeoPoint *locationPoint;
 @property (weak, nonatomic) IBOutlet UITextView *detailsTextView;
 @property (weak, nonatomic) id<CreateViewControllerDelegate> delegate;
 

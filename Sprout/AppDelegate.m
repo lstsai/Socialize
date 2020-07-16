@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 @import GooglePlaces;
+@import GoogleMaps;
 @interface AppDelegate ()
 
 @end
@@ -24,6 +25,8 @@
     }];
     [Parse initializeWithConfiguration:config];
     [GMSPlacesClient provideAPIKey:[[NSProcessInfo processInfo] environment][@"Google-api-key"]];
+    [GMSServices provideAPIKey:[[NSProcessInfo processInfo] environment][@"Google-api-key"]];
+
     return YES;
 }
 

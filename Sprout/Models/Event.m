@@ -23,7 +23,7 @@
 + (nonnull NSString *)parseClassName {
     return @"Event";
 }
-+ (void) postEvent:(UIImage * _Nullable )image withName:(NSString *)name withTime:(NSDate*)time withLocation:(NSString*)location withDetails:(NSString*)details withCompletion: (PFBooleanResultBlock  _Nullable)completion{
++ (void) postEvent:(UIImage * _Nullable )image withName:(NSString *)name withTime:(NSDate*)time withLocation:(PFGeoPoint*)location withDetails:(NSString*)details withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Event *newEvent= [Event new];
     newEvent.name=name;
     newEvent.image= [self getPFFileFromImage:image withName:name];

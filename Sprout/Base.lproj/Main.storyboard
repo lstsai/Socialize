@@ -766,6 +766,10 @@
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" red="0.63516895490000003" green="0.77692734770000005" blue="0.66256751579999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <size key="customSize" width="128" height="157"/>
+                                        <connections>
+                                            <outlet property="eventImage" destination="UV5-Ca-YjX" id="mFc-cU-vLY"/>
+                                            <outlet property="eventNameLabel" destination="fte-Hx-ZeO" id="TQP-bS-nCg"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -833,6 +837,10 @@
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" red="0.63516895490000003" green="0.77692734770000005" blue="0.66256751579999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <size key="customSize" width="128" height="157"/>
+                                        <connections>
+                                            <outlet property="orgImage" destination="EEY-hH-AE7" id="thQ-Jx-hH3"/>
+                                            <outlet property="orgNameLabel" destination="z3T-uS-vmg" id="ptR-49-EzM"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>

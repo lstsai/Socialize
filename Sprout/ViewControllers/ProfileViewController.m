@@ -82,10 +82,12 @@
     if(collectionView==self.eventCollectionView)
     {
         EventCollectionCell *ecc=[collectionView dequeueReusableCellWithReuseIdentifier:@"EventCollectionCell" forIndexPath:indexPath];
+        [ecc loadEventCell:self.likedEvents[indexPath.item]];
         return ecc;
     }
     else{
         OrgCollectionCell *orgcc=[collectionView dequeueReusableCellWithReuseIdentifier:@"OrgCollectionCell" forIndexPath:indexPath];
+        [orgcc loadOrgCell:self.likedOrgs[indexPath.item]];
         return orgcc;
     }
 }

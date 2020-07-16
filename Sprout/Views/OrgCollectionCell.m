@@ -9,5 +9,8 @@
 #import "OrgCollectionCell.h"
 
 @implementation OrgCollectionCell
-
+-(void) loadOrgCell:(Organization*)org{
+    [self.orgImage setImageWithURL:org.imageURL];
+    self.orgNameLabel.text=org.name;
+}
 @end

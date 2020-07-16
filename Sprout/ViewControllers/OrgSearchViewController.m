@@ -11,6 +11,7 @@
 #import "OrgCell.h"
 #import "APIManager.h"
 #import "OrgDetailsViewController.h"
+#import "AppDelegate.h"
 @interface OrgSearchViewController ()<UITableViewDataSource, UITableViewDelegate>
 @end
 
@@ -55,11 +56,9 @@
     if(![refreshControl isKindOfClass:[UIRefreshControl class]])
          [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchText, @"rated":@"TRUE", @"state": self.stateSearch, @"city": self.citySearch, @"pageSize":@(RESULTS_SIZE)};
-
-    NSLog(@"%@ params", params);
      [[APIManager shared] getOrganizationsWithCompletion:params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
          if(error)
-             NSLog(@"Error getting organizations: %@", error.localizedDescription);
+            [AppDelegate displayAlert:@"Error getting organizations" withMessage:error.localizedDescription on:self];
          self.organizations=[organizations mutableCopy];
          [self.tableView reloadData];
          
@@ -92,7 +91,7 @@
     [[APIManager shared] getOrganizationsWithCompletion:params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
         if(error)
         {
-            NSLog(@"Error getting organizations: %@", error.localizedDescription);
+            [AppDelegate displayAlert:@"Error getting organizations" withMessage:error.localizedDescription on:self];
         }
         else{
             [self.organizations addObjectsFromArray:organizations];

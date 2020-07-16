@@ -15,6 +15,7 @@
 #import "AFHTTPSessionManager.h"
 #import "MBProgressHUD.h"
 #import "OrgDetailsViewController.h"
+#import "AppDelegate.h"
 @interface SearchViewController ()<UISearchBarDelegate, CLLocationManagerDelegate>
 
 @end
@@ -35,7 +36,7 @@
 - (IBAction)didTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         if(error)
-            NSLog(@"Error Logging out: %@", error.description);
+            [AppDelegate displayAlert:@"Error Logging out" withMessage:error.localizedDescription on:self];
         else
             NSLog(@"Success Logging out");
     }];
@@ -61,21 +62,30 @@
                                                        repeats: NO];
 }
 - (IBAction)didChangeLocation:(id)sender {
-    [self fetchResults:nil];
+    if (self.searchTimer != nil) {
+        [self.searchTimer invalidate];
+        self.searchTimer = nil;
+    }
+    // reschedule the search: in 1.0 second, call the searchForKeyword: method on the new textfield content
+    self.searchTimer = [NSTimer scheduledTimerWithTimeInterval: SEARCH_DELAY
+                                                        target: self
+                                                      selector: @selector(fetchResults:)
+                                                      userInfo: nil
+                                                       repeats: NO];
 }
 -(void) fetchResults:( UIRefreshControl * _Nullable )refreshControl{
     
     if(self.searchControl.selectedSegmentIndex==ORG_SEGMENT)
     {
         self.orgsVC.searchText=self.searchBar.text;
-        self.orgsVC.citySearch=self.cityField.text;
-        self.orgsVC.stateSearch=self.stateField.text;
+        self.orgsVC.citySearch=[self.cityField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        self.orgsVC.stateSearch=[[self.stateField.text uppercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         [self.orgsVC getOrgs:refreshControl];
     }
     else if(self.searchControl.selectedSegmentIndex==EVENT_SEGMENT){
         self.eventsVC.searchText=self.searchBar.text;
-        self.eventsVC.citySearch=self.cityField.text;
-        self.eventsVC.stateSearch=self.stateField.text;
+        self.eventsVC.citySearch=[self.cityField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        self.eventsVC.stateSearch=[[self.stateField.text uppercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         [self.eventsVC getEvents:refreshControl];
     }
 }
@@ -84,8 +94,8 @@
     if(self.searchControl.selectedSegmentIndex==ORG_SEGMENT)
     {
         self.orgsVC.searchText=self.searchBar.text;
-        self.orgsVC.citySearch=self.cityField.text;
-        self.orgsVC.stateSearch=self.cityField.text;
+        self.orgsVC.citySearch=[self.cityField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        self.orgsVC.stateSearch=[[self.stateField.text uppercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         [self.orgsVC getOrgs:nil];
         [self.searchBar setPlaceholder:[ORG_SEARCH_PLACEHOLDER mutableCopy]];
         [self.eventsView setHidden:YES];
@@ -94,8 +104,8 @@
     else if (self.searchControl.selectedSegmentIndex==EVENT_SEGMENT)
     {
         self.eventsVC.searchText=self.searchBar.text;
-        self.eventsVC.citySearch=self.cityField.text;
-        self.eventsVC.stateSearch=self.cityField.text;
+        self.eventsVC.citySearch=[self.cityField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        self.eventsVC.stateSearch=[[self.stateField.text uppercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         [self.eventsVC getEvents:nil];
         [self.searchBar setPlaceholder:[EVENT_SEARCH_PLACEHOLDER mutableCopy]];
         [self.orgsView setHidden:YES];

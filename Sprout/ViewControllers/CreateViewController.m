@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "Event.h"
 #import "MBProgressHUD.h"
+#import "AppDelegate.h"
 @import GooglePlaces;
 
 @interface CreateViewController ()  <UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMSAutocompleteViewControllerDelegate>
@@ -54,7 +55,7 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         else{
-            NSLog(@"Error creating event %@", error.localizedDescription);
+            [AppDelegate displayAlert:@"Error creating event" withMessage:error.localizedDescription on:self];
         }
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
@@ -73,7 +74,7 @@
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
     else {
-        NSLog(@"Camera 🚫 available so we will use photo library instead");
+        NSLog(@"No camera available, using image picker");
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
     [self presentViewController:imagePickerVC animated:YES completion:nil];
@@ -114,7 +115,8 @@
 }
 
 - (void)viewController:(nonnull GMSAutocompleteViewController *)viewController didFailAutocompleteWithError:(nonnull NSError *)error {
-    NSLog(@"Error autocomplete %@", error.localizedDescription);
+    [AppDelegate displayAlert:@"Error with location autocomplete" withMessage:error.localizedDescription on:self];
+
 }
 
 - (void)wasCancelled:(nonnull GMSAutocompleteViewController *)viewController {

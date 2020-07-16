@@ -9,6 +9,7 @@
 #import "ProfileViewController.h"
 #import "EventCollectionCell.h"
 #import "OrgCollectionCell.h"
+#import "AppDelegate.h"
 @interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end
@@ -22,8 +23,10 @@
     self.eventCollectionView.dataSource=self;
     self.orgCollectionView.delegate=self;
     self.orgCollectionView.dataSource=self;
-    if(!self.user)
+    if(!self.user){
+        [PFUser.currentUser fetch];
         self.user=PFUser.currentUser;
+    }
     [self loadProfile];
     
 }
@@ -51,15 +54,12 @@
 -(void)getLikedOrgInfo{
     [[APIManager shared] getOrgsWithEIN:self.user[@"likedOrgs"] completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
         if(error)
-            NSLog(@"Error getting liked orgs %@", error.localizedDescription);
+            [AppDelegate displayAlert:@"Error getting liked organizations" withMessage:error.localizedDescription on:self];
         else{
             self.likedOrgs=organizations;
-            NSLog(@"Success getting liked orgs %@", organizations);
-
+            NSLog(@"Success getting liked orgs");
             [self.orgCollectionView reloadData];
-
         }
-        
     }];
     
 }
@@ -68,7 +68,7 @@
     [eventQuery whereKey:@"objectId" containedIn:self.user[@"likedEvents"]];
     [eventQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)
-            NSLog(@"Error getting liked events %@", error.localizedDescription);
+            [AppDelegate displayAlert:@"Error getting location of event" withMessage:error.localizedDescription on:self];
         else
         {
             self.likedEvents=objects;

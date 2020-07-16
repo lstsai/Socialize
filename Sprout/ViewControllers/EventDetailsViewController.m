@@ -8,6 +8,7 @@
 //
 
 #import "EventDetailsViewController.h"
+#import "AppDelegate.h"
 @import GooglePlaces;
 @import GoogleMaps;
 @interface EventDetailsViewController ()
@@ -33,6 +34,7 @@
         }
         else{
             NSLog(@"Error getting location of event %@", error.localizedDescription);
+            [AppDelegate displayAlert:@"Error getting location of event" withMessage:error.localizedDescription on:self];
         }
 
     }];

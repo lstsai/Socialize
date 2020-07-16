@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import "EventCell.h"
 #import "EventDetailsViewController.h"
+#import "AppDelegate.h"
 @interface EventSearchViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @end
@@ -73,7 +74,7 @@
     [eventsQuery includeKey:@"author"];
     [eventsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)
-            NSLog(@"Error getting events %@", error.localizedDescription);
+            [AppDelegate displayAlert:@"Error getting events" withMessage:error.localizedDescription on:self];
         else
         {
             self.events=[objects mutableCopy];
@@ -105,7 +106,7 @@
        }
 }
 -(void) loadMoreResults{
-    
+     [self.loadingMoreView stopAnimating];
 }
 
 

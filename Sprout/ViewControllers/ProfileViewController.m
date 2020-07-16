@@ -7,8 +7,9 @@
 //
 
 #import "ProfileViewController.h"
-
-@interface ProfileViewController ()
+#import "EventCollectionCell.h"
+#import "OrgCollectionCell.h"
+@interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end
 
@@ -17,6 +18,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.eventCollectionView.delegate=self;
+    self.eventCollectionView.dataSource=self;
+    self.orgCollectionView.delegate=self;
+    self.orgCollectionView.dataSource=self;
 }
 
 /*
@@ -29,4 +34,19 @@
 }
 */
 
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    if(collectionView==self.eventCollectionView)
+    {
+        EventCollectionCell *ecc=[collectionView dequeueReusableCellWithReuseIdentifier:@"EventCollectionCell" forIndexPath:indexPath];
+        return ecc;
+    }
+    else{
+        OrgCollectionCell *orgcc=[collectionView dequeueReusableCellWithReuseIdentifier:@"OrgCollectionCell" forIndexPath:indexPath];
+        return orgcc;
+    }
+}
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 10;
+}
 @end

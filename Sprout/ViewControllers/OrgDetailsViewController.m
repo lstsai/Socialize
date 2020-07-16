@@ -34,6 +34,22 @@
 - (IBAction)didTapLink:(id)sender {
     [self performSegueWithIdentifier:@"webSegue" sender:nil];
 }
+- (IBAction)didTapLike:(id)sender {
+    
+    NSMutableArray *likedOrgs= [PFUser.currentUser[@"likedOrgs"] mutableCopy];
+    if(!self.likeButton.selected)
+    {
+        self.likeButton.selected=YES;
+        [likedOrgs addObject:self.org.ein];
+    }
+    else{
+        self.likeButton.selected=YES;
+        [likedOrgs removeObject:self.org.ein];
+    }
+    PFUser.currentUser[@"likedOrgs"]=likedOrgs;
+    [PFUser.currentUser saveInBackground];
+    
+}
 
 #pragma mark - Navigation
 

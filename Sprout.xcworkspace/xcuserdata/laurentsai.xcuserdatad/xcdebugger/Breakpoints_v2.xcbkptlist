@@ -96,5 +96,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DC0D9300-57FA-4BB9-BC63-DC76692E8378"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sprout/ViewControllers/OrgSearchViewController.h"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "locManager"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "DC0D9300-57FA-4BB9-BC63-DC76692E8378 - 54137fb8353805ba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[OrgSearchViewController pageNum]"
+                  moduleName = "Sprout"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/laurentsai/Desktop/Sprout/Sprout/ViewControllers/OrgSearchViewController.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  uuid = "DC0D9300-57FA-4BB9-BC63-DC76692E8378 - c8eff03ee35ae314"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[OrgSearchViewController setPageNum:]"
+                  moduleName = "Sprout"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/laurentsai/Desktop/Sprout/Sprout/ViewControllers/OrgSearchViewController.h"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

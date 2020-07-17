@@ -36,6 +36,8 @@
 		DC3CF1C024BF644100C482F8 /* OrgSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1BF24BF644100C482F8 /* OrgSearchViewController.m */; };
 		DC3CF1C324BF645300C482F8 /* EventSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1C224BF645300C482F8 /* EventSearchViewController.m */; };
 		DC3CF1C624BF67BB00C482F8 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1C524BF67BB00C482F8 /* EventCell.m */; };
+		DCB629D624C1519200C42EFB /* OrgVerticalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629D524C1519200C42EFB /* OrgVerticalCell.m */; };
+		DCB629D924C1FBE100C42EFB /* EventVerticalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629D824C1FBE100C42EFB /* EventVerticalCell.m */; };
 		DCE6FA4B24BFA447008091A3 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */; };
 		DCE6FA4E24C0AA4C008091A3 /* OrgCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA4D24C0AA4C008091A3 /* OrgCollectionCell.m */; };
 		DCE6FA5124C0AA66008091A3 /* EventCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA5024C0AA66008091A3 /* EventCollectionCell.m */; };
@@ -120,6 +122,24 @@
 		DC3CF1C224BF645300C482F8 /* EventSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventSearchViewController.m; sourceTree = "<group>"; };
 		DC3CF1C424BF67BB00C482F8 /* EventCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
 		DC3CF1C524BF67BB00C482F8 /* EventCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
+		DCB629C424C1482B00C42EFB /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Animation.swift; path = ViewAnimator/Classes/Protocols/Animation.swift; sourceTree = "<group>"; };
+		DCB629C524C1482B00C42EFB /* AnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnimationType.swift; path = ViewAnimator/Classes/Models/AnimationType.swift; sourceTree = "<group>"; };
+		DCB629C624C1482B00C42EFB /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Direction.swift; path = ViewAnimator/Classes/Models/Direction.swift; sourceTree = "<group>"; };
+		DCB629C724C1482B00C42EFB /* UICollectionView + ViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UICollectionView + ViewAnimator.swift"; path = "ViewAnimator/Classes/Extensions/UICollectionView + ViewAnimator.swift"; sourceTree = "<group>"; };
+		DCB629C824C1482B00C42EFB /* UITableView + ViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITableView + ViewAnimator.swift"; path = "ViewAnimator/Classes/Extensions/UITableView + ViewAnimator.swift"; sourceTree = "<group>"; };
+		DCB629C924C1482B00C42EFB /* ViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewAnimator.swift; path = ViewAnimator/Classes/ViewAnimator.swift; sourceTree = "<group>"; };
+		DCB629CA24C1482B00C42EFB /* ViewAnimatorConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewAnimatorConfig.swift; path = ViewAnimator/Classes/ViewAnimatorConfig.swift; sourceTree = "<group>"; };
+		DCB629CB24C1482B00C42EFB /* ViewAnimator.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = ViewAnimator.modulemap; path = "Sprout/Target Support Files/ViewAnimator/ViewAnimator.modulemap"; sourceTree = "<group>"; };
+		DCB629CC24C1482B00C42EFB /* ViewAnimator-dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "ViewAnimator-dummy.m"; path = "Sprout/Target Support Files/ViewAnimator/ViewAnimator-dummy.m"; sourceTree = "<group>"; };
+		DCB629CD24C1482B00C42EFB /* ViewAnimator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "ViewAnimator-Info.plist"; path = "Sprout/Target Support Files/ViewAnimator/ViewAnimator-Info.plist"; sourceTree = "<group>"; };
+		DCB629CE24C1482B00C42EFB /* ViewAnimator-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ViewAnimator-prefix.pch"; path = "Sprout/Target Support Files/ViewAnimator/ViewAnimator-prefix.pch"; sourceTree = "<group>"; };
+		DCB629CF24C1482B00C42EFB /* ViewAnimator-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ViewAnimator-umbrella.h"; path = "Sprout/Target Support Files/ViewAnimator/ViewAnimator-umbrella.h"; sourceTree = "<group>"; };
+		DCB629D024C1482B00C42EFB /* ViewAnimator.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = ViewAnimator.debug.xcconfig; path = "Sprout/Target Support Files/ViewAnimator/ViewAnimator.debug.xcconfig"; sourceTree = "<group>"; };
+		DCB629D124C1482B00C42EFB /* ViewAnimator.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = ViewAnimator.release.xcconfig; path = "Sprout/Target Support Files/ViewAnimator/ViewAnimator.release.xcconfig"; sourceTree = "<group>"; };
+		DCB629D424C1519200C42EFB /* OrgVerticalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgVerticalCell.h; sourceTree = "<group>"; };
+		DCB629D524C1519200C42EFB /* OrgVerticalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrgVerticalCell.m; sourceTree = "<group>"; };
+		DCB629D724C1FBE100C42EFB /* EventVerticalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventVerticalCell.h; sourceTree = "<group>"; };
+		DCB629D824C1FBE100C42EFB /* EventVerticalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventVerticalCell.m; sourceTree = "<group>"; };
 		DCE6FA4924BFA447008091A3 /* EventDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventDetailsViewController.h; sourceTree = "<group>"; };
 		DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 		DCE6FA4C24C0AA4C008091A3 /* OrgCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgCollectionCell.h; sourceTree = "<group>"; };
@@ -221,6 +241,7 @@
 				DC3CF15824BCB27A00C482F8 /* LaunchScreen.storyboard */,
 				DC3CF15B24BCB27A00C482F8 /* Info.plist */,
 				DC3CF15C24BCB27A00C482F8 /* main.m */,
+				DCB629D324C1482B00C42EFB /* ViewAnimator */,
 			);
 			path = Sprout;
 			sourceTree = "<group>";
@@ -283,6 +304,10 @@
 				DCE6FA4D24C0AA4C008091A3 /* OrgCollectionCell.m */,
 				DCE6FA4F24C0AA66008091A3 /* EventCollectionCell.h */,
 				DCE6FA5024C0AA66008091A3 /* EventCollectionCell.m */,
+				DCB629D424C1519200C42EFB /* OrgVerticalCell.h */,
+				DCB629D524C1519200C42EFB /* OrgVerticalCell.m */,
+				DCB629D724C1FBE100C42EFB /* EventVerticalCell.h */,
+				DCB629D824C1FBE100C42EFB /* EventVerticalCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -311,6 +336,36 @@
 				DC3CF1B924BE1D6100C482F8 /* LocationManager.m */,
 			);
 			path = MISC;
+			sourceTree = "<group>";
+		};
+		DCB629D224C1482B00C42EFB /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				DCB629CB24C1482B00C42EFB /* ViewAnimator.modulemap */,
+				DCB629CC24C1482B00C42EFB /* ViewAnimator-dummy.m */,
+				DCB629CD24C1482B00C42EFB /* ViewAnimator-Info.plist */,
+				DCB629CE24C1482B00C42EFB /* ViewAnimator-prefix.pch */,
+				DCB629CF24C1482B00C42EFB /* ViewAnimator-umbrella.h */,
+				DCB629D024C1482B00C42EFB /* ViewAnimator.debug.xcconfig */,
+				DCB629D124C1482B00C42EFB /* ViewAnimator.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/ViewAnimator";
+			sourceTree = "<group>";
+		};
+		DCB629D324C1482B00C42EFB /* ViewAnimator */ = {
+			isa = PBXGroup;
+			children = (
+				DCB629C424C1482B00C42EFB /* Animation.swift */,
+				DCB629C524C1482B00C42EFB /* AnimationType.swift */,
+				DCB629C624C1482B00C42EFB /* Direction.swift */,
+				DCB629C724C1482B00C42EFB /* UICollectionView + ViewAnimator.swift */,
+				DCB629C824C1482B00C42EFB /* UITableView + ViewAnimator.swift */,
+				DCB629C924C1482B00C42EFB /* ViewAnimator.swift */,
+				DCB629CA24C1482B00C42EFB /* ViewAnimatorConfig.swift */,
+				DCB629D224C1482B00C42EFB /* Support Files */,
+			);
+			path = ViewAnimator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -593,11 +648,13 @@
 				DC3CF1A124BD081300C482F8 /* OrgDetailsViewController.m in Sources */,
 				DCE6FA5124C0AA66008091A3 /* EventCollectionCell.m in Sources */,
 				DC3CF1A724BD28DC00C482F8 /* WebViewController.m in Sources */,
+				DCB629D924C1FBE100C42EFB /* EventVerticalCell.m in Sources */,
 				DC3CF1C024BF644100C482F8 /* OrgSearchViewController.m in Sources */,
 				DCE6FA4E24C0AA4C008091A3 /* OrgCollectionCell.m in Sources */,
 				DC3CF15D24BCB27A00C482F8 /* main.m in Sources */,
 				DC3CF1BD24BE500C00C482F8 /* Event.m in Sources */,
 				DCE6FA5424C0AB58008091A3 /* ProfileViewController.m in Sources */,
+				DCB629D624C1519200C42EFB /* OrgVerticalCell.m in Sources */,
 				DC3CF18A24BCCFB300C482F8 /* OrgCell.m in Sources */,
 				DCE6FA4B24BFA447008091A3 /* EventDetailsViewController.m in Sources */,
 				DC3CF1A424BD23FC00C482F8 /* APIManager.m in Sources */,

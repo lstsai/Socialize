@@ -12,7 +12,8 @@
 #import "APIManager.h"
 #import "OrgDetailsViewController.h"
 #import "AppDelegate.h"
-@interface OrgSearchViewController ()<UITableViewDataSource, UITableViewDelegate>
+#import "OrgVerticalCell.h"
+@interface OrgSearchViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @end
 
 @implementation OrgSearchViewController
@@ -20,36 +21,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      //Do any additional setup after loading the view.
-    self.tableView.delegate=self;
-    self.tableView.dataSource=self;
+
+    self.collectionView.delegate=self;
+    self.collectionView.dataSource=self;
+
     self.organizations=[[NSMutableArray alloc]init];
     [self setupLoadingIndicators];
-    [self.tableView reloadData];
+    [self.collectionView reloadData];
 }
 -(void) setupLoadingIndicators{
     UIRefreshControl *refreshControl= [[UIRefreshControl alloc] init];//initialize the refresh control
     [refreshControl addTarget:self action:@selector(getOrgs:) forControlEvents:UIControlEventValueChanged];//add an event listener
-    [self.tableView insertSubview:refreshControl atIndex:0];//add into the storyboard
+    [self.collectionView insertSubview:refreshControl atIndex:0];//add into the storyboard
 
-    CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+    CGRect frame = CGRectMake(0, self.collectionView.contentSize.height, self.collectionView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
     self.loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
     self.loadingMoreView.hidden = true;
-    [self.tableView addSubview:self.loadingMoreView];
+    [self.collectionView addSubview:self.loadingMoreView];
 
-    UIEdgeInsets insets = self.tableView.contentInset;
+    UIEdgeInsets insets = self.collectionView.contentInset;
     insets.bottom += InfiniteScrollActivityView.defaultHeight;
-    self.tableView.contentInset = insets;
-}
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    OrgCell *orgCell= [tableView dequeueReusableCellWithIdentifier:@"OrgCell"];
-    orgCell.org=self.organizations[indexPath.row];
-    [orgCell loadData];
-    return orgCell;
+    self.collectionView.contentInset = insets;
 }
 
-- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.organizations.count;
-}
 -(void) getOrgs:( UIRefreshControl * _Nullable )refreshControl{
     if([self.searchText isEqualToString:@""])
         return;
@@ -60,7 +54,7 @@
          if(error)
             [AppDelegate displayAlert:@"Error getting organizations" withMessage:error.localizedDescription on:self];
          self.organizations=[organizations mutableCopy];
-         [self.tableView reloadData];
+         [self.collectionView reloadData];
          
          if([refreshControl isKindOfClass:[UIRefreshControl class]])
              [refreshControl endRefreshing];
@@ -71,14 +65,14 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
      if(!self.isMoreDataLoading)
        {
-           int scrollContentHeight=self.tableView.contentSize.height;
-           int scrollOffsetThreshold = scrollContentHeight - self.tableView.bounds.size.height;
+           int scrollContentHeight=self.collectionView.contentSize.height;
+           int scrollOffsetThreshold = scrollContentHeight - self.collectionView.bounds.size.height;
 
-           if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging)
+           if(scrollView.contentOffset.y > scrollOffsetThreshold && self.collectionView.isDragging)
            {
                self.isMoreDataLoading=YES;
                self.pageNum++;
-               CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+               CGRect frame = CGRectMake(0, self.collectionView.contentSize.height, self.collectionView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
                self.loadingMoreView.frame = frame;
                [self.loadingMoreView startAnimating];
                [self loadMoreResults];
@@ -95,7 +89,7 @@
         }
         else{
             [self.organizations addObjectsFromArray:organizations];
-            [self.tableView reloadData];
+            [self.collectionView reloadData];
             [self.loadingMoreView stopAnimating];
         }
         self.isMoreDataLoading=NO;
@@ -113,12 +107,31 @@
     if([segue.identifier isEqualToString:@"detailSegue"])
     {
         OrgDetailsViewController *orgVC=segue.destinationViewController;
-        UITableViewCell *tappedCell= sender;
-        NSIndexPath *tappedIndex= [self.tableView indexPathForCell:tappedCell];
-        orgVC.org=self.organizations[tappedIndex.row];
-        [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
+        UICollectionViewCell *tappedCell= sender;
+        NSIndexPath *tappedIndex= [self.collectionView indexPathForCell:tappedCell];
+        orgVC.org=self.organizations[tappedIndex.item];
+        [self.collectionView deselectItemAtIndexPath:tappedIndex animated:YES];
     }
 }
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    OrgVerticalCell *orgCell= [collectionView dequeueReusableCellWithReuseIdentifier:@"OrgVerticalCell" forIndexPath:indexPath];
+    orgCell.org=self.organizations[indexPath.item];
+    [orgCell loadData];
+    return orgCell;
+}
 
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.organizations.count;
+}
+-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+
+    cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0);
+    cell.contentView.alpha = 0.3;
+
+    [UIView animateWithDuration:0.75 animations:^{
+        cell.layer.transform =CATransform3DIdentity;
+        cell.contentView.alpha = 1;
+    }];
+}
 
 @end

@@ -13,6 +13,16 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.backgroundColor = [UIColor clearColor]; // very important
+    self.layer.masksToBounds = false;
+    self.layer.shadowOpacity = 0.23;
+    self.layer.shadowRadius = 4;
+    self.layer.shadowOffset = CGSizeMake(0, 0);
+    self.layer.shadowColor = [[UIColor blackColor] CGColor];
+    
+    // add corner radius on `contentView`
+    self.contentView.backgroundColor =[UIColor whiteColor];
+    self.contentView.layer.cornerRadius = 8;
 }
 -(void) loadData{
     self.nameLabel.text=self.org.name;

@@ -10,6 +10,7 @@
 #import "EventCollectionCell.h"
 #import "OrgCollectionCell.h"
 #import "AppDelegate.h"
+
 @interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end

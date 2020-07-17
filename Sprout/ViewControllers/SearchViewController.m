@@ -16,6 +16,7 @@
 #import "MBProgressHUD.h"
 #import "OrgDetailsViewController.h"
 #import "AppDelegate.h"
+
 @interface SearchViewController ()<UISearchBarDelegate, CLLocationManagerDelegate>
 
 @end
@@ -30,6 +31,7 @@
     self.orgsVC=[self.childViewControllers objectAtIndex:ORG_SEGMENT];
     [self.eventsView setHidden:YES];
     [self.orgsView setHidden:NO];
+    
 }
 
 

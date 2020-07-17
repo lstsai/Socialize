@@ -13,7 +13,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OrgSearchViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray* organizations;
 @property (strong, nonatomic) NSString* searchText;
 @property (strong, nonatomic) NSString* stateSearch;
@@ -22,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) int pageNum;
 @property (nonatomic) BOOL isMoreDataLoading;
 @property (strong, nonatomic) InfiniteScrollActivityView* loadingMoreView;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 -(void) getOrgs:( UIRefreshControl * _Nullable )refreshControl;
 -(void) loadMoreResults;

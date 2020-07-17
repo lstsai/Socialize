@@ -10,6 +10,7 @@
 #import "MBProgressHUD.h"
 #import "AppDelegate.h"
 #import "Constants.h"
+#import "ProfileViewController.h"
 @interface PeopleSearchViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end
@@ -112,13 +113,13 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-//    if([segue.identifier isEqualToString:@"detailSegue"])
-//    {
-//        EventDetailsViewController *eventVC=segue.destinationViewController;
-//        UICollectionViewCell *tappedCell= sender;
-//        NSIndexPath *tappedIndex= [self.collectionView indexPathForCell:tappedCell];
-//        eventVC.event=self.events[tappedIndex.row];
-//        [self.collectionView deselectItemAtIndexPath:tappedIndex animated:YES];
-//    }
+    if([segue.identifier isEqualToString:@"profileSegue"])
+    {
+        ProfileViewController *profileVC=segue.destinationViewController;
+        UICollectionViewCell *tappedCell= sender;
+        NSIndexPath *tappedIndex= [self.collectionView indexPathForCell:tappedCell];
+        profileVC.user=self.people[tappedIndex.item];
+        [self.collectionView deselectItemAtIndexPath:tappedIndex animated:YES];
+    }
 }
 @end

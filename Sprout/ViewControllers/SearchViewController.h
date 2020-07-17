@@ -13,6 +13,7 @@
 #import "LocationManager.h"
 #import "EventSearchViewController.h"
 #import "OrgSearchViewController.h"
+#import "PeopleSearchViewController.h"
 @import MapKit;
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,8 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextField *stateField;
 @property (weak, nonatomic) IBOutlet UIView *eventsView;
 @property (weak, nonatomic) IBOutlet UIView *orgsView;
+@property (weak, nonatomic) IBOutlet UIView *peopleView;
 @property (weak, nonatomic) IBOutlet EventSearchViewController *eventsVC;
 @property (weak, nonatomic) IBOutlet OrgSearchViewController *orgsVC;
+@property (weak, nonatomic) IBOutlet PeopleSearchViewController *peopleVC;
+
 @property (weak, nonatomic) IBOutlet UISegmentedControl *searchControl;
 @property (strong, nonatomic) NSTimer * _Nullable searchTimer;
 

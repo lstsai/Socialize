@@ -7,7 +7,6 @@
 //
 
 #import "SearchViewController.h"
-#import "OrgCell.h"
 #import <Parse/Parse.h>
 #import "SceneDelegate.h"
 #import "LoginViewController.h"
@@ -29,6 +28,8 @@
     self.searchBar.delegate=self;
     self.eventsVC=[self.childViewControllers objectAtIndex:EVENT_SEGMENT ];
     self.orgsVC=[self.childViewControllers objectAtIndex:ORG_SEGMENT];
+    self.peopleVC=[self.childViewControllers objectAtIndex:PEOPLE_SEGMENT];
+    [self.peopleView setHidden:YES];
     [self.eventsView setHidden:YES];
     [self.orgsView setHidden:NO];
     
@@ -90,6 +91,10 @@
         self.eventsVC.stateSearch=[[self.stateField.text uppercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         [self.eventsVC getEvents:refreshControl];
     }
+    else if(self.searchControl.selectedSegmentIndex==PEOPLE_SEGMENT){
+        self.peopleVC.searchText=self.searchBar.text;
+        [self.peopleVC getPeople:refreshControl];
+    }
 }
 
 - (IBAction)didChangeSearch:(id)sender {
@@ -101,6 +106,7 @@
         [self.orgsVC getOrgs:nil];
         [self.searchBar setPlaceholder:[ORG_SEARCH_PLACEHOLDER mutableCopy]];
         [self.eventsView setHidden:YES];
+        [self.peopleView setHidden:YES];
         [self.orgsView setHidden:NO];
     }
     else if (self.searchControl.selectedSegmentIndex==EVENT_SEGMENT)
@@ -111,7 +117,15 @@
         [self.eventsVC getEvents:nil];
         [self.searchBar setPlaceholder:[EVENT_SEARCH_PLACEHOLDER mutableCopy]];
         [self.orgsView setHidden:YES];
+        [self.peopleView setHidden:YES];
         [self.eventsView setHidden:NO];
+    }
+    else if(self.searchControl.selectedSegmentIndex==PEOPLE_SEGMENT){
+        self.peopleVC.searchText=self.searchBar.text;
+        [self.searchBar setPlaceholder:[PEOPLE_SEARCH_PLACEHOLDER mutableCopy]];
+        [self.orgsView setHidden:YES];
+        [self.eventsView setHidden:YES];
+        [self.peopleView setHidden:NO];
     }
 }
 

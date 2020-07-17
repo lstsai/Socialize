@@ -8,7 +8,6 @@
 
 #import "OrgSearchViewController.h"
 #import "MBProgressHUD.h"
-#import "OrgCell.h"
 #import "APIManager.h"
 #import "OrgDetailsViewController.h"
 #import "AppDelegate.h"

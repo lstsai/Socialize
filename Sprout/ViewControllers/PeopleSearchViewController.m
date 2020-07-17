@@ -1,21 +1,20 @@
 //
-//  EventSearchViewController.m
+//  PeopleSearchViewController.m
 //  Sprout
 //
-//  Created by laurentsai on 7/15/20.
+//  Created by laurentsai on 7/17/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
 
-#import "EventSearchViewController.h"
+#import "PeopleSearchViewController.h"
 #import "MBProgressHUD.h"
-#import <Parse/Parse.h>
-#import "EventDetailsViewController.h"
 #import "AppDelegate.h"
-@interface EventSearchViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+#import "Constants.h"
+@interface PeopleSearchViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end
 
-@implementation EventSearchViewController
+@implementation PeopleSearchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,10 +22,11 @@
     self.collectionView.delegate=self;
     self.collectionView.dataSource=self;
     [self setupLoadingIndicators];
+    self.resultNum=1;
 }
 -(void) setupLoadingIndicators{
     UIRefreshControl *refreshControl= [[UIRefreshControl alloc] init];//initialize the refresh control
-    [refreshControl addTarget:self action:@selector(getEvents:) forControlEvents:UIControlEventValueChanged];//add an event listener
+    [refreshControl addTarget:self action:@selector(getPeople:) forControlEvents:UIControlEventValueChanged];//add an event listener
     [self.collectionView insertSubview:refreshControl atIndex:0];//add into the storyboard
 
     CGRect frame = CGRectMake(0, self.collectionView.contentSize.height, self.collectionView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
@@ -40,14 +40,14 @@
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    EventVerticalCell *eventCell=[collectionView dequeueReusableCellWithReuseIdentifier:@"EventVerticalCell" forIndexPath:indexPath];
-    eventCell.event = self.events[indexPath.item];
-    [eventCell loadData];
-    return eventCell;
+    PersonCell *personCell=[collectionView dequeueReusableCellWithReuseIdentifier:@"PersonCell" forIndexPath:indexPath];
+    personCell.user = self.people[indexPath.item];
+    [personCell loadData];
+    return personCell;
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.events.count;
+    return self.people.count;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -61,39 +61,30 @@
     }];
 }
 
--(void) getEvents:( UIRefreshControl * _Nullable )refreshControl{
+-(void) getPeople:( UIRefreshControl * _Nullable )refreshControl{
     if([self.searchText isEqualToString:@""])
         return;
     if(![refreshControl isKindOfClass:[UIRefreshControl class]])
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    PFQuery *eventsNameQuery=[PFQuery queryWithClassName:@"Event"];
+    PFQuery *userQuery=[PFQuery queryWithClassName:@"_User"];
+    [userQuery whereKey:@"username" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchText]];
+    [userQuery setLimit:self.resultNum*RESULTS_SIZE];
     
-    [eventsNameQuery whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchText]];
-    
-    PFQuery *eventsDetailsQuery=[PFQuery queryWithClassName:@"Event"];
-    [eventsDetailsQuery whereKey:@"details" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchText]];
-    
-    PFQuery *eventsQuery=[PFQuery orQueryWithSubqueries:@[eventsNameQuery,eventsDetailsQuery]];
-    
-    if(![self.stateSearch isEqualToString:@""] || ![self.citySearch isEqualToString:@""])
-    {
-        [eventsQuery whereKey:@"streetAddress" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.citySearch]];
-        [eventsQuery whereKey:@"streetAddress" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.stateSearch]];
-    }
-    [eventsQuery includeKey:@"author"];
-    [eventsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+    [userQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)
-            [AppDelegate displayAlert:@"Error getting events" withMessage:error.localizedDescription on:self];
+            [AppDelegate displayAlert:@"Error getting people" withMessage:error.localizedDescription on:self];
         else
         {
-            self.events=[objects mutableCopy];
+            self.people=[objects mutableCopy];
             [self.collectionView reloadData];
         }
         if([refreshControl isKindOfClass:[UIRefreshControl class]])
             [refreshControl endRefreshing];
-        else
+        else{
             [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [self.loadingMoreView stopAnimating];
+        }
     }];
 }
 
@@ -106,19 +97,14 @@
         if(scrollView.contentOffset.y > scrollOffsetThreshold && self.collectionView.isDragging)
         {
             self.isMoreDataLoading=YES;
-            self.pageNum++;
+            self.resultNum++;
             CGRect frame = CGRectMake(0, self.collectionView.contentSize.height, self.collectionView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
             self.loadingMoreView.frame = frame;
             [self.loadingMoreView startAnimating];
-            [self loadMoreResults];
+            [self getPeople:nil];
         }
-        
     }
 }
--(void) loadMoreResults{
-    [self.loadingMoreView stopAnimating];
-}
-
 
 #pragma mark - Navigation
 
@@ -126,14 +112,13 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if([segue.identifier isEqualToString:@"detailSegue"])
-    {
-        EventDetailsViewController *eventVC=segue.destinationViewController;
-        UICollectionViewCell *tappedCell= sender;
-        NSIndexPath *tappedIndex= [self.collectionView indexPathForCell:tappedCell];
-        eventVC.event=self.events[tappedIndex.row];
-        [self.collectionView deselectItemAtIndexPath:tappedIndex animated:YES];
-    }
+//    if([segue.identifier isEqualToString:@"detailSegue"])
+//    {
+//        EventDetailsViewController *eventVC=segue.destinationViewController;
+//        UICollectionViewCell *tappedCell= sender;
+//        NSIndexPath *tappedIndex= [self.collectionView indexPathForCell:tappedCell];
+//        eventVC.event=self.events[tappedIndex.row];
+//        [self.collectionView deselectItemAtIndexPath:tappedIndex animated:YES];
+//    }
 }
-
 @end

@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) PFUser *user;
 @property (strong, nonatomic) NSArray *likedOrgs;
 @property (strong, nonatomic) NSArray *likedEvents;
+@property (weak, nonatomic) IBOutlet UIButton *topButton;
 
 
 -(void)getLikedOrgInfo;

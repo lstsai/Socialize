@@ -119,6 +119,7 @@
         UICollectionViewCell *tappedCell= sender;
         NSIndexPath *tappedIndex= [self.collectionView indexPathForCell:tappedCell];
         profileVC.user=self.people[tappedIndex.item];
+        NSLog(@"user %@",profileVC.user.username);
         [self.collectionView deselectItemAtIndexPath:tappedIndex animated:YES];
     }
 }

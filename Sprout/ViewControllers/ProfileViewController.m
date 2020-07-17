@@ -28,15 +28,27 @@
     if(!self.user){
         [PFUser.currentUser fetchInBackground];
         self.user=PFUser.currentUser;
-    }
-    [self loadProfile];
-    
+    }    
 }
 -(void) viewWillAppear:(BOOL)animated{
     [self loadProfile];
 }
 
 -(void)loadProfile{
+    if(self.user==PFUser.currentUser)
+    {
+        [self.topButton setTitle:@"Edit" forState:UIControlStateNormal];
+        [self.topButton setTitle:@"Edit" forState:UIControlStateSelected];
+    }
+    else{
+        [self.topButton setTitle:@"+ Friend" forState:UIControlStateNormal];
+        [self.topButton setTitle:@"Friends" forState:UIControlStateSelected];
+        if([PFUser.currentUser[@"friends"] containsObject:self.user.objectId])
+            self.topButton.selected=YES;
+    }
+    self.topButton.layer.cornerRadius=8;
+    self.topButton.layer.masksToBounds=YES;
+    
     self.nameLabel.text=self.user.username;
     self.usernameLabel.text=self.user.username;
 
@@ -103,6 +115,28 @@
         return self.likedEvents.count;
     else
         return self.likedOrgs.count;
+}
+- (IBAction)didTapButton:(id)sender {
+    
+    if(self.user!=PFUser.currentUser)
+    {
+        if(!self.topButton.selected)
+        {
+            self.topButton.selected=YES;
+            NSMutableArray *friendsArray=PFUser.currentUser[@"friends"];
+            [friendsArray addObject:self.user.objectId];
+            PFUser.currentUser[@"friends"]=friendsArray;
+        }
+        else
+        {
+            self.topButton.selected=NO;
+            NSMutableArray *friendsArray=PFUser.currentUser[@"friends"];
+            [friendsArray removeObject:self.user.objectId];
+            PFUser.currentUser[@"friends"]=friendsArray;
+        }
+        [PFUser.currentUser saveInBackground];
+    }
+
 }
 
 /*

@@ -10,7 +10,7 @@
 #import "EventCollectionCell.h"
 #import "OrgCollectionCell.h"
 #import "AppDelegate.h"
-
+#import "MBProgressHUD.h"
 @interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end
@@ -31,7 +31,11 @@
     }    
 }
 -(void) viewWillAppear:(BOOL)animated{
-    [self loadProfile];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.user fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        [self loadProfile];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
 }
 
 -(void)loadProfile{
@@ -126,6 +130,10 @@
             NSMutableArray *friendsArray=PFUser.currentUser[@"friends"];
             [friendsArray addObject:self.user.objectId];
             PFUser.currentUser[@"friends"]=friendsArray;
+            
+            friendsArray=self.user[@"friends"];
+            [friendsArray addObject:PFUser.currentUser.objectId];
+            self.user[@"friends"]=friendsArray;
         }
         else
         {
@@ -133,8 +141,13 @@
             NSMutableArray *friendsArray=PFUser.currentUser[@"friends"];
             [friendsArray removeObject:self.user.objectId];
             PFUser.currentUser[@"friends"]=friendsArray;
+            
+            friendsArray=self.user[@"friends"];
+            [friendsArray removeObject:PFUser.currentUser.objectId];
+            self.user[@"friends"]=friendsArray;
         }
         [PFUser.currentUser saveInBackground];
+        [self.user saveInBackground];
     }
 
 }

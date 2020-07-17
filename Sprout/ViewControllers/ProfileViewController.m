@@ -24,8 +24,9 @@
     self.eventCollectionView.dataSource=self;
     self.orgCollectionView.delegate=self;
     self.orgCollectionView.dataSource=self;
+    self.likedOrgs= [[NSMutableArray alloc]init];
     if(!self.user){
-        [PFUser.currentUser fetch];
+        [PFUser.currentUser fetchInBackground];
         self.user=PFUser.currentUser;
     }
     [self loadProfile];
@@ -61,7 +62,7 @@
         if(error)
             [AppDelegate displayAlert:@"Error getting liked organizations" withMessage:error.localizedDescription on:self];
         else{
-            self.likedOrgs=organizations;
+            self.likedOrgs =organizations;
             NSLog(@"Success getting liked orgs");
             [self.orgCollectionView reloadData];
         }

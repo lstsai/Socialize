@@ -7,7 +7,7 @@
 //
 
 #import <AFNetworking/AFNetworking.h>
-
+#import "Organization.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface APIManager : AFHTTPSessionManager

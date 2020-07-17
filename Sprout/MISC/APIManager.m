@@ -54,11 +54,8 @@ static NSString * const baseURLString = @"https://api.data.charitynavigator.org/
         [self GET:getString parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             [orgDictionaries addObject:responseObject];
             
-            if([ein isEqualToString:[eins lastObject]])
-            {
-                NSArray *organizations=[Organization orgsWithArray:orgDictionaries];
-                completion(organizations,nil);
-            }
+            NSArray *organizations=[Organization orgsWithArray:orgDictionaries];
+            completion(organizations,nil);
         
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"Error getting org: %@", error.localizedDescription);

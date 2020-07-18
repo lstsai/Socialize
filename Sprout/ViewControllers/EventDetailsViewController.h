@@ -22,6 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) Event *event;
 
 -(void) loadEventDetails;
+-(void) addEventToFriendsList;
+-(void) deleteEventFromFriendsList;
+
 
 @end
 

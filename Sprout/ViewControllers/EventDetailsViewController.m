@@ -59,14 +59,73 @@
        {
            self.likeButton.selected=YES;
            [likedEvents addObject:self.event.objectId];
+           [self performSelectorInBackground:@selector(addEventToFriendsList) withObject:nil];
        }
        else{
            self.likeButton.selected=NO;
            [likedEvents removeObject:self.event.objectId];
+           [self performSelectorInBackground:@selector(deleteEventFromFriendsList) withObject:nil];
+
        }
        PFUser.currentUser[@"likedEvents"]=likedEvents;
        [PFUser.currentUser saveInBackground];
 }
+
+-(void) addEventToFriendsList{
+    for(NSString* friend in PFUser.currentUser[@"friends"])//get the array of friends for current user
+    {
+        PFQuery *friendQuery = [PFQuery queryWithClassName:@"_User"];
+        [friendQuery includeKey:@"friendAccessible"];
+        PFUser* friendProfile=[friendQuery getObjectWithId:friend];
+        //if the friend alreay has other friends that like this org
+        PFObject * faAcess=friendProfile[@"friendAccessible"];
+        if(faAcess[@"friendEvents"][self.event.objectId])
+        {
+            //add own username to that list of friends
+            NSMutableDictionary *friendEvents=[faAcess[@"friendEvents"] mutableCopy];
+            
+            NSMutableArray* list= [friendEvents[self.event.objectId] mutableCopy];
+            [list addObject:PFUser.currentUser.username];
+            
+            friendEvents[self.event.objectId]=list;
+            faAcess[@"friendEvents"]= friendEvents;
+        }
+        else
+        {
+            //create that array for the ein and add self as the person who liked it
+            NSMutableDictionary *friendEvents=[faAcess[@"friendEvents"] mutableCopy];
+            friendEvents[self.event.objectId]=@[PFUser.currentUser.username];
+            faAcess[@"friendEvents"]= friendEvents;
+        }
+        //save each friend
+        [faAcess saveInBackground];
+    }
+}
+
+-(void) deleteEventFromFriendsList{
+    for(NSString* friend in PFUser.currentUser[@"friends"])//get the array of friends for current user
+       {
+           PFQuery *friendQuery = [PFQuery queryWithClassName:@"_User"];
+           [friendQuery includeKey:@"friendAccessible"];
+           PFUser* friendProfile=[friendQuery getObjectWithId:friend];
+           //if the friend alreay has other friends that like this org
+           PFObject * faAcess=friendProfile[@"friendAccessible"];
+           if(faAcess[@"friendEvents"][self.event.objectId])
+           {
+               //add own username to that list of friends
+               NSMutableDictionary *friendEvents=[faAcess[@"friendEvents"] mutableCopy];
+               
+               NSMutableArray* list= [friendEvents[self.event.objectId] mutableCopy];
+               [list removeObject:PFUser.currentUser.username];
+               
+               friendEvents[self.event.objectId]=list;
+               faAcess[@"friendEvents"]= friendEvents;
+           }
+           //save each friend
+           [faAcess saveInBackground];
+       }
+}
+
 
 
 /*

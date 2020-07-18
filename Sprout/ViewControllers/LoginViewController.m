@@ -47,6 +47,8 @@
     
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
+    PFObject *userAccessible= [PFObject objectWithClassName:@"UserAccessible"];
+    userAccessible[@"username"]=newUser.username;
     
     if([newUser.username isEqualToString:@""] || [newUser.password isEqualToString:@""])
     {
@@ -61,6 +63,9 @@
 
             } else {
                 NSLog(@"User registered successfully");
+                [userAccessible saveInBackground];
+                newUser[@"friendAccessible"]=userAccessible;
+                [newUser saveInBackground];
                 [self performSegueWithIdentifier:@"loginSegue" sender:nil];//go to timeline after login
             }
             [self.activityIndicator stopAnimating];

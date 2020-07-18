@@ -9,6 +9,7 @@
 #import "OrgDetailsViewController.h"
 #import "Location.h"
 #import "WebViewController.h"
+#import <Parse/Parse.h>
 @interface OrgDetailsViewController ()
 
 @end
@@ -50,7 +51,40 @@
     }
     PFUser.currentUser[@"likedOrgs"]=likedOrgs;
     [PFUser.currentUser saveInBackground];
+    [self performSelectorInBackground:@selector(addOrgToFriendsList) withObject:nil];//add to list in background
     
+}
+-(void) addOrgToFriendsList{
+    for(NSString* friend in PFUser.currentUser[@"friends"])//get the array of friends for current user
+    {
+        PFQuery *friendQuery = [PFQuery queryWithClassName:@"_User"];
+        [friendQuery includeKey:@"friendAccessible"];
+        PFUser* friendProfile=[friendQuery getObjectWithId:friend];
+        //if the friend alreay has other friends that like this org
+        PFObject * faAcess=friendProfile[@"friendAccessible"];
+        if(faAcess[@"friendOrgs"][self.org.ein])
+        {
+            //add own username to that list of friends
+            NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
+            
+            NSMutableArray* list= [friendOrgs[self.org.ein] mutableCopy];
+            [list addObject:PFUser.currentUser.username];
+            
+            friendOrgs[self.org.ein]=list;
+            faAcess[@"friendOrgs"]= friendOrgs;
+        }
+        else
+        {
+            //create that array for the ein and add self as the person who liked it
+            NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
+
+            friendOrgs[self.org.ein]=@[PFUser.currentUser.username];
+            
+            faAcess[@"friendOrgs"]= friendOrgs;
+        }
+        //save each friend
+        [faAcess saveInBackground];
+    }
 }
 
 #pragma mark - Navigation

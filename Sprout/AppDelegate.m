@@ -19,11 +19,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-        
+
         configuration.applicationId = @"lt-sprout";
-        configuration.server = @"https://lt-sprout.herokuapp.com/parse";
+         configuration.server = @"https://lt-sprout.herokuapp.com/parse";
     }];
     [Parse initializeWithConfiguration:config];
+//
+//    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+//        configuration.applicationId = [[NSProcessInfo processInfo] environment][@"B4A-app-id"];
+//        configuration.server = @"http://localhost:1337/parse";
+//    }]];
+//
+    
     [GMSPlacesClient provideAPIKey:[[NSProcessInfo processInfo] environment][@"Google-api-key"]];
     [GMSServices provideAPIKey:[[NSProcessInfo processInfo] environment][@"Google-api-key"]];
 

@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *website;
 @property (weak, nonatomic) IBOutlet UIView *detailContainerView;
 -(void) loadOrgDetails;
-
+-(void) addOrgToFriendsList;
 
 @end
 

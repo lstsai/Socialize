@@ -126,28 +126,40 @@
     {
         if(!self.topButton.selected)
         {
+            //add this friend to friend list and update write acess
             self.topButton.selected=YES;
             NSMutableArray *friendsArray=PFUser.currentUser[@"friends"];
             [friendsArray addObject:self.user.objectId];
             PFUser.currentUser[@"friends"]=friendsArray;
+            //[self.user.ACL setWriteAccess:YES forUser:PFUser.currentUser];
+            //NSString* hello= [PFCloud callFunction:@"hello" withParameters:@{@"userId": self.user.objectId}];
+            //NSLog(@"%@", hello);
+            //add this self to friend's friend list and update write acess
             
-            friendsArray=self.user[@"friends"];
-            [friendsArray addObject:PFUser.currentUser.objectId];
-            self.user[@"friends"]=friendsArray;
+            //[PFCloud callFunction:@"addFriend" withParameters:@{@"userId": self.user.objectId,@"currentUserId": PFUser.currentUser.objectId}];
+//            friendsArray=self.user[@"friends"];
+//            [friendsArray addObject:PFUser.currentUser.objectId];
+//            self.user[@"friends"]=friendsArray;
+            //[PFCloud callFunction:@"addFriend" withParameters:@{@"user": self.user}];
+            //[PFUser.currentUser.ACL setWriteAccess:YES forUser:self.user];
         }
         else
         {
+            //remove friend from friend list and update write acess
             self.topButton.selected=NO;
             NSMutableArray *friendsArray=PFUser.currentUser[@"friends"];
             [friendsArray removeObject:self.user.objectId];
             PFUser.currentUser[@"friends"]=friendsArray;
-            
-            friendsArray=self.user[@"friends"];
-            [friendsArray removeObject:PFUser.currentUser.objectId];
-            self.user[@"friends"]=friendsArray;
+            //[self.user.ACL setWriteAccess:NO forUser:PFUser.currentUser];
+
+            //remove self from friend's friend list and update write acess
+//            friendsArray=self.user[@"friends"];
+//            [friendsArray removeObject:PFUser.currentUser.objectId];
+//            self.user[@"friends"]=friendsArray;
+            //[PFUser.currentUser.ACL setWriteAccess:NO forUser:self.user];
         }
         [PFUser.currentUser saveInBackground];
-        [self.user saveInBackground];
+        //[self.user saveInBackground];
     }
 
 }

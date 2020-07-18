@@ -131,6 +131,8 @@
             NSMutableArray *friendsArray=PFUser.currentUser[@"friends"];
             [friendsArray addObject:self.user.objectId];
             PFUser.currentUser[@"friends"]=friendsArray;
+            [self performSelectorInBackground:@selector(addFriendLikes) withObject:nil];
+            
             //[self.user.ACL setWriteAccess:YES forUser:PFUser.currentUser];
             //NSString* hello= [PFCloud callFunction:@"hello" withParameters:@{@"userId": self.user.objectId}];
             //NSLog(@"%@", hello);
@@ -150,6 +152,7 @@
             NSMutableArray *friendsArray=PFUser.currentUser[@"friends"];
             [friendsArray removeObject:self.user.objectId];
             PFUser.currentUser[@"friends"]=friendsArray;
+            [self performSelectorInBackground:@selector(deleteFriendLikes) withObject:nil];
             //[self.user.ACL setWriteAccess:NO forUser:PFUser.currentUser];
 
             //remove self from friend's friend list and update write acess
@@ -163,7 +166,66 @@
     }
 
 }
-
+-(void)addFriendLikes{
+    PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
+    [selfAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
+    PFObject* selfAccess=[selfAccessQ getFirstObject];
+    for(NSString* ein in self.user[@"likedOrgs"])
+    {
+        if(selfAccess[@"friendOrgs"][ein])
+        {
+            NSMutableArray *list= [selfAccess[@"friendOrgs"][ein] mutableCopy];
+            [list addObject:self.user.objectId];
+            selfAccess[@"friendOrgs"][ein]=list;
+        }
+        else
+        {
+            selfAccess[@"friendOrgs"][ein]=@[self.user.objectId];
+        }
+    }
+    
+    for(NSString *eventId in self.user[@"likedEvents"])
+    {
+        if(selfAccess[@"friendEvents"][eventId])
+        {
+            NSMutableArray *list= [selfAccess[@"friendEvents"][eventId] mutableCopy];
+            [list addObject:self.user.objectId];
+            selfAccess[@"friendEvents"][eventId]=list;
+        }
+        else
+        {
+            selfAccess[@"friendEvents"][eventId]=@[self.user.objectId];
+        }
+    }
+    [selfAccess saveInBackground];
+    
+}
+-(void)deleteFriendLikes{
+    
+    PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
+    [selfAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
+    PFObject* selfAccess=[selfAccessQ getFirstObject];
+    for(NSString* ein in self.user[@"likedOrgs"])
+    {
+        if(selfAccess[@"friendOrgs"][ein])
+        {
+            NSMutableArray *list= [selfAccess[@"friendOrgs"][ein] mutableCopy];
+            [list removeObject:self.user.objectId];
+            selfAccess[@"friendOrgs"][ein]=list;
+        }
+    }
+    
+    for(NSString *eventId in self.user[@"likedEvents"])
+    {
+        if(selfAccess[@"friendEvents"][eventId])
+        {
+            NSMutableArray *list= [selfAccess[@"friendEvents"][eventId] mutableCopy];
+            [list removeObject:self.user.objectId];
+            selfAccess[@"friendEvents"][eventId]=list;
+        }
+    }
+    [selfAccess saveInBackground];
+}
 /*
 #pragma mark - Navigation
 

@@ -32,6 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)getLikedOrgInfo;
 -(void)getLikedEventInfo;
 -(void)loadProfile;
+-(void)deleteFriendLikes;
+-(void)addFriendLikes;
+
 
 @end
 

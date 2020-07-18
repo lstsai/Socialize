@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *tagLineLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *orgImage;
 @property (strong, nonatomic) Organization *org;
+@property (weak, nonatomic) IBOutlet UILabel *numLikeLabel;
 
 -(void) loadData;
 @end

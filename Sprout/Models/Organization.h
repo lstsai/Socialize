@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *tagLine; // Display website
 @property (nonatomic, strong) NSURL *website;
 @property (nonatomic,strong)NSURL *imageURL;
+@property (nonatomic) NSInteger numFriendsLike;
+
 @property (strong, nonatomic) Location *location;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;

@@ -7,7 +7,7 @@
 //
 
 #import "Organization.h"
-
+#import <Parse/Parse.h>
 @implementation Organization
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
@@ -15,7 +15,6 @@
     self = [super init];
     if (self) {
 
-        // Is this a re-tweet?
         self.ein = dictionary[@"ein"];
         self.category=dictionary[@"category"][@"categoryName"];
         self.cause=dictionary[@"cause"][@"causeName"];
@@ -31,6 +30,13 @@
         
         if(![dictionary[@"websiteURL"] isEqual:[NSNull null]])
             self.website=[NSURL URLWithString:dictionary[@"websiteURL"]];
+        PFQuery * friendAccessQ=[PFQuery queryWithClassName:@"UserAccessible"];
+        [friendAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
+        PFObject *userAccess= [friendAccessQ getFirstObject];
+        if(userAccess[@"friendOrgs"][self.ein])
+            self.numFriendsLike=((NSArray*)userAccess[@"friendOrgs"][self.ein]).count;
+        else
+            self.numFriendsLike=0;
     }
     return self;
 

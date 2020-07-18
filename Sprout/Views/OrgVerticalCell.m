@@ -12,7 +12,8 @@
 -(void) loadData{
     self.nameLabel.text=self.org.name;
     self.tagLineLabel.text=self.org.tagLine;
-    
+    self.numLikeLabel.text=[NSString stringWithFormat:@"%lu", self.org.numFriendsLike];
+
     self.contentView.layer.cornerRadius = 20.0f;
     self.contentView.layer.borderWidth = 1.0f;
     self.contentView.layer.borderColor = [UIColor clearColor].CGColor;

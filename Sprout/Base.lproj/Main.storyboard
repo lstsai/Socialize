@@ -1012,12 +1012,20 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="tintColor" red="0.52156648640000003" green="0.69836868519999995" blue="0.54181003660000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="num" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4x-YQ-tXP">
+                                                    <rect key="frame" x="207" y="38" width="34" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.95821225564891144" green="0.95698429266773" blue="0.97843374727946253" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="410" height="96"/>
                                         <connections>
                                             <outlet property="nameLabel" destination="lyR-Ct-Kn0" id="mmw-r0-CLs"/>
+                                            <outlet property="numLikeLabel" destination="l4x-YQ-tXP" id="Cyi-Ab-3Ye"/>
                                             <outlet property="orgImage" destination="7Nh-vt-8Xq" id="k2F-mM-Pty"/>
                                             <outlet property="tagLineLabel" destination="pq8-Le-Rf3" id="JqM-qG-v6e"/>
                                             <segue destination="Wv5-VZ-aSd" kind="show" identifier="detailSegue" id="kca-Ek-PnJ"/>

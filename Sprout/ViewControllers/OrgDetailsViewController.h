@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *detailContainerView;
 -(void) loadOrgDetails;
 -(void) addOrgToFriendsList;
+-(void) deleteOrgFromFriendsList;
 
 @end
 

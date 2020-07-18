@@ -131,7 +131,10 @@
             NSMutableArray *friendsArray=PFUser.currentUser[@"friends"];
             [friendsArray addObject:self.user.objectId];
             PFUser.currentUser[@"friends"]=friendsArray;
+            //[self performSelectorInBackground:@selector(addFriendLikes) withObject:nil];
+            [PFUser.currentUser saveInBackground];
             [self performSelectorInBackground:@selector(addFriendLikes) withObject:nil];
+
             
             //[self.user.ACL setWriteAccess:YES forUser:PFUser.currentUser];
             //NSString* hello= [PFCloud callFunction:@"hello" withParameters:@{@"userId": self.user.objectId}];
@@ -152,6 +155,8 @@
             NSMutableArray *friendsArray=PFUser.currentUser[@"friends"];
             [friendsArray removeObject:self.user.objectId];
             PFUser.currentUser[@"friends"]=friendsArray;
+            [PFUser.currentUser saveInBackground];
+
             [self performSelectorInBackground:@selector(deleteFriendLikes) withObject:nil];
             //[self.user.ACL setWriteAccess:NO forUser:PFUser.currentUser];
 
@@ -161,70 +166,101 @@
 //            self.user[@"friends"]=friendsArray;
             //[PFUser.currentUser.ACL setWriteAccess:NO forUser:self.user];
         }
-        [PFUser.currentUser saveInBackground];
         //[self.user saveInBackground];
     }
 
 }
 -(void)addFriendLikes{
+    
+    /*
+    HI JOHN if you're reading this the code you're about to see is super
+    duper chunky because Parse wouldn't save my objects otherwise.
+     You were warned :))
+     */
+     
     PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
     [selfAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
-    PFObject* selfAccess=[selfAccessQ getFirstObject];
-    for(NSString* ein in self.user[@"likedOrgs"])
-    {
-        if(selfAccess[@"friendOrgs"][ein])
+    [selfAccessQ getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        PFObject* selfAccess=object;
+        PFObject *friendLikes=selfAccess[@"friendOrgs"];
+        for(NSString* ein in self.user[@"likedOrgs"])
         {
-            NSMutableArray *list= [selfAccess[@"friendOrgs"][ein] mutableCopy];
-            [list addObject:self.user.objectId];
-            selfAccess[@"friendOrgs"][ein]=list;
+            if(friendLikes[ein])
+            {
+                NSMutableArray *list= [friendLikes[ein] mutableCopy];
+                [list addObject:self.user.username];
+                friendLikes[ein]=list;
+            }
+            else
+            {
+                friendLikes[ein]=@[self.user.username];
+            }
+            selfAccess[@"friendOrgs"]=friendLikes;
+            [selfAccess saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if(succeeded)
+                    NSLog(@"AY");
+            }];
         }
-        else
+        
+        friendLikes=selfAccess[@"friendEvents"];
+        for(NSString *eventId in self.user[@"likedEvents"])
         {
-            selfAccess[@"friendOrgs"][ein]=@[self.user.objectId];
+            if(friendLikes[eventId])
+            {
+                NSMutableArray *list= [friendLikes[eventId] mutableCopy];
+                [list addObject:self.user.username];
+                friendLikes[eventId]=list;
+            }
+            else
+            {
+                friendLikes[eventId]=@[self.user.username];
+            }
+            selfAccess[@"friendOrgs"]=friendLikes;
+            [selfAccess saveInBackground];
         }
-    }
+
+    }];
     
-    for(NSString *eventId in self.user[@"likedEvents"])
-    {
-        if(selfAccess[@"friendEvents"][eventId])
-        {
-            NSMutableArray *list= [selfAccess[@"friendEvents"][eventId] mutableCopy];
-            [list addObject:self.user.objectId];
-            selfAccess[@"friendEvents"][eventId]=list;
-        }
-        else
-        {
-            selfAccess[@"friendEvents"][eventId]=@[self.user.objectId];
-        }
-    }
-    [selfAccess saveInBackground];
+    
     
 }
 -(void)deleteFriendLikes{
     
     PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
     [selfAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
-    PFObject* selfAccess=[selfAccessQ getFirstObject];
-    for(NSString* ein in self.user[@"likedOrgs"])
-    {
-        if(selfAccess[@"friendOrgs"][ein])
+    [selfAccessQ getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        PFObject* selfAccess=object;
+        PFObject *friendLikes=selfAccess[@"friendOrgs"];
+        for(NSString* ein in self.user[@"likedOrgs"])
         {
-            NSMutableArray *list= [selfAccess[@"friendOrgs"][ein] mutableCopy];
-            [list removeObject:self.user.objectId];
-            selfAccess[@"friendOrgs"][ein]=list;
+            if(friendLikes[ein])
+            {
+                NSMutableArray *list= [friendLikes[ein] mutableCopy];
+                [list removeObject:self.user.username];
+                friendLikes[ein]=list;
+            }
+            
+            selfAccess[@"friendOrgs"]=friendLikes;
+            [selfAccess saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if(succeeded)
+                    NSLog(@"AY");
+            }];
         }
-    }
-    
-    for(NSString *eventId in self.user[@"likedEvents"])
-    {
-        if(selfAccess[@"friendEvents"][eventId])
+        
+        friendLikes=selfAccess[@"friendEvents"];
+        for(NSString *eventId in self.user[@"likedEvents"])
         {
-            NSMutableArray *list= [selfAccess[@"friendEvents"][eventId] mutableCopy];
-            [list removeObject:self.user.objectId];
-            selfAccess[@"friendEvents"][eventId]=list;
+            if(friendLikes[eventId])
+            {
+                NSMutableArray *list= [friendLikes[eventId] mutableCopy];
+                [list removeObject:self.user.username];
+                friendLikes[eventId]=list;
+            }
+            selfAccess[@"friendOrgs"]=friendLikes;
+            [selfAccess saveInBackground];
         }
-    }
-    [selfAccess saveInBackground];
+
+    }];
 }
 /*
 #pragma mark - Navigation

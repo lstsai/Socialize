@@ -16,3 +16,22 @@ NSString * const PEOPLE_SEARCH_PLACEHOLDER=@"Search for people";
 const int ORG_SEGMENT=0;
 const int EVENT_SEGMENT=1;
 const int PEOPLE_SEGMENT=2;
+
+const CGFloat CELL_CORNER_RADIUS=10.0f;
+const CGFloat SHADOW_RADIUS=5.0f;
+const CGFloat SHADOW_OFFSET=2.0f;
+const CGFloat SHADOW_OPACITY=0.5f;
+
+const int MIN_MARGINS=5;
+const int SECTION_INSETS=10;
+const CGFloat PEOPLE_PER_LINE=2;
+
+const NSTimeInterval ANIMATION_DURATION=0.75;
+const CGFloat CELL_TOP_OFFSET=50.0f;
+
+const int SHOW_ALPHA=1;
+const int HIDE_ALPHA=0;
+
+
+
+

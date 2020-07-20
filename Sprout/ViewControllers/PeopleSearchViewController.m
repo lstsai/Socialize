@@ -11,6 +11,8 @@
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "ProfileViewController.h"
+#import "Constants.h"
+
 @interface PeopleSearchViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end
@@ -41,15 +43,14 @@
     self.collectionView.contentInset = insets;
 }
 -(void)setUpLayout{
-    int minMargins=5;
+    
     self.collectionView.frame=self.view.frame;
     UICollectionViewFlowLayout *layout= (UICollectionViewFlowLayout *) self.collectionView.collectionViewLayout;//cast to supress warning
-    layout.minimumInteritemSpacing=minMargins;
-    layout.minimumLineSpacing=minMargins*2;
+    layout.minimumInteritemSpacing=MIN_MARGINS;
+    layout.minimumLineSpacing=MIN_MARGINS*2;
     
-    CGFloat peoplePerLine=2;
-    CGFloat itemWidth=(self.collectionView.frame.size.width-layout.minimumInteritemSpacing*(peoplePerLine-1)-(2*minMargins))/peoplePerLine;
-    layout.itemSize=CGSizeMake(itemWidth, itemWidth*1.2);
+    CGFloat itemWidth=(self.collectionView.frame.size.width-layout.minimumInteritemSpacing*(PEOPLE_PER_LINE-1)-(2*MIN_MARGINS)-(2*SECTION_INSETS))/PEOPLE_PER_LINE;
+    layout.itemSize=CGSizeMake(itemWidth, itemWidth);
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -65,12 +66,12 @@
 
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
 
-    cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0);
-    cell.contentView.alpha = 0.3;
+    cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, CELL_TOP_OFFSET, 0);
+    cell.contentView.alpha = SHOW_ALPHA*0.3;
 
-    [UIView animateWithDuration:0.75 animations:^{
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         cell.layer.transform =CATransform3DIdentity;
-        cell.contentView.alpha = 1;
+        cell.contentView.alpha = SHOW_ALPHA;
     }];
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "EventVerticalCell.h"
+#import "Constants.h"
 @import GoogleMaps;
 
 @implementation EventVerticalCell
@@ -33,7 +34,6 @@
     self.eventImage.file=self.event.image;
     [self.eventImage loadInBackground];
     
-    
     GMSGeocoder *geocoder= [GMSGeocoder geocoder];
     CLLocationCoordinate2D cllocation= CLLocationCoordinate2DMake(self.event.location.latitude, self.event.location.longitude);
     [geocoder reverseGeocodeCoordinate:cllocation completionHandler:^(GMSReverseGeocodeResponse * _Nullable address, NSError * _Nullable error) {
@@ -50,27 +50,25 @@
 }
 -(void) setupShadows{
     
-    self.contentView.layer.cornerRadius = 10.0f;
-    self.contentView.layer.borderWidth = 1.0f;
+    self.contentView.layer.cornerRadius = CELL_CORNER_RADIUS;
     self.contentView.layer.borderColor = [UIColor clearColor].CGColor;
     self.contentView.layer.masksToBounds = YES;
     self.contentView.clipsToBounds = YES;
     self.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-    self.layer.shadowOffset = CGSizeMake(2.0f, 2.0f);
-    self.layer.shadowRadius = 5.0f;
-    self.layer.shadowOpacity = 0.5f;
+    self.layer.shadowOffset = CGSizeMake(SHADOW_OFFSET, SHADOW_OFFSET);
+    self.layer.shadowRadius = SHADOW_RADIUS*2;
+    self.layer.shadowOpacity = SHADOW_OPACITY;
     self.layer.masksToBounds = NO;
     self.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.contentView.layer.cornerRadius].CGPath;
     
-    self.dateView.layer.cornerRadius = 5.0f;
-    self.dateView.layer.borderWidth = 1.0f;
+    self.dateView.layer.cornerRadius = CELL_CORNER_RADIUS/2;
     self.dateView.layer.borderColor = [UIColor clearColor].CGColor;
     self.dateView.layer.masksToBounds = YES;
     self.dateView.clipsToBounds = YES;
     self.dateView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-    self.dateView.layer.shadowOffset = CGSizeMake(2.0f, 2.0f);
-    self.dateView.layer.shadowRadius = 5.0f;
-    self.dateView.layer.shadowOpacity = 0.5f;
+    self.dateView.layer.shadowOffset = CGSizeMake(SHADOW_OFFSET, SHADOW_OFFSET);
+    self.dateView.layer.shadowRadius = SHADOW_RADIUS;
+    self.dateView.layer.shadowOpacity = SHADOW_OPACITY/2;
     self.dateView.layer.masksToBounds = NO;
     self.dateView.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.dateView.bounds cornerRadius:self.dateView.layer.cornerRadius].CGPath;
 
@@ -85,11 +83,11 @@
         {
             self.event.numFriendsLike=((NSArray*)userAccess[@"friendEvents"][self.event.objectId]).count;
             self.numLikesLabel.text=[NSString stringWithFormat:@"%lu friends have liked this", self.event.numFriendsLike];
-            self.numLikesLabel.alpha=1;
+            self.numLikesLabel.alpha=SHOW_ALPHA;
         }
         else
         {
-            self.numLikesLabel.alpha=0;
+            self.numLikesLabel.alpha=HIDE_ALPHA;
         }
     }];
 }

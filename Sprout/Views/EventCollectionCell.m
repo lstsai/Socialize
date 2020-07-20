@@ -7,7 +7,7 @@
 //
 
 #import "EventCollectionCell.h"
-
+#import "Constants.h"
 @implementation EventCollectionCell
 -(void) loadEventCell:(Event*)event{
     
@@ -15,16 +15,15 @@
     [self.eventImage loadInBackground];
     self.eventNameLabel.text=event.name;
    
-    self.contentView.layer.cornerRadius = 5.0f;
-    self.contentView.layer.borderWidth = 1.0f;
+    self.contentView.layer.cornerRadius = CELL_CORNER_RADIUS;
     self.contentView.layer.borderColor = [UIColor clearColor].CGColor;
     self.contentView.layer.masksToBounds = YES;
     self.contentView.clipsToBounds = YES;
 
     self.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-    self.layer.shadowOffset = CGSizeMake(2.0f, 2.0f);
-    self.layer.shadowRadius = 5.0f;
-    self.layer.shadowOpacity = 0.5f;
+    self.layer.shadowOffset = CGSizeMake(SHADOW_OFFSET, SHADOW_OFFSET);
+    self.layer.shadowRadius = SHADOW_RADIUS;
+    self.layer.shadowOpacity = SHADOW_OPACITY;
     self.layer.masksToBounds = NO;
     self.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.contentView.layer.cornerRadius].CGPath;
 }

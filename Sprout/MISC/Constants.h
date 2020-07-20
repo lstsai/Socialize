@@ -18,6 +18,18 @@ extern NSString * const PEOPLE_SEARCH_PLACEHOLDER;
 extern const int ORG_SEGMENT;
 extern const int EVENT_SEGMENT;
 extern const int PEOPLE_SEGMENT;
+extern const CGFloat CELL_CORNER_RADIUS;
+extern const CGFloat SHADOW_RADIUS;
+extern const CGFloat SHADOW_OFFSET;
+extern const CGFloat SHADOW_OPACITY;
+extern const int MIN_MARGINS;
+extern const int SECTION_INSETS;
+extern const CGFloat PEOPLE_PER_LINE;
+extern const NSTimeInterval ANIMATION_DURATION;
+extern const CGFloat CELL_TOP_OFFSET;
+extern const int SHOW_ALPHA;
+extern const int HIDE_ALPHA;
+
 
 
 #endif /* Constants_h */

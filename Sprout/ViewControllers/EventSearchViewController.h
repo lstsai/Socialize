@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void) getEvents:( UIRefreshControl * _Nullable )refreshControl;
 -(void) loadMoreResults;
 -(void) setupLoadingIndicators;
+-(void) setupLayout;
 -(void) addEventToFriendsList:(Event*)likedEvent;
 -(void) deleteEventFromFriendsList:(Event*)unlikedEvent;
 

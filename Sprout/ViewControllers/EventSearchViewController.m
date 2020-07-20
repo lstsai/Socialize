@@ -12,6 +12,7 @@
 #import "EventDetailsViewController.h"
 #import "AppDelegate.h"
 #import "EventVerticalCell.h"
+#import "Constants.h"
 @interface EventSearchViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, EventVerticalCellDelegate, EventDetailsViewControllerDelegate>
 
 @end
@@ -24,6 +25,7 @@
     self.collectionView.delegate=self;
     self.collectionView.dataSource=self;
     [self setupLoadingIndicators];
+    [self setupLayout];
 }
 -(void) setupLoadingIndicators{
     UIRefreshControl *refreshControl= [[UIRefreshControl alloc] init];//initialize the refresh control
@@ -38,6 +40,13 @@
     UIEdgeInsets insets = self.collectionView.contentInset;
     insets.bottom += InfiniteScrollActivityView.defaultHeight;
     self.collectionView.contentInset = insets;
+}
+
+-(void)setupLayout{
+    
+    self.collectionView.frame=self.view.frame;
+    UICollectionViewFlowLayout *layout= (UICollectionViewFlowLayout *) self.collectionView.collectionViewLayout;//cast to supress warning
+    layout.minimumLineSpacing=MIN_MARGINS*3;
 }
 
 -(void) getEvents:( UIRefreshControl * _Nullable )refreshControl{
@@ -191,12 +200,11 @@
 
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
 
-    cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0);
-    cell.contentView.alpha = 0.3;
-
-    [UIView animateWithDuration:0.75 animations:^{
+    cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, CELL_TOP_OFFSET, 0);
+    cell.contentView.alpha = SHOW_ALPHA*0.3;
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         cell.layer.transform =CATransform3DIdentity;
-        cell.contentView.alpha = 1;
+        cell.contentView.alpha = SHOW_ALPHA;
     }];
 }
 

@@ -10,6 +10,13 @@
 #import "Event.h"
 @import Parse;
 NS_ASSUME_NONNULL_BEGIN
+@protocol EventDetailsViewControllerDelegate
+
+- (void)didLikeEvent:(Event*)likedEvent;
+- (void)didUnlikeEvent:(Event*)unlikedEvent;
+
+
+@end
 
 @interface EventDetailsViewController : UIViewController
 @property (weak, nonatomic) IBOutlet PFImageView *eventImageView;
@@ -20,10 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *eventDetailsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) Event *event;
+@property (weak, nonatomic) id<EventDetailsViewControllerDelegate> delegate;
+
 
 -(void) loadEventDetails;
--(void) addEventToFriendsList;
--(void) deleteEventFromFriendsList;
 
 
 @end

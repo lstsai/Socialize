@@ -12,7 +12,7 @@
 #import "EventDetailsViewController.h"
 #import "AppDelegate.h"
 #import "EventVerticalCell.h"
-@interface EventSearchViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface EventSearchViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, EventVerticalCellDelegate, EventDetailsViewControllerDelegate>
 
 @end
 
@@ -38,28 +38,6 @@
     UIEdgeInsets insets = self.collectionView.contentInset;
     insets.bottom += InfiniteScrollActivityView.defaultHeight;
     self.collectionView.contentInset = insets;
-}
-
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    EventVerticalCell *eventCell=[collectionView dequeueReusableCellWithReuseIdentifier:@"EventVerticalCell" forIndexPath:indexPath];
-    eventCell.event = self.events[indexPath.item];
-    [eventCell loadData];
-    return eventCell;
-}
-
-- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.events.count;
-}
-
--(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
-
-    cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0);
-    cell.contentView.alpha = 0.3;
-
-    [UIView animateWithDuration:0.75 animations:^{
-        cell.layer.transform =CATransform3DIdentity;
-        cell.contentView.alpha = 1;
-    }];
 }
 
 -(void) getEvents:( UIRefreshControl * _Nullable )refreshControl{
@@ -120,6 +98,108 @@
     [self.loadingMoreView stopAnimating];
 }
 
+-(void) didLikeEvent:(Event*)likedEvent{
+    NSMutableArray *likedEvents= [PFUser.currentUser[@"likedEvents"] mutableCopy];
+    
+    [likedEvents addObject:likedEvent.objectId];
+    [self performSelectorInBackground:@selector(addEventToFriendsList:) withObject:likedEvent];
+    
+    PFUser.currentUser[@"likedEvents"]=likedEvents;
+    [PFUser.currentUser saveInBackground];
+}
+- (void)didUnlikeEvent:(Event*)unlikedEvent{
+    NSMutableArray *likedEvents= [PFUser.currentUser[@"likedEvents"] mutableCopy];
+
+    [likedEvents removeObject:unlikedEvent.objectId];
+    [self performSelectorInBackground:@selector(deleteEventFromFriendsList:) withObject:unlikedEvent];
+    
+    PFUser.currentUser[@"likedEvents"]=likedEvents;
+    [PFUser.currentUser saveInBackground];
+}
+-(void) addEventToFriendsList:(Event*)likedEvent{
+    PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
+    [selfAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
+    PFObject *friendAccess=[selfAccessQ getFirstObject];
+    for(NSString* friend in friendAccess[@"friends"])//get the array of friends for current user
+    {
+        PFQuery *friendQuery = [PFQuery queryWithClassName:@"_User"];
+        [friendQuery includeKey:@"friendAccessible"];
+        PFUser* friendProfile=[friendQuery getObjectWithId:friend];
+        //if the friend alreay has other friends that like this org
+        PFObject * faAcess=friendProfile[@"friendAccessible"];
+        if(faAcess[@"friendEvents"][likedEvent.objectId])
+        {
+            //add own username to that list of friends
+            NSMutableDictionary *friendEvents=[faAcess[@"friendEvents"] mutableCopy];
+            
+            NSMutableArray* list= [friendEvents[likedEvent.objectId] mutableCopy];
+            [list addObject:PFUser.currentUser.username];
+            
+            friendEvents[likedEvent.objectId]=list;
+            faAcess[@"friendEvents"]= friendEvents;
+        }
+        else
+        {
+            //create that array for the ein and add self as the person who liked it
+            NSMutableDictionary *friendEvents=[faAcess[@"friendEvents"] mutableCopy];
+            friendEvents[likedEvent.objectId]=@[PFUser.currentUser.username];
+            faAcess[@"friendEvents"]= friendEvents;
+        }
+        //save each friend
+        [faAcess saveInBackground];
+    }
+}
+
+-(void) deleteEventFromFriendsList:(Event*)unlikedEvent{
+    PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
+    [selfAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
+    PFObject *friendAccess=[selfAccessQ getFirstObject];
+    for(NSString* friend in friendAccess[@"friends"])//get the array of friends for current user
+       {
+           PFQuery *friendQuery = [PFQuery queryWithClassName:@"_User"];
+           [friendQuery includeKey:@"friendAccessible"];
+           PFUser* friendProfile=[friendQuery getObjectWithId:friend];
+           //if the friend alreay has other friends that like this org
+           PFObject * faAcess=friendProfile[@"friendAccessible"];
+           if(faAcess[@"friendEvents"][unlikedEvent.objectId])
+           {
+               //add own username to that list of friends
+               NSMutableDictionary *friendEvents=[faAcess[@"friendEvents"] mutableCopy];
+               
+               NSMutableArray* list= [friendEvents[unlikedEvent.objectId] mutableCopy];
+               [list removeObject:PFUser.currentUser.username];
+               
+               friendEvents[unlikedEvent.objectId]=list;
+               faAcess[@"friendEvents"]= friendEvents;
+           }
+           //save each friend
+           [faAcess saveInBackground];
+       }
+}
+
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    EventVerticalCell *eventCell=[collectionView dequeueReusableCellWithReuseIdentifier:@"EventVerticalCell" forIndexPath:indexPath];
+    eventCell.event = self.events[indexPath.item];
+    eventCell.delegate=self;
+    [eventCell loadData];
+    return eventCell;
+}
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.events.count;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+
+    cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0);
+    cell.contentView.alpha = 0.3;
+
+    [UIView animateWithDuration:0.75 animations:^{
+        cell.layer.transform =CATransform3DIdentity;
+        cell.contentView.alpha = 1;
+    }];
+}
+
 
 #pragma mark - Navigation
 
@@ -133,6 +213,7 @@
         UICollectionViewCell *tappedCell= sender;
         NSIndexPath *tappedIndex= [self.collectionView indexPathForCell:tappedCell];
         eventVC.event=self.events[tappedIndex.row];
+        eventVC.delegate=self;
         [self.collectionView deselectItemAtIndexPath:tappedIndex animated:YES];
     }
 }

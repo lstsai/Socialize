@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LocationManager.h"
 #import "InfiniteScrollActivityView.h"
+#import "Event.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface EventSearchViewController : UIViewController
@@ -25,6 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
 -(void) getEvents:( UIRefreshControl * _Nullable )refreshControl;
 -(void) loadMoreResults;
 -(void) setupLoadingIndicators;
+-(void) addEventToFriendsList:(Event*)likedEvent;
+-(void) deleteEventFromFriendsList:(Event*)unlikedEvent;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

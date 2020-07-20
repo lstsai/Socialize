@@ -56,7 +56,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
             uuid = "8103E802-01A8-4ABE-B8FD-7AA9BF3544ED"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             breakpointStackSelectionBehavior = "1"
@@ -113,7 +113,7 @@
             <Locations>
                <Location
                   uuid = "DC0D9300-57FA-4BB9-BC63-DC76692E8378 - 54137fb8353805ba"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[OrgSearchViewController pageNum]"
@@ -128,7 +128,7 @@
                </Location>
                <Location
                   uuid = "DC0D9300-57FA-4BB9-BC63-DC76692E8378 - c8eff03ee35ae314"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[OrgSearchViewController setPageNum:]"
@@ -161,7 +161,7 @@
             <Locations>
                <Location
                   uuid = "2702B02B-3293-4F4E-A5E0-0318C5A3A664 - 4bb0bcda893d539d"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[OrgDetailsViewController addOrgToFriendsList]"
@@ -176,7 +176,7 @@
                </Location>
                <Location
                   uuid = "2702B02B-3293-4F4E-A5E0-0318C5A3A664 - 4bb0bcda893d539d"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[OrgDetailsViewController addOrgToFriendsList]"
@@ -241,7 +241,7 @@
             <Locations>
                <Location
                   uuid = "DD3CFD7E-CEC6-4002-9DF9-457EA602934F - e5e5a1a75f0d05d9"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__40-[ProfileViewController addFriendLikes:]_block_invoke"
@@ -256,7 +256,7 @@
                </Location>
                <Location
                   uuid = "DD3CFD7E-CEC6-4002-9DF9-457EA602934F - e5e5a1a75f0d05d9"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__40-[ProfileViewController addFriendLikes:]_block_invoke"

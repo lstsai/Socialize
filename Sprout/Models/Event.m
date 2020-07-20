@@ -20,6 +20,7 @@
 @dynamic image;
 @dynamic createdAt;
 @dynamic time;
+@dynamic numFriendsLike;
 
 + (nonnull NSString *)parseClassName {
     return @"Event";

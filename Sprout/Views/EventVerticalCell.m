@@ -24,6 +24,16 @@
     self.timeLabel.text=timeString;
     
     self.nameLabel.text=self.event.name;
+    
+    if([PFUser.currentUser[@"likedEvents"] containsObject:self.event.objectId])
+        self.likeButton.selected=YES;
+    else
+        self.likeButton.selected=NO;
+    
+    self.eventImage.file=self.event.image;
+    [self.eventImage loadInBackground];
+    
+    
     GMSGeocoder *geocoder= [GMSGeocoder geocoder];
     CLLocationCoordinate2D cllocation= CLLocationCoordinate2DMake(self.event.location.latitude, self.event.location.longitude);
     [geocoder reverseGeocodeCoordinate:cllocation completionHandler:^(GMSReverseGeocodeResponse * _Nullable address, NSError * _Nullable error) {
@@ -33,9 +43,12 @@
             self.locationLabel.text=[[address firstResult] locality];
 
     }];
+    [self setupShadows];
+    [self performSelectorInBackground:@selector(getLikes) withObject:nil];
     
-    self.eventImage.file=self.event.image;
-    [self.eventImage loadInBackground];
+
+}
+-(void) setupShadows{
     
     self.contentView.layer.cornerRadius = 10.0f;
     self.contentView.layer.borderWidth = 1.0f;
@@ -63,4 +76,33 @@
 
 }
 
+-(void) getLikes{
+    PFQuery * friendAccessQ=[PFQuery queryWithClassName:@"UserAccessible"];
+    [friendAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
+    [friendAccessQ getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        PFObject* userAccess=object;
+        if(userAccess[@"friendEvents"][self.event.objectId])
+        {
+            self.event.numFriendsLike=((NSArray*)userAccess[@"friendEvents"][self.event.objectId]).count;
+            self.numLikesLabel.text=[NSString stringWithFormat:@"%lu friends have liked this", self.event.numFriendsLike];
+            self.numLikesLabel.alpha=1;
+        }
+        else
+        {
+            self.numLikesLabel.alpha=0;
+        }
+    }];
+}
+- (IBAction)didTapLike:(id)sender {
+    if(!self.likeButton.selected)
+    {
+        self.likeButton.selected=YES;
+        [self.delegate didLikeEvent:self.event];
+    }
+    else{
+        self.likeButton.selected=NO;
+        [self.delegate didUnlikeEvent:self.event];
+
+    }
+}
 @end

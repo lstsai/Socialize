@@ -38,83 +38,17 @@
     [self performSegueWithIdentifier:@"webSegue" sender:nil];
 }
 - (IBAction)didTapLike:(id)sender {
-
-    NSMutableArray *likedOrgs= [PFUser.currentUser[@"likedOrgs"] mutableCopy];
     if(!self.likeButton.selected)
     {
         self.likeButton.selected=YES;
-        [likedOrgs addObject:self.org.ein];
-        [self performSelectorInBackground:@selector(addOrgToFriendsList) withObject:nil];//add to list in background
+        [self.delegate didLikeOrg:self.org];
 
     }
     else{
         self.likeButton.selected=NO;
-        [likedOrgs removeObject:self.org.ein];
-        [self performSelectorInBackground:@selector(deleteOrgFromFriendsList) withObject:nil];//add to list in background
+        [self.delegate didUnlikeOrg:self.org];
 
     }
-    PFUser.currentUser[@"likedOrgs"]=likedOrgs;
-    [PFUser.currentUser saveInBackground];
-    
-}
--(void) addOrgToFriendsList{
-    PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
-    [selfAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
-    PFObject *friendAccess=[selfAccessQ getFirstObject];
-    for(NSString* friend in friendAccess[@"friends"])//get the array of friends for current user
-    {
-        PFQuery *friendQuery = [PFQuery queryWithClassName:@"_User"];
-        [friendQuery includeKey:@"friendAccessible"];
-        PFUser* friendProfile=[friendQuery getObjectWithId:friend];
-        //if the friend alreay has other friends that like this org
-        PFObject * faAcess=friendProfile[@"friendAccessible"];
-        if(faAcess[@"friendOrgs"][self.org.ein])
-        {
-            //add own username to that list of friends
-            NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
-            
-            NSMutableArray* list= [friendOrgs[self.org.ein] mutableCopy];
-            [list addObject:PFUser.currentUser.username];
-            
-            friendOrgs[self.org.ein]=list;
-            faAcess[@"friendOrgs"]= friendOrgs;
-        }
-        else
-        {
-            //create that array for the ein and add self as the person who liked it
-            NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
-            friendOrgs[self.org.ein]=@[PFUser.currentUser.username];
-            faAcess[@"friendOrgs"]= friendOrgs;
-        }
-        //save each friend
-        [faAcess saveInBackground];
-    }
-}
--(void) deleteOrgFromFriendsList{
-    PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
-    [selfAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
-    PFObject *friendAccess=[selfAccessQ getFirstObject];
-    for(NSString* friend in friendAccess[@"friends"])//get the array of friends for current user
-       {
-           PFQuery *friendQuery = [PFQuery queryWithClassName:@"_User"];
-           [friendQuery includeKey:@"friendAccessible"];
-           PFUser* friendProfile=[friendQuery getObjectWithId:friend];
-           //if the friend alreay has other friends that like this org
-           PFObject * faAcess=friendProfile[@"friendAccessible"];
-           if(faAcess[@"friendOrgs"][self.org.ein])
-           {
-               //add own username to that list of friends
-               NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
-               
-               NSMutableArray* list= [friendOrgs[self.org.ein] mutableCopy];
-               [list removeObject:PFUser.currentUser.username];
-               
-               friendOrgs[self.org.ein]=list;
-               faAcess[@"friendOrgs"]= friendOrgs;
-           }
-           //save each friend
-           [faAcess saveInBackground];
-       }
 }
 
 #pragma mark - Navigation

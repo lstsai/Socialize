@@ -976,7 +976,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SHD-aP-U6v">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="651"/>
+                                <rect key="frame" x="0.0" y="-8" width="414" height="651"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
@@ -1015,8 +1015,24 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uha-1x-Stj">
+                                                    <rect key="frame" x="295" y="36" width="27" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="27" id="SfC-hK-SHY"/>
+                                                        <constraint firstAttribute="height" constant="25" id="vx4-tv-sal"/>
+                                                    </constraints>
+                                                    <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" image="star" catalog="system">
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                                    </state>
+                                                    <state key="selected" image="star.fill" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="didTapLike:" destination="TQi-Po-Air" eventType="touchUpInside" id="TiZ-NU-GoT"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="uha-1x-Stj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7Gw-P0-e51" secondAttribute="trailing" constant="5" id="1Zi-OZ-bxs"/>
                                                 <constraint firstItem="i8B-0I-Dds" firstAttribute="top" secondItem="Ibc-le-SWa" secondAttribute="top" constant="11" id="262-tg-GDt"/>
                                                 <constraint firstItem="MIF-2j-GD4" firstAttribute="top" secondItem="Ibc-le-SWa" secondAttribute="top" constant="12" id="2Bg-ir-KIA"/>
                                                 <constraint firstItem="7Gw-P0-e51" firstAttribute="leading" secondItem="MIF-2j-GD4" secondAttribute="leading" id="2No-eQ-mFb"/>
@@ -1025,14 +1041,16 @@
                                                 <constraint firstItem="RHX-fP-W9U" firstAttribute="top" secondItem="7Gw-P0-e51" secondAttribute="bottom" constant="7.5" id="7G0-zr-vnx"/>
                                                 <constraint firstItem="MIF-2j-GD4" firstAttribute="leading" secondItem="Ibc-le-SWa" secondAttribute="leading" constant="20" id="9iO-SB-RDP"/>
                                                 <constraint firstItem="i8B-0I-Dds" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MIF-2j-GD4" secondAttribute="trailing" constant="10" id="Ddg-Oc-uwA"/>
+                                                <constraint firstItem="uha-1x-Stj" firstAttribute="centerY" secondItem="7Gw-P0-e51" secondAttribute="centerY" id="Fvd-tY-hyE"/>
                                                 <constraint firstItem="i8B-0I-Dds" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RHX-fP-W9U" secondAttribute="trailing" constant="10" id="Rkj-R3-BCG"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="RHX-fP-W9U" secondAttribute="bottom" constant="10" id="Srh-ie-bba"/>
                                                 <constraint firstItem="7Gw-P0-e51" firstAttribute="top" secondItem="MIF-2j-GD4" secondAttribute="bottom" constant="6" id="lhP-rI-dRu"/>
-                                                <constraint firstItem="i8B-0I-Dds" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7Gw-P0-e51" secondAttribute="trailing" constant="5" id="msh-ND-R3E"/>
                                                 <constraint firstAttribute="trailing" secondItem="i8B-0I-Dds" secondAttribute="trailing" constant="14" id="vAQ-Ri-RCR"/>
+                                                <constraint firstItem="i8B-0I-Dds" firstAttribute="leading" secondItem="uha-1x-Stj" secondAttribute="trailing" constant="8" id="xC0-4b-53q"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="likeButton" destination="uha-1x-Stj" id="3FH-sF-MI3"/>
                                             <outlet property="nameLabel" destination="MIF-2j-GD4" id="CMv-H8-N4U"/>
                                             <outlet property="numLikesLabel" destination="RHX-fP-W9U" id="99m-oj-sKl"/>
                                             <outlet property="orgImage" destination="i8B-0I-Dds" id="rSp-eC-e2E"/>
@@ -1126,6 +1144,10 @@
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7bc-kn-ueq">
                                                     <rect key="frame" x="302.5" y="236" width="27" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="27" id="4Kg-8c-82W"/>
+                                                        <constraint firstAttribute="height" constant="25" id="5M0-52-2Rm"/>
+                                                    </constraints>
                                                     <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" image="star" catalog="system">
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>

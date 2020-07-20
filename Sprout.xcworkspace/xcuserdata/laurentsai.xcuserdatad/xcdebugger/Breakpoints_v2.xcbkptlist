@@ -147,54 +147,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2702B02B-3293-4F4E-A5E0-0318C5A3A664"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Sprout/ViewControllers/OrgDetailsViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "-addOrgToFriendsList"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "2702B02B-3293-4F4E-A5E0-0318C5A3A664 - 4bb0bcda893d539d"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[OrgDetailsViewController addOrgToFriendsList]"
-                  moduleName = "Sprout"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/laurentsai/Desktop/Sprout/Sprout/ViewControllers/OrgDetailsViewController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "41">
-               </Location>
-               <Location
-                  uuid = "2702B02B-3293-4F4E-A5E0-0318C5A3A664 - 4bb0bcda893d539d"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[OrgDetailsViewController addOrgToFriendsList]"
-                  moduleName = "Sprout"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/laurentsai/Desktop/Sprout/Sprout/ViewControllers/OrgDetailsViewController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "63">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "DD17700A-CD2E-4870-AD95-46060825CDBF"
             shouldBeEnabled = "No"
             ignoreCount = "0"

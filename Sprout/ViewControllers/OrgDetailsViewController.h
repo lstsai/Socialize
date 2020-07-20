@@ -12,6 +12,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol OrgDetailsViewControllerDelegate
+
+- (void)didLikeOrg:(Organization*)likedOrg;
+- (void)didUnlikeOrg:(Organization*)unlikedOrg;
+
+@end
+
 @interface OrgDetailsViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) Organization *org;
@@ -24,9 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *cause;
 @property (weak, nonatomic) IBOutlet UILabel *website;
 @property (weak, nonatomic) IBOutlet UIView *detailContainerView;
+@property (weak, nonatomic) id<OrgDetailsViewControllerDelegate> delegate;
+
 -(void) loadOrgDetails;
--(void) addOrgToFriendsList;
--(void) deleteOrgFromFriendsList;
 
 @end
 

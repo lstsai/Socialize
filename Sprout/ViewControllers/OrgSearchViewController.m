@@ -12,7 +12,7 @@
 #import "OrgDetailsViewController.h"
 #import "AppDelegate.h"
 #import "OrgCell.h"
-@interface OrgSearchViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface OrgSearchViewController ()<UITableViewDelegate, UITableViewDataSource, OrgCellDelegate, OrgDetailsViewControllerDelegate>
 @end
 
 @implementation OrgSearchViewController
@@ -96,6 +96,84 @@
     }];
 }
 
+- (void)didLikeOrg:(Organization*)likedOrg{
+    NSMutableArray *likedOrgs= [PFUser.currentUser[@"likedOrgs"] mutableCopy];
+    [likedOrgs addObject:likedOrg.ein];
+    [self performSelectorInBackground:@selector(addOrgToFriendsList:) withObject:likedOrg];//add to list in background
+
+    
+    PFUser.currentUser[@"likedOrgs"]=likedOrgs;
+    [PFUser.currentUser saveInBackground];
+    
+}
+- (void)didUnlikeOrg:(Organization*)unlikedOrg{
+    NSMutableArray *likedOrgs= [PFUser.currentUser[@"likedOrgs"] mutableCopy];
+
+    [likedOrgs removeObject:unlikedOrg.ein];
+    [self performSelectorInBackground:@selector(deleteOrgFromFriendsList:) withObject:unlikedOrg];//add to list in background
+    PFUser.currentUser[@"likedOrgs"]=likedOrgs;
+    [PFUser.currentUser saveInBackground];
+}
+
+-(void) addOrgToFriendsList:(Organization*)likedOrg{
+    PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
+    [selfAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
+    PFObject *friendAccess=[selfAccessQ getFirstObject];
+    for(NSString* friend in friendAccess[@"friends"])//get the array of friends for current user
+    {
+        PFQuery *friendQuery = [PFQuery queryWithClassName:@"_User"];
+        [friendQuery includeKey:@"friendAccessible"];
+        PFUser* friendProfile=[friendQuery getObjectWithId:friend];
+        //if the friend alreay has other friends that like this org
+        PFObject * faAcess=friendProfile[@"friendAccessible"];
+        if(faAcess[@"friendOrgs"][likedOrg.ein])
+        {
+            //add own username to that list of friends
+            NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
+            
+            NSMutableArray* list= [friendOrgs[likedOrg.ein] mutableCopy];
+            [list addObject:PFUser.currentUser.username];
+            
+            friendOrgs[likedOrg.ein]=list;
+            faAcess[@"friendOrgs"]= friendOrgs;
+        }
+        else
+        {
+            //create that array for the ein and add self as the person who liked it
+            NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
+            friendOrgs[likedOrg.ein]=@[PFUser.currentUser.username];
+            faAcess[@"friendOrgs"]= friendOrgs;
+        }
+        //save each friend
+        [faAcess saveInBackground];
+    }
+}
+-(void) deleteOrgFromFriendsList:(Organization*)unlikedOrg{
+    PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
+    [selfAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
+    PFObject *friendAccess=[selfAccessQ getFirstObject];
+    for(NSString* friend in friendAccess[@"friends"])//get the array of friends for current user
+       {
+           PFQuery *friendQuery = [PFQuery queryWithClassName:@"_User"];
+           [friendQuery includeKey:@"friendAccessible"];
+           PFUser* friendProfile=[friendQuery getObjectWithId:friend];
+           //if the friend alreay has other friends that like this org
+           PFObject * faAcess=friendProfile[@"friendAccessible"];
+           if(faAcess[@"friendOrgs"][unlikedOrg.ein])
+           {
+               //add own username to that list of friends
+               NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
+               
+               NSMutableArray* list= [friendOrgs[unlikedOrg.ein] mutableCopy];
+               [list removeObject:PFUser.currentUser.username];
+               
+               friendOrgs[unlikedOrg.ein]=list;
+               faAcess[@"friendOrgs"]= friendOrgs;
+           }
+           //save each friend
+           [faAcess saveInBackground];
+       }
+}
 
 #pragma mark - Navigation
 
@@ -109,12 +187,14 @@
         UITableViewCell *tappedCell= sender;
         NSIndexPath *tappedIndex= [self.tableView indexPathForCell:tappedCell];
         orgVC.org=self.organizations[tappedIndex.item];
+        orgVC.delegate=self;
         [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     OrgCell *orgCell= [tableView dequeueReusableCellWithIdentifier:@"OrgCell" forIndexPath:indexPath];
     orgCell.org=self.organizations[indexPath.item];
+    orgCell.delegate=self;
     [orgCell loadData];
     return orgCell;
 }

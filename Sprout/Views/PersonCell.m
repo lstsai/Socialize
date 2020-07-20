@@ -22,10 +22,10 @@
     self.contentView.layer.masksToBounds = YES;
     self.contentView.clipsToBounds = YES;
 
-    self.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.layer.shadowColor = [UIColor lightGrayColor].CGColor;
     self.layer.shadowOffset = CGSizeMake(2.0f, 2.0f);
-    self.layer.shadowRadius = 3.0f;
-    self.layer.shadowOpacity = 0.3f;
+    self.layer.shadowRadius = 5.0f;
+    self.layer.shadowOpacity = 0.5f;
     self.layer.masksToBounds = NO;
     self.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.contentView.layer.cornerRadius].CGPath;
 }

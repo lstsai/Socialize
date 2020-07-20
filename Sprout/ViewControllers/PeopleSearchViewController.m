@@ -23,6 +23,7 @@
     self.collectionView.delegate=self;
     self.collectionView.dataSource=self;
     [self setupLoadingIndicators];
+    [self setUpLayout];
     self.resultNum=1;
 }
 -(void) setupLoadingIndicators{
@@ -38,6 +39,17 @@
     UIEdgeInsets insets = self.collectionView.contentInset;
     insets.bottom += InfiniteScrollActivityView.defaultHeight;
     self.collectionView.contentInset = insets;
+}
+-(void)setUpLayout{
+    int minMargins=5;
+    self.collectionView.frame=self.view.frame;
+    UICollectionViewFlowLayout *layout= (UICollectionViewFlowLayout *) self.collectionView.collectionViewLayout;//cast to supress warning
+    layout.minimumInteritemSpacing=minMargins;
+    layout.minimumLineSpacing=minMargins*2;
+    
+    CGFloat peoplePerLine=2;
+    CGFloat itemWidth=(self.collectionView.frame.size.width-layout.minimumInteritemSpacing*(peoplePerLine-1)-(2*minMargins))/peoplePerLine;
+    layout.itemSize=CGSizeMake(itemWidth, itemWidth*1.2);
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{

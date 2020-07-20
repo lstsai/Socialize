@@ -39,6 +39,7 @@
 		DCB629DC24C206A900C42EFB /* PeopleSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629DB24C206A900C42EFB /* PeopleSearchViewController.m */; };
 		DCB629DF24C207B300C42EFB /* PersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629DE24C207B300C42EFB /* PersonCell.m */; };
 		DCB629E424C24A3100C42EFB /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = DCB629E324C24A3100C42EFB /* main.js */; };
+		DCB629E624C37C6700C42EFB /* Roboto in Resources */ = {isa = PBXBuildFile; fileRef = DCB629E524C37C6700C42EFB /* Roboto */; };
 		DCE6FA4B24BFA447008091A3 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */; };
 		DCE6FA4E24C0AA4C008091A3 /* OrgCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA4D24C0AA4C008091A3 /* OrgCollectionCell.m */; };
 		DCE6FA5124C0AA66008091A3 /* EventCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA5024C0AA66008091A3 /* EventCollectionCell.m */; };
@@ -142,6 +143,7 @@
 		DCB629DD24C207B300C42EFB /* PersonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonCell.h; sourceTree = "<group>"; };
 		DCB629DE24C207B300C42EFB /* PersonCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonCell.m; sourceTree = "<group>"; };
 		DCB629E324C24A3100C42EFB /* main.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
+		DCB629E524C37C6700C42EFB /* Roboto */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Roboto; path = ../../../../Downloads/Roboto; sourceTree = "<group>"; };
 		DCE6FA4924BFA447008091A3 /* EventDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventDetailsViewController.h; sourceTree = "<group>"; };
 		DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 		DCE6FA4C24C0AA4C008091A3 /* OrgCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgCollectionCell.h; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				DC3CF1B824BE1D6100C482F8 /* LocationManager.h */,
 				DC3CF1B924BE1D6100C482F8 /* LocationManager.m */,
 				DCB629E324C24A3100C42EFB /* main.js */,
+				DCB629E524C37C6700C42EFB /* Roboto */,
 			);
 			path = MISC;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCB629E624C37C6700C42EFB /* Roboto in Resources */,
 				DC3CF15A24BCB27A00C482F8 /* LaunchScreen.storyboard in Resources */,
 				DC3CF15724BCB27A00C482F8 /* Assets.xcassets in Resources */,
 				DC3CF15524BCB27900C482F8 /* Main.storyboard in Resources */,

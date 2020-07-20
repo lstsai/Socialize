@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void) getPeople:( UIRefreshControl * _Nullable )refreshControl;
 -(void) setupLoadingIndicators;
+-(void) setUpLayout;
 @end
 
 NS_ASSUME_NONNULL_END

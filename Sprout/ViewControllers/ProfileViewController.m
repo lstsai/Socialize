@@ -39,7 +39,7 @@
 }
 
 -(void)loadProfile{
-    if(self.user==PFUser.currentUser)
+    if(self.user.username==PFUser.currentUser.username)
     {
         [self.topButton setTitle:@"Edit" forState:UIControlStateNormal];
         [self.topButton setTitle:@"Edit" forState:UIControlStateSelected];
@@ -47,7 +47,11 @@
     else{
         [self.topButton setTitle:@"+ Friend" forState:UIControlStateNormal];
         [self.topButton setTitle:@"Friends" forState:UIControlStateSelected];
-        if([PFUser.currentUser[@"friends"] containsObject:self.user.objectId])
+        
+        PFQuery *accessQuery= [PFQuery queryWithClassName:@"UserAccessible"];
+        [accessQuery whereKey:@"username" equalTo:PFUser.currentUser.username];
+        PFObject *fAccess=[accessQuery getFirstObject];
+        if([fAccess[@"friends"] containsObject:self.user.objectId])
             self.topButton.selected=YES;
     }
     self.topButton.layer.cornerRadius=8;
@@ -66,7 +70,10 @@
         self.backgroundImage.file=self.user[@"backgroundPic"];
         [self.backgroundImage loadInBackground];
     }
-    self.friendCount.text=[NSString stringWithFormat:@"%lu", ((NSArray*)self.user[@"friends"]).count];
+    PFQuery *accessQuery= [PFQuery queryWithClassName:@"UserAccessible"];
+    [accessQuery whereKey:@"username" equalTo:PFUser.currentUser.username];
+    PFObject *fAccess=[accessQuery getFirstObject];
+    self.friendCount.text=[NSString stringWithFormat:@"%lu", ((NSArray*)fAccess[@"friends"]).count];
     self.orgCount.text=[NSString stringWithFormat:@"%lu",((NSArray*)self.user[@"likedOrgs"]).count];
     self.eventCount.text=[NSString stringWithFormat:@"%lu",((NSArray*)self.user[@"likedEvents"]).count];
     [self getLikedOrgInfo];
@@ -128,138 +135,138 @@
         {
             //add this friend to friend list and update write acess
             self.topButton.selected=YES;
-            NSMutableArray *friendsArray=PFUser.currentUser[@"friends"];
-            [friendsArray addObject:self.user.objectId];
-            PFUser.currentUser[@"friends"]=friendsArray;
-            //[self performSelectorInBackground:@selector(addFriendLikes) withObject:nil];
-            [PFUser.currentUser saveInBackground];
-            [self performSelectorInBackground:@selector(addFriendLikes) withObject:nil];
-
-            
-            //[self.user.ACL setWriteAccess:YES forUser:PFUser.currentUser];
-            //NSString* hello= [PFCloud callFunction:@"hello" withParameters:@{@"userId": self.user.objectId}];
-            //NSLog(@"%@", hello);
-            //add this self to friend's friend list and update write acess
-            
-            //[PFCloud callFunction:@"addFriend" withParameters:@{@"userId": self.user.objectId,@"currentUserId": PFUser.currentUser.objectId}];
-//            friendsArray=self.user[@"friends"];
-//            [friendsArray addObject:PFUser.currentUser.objectId];
-//            self.user[@"friends"]=friendsArray;
-            //[PFCloud callFunction:@"addFriend" withParameters:@{@"user": self.user}];
-            //[PFUser.currentUser.ACL setWriteAccess:YES forUser:self.user];
+            [self addFriend:PFUser.currentUser toFriend:self.user];
+            [self addFriend:self.user toFriend:PFUser.currentUser];
         }
         else
         {
             //remove friend from friend list and update write acess
             self.topButton.selected=NO;
-            NSMutableArray *friendsArray=PFUser.currentUser[@"friends"];
-            [friendsArray removeObject:self.user.objectId];
-            PFUser.currentUser[@"friends"]=friendsArray;
-            [PFUser.currentUser saveInBackground];
-
-            [self performSelectorInBackground:@selector(deleteFriendLikes) withObject:nil];
-            //[self.user.ACL setWriteAccess:NO forUser:PFUser.currentUser];
-
-            //remove self from friend's friend list and update write acess
-//            friendsArray=self.user[@"friends"];
-//            [friendsArray removeObject:PFUser.currentUser.objectId];
-//            self.user[@"friends"]=friendsArray;
-            //[PFUser.currentUser.ACL setWriteAccess:NO forUser:self.user];
+            [self removeFriend:PFUser.currentUser toFriend:self.user];
+            [self removeFriend:self.user toFriend:PFUser.currentUser];
         }
-        //[self.user saveInBackground];
     }
 
 }
--(void)addFriendLikes{
+
+-(void) addFriend:(PFUser*) from toFriend:(PFUser*) to{
+    
+    PFQuery *accessQuery= [PFQuery queryWithClassName:@"UserAccessible"];
+    [accessQuery whereKey:@"username" equalTo:from.username];
+    PFObject *friendsAccess= [accessQuery getFirstObject];
+    NSMutableArray *friendsArray=friendsAccess[@"friends"];
+    [friendsArray addObject:to.objectId];
+    friendsAccess[@"friends"]=friendsArray;
+    [friendsAccess saveInBackground];
+    
+    [self performSelectorInBackground:@selector(addFriendLikes:) withObject:@[from, to]];
+}
+
+-(void) removeFriend:(PFUser*) from toFriend:(PFUser*) to{
+    
+    PFQuery *accessQuery= [PFQuery queryWithClassName:@"UserAccessible"];
+    [accessQuery whereKey:@"username" equalTo:from.username];
+    PFObject *friendsAccess= [accessQuery getFirstObject];
+    NSMutableArray *friendsArray=friendsAccess[@"friends"];
+    [friendsArray removeObject:to.objectId];
+    friendsAccess[@"friends"]=friendsArray;
+    [friendsAccess saveInBackground];
+    [self performSelectorInBackground:@selector(deleteFriendLikes:) withObject:@[from, to]];
+
+}
+
+-(void)addFriendLikes:(NSArray*)users{
     
     /*
-    HI JOHN if you're reading this the code you're about to see is super
+    HI JOHN if you're reading this the code ypou're about to see is super
     duper chunky because Parse wouldn't save my objects otherwise.
      You were warned :))
      */
-     
+    PFUser *fromUser= [users firstObject];
+    PFUser *toUser=[users lastObject];
     PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
-    [selfAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
+    [selfAccessQ whereKey:@"username" equalTo:fromUser.username];
     [selfAccessQ getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         PFObject* selfAccess=object;
         PFObject *friendLikes=selfAccess[@"friendOrgs"];
-        for(NSString* ein in self.user[@"likedOrgs"])
+        for(NSString* ein in toUser[@"likedOrgs"])
         {
             if(friendLikes[ein])
             {
                 NSMutableArray *list= [friendLikes[ein] mutableCopy];
-                [list addObject:self.user.username];
+                [list addObject:toUser.username];
                 friendLikes[ein]=list;
             }
             else
             {
-                friendLikes[ein]=@[self.user.username];
+                friendLikes[ein]=@[toUser.username];
             }
-            selfAccess[@"friendOrgs"]=friendLikes;
-            [selfAccess saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if(succeeded)
-                    NSLog(@"AY");
-            }];
         }
-        
+        selfAccess[@"friendOrgs"]=friendLikes;
+        [selfAccess saveInBackground];
+
+
         friendLikes=selfAccess[@"friendEvents"];
-        for(NSString *eventId in self.user[@"likedEvents"])
+        for(NSString *eventId in toUser[@"likedEvents"])
         {
             if(friendLikes[eventId])
             {
                 NSMutableArray *list= [friendLikes[eventId] mutableCopy];
-                [list addObject:self.user.username];
+                [list addObject:toUser];
                 friendLikes[eventId]=list;
             }
             else
             {
-                friendLikes[eventId]=@[self.user.username];
+                friendLikes[eventId]=@[toUser.username];
             }
-            selfAccess[@"friendOrgs"]=friendLikes;
-            [selfAccess saveInBackground];
         }
-
+        selfAccess[@"friendEvents"]=friendLikes;
+        [selfAccess saveInBackground];
+    
     }];
-    
-    
-    
 }
--(void)deleteFriendLikes{
-    
+-(void)deleteFriendLikes:(NSArray*)users{
+
+    PFUser *fromUser= [users firstObject];
+    PFUser *toUser=[users lastObject];
     PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
-    [selfAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
+    [selfAccessQ whereKey:@"username" equalTo:fromUser.username];
     [selfAccessQ getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         PFObject* selfAccess=object;
         PFObject *friendLikes=selfAccess[@"friendOrgs"];
-        for(NSString* ein in self.user[@"likedOrgs"])
+        for(NSString* ein in toUser[@"likedOrgs"])
         {
             if(friendLikes[ein])
             {
                 NSMutableArray *list= [friendLikes[ein] mutableCopy];
-                [list removeObject:self.user.username];
+                [list removeObject:toUser.username];
                 friendLikes[ein]=list;
             }
-            
-            selfAccess[@"friendOrgs"]=friendLikes;
-            [selfAccess saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if(succeeded)
-                    NSLog(@"AY");
-            }];
+            else
+            {
+                friendLikes[ein]=@[toUser.username];
+            }
         }
-        
+        selfAccess[@"friendOrgs"]=friendLikes;
+        [selfAccess saveInBackground];
+
         friendLikes=selfAccess[@"friendEvents"];
-        for(NSString *eventId in self.user[@"likedEvents"])
+        for(NSString *eventId in toUser[@"likedEvents"])
         {
             if(friendLikes[eventId])
             {
                 NSMutableArray *list= [friendLikes[eventId] mutableCopy];
-                [list removeObject:self.user.username];
+                [list removeObject:toUser];
                 friendLikes[eventId]=list;
             }
-            selfAccess[@"friendOrgs"]=friendLikes;
-            [selfAccess saveInBackground];
+            else
+            {
+                friendLikes[eventId]=@[toUser.username];
+            }
         }
-
+        selfAccess[@"friendEvents"]=friendLikes;
+        [selfAccess saveInBackground];
+    
     }];
 }
 /*

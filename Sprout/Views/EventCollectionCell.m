@@ -15,7 +15,7 @@
     [self.eventImage loadInBackground];
     self.eventNameLabel.text=event.name;
    
-    self.contentView.layer.cornerRadius = 10.0f;
+    self.contentView.layer.cornerRadius = 5.0f;
     self.contentView.layer.borderWidth = 1.0f;
     self.contentView.layer.borderColor = [UIColor clearColor].CGColor;
     self.contentView.layer.masksToBounds = YES;

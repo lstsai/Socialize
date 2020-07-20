@@ -58,7 +58,10 @@
     
 }
 -(void) addOrgToFriendsList{
-    for(NSString* friend in PFUser.currentUser[@"friends"])//get the array of friends for current user
+    PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
+    [selfAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
+    PFObject *friendAccess=[selfAccessQ getFirstObject];
+    for(NSString* friend in friendAccess[@"friends"])//get the array of friends for current user
     {
         PFQuery *friendQuery = [PFQuery queryWithClassName:@"_User"];
         [friendQuery includeKey:@"friendAccessible"];
@@ -88,7 +91,10 @@
     }
 }
 -(void) deleteOrgFromFriendsList{
-    for(NSString* friend in PFUser.currentUser[@"friends"])//get the array of friends for current user
+    PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
+    [selfAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
+    PFObject *friendAccess=[selfAccessQ getFirstObject];
+    for(NSString* friend in friendAccess[@"friends"])//get the array of friends for current user
        {
            PFQuery *friendQuery = [PFQuery queryWithClassName:@"_User"];
            [friendQuery includeKey:@"friendAccessible"];

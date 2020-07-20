@@ -12,11 +12,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface EventVerticalCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *monthLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet  PFImageView *eventImage;
 @property (strong, nonatomic) Event *event;
+@property (weak, nonatomic) IBOutlet UIView *dateView;
 
 -(void) loadData;
 @end

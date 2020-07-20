@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "LocationManager.h"
 #import "InfiniteScrollActivityView.h"
-#import "EventVerticalCell.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface EventSearchViewController : UIViewController

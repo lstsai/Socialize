@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import "EventDetailsViewController.h"
 #import "AppDelegate.h"
+#import "EventVerticalCell.h"
 @interface EventSearchViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @end

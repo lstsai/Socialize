@@ -30,13 +30,6 @@
         
         if(![dictionary[@"websiteURL"] isEqual:[NSNull null]])
             self.website=[NSURL URLWithString:dictionary[@"websiteURL"]];
-        PFQuery * friendAccessQ=[PFQuery queryWithClassName:@"UserAccessible"];
-        [friendAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
-        PFObject *userAccess= [friendAccessQ getFirstObject];
-        if(userAccess[@"friendOrgs"][self.ein])
-            self.numFriendsLike=((NSArray*)userAccess[@"friendOrgs"][self.ein]).count;
-        else
-            self.numFriendsLike=0;
     }
     return self;
 

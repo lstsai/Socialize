@@ -64,7 +64,7 @@
     NSString *searchTerm= [orgName stringByAppendingString:@" logo"];
     NSDictionary *params= @{@"key":[[NSProcessInfo processInfo] environment][@"Google-api-key"] , @"q": searchTerm, @"cx": @"001132024093895335480:dbqsrizjopq", @"searchType": @"image", @"num": @(1)};
     [self GET:@"https://www.googleapis.com/customsearch/v1" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSURL *imageURL=[NSURL URLWithString:responseObject[@"items"][0][@"link"]];
+        NSURL *imageURL=[NSURL URLWithString:responseObject[@"items"][0][@"image"][@"thumbnailLink"]];
         completion(imageURL, nil);
         
        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

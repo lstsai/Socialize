@@ -20,7 +20,7 @@
         self.category=dictionary[@"category"][@"categoryName"];
         self.cause=dictionary[@"cause"][@"causeName"];
         self.name=dictionary[@"charityName"];
-
+        self.imageURL=nil;
         self.location= [Location locationWithDictionary:dictionary[@"mailingAddress"]];
 
         if(![dictionary[@"mission"] isEqual:[NSNull null]])

@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *missionStatement; // Display website
 @property (nonatomic, strong) NSString *tagLine; // Display website
 @property (nonatomic, strong) NSURL *website;
-@property (nonatomic,strong)NSURL *imageURL;
+@property (nonatomic,strong) NSURL * _Nullable imageURL;
 @property (nonatomic) NSInteger numFriendsLike;
 
 @property (strong, nonatomic) Location *location;

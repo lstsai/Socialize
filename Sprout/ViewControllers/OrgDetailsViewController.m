@@ -10,6 +10,8 @@
 #import "Location.h"
 #import "WebViewController.h"
 #import <Parse/Parse.h>
+#import "APIManager.h"
+#import "UIImageView+AFNetworking.h"
 @interface OrgDetailsViewController ()
 
 @end
@@ -31,6 +33,20 @@
     self.mission.text=self.org.missionStatement;
     self.website.text=[self.org.website absoluteString];
     self.website.textColor=[UIColor linkColor];
+    
+    if(self.org.imageURL)//set image if available
+        [self.backdropImage setImageWithURL:self.org.imageURL];
+    else{
+        //fetch image if not available, set when complete
+        [[APIManager shared] getOrgImage:self.org.name completion:^(NSURL * _Nonnull orgImage, NSError * _Nonnull error) {
+            if(orgImage)
+            {
+                self.org.imageURL=orgImage;
+                NSLog(@"%@", orgImage);
+                [self.backdropImage setImageWithURL:self.org.imageURL];
+            }
+        }];
+    }
     if([PFUser.currentUser[@"likedOrgs"] containsObject:self.org.ein])
         self.likeButton.selected=YES;
 }

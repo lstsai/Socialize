@@ -60,7 +60,7 @@
         }];
     }
 }
-- (void)getOrgImage:(NSString*)orgName completion:(void(^)(NSURL *orgImageURL, NSError *error))completion{
+- (void)getOrgImage:(NSString*)orgName completion:(void(^)(NSURL *orgImage, NSError *error))completion{
     NSString *searchTerm= [orgName stringByAppendingString:@" logo"];
     NSDictionary *params= @{@"key":[[NSProcessInfo processInfo] environment][@"Google-api-key"] , @"q": searchTerm, @"cx": @"001132024093895335480:dbqsrizjopq", @"searchType": @"image", @"num": @(1)};
     [self GET:@"https://www.googleapis.com/customsearch/v1" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -69,7 +69,7 @@
         
        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
            NSLog(@"Error getting search %@", error.localizedDescription);
-           //completion(nil,error);
+           completion(nil,error);
     }];
 }
 @end

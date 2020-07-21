@@ -19,17 +19,7 @@
         self.ein = dictionary[@"ein"];
         self.category=dictionary[@"category"][@"categoryName"];
         self.cause=dictionary[@"cause"][@"causeName"];
-        //self.imageURL= [NSURL URLWithString:dictionary[@"category"][@"image"]];
         self.name=dictionary[@"charityName"];
-       
-        [[APIManager shared] getOrgImage:self.name completion:^(NSURL * _Nonnull orgImageURL, NSError * _Nonnull error) {
-               if(error)
-                   NSLog(@"Error getting Image %@", error.localizedDescription);
-               else
-               {
-                   self.imageURL=orgImageURL;
-               }
-        }];
 
         self.location= [Location locationWithDictionary:dictionary[@"mailingAddress"]];
 

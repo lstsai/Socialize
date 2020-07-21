@@ -9,8 +9,7 @@
 #import "APIManager.h"
 #import "Organization.h"
 #import "Organization.h"
-static NSString * const baseURLString = @"https://api.data.charitynavigator.org/v2/";
-
+#import "UIImageView+AFNetworking.h"
 @implementation APIManager
 
 + (instancetype)shared {
@@ -23,10 +22,8 @@ static NSString * const baseURLString = @"https://api.data.charitynavigator.org/
 }
 
 - (instancetype)init {
-    
-    NSURL *baseURL = [NSURL URLWithString:baseURLString];
-    
-    self = [super initWithBaseURL:baseURL];
+        
+    self = [super init];
     if (self) {
         
     }
@@ -35,7 +32,7 @@ static NSString * const baseURLString = @"https://api.data.charitynavigator.org/
 
 - (void)getOrganizationsWithCompletion:(NSDictionary*)params completion:(void(^)(NSArray *organizations, NSError *error))completion{
 
-    [self GET:@"Organizations" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self GET:@"https://api.data.charitynavigator.org/v2/Organizations" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSArray *orgs= [Organization orgsWithArray:responseObject];
         completion(orgs, nil);
         NSLog(@"Success getting orgs");
@@ -50,7 +47,7 @@ static NSString * const baseURLString = @"https://api.data.charitynavigator.org/
     NSMutableArray* orgDictionaries=[[NSMutableArray alloc] init];
     for(NSString* ein in eins)
     {
-        NSString *getString= [NSString stringWithFormat:@"Organizations/%@", ein];
+        NSString *getString= [NSString stringWithFormat:@"https://api.data.charitynavigator.org/v2/Organizations/%@", ein];
         [self GET:getString parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             [orgDictionaries addObject:responseObject];
             
@@ -63,5 +60,16 @@ static NSString * const baseURLString = @"https://api.data.charitynavigator.org/
         }];
     }
 }
-
+- (void)getOrgImage:(NSString*)orgName completion:(void(^)(NSURL *orgImageURL, NSError *error))completion{
+    NSString *searchTerm= [orgName stringByAppendingString:@" logo"];
+    NSDictionary *params= @{@"key":[[NSProcessInfo processInfo] environment][@"Google-api-key"] , @"q": searchTerm, @"cx": @"001132024093895335480:dbqsrizjopq", @"searchType": @"image", @"num": @(1)};
+    [self GET:@"https://www.googleapis.com/customsearch/v1" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSURL *imageURL=[NSURL URLWithString:responseObject[@"items"][0][@"link"]];
+        completion(imageURL, nil);
+        
+       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           NSLog(@"Error getting search %@", error.localizedDescription);
+           //completion(nil,error);
+    }];
+}
 @end

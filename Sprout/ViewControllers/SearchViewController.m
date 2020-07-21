@@ -26,6 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.searchBar.delegate=self;
+    [self setupSegmentControl];
     self.eventsVC=[self.childViewControllers objectAtIndex:EVENT_SEGMENT ];
     self.orgsVC=[self.childViewControllers objectAtIndex:ORG_SEGMENT];
     self.peopleVC=[self.childViewControllers objectAtIndex:PEOPLE_SEGMENT];
@@ -34,7 +35,10 @@
     [self.orgsView setHidden:NO];
     
 }
-
+-(void) setupSegmentControl{
+    self.searchControl.backgroundColor=[UIColor whiteColor];
+    self.searchControl.tintColor=[UIColor clearColor];    
+}
 
 - (IBAction)didTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {

@@ -8,6 +8,7 @@
 
 #import "Organization.h"
 #import <Parse/Parse.h>
+#import "APIManager.h"
 @implementation Organization
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
@@ -18,8 +19,18 @@
         self.ein = dictionary[@"ein"];
         self.category=dictionary[@"category"][@"categoryName"];
         self.cause=dictionary[@"cause"][@"causeName"];
-        self.imageURL= [NSURL URLWithString:dictionary[@"category"][@"image"]];
+        //self.imageURL= [NSURL URLWithString:dictionary[@"category"][@"image"]];
         self.name=dictionary[@"charityName"];
+       
+        [[APIManager shared] getOrgImage:self.name completion:^(NSURL * _Nonnull orgImageURL, NSError * _Nonnull error) {
+               if(error)
+                   NSLog(@"Error getting Image %@", error.localizedDescription);
+               else
+               {
+                   self.imageURL=orgImageURL;
+               }
+        }];
+
         self.location= [Location locationWithDictionary:dictionary[@"mailingAddress"]];
 
         if(![dictionary[@"mission"] isEqual:[NSNull null]])
@@ -30,10 +41,11 @@
         
         if(![dictionary[@"websiteURL"] isEqual:[NSNull null]])
             self.website=[NSURL URLWithString:dictionary[@"websiteURL"]];
-    }
+    }    
     return self;
 
 }
+
 //add factory method that returns tweets when initialized with an array of tweet dictionaries
 + (NSMutableArray *)orgsWithArray:(NSArray *)dictionaries{
     NSMutableArray *orgs = [NSMutableArray array];

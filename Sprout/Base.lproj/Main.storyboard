@@ -121,8 +121,8 @@
                                     <segue destination="YhK-qG-S72" kind="embed" id="D9B-DF-uFj"/>
                                 </connections>
                             </containerView>
-                            <searchBar contentMode="redraw" text="" placeholder="Search for a Non-profit" translatesAutoresizingMaskIntoConstraints="NO" id="W4I-gt-Dwr">
-                                <rect key="frame" x="0.0" y="56" width="414" height="56"/>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" text="" placeholder="Search for a Non-profit" translatesAutoresizingMaskIntoConstraints="NO" id="W4I-gt-Dwr">
+                                <rect key="frame" x="0.0" y="56" width="377" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <scopeButtonTitles>
                                     <string>Title</string>
@@ -168,18 +168,27 @@
                                     <action selector="didChangeSearch:" destination="h95-5b-sSA" eventType="valueChanged" id="7CZ-pH-IIA"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KB1-MN-UPL">
+                                <rect key="frame" x="377" y="73" width="26" height="22"/>
+                                <color key="tintColor" red="0.63516895490000003" green="0.77692734770000005" blue="0.66256751579999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" image="slider.horizontal.3" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="KB1-MN-UPL" firstAttribute="leading" secondItem="W4I-gt-Dwr" secondAttribute="trailing" id="3CE-6X-QrX"/>
                             <constraint firstItem="2qC-uU-w7J" firstAttribute="top" secondItem="Yf7-fv-qvs" secondAttribute="bottom" constant="5" id="A89-O1-92G"/>
                             <constraint firstItem="W4I-gt-Dwr" firstAttribute="leading" secondItem="nhh-H8-qeo" secondAttribute="leading" id="BbW-G9-wSb"/>
                             <constraint firstItem="Nf0-jc-dv9" firstAttribute="top" secondItem="W4I-gt-Dwr" secondAttribute="bottom" constant="11" id="CBG-ed-npU"/>
+                            <constraint firstItem="KB1-MN-UPL" firstAttribute="centerY" secondItem="W4I-gt-Dwr" secondAttribute="centerY" id="E98-S1-r6U"/>
                             <constraint firstItem="e37-bd-wMa" firstAttribute="leading" secondItem="Yf7-fv-qvs" secondAttribute="trailing" constant="16" id="Kzc-9r-QQk"/>
-                            <constraint firstItem="W4I-gt-Dwr" firstAttribute="trailing" secondItem="nhh-H8-qeo" secondAttribute="trailing" id="P2R-8a-7bt"/>
                             <constraint firstItem="2qC-uU-w7J" firstAttribute="trailing" secondItem="nhh-H8-qeo" secondAttribute="trailing" id="PsF-Ri-z6q"/>
                             <constraint firstItem="nhh-H8-qeo" firstAttribute="trailing" secondItem="e37-bd-wMa" secondAttribute="trailing" constant="20" id="ZWf-Q6-TmU"/>
                             <constraint firstItem="Yf7-fv-qvs" firstAttribute="leading" secondItem="Nf0-jc-dv9" secondAttribute="trailing" constant="13" id="hZD-Tl-bAC"/>
                             <constraint firstItem="2qC-uU-w7J" firstAttribute="leading" secondItem="nhh-H8-qeo" secondAttribute="leading" id="kLb-ym-z5m"/>
+                            <constraint firstItem="nhh-H8-qeo" firstAttribute="trailing" secondItem="KB1-MN-UPL" secondAttribute="trailing" constant="11" id="oPl-kI-dIf"/>
                             <constraint firstItem="Nf0-jc-dv9" firstAttribute="leading" secondItem="nhh-H8-qeo" secondAttribute="leading" constant="20" id="pcX-5h-a4E"/>
                             <constraint firstItem="e37-bd-wMa" firstAttribute="top" secondItem="W4I-gt-Dwr" secondAttribute="bottom" constant="6" id="yhV-UD-Pq7"/>
                             <constraint firstItem="W4I-gt-Dwr" firstAttribute="top" secondItem="nhh-H8-qeo" secondAttribute="top" id="yi5-fd-ODZ"/>
@@ -1638,6 +1647,7 @@
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
         <image name="pin" width="256" height="256"/>
+        <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="square.and.pencil" catalog="system" width="128" height="118"/>
         <image name="star" catalog="system" width="128" height="116"/>

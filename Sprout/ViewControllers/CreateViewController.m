@@ -30,24 +30,41 @@
     [datePicker setDate:[NSDate date]];
     [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
     [datePicker setMinuteInterval:MINUTE_INTERVAL];
-    [datePicker addTarget:self action:@selector(didUpdateDate:) forControlEvents:UIControlEventValueChanged];
-
-    [self.dateField setInputView:datePicker];
-
+    [datePicker addTarget:self action:@selector(didUpdateSDate:) forControlEvents:UIControlEventValueChanged];
+    [self.startDateField setInputView:datePicker];
+    
+    UIDatePicker *eDatePicker = [[UIDatePicker alloc]init];
+    [eDatePicker setDate:[NSDate date]];
+    [eDatePicker setDatePickerMode:UIDatePickerModeDateAndTime];
+    [eDatePicker setMinuteInterval:MINUTE_INTERVAL];
+    [eDatePicker addTarget:self action:@selector(didUpdateEDate:) forControlEvents:UIControlEventValueChanged];
+    [self.endDateField setInputView:eDatePicker];
 
 }
--(void) didUpdateDate:(id)sender{
-    UIDatePicker *picker = (UIDatePicker*)self.dateField.inputView;
+-(void) didUpdateSDate:(id)sender{
+    UIDatePicker *picker = (UIDatePicker*)self.startDateField.inputView;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *eventDate = picker.date;
     [dateFormat setDateFormat:@"MM/dd/yy h:mm a"];
     NSString *dateString = [dateFormat stringFromDate:eventDate];
-    self.dateField.text = [NSString stringWithFormat:@"%@",dateString];
+    self.startDateField.text = [NSString stringWithFormat:@"%@",dateString];
 }
+
+-(void) didUpdateEDate:(id)sender{
+    UIDatePicker *picker = (UIDatePicker*)self.endDateField.inputView;
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSDate *eventDate = picker.date;
+    [dateFormat setDateFormat:@"MM/dd/yy h:mm a"];
+    NSString *dateString = [dateFormat stringFromDate:eventDate];
+    self.endDateField.text = [NSString stringWithFormat:@"%@",dateString];
+}
+
 - (IBAction)didTapCreate:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    UIDatePicker *picker = (UIDatePicker*)self.dateField.inputView;
-    [Event postEvent:self.eventImage.image withName:self.eventNameField.text withTime:picker.date withLocation:self.locationPoint withStreetAdress:self.locationField.text withDetails:self.detailsTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    UIDatePicker *spicker = (UIDatePicker*)self.startDateField.inputView;
+    UIDatePicker *epicker = (UIDatePicker*)self.endDateField.inputView;
+
+    [Event postEvent:self.eventImage.image withName:self.eventNameField.text withSTime:spicker.date withETime:epicker.date withLocation:self.locationPoint withStreetAdress:self.locationField.text withDetails:self.detailsTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded)
         {
             NSLog(@"Success creating event");

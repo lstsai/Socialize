@@ -19,10 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
     @property (nonatomic, strong) NSString *streetAddress;
     @property (nonatomic, strong) PFFileObject *image;
     @property (nonatomic, strong) NSDate *createdAt;
-    @property (nonatomic, strong) NSDate *time;
+    @property (nonatomic, strong) NSDate *startTime;
+    @property (nonatomic, strong) NSDate *endTime;
     @property (nonatomic) NSInteger numFriendsLike;
 
-+ (void) postEvent:(UIImage * _Nullable )image withName:(NSString *)name withTime:(NSDate*)time withLocation:(PFGeoPoint*)location withStreetAdress:(NSString*)streetAddress withDetails:(NSString*)details withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) postEvent:(UIImage * _Nullable )image withName:(NSString *)name withSTime:(NSDate*)stime withETime:(NSDate*)etime withLocation:(PFGeoPoint*)location withStreetAdress:(NSString*)streetAddress withDetails:(NSString*)details withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image withName:(NSString*)eventName;
 
     @end

@@ -24,7 +24,8 @@
 }
 -(void) loadEventDetails{
     self.eventNameLabel.text=self.event.name;
-    self.eventAuthorLabel.text=self.event.author.username;
+    self.eventAuthorLabel.text= self.event.author.username;
+    
     GMSGeocoder *geocoder= [GMSGeocoder geocoder];
     CLLocationCoordinate2D cllocation= CLLocationCoordinate2DMake(self.event.location.latitude, self.event.location.longitude);
     [geocoder reverseGeocodeCoordinate:cllocation completionHandler:^(GMSReverseGeocodeResponse * _Nullable address, NSError * _Nullable error) {
@@ -39,11 +40,24 @@
 
     }];
     self.eventDetailsLabel.text= self.event.details;
+    NSString *sdateString, *edateString;
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"E, d MMM yyyy\nh:mm a"];
-    NSString *dateString = [dateFormat stringFromDate:self.event.time];
-    self.eventTimeLabel.text=dateString;
+    
+    if([[NSCalendar currentCalendar] isDate:self.event.startTime inSameDayAsDate:self.event.endTime])
+    {
+        [dateFormat setDateFormat:@"E, d MMM yyyy\nh:mm a"];
+        sdateString = [dateFormat stringFromDate:self.event.startTime];
+        [dateFormat setDateFormat:@" - h:mm a"];
+        edateString=[dateFormat stringFromDate:self.event.endTime];
+        self.eventTimeLabel.text=[sdateString stringByAppendingString:edateString];
+    }
+    else{
+        [dateFormat setDateFormat:@"E, d MMM yyyy h:mm a"];
+        sdateString = [dateFormat stringFromDate:self.event.startTime];
+        edateString =[dateFormat stringFromDate:self.event.endTime];
+        self.eventTimeLabel.text=[sdateString stringByAppendingFormat:@"\nTo %@", edateString];
+    }
     
     if(self.event.image)
     {

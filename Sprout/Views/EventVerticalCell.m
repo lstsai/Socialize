@@ -15,13 +15,13 @@
 -(void) loadData{
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd"];
-    NSString *dateString = [dateFormat stringFromDate:self.event.time];
+    NSString *dateString = [dateFormat stringFromDate:self.event.startTime];
     self.dateLabel.text=dateString;
     [dateFormat setDateFormat:@"MMM"];
-    NSString *monthString = [dateFormat stringFromDate:self.event.time];
+    NSString *monthString = [dateFormat stringFromDate:self.event.startTime];
     self.monthLabel.text=monthString;
     [dateFormat setDateFormat:@"h:mm a"];
-    NSString *timeString = [dateFormat stringFromDate:self.event.time];
+    NSString *timeString = [dateFormat stringFromDate:self.event.startTime];
     self.timeLabel.text=timeString;
     
     self.nameLabel.text=self.event.name;

@@ -56,20 +56,18 @@
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     PFQuery *eventsNameQuery=[PFQuery queryWithClassName:@"Event"];
-    
     [eventsNameQuery whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchText]];
     
     PFQuery *eventsDetailsQuery=[PFQuery queryWithClassName:@"Event"];
     [eventsDetailsQuery whereKey:@"details" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchText]];
-    
+
     PFQuery *eventsQuery=[PFQuery orQueryWithSubqueries:@[eventsNameQuery,eventsDetailsQuery]];
-    
+    [eventsQuery includeKey:@"author"];
     if(![self.stateSearch isEqualToString:@""] || ![self.citySearch isEqualToString:@""])
     {
         [eventsQuery whereKey:@"streetAddress" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.citySearch]];
         [eventsQuery whereKey:@"streetAddress" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.stateSearch]];
     }
-    [eventsQuery includeKey:@"author"];
     [eventsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)
             [AppDelegate displayAlert:@"Error getting events" withMessage:error.localizedDescription on:self];

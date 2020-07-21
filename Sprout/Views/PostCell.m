@@ -7,7 +7,8 @@
 //
 
 #import "PostCell.h"
-
+#import "DateTools.h"
+@import Parse;
 @implementation PostCell
 
 - (void)awakeFromNib {
@@ -15,7 +16,11 @@
     // Initialization code
 }
 -(void) loadData{
-    
+    self.nameLabel.text=self.post.author.username;
+    self.profileImage.file=self.post.author[@"profilePic"];
+    [self.profileImage loadInBackground];
+    self.postDescriptionLabel.text=self.post.postDescription;
+    self.timeLabel.text=[self.post.createdAt shortTimeAgoSinceNow];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

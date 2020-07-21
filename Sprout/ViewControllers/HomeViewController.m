@@ -20,6 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tableView.delegate=self;
+    self.tableView.dataSource=self;
+    [self getPosts];
 }
 
 -(void) didCreateEvent{
@@ -46,6 +49,8 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     PostCell *postCell= [self.tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
+    postCell.post=self.posts[indexPath.row];
+    [postCell loadData];
     return postCell;
 }
 

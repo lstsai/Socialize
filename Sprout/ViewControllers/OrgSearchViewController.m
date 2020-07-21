@@ -12,6 +12,7 @@
 #import "OrgDetailsViewController.h"
 #import "AppDelegate.h"
 #import "OrgCell.h"
+@import ListPlaceholder;
 @interface OrgSearchViewController ()<UITableViewDelegate, UITableViewDataSource, OrgCellDelegate, OrgDetailsViewControllerDelegate>
 @end
 
@@ -48,6 +49,7 @@
         return;
     if(![refreshControl isKindOfClass:[UIRefreshControl class]])
          [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.tableView showLoader];
     NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchText, @"rated":@"TRUE", @"state": self.stateSearch, @"city": self.citySearch, @"pageSize":@(RESULTS_SIZE)};
      [[APIManager shared] getOrganizationsWithCompletion:params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
          if(error)
@@ -59,6 +61,7 @@
              [refreshControl endRefreshing];
          else
              [MBProgressHUD hideHUDForView:self.view animated:YES];
+         [self.tableView hideLoader];
      }];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

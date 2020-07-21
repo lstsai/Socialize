@@ -7,7 +7,7 @@
 //
 
 #import "Event.h"
-
+#import "Post.h"
 @implementation Event
 
 @dynamic postID;
@@ -36,7 +36,10 @@
     newEvent.startTime=stime;
     newEvent.endTime=etime;
     newEvent.streetAddress=streetAddress;
-    [newEvent saveInBackgroundWithBlock:completion];
+    [newEvent saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if(succeeded)
+            [Post createPost:nil withDescription:@"Created an event" withRelatedObject:newEvent withCompletion:completion];
+    }];
 }
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image withName:(NSString*)eventName {
     if(image)//no image

@@ -67,7 +67,7 @@
     [Event postEvent:self.eventImage.image withName:self.eventNameField.text withSTime:spicker.date withETime:epicker.date withLocation:self.locationPoint withStreetAdress:self.locationField.text withDetails:self.detailsTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded)
         {
-            NSLog(@"Success creating event");
+            NSLog(@"Success creating event and post");
             [self.delegate didCreateEvent];
             [self dismissViewControllerAnimated:YES completion:nil];
         }

@@ -39,6 +39,8 @@
 		DCB629DF24C207B300C42EFB /* PersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629DE24C207B300C42EFB /* PersonCell.m */; };
 		DCB629F124C620E400C42EFB /* OrgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629ED24C620E300C42EFB /* OrgCell.m */; };
 		DCB629F524C62C5D00C42EFB /* OrgCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629F424C62C5D00C42EFB /* OrgCollectionCell.m */; };
+		DCB65C1724C7513F005A43A9 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB65C1624C7513F005A43A9 /* PostCell.m */; };
+		DCB65C1A24C753C2005A43A9 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB65C1924C753C2005A43A9 /* Post.m */; };
 		DCE6FA4B24BFA447008091A3 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */; };
 		DCE6FA5124C0AA66008091A3 /* EventCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA5024C0AA66008091A3 /* EventCollectionCell.m */; };
 		DCE6FA5424C0AB58008091A3 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA5324C0AB58008091A3 /* ProfileViewController.m */; };
@@ -142,6 +144,10 @@
 		DCB629EF24C620E400C42EFB /* OrgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrgCell.h; sourceTree = "<group>"; };
 		DCB629F324C62C5D00C42EFB /* OrgCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrgCollectionCell.h; sourceTree = "<group>"; };
 		DCB629F424C62C5D00C42EFB /* OrgCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrgCollectionCell.m; sourceTree = "<group>"; };
+		DCB65C1524C7513F005A43A9 /* PostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
+		DCB65C1624C7513F005A43A9 /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
+		DCB65C1824C753C2005A43A9 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		DCB65C1924C753C2005A43A9 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		DCE6FA4924BFA447008091A3 /* EventDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventDetailsViewController.h; sourceTree = "<group>"; };
 		DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 		DCE6FA4F24C0AA66008091A3 /* EventCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCollectionCell.h; sourceTree = "<group>"; };
@@ -308,6 +314,8 @@
 				DCB629DE24C207B300C42EFB /* PersonCell.m */,
 				DCB629EF24C620E400C42EFB /* OrgCell.h */,
 				DCB629ED24C620E300C42EFB /* OrgCell.m */,
+				DCB65C1524C7513F005A43A9 /* PostCell.h */,
+				DCB65C1624C7513F005A43A9 /* PostCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -321,6 +329,8 @@
 				DC3CF19A24BCF28D00C482F8 /* Location.m */,
 				DC3CF1BB24BE500C00C482F8 /* Event.h */,
 				DC3CF1BC24BE500C00C482F8 /* Event.m */,
+				DCB65C1824C753C2005A43A9 /* Post.h */,
+				DCB65C1924C753C2005A43A9 /* Post.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -647,6 +657,7 @@
 				DC3CF1AD24BD590D00C482F8 /* InfiniteScrollActivityView.m in Sources */,
 				DC3CF14C24BCB27900C482F8 /* AppDelegate.m in Sources */,
 				DC3CF1A124BD081300C482F8 /* OrgDetailsViewController.m in Sources */,
+				DCB65C1724C7513F005A43A9 /* PostCell.m in Sources */,
 				DCE6FA5124C0AA66008091A3 /* EventCollectionCell.m in Sources */,
 				DC3CF1A724BD28DC00C482F8 /* WebViewController.m in Sources */,
 				DCB629DF24C207B300C42EFB /* PersonCell.m in Sources */,
@@ -668,6 +679,7 @@
 				DC3CF18424BCC0D700C482F8 /* LoginViewController.m in Sources */,
 				DCB629DC24C206A900C42EFB /* PeopleSearchViewController.m in Sources */,
 				DC3CF1AA24BD53A900C482F8 /* Constants.m in Sources */,
+				DCB65C1A24C753C2005A43A9 /* Post.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -857,6 +869,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SL6QTNT4Q5;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking/AFNetworking.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Bolts/Bolts.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DateTools/DateTools.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD/MBProgressHUD.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Parse/Parse.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SkeletonView/SkeletonView.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/\"/**",
+				);
 				INFOPLIST_FILE = Sprout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

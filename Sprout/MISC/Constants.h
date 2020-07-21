@@ -29,7 +29,7 @@ extern const NSTimeInterval ANIMATION_DURATION;
 extern const CGFloat CELL_TOP_OFFSET;
 extern const int SHOW_ALPHA;
 extern const int HIDE_ALPHA;
-
+extern const int NUM_PLACEHOLDER_CELLS;
 
 
 #endif /* Constants_h */

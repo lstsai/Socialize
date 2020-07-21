@@ -32,6 +32,9 @@ const CGFloat CELL_TOP_OFFSET=50.0f;
 const int SHOW_ALPHA=1;
 const int HIDE_ALPHA=0;
 
+const int NUM_PLACEHOLDER_CELLS=3;
+
+
 
 
 

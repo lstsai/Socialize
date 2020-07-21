@@ -874,6 +874,7 @@
                                         <connections>
                                             <outlet property="eventImage" destination="UV5-Ca-YjX" id="mFc-cU-vLY"/>
                                             <outlet property="eventNameLabel" destination="fte-Hx-ZeO" id="TQP-bS-nCg"/>
+                                            <segue destination="awX-v5-WsL" kind="show" identifier="eventSegue" id="WTd-pV-B1j"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1247,22 +1248,22 @@
             <objects>
                 <viewController id="awX-v5-WsL" customClass="EventDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="72c-d5-Kpb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="596"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="591"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XE6-QZ-nQQ">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="596"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4lz-S4-Wq5">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="799.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="798"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D0l-97-NnY" customClass="PFImageView">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="198.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="197"/>
                                                 <color key="backgroundColor" red="0.5840205892" green="0.74922668150000005" blue="0.6097390976" alpha="0.90196917809999999" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <gestureRecognizers/>
                                             </imageView>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0A7-SH-Kxj">
-                                                <rect key="frame" x="0.0" y="198.5" width="414" height="601"/>
+                                                <rect key="frame" x="0.0" y="197" width="414" height="601"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="PYt-Rh-PTM">
                                                         <rect key="frame" x="25" y="120.5" width="43" height="37"/>
@@ -1526,6 +1527,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="WTd-pV-B1j"/>
         <segue reference="rWx-qN-VT4"/>
         <segue reference="rff-eI-h6r"/>
     </inferredMetricsTieBreakers>

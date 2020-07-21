@@ -11,6 +11,8 @@
 #import "OrgCollectionCell.h"
 #import "AppDelegate.h"
 #import "MBProgressHUD.h"
+#import "EventDetailsViewController.h"
+#import "OrgDetailsViewController.h"
 @interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end
@@ -269,14 +271,30 @@
     
     }];
 }
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"orgSegue"])
+    {
+        OrgDetailsViewController *orgVC= segue.destinationViewController;
+        UICollectionViewCell *tappedCell=sender;
+        NSIndexPath *tappedIndex=[self.orgCollectionView indexPathForCell:tappedCell];
+        orgVC.org=self.likedOrgs[tappedIndex.item];
+        [self.orgCollectionView deselectItemAtIndexPath:tappedIndex animated:YES];
+    }
+    else if([segue.identifier isEqualToString:@"eventSegue"])
+    {
+        EventDetailsViewController *eventVC= segue.destinationViewController;
+        UICollectionViewCell *tappedCell=sender;
+        NSIndexPath *tappedIndex=[self.eventCollectionView indexPathForCell:tappedCell];
+        eventVC.event=self.likedEvents[tappedIndex.item];
+        [self.eventCollectionView deselectItemAtIndexPath:tappedIndex animated:YES];
+    }
 }
-*/
+
 
 @end

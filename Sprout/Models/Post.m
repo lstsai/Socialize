@@ -24,20 +24,10 @@
 + (void) createPost:(UIImage * _Nullable )image withDescription:(NSString *)description withRelatedObject:(PFObject*)relatedObject withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Post *newPost= [Post new];
     newPost.author=PFUser.currentUser;
-    newPost.image=[Post getPFFileFromImage:image];
+    newPost.image=[ParseHelper getPFFileFromImage:image withName:@"postImage"];
     newPost.postDescription=description;
     newPost.relatedObject=relatedObject;
     [newPost saveInBackgroundWithBlock:completion];
 }
-+ (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image{
-    if(image)//no image
-    {
-        NSData *imageData = UIImagePNGRepresentation(image);
-        if(imageData)
-            return [PFFileObject fileObjectWithName:@"postImage.png" data:imageData];
-    }
-    return nil;//if image data or image is nil
-}
-
 
 @end

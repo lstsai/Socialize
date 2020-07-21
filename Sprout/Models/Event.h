@@ -7,6 +7,7 @@
 //
 
 #import <Parse/Parse.h>
+#import "ParseHelper.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Event : PFObject <PFSubclassing>
@@ -24,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
     @property (nonatomic) NSInteger numFriendsLike;
 
 + (void) postEvent:(UIImage * _Nullable )image withName:(NSString *)name withSTime:(NSDate*)stime withETime:(NSDate*)etime withLocation:(PFGeoPoint*)location withStreetAdress:(NSString*)streetAddress withDetails:(NSString*)details withCompletion: (PFBooleanResultBlock  _Nullable)completion;
-+ (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image withName:(NSString*)eventName;
 
 @end
 

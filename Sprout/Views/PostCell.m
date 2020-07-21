@@ -17,8 +17,13 @@
 }
 -(void) loadData{
     self.nameLabel.text=self.post.author.username;
+    
+    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+    self.profileImage.clipsToBounds = YES;
+    self.profileImage.layer.masksToBounds=YES;
     self.profileImage.file=self.post.author[@"profilePic"];
     [self.profileImage loadInBackground];
+    
     self.postDescriptionLabel.text=self.post.postDescription;
     self.timeLabel.text=[self.post.createdAt shortTimeAgoSinceNow];
 }

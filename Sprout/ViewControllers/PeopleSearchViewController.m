@@ -13,7 +13,7 @@
 #import "ProfileViewController.h"
 #import "Constants.h"
 
-@interface PeopleSearchViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
+@interface PeopleSearchViewController ()< UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end
 

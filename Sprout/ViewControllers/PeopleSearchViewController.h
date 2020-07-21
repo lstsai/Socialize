@@ -20,7 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL isMoreDataLoading;
 @property (nonatomic) int resultNum;
 
-
 -(void) getPeople:( UIRefreshControl * _Nullable )refreshControl;
 -(void) setupLoadingIndicators;
 -(void) setUpLayout;

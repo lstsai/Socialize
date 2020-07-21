@@ -7,7 +7,7 @@
 //
 
 #import <Parse/Parse.h>
-
+#import "ParseHelper.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Post : PFObject<PFSubclassing>
@@ -20,7 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 + (void) createPost:(UIImage * _Nullable )image withDescription:(NSString *)description withRelatedObject:(PFObject*)relatedObject withCompletion: (PFBooleanResultBlock  _Nullable)completion;
-+ (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image;
 
 @end
 

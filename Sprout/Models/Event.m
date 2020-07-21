@@ -8,6 +8,7 @@
 
 #import "Event.h"
 #import "Post.h"
+
 @implementation Event
 
 @dynamic postID;
@@ -29,7 +30,7 @@
 + (void) postEvent:(UIImage * _Nullable )image withName:(NSString *)name withSTime:(NSDate*)stime withETime:(NSDate*)etime withLocation:(PFGeoPoint*)location withStreetAdress:(NSString*)streetAddress withDetails:(NSString*)details withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Event *newEvent= [Event new];
     newEvent.name=name;
-    newEvent.image= [self getPFFileFromImage:image withName:name];
+    newEvent.image= [ParseHelper getPFFileFromImage:image withName:name];
     newEvent.details=details;
     newEvent.author=[PFUser currentUser];
     newEvent.location=location;
@@ -41,16 +42,5 @@
             [Post createPost:nil withDescription:@"Created an event" withRelatedObject:newEvent withCompletion:completion];
     }];
 }
-+ (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image withName:(NSString*)eventName {
-    if(image)//no image
-    {
-        NSData *imageData = UIImagePNGRepresentation(image);
-        eventName=[eventName stringByReplacingOccurrencesOfString:@" " withString:@""];
-        NSString* fileName=[eventName stringByAppendingString:@".png"];
-        if(imageData)
-            return [PFFileObject fileObjectWithName:fileName data:imageData];
-    }
-    
-    return nil;//if image data or image is nil
-}
+
 @end

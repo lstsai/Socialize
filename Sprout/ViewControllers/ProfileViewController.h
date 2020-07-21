@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSArray *likedOrgs;
 @property (strong, nonatomic) NSArray *likedEvents;
 @property (weak, nonatomic) IBOutlet UIButton *topButton;
+@property (strong, nonatomic) UIImagePickerController* profileImagePicker;
+@property (strong, nonatomic) UIImagePickerController* backgroundImagePicker;
 
 
 -(void)getLikedOrgInfo;
@@ -36,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)addFriendLikes:(NSArray*)users;
 -(void) addFriend:(PFUser*) from toFriend:(PFUser*) to;
 -(void) removeFriend:(PFUser*) from toFriend:(PFUser*) to;
+-(void) setupImagePicker;
 
 @end
 

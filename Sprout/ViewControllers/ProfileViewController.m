@@ -13,7 +13,8 @@
 #import "MBProgressHUD.h"
 #import "EventDetailsViewController.h"
 #import "OrgDetailsViewController.h"
-@interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+#import "ParseHelper.h"
+@interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end
 
@@ -30,7 +31,8 @@
     if(!self.user){
         [PFUser.currentUser fetchInBackground];
         self.user=PFUser.currentUser;
-    }    
+    }
+    [self setupImagePicker];
 }
 -(void) viewWillAppear:(BOOL)animated{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -271,6 +273,57 @@
     
     }];
 }
+
+-(void) setupImagePicker{
+    self.profileImagePicker=[UIImagePickerController new];
+    self.profileImagePicker.allowsEditing=YES;
+    self.profileImagePicker.delegate=self;
+    
+    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+    self.profileImage.clipsToBounds = YES;
+    self.profileImage.layer.masksToBounds=YES;
+    
+    self.backgroundImagePicker=[UIImagePickerController new];
+    self.backgroundImagePicker.allowsEditing=YES;
+    self.backgroundImagePicker.delegate=self;
+}
+
+- (IBAction)didTapImagePicker:(id)sender {
+    UIImagePickerController* imagePickerVC;
+    
+    if([(UIGestureRecognizer *)sender view]==self.profileImage)
+        imagePickerVC=self.profileImagePicker;
+    else
+        imagePickerVC=self.backgroundImagePicker;
+    //check if this device has a camera before presenting the picker
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else {
+        NSLog(@"No camera available, using image picker");
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    if(picker==self.profileImagePicker){
+        [self.profileImage setImage:editedImage];
+        NSString *imageName=[PFUser.currentUser.username stringByAppendingString:@"ProfilePic"];
+        PFUser.currentUser[@"profilePic"]=[ParseHelper getPFFileFromImage:editedImage withName:imageName];
+    }
+    else{
+        [self.backgroundImage setImage:editedImage];
+        NSString *imageName=[PFUser.currentUser.username stringByAppendingString:@"BackgroundPic"];
+        PFUser.currentUser[@"backgroundPic"]=[ParseHelper getPFFileFromImage:editedImage withName:imageName];
+    }
+    [PFUser.currentUser saveInBackground];
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 #pragma mark - Navigation
 

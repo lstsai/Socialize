@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "OrgCell.h"
 #import "Helper.h"
+#import "Post.h"
 @import ListPlaceholder;
 @interface OrgSearchViewController ()<UITableViewDelegate, UITableViewDataSource, OrgCellDelegate, OrgDetailsViewControllerDelegate>
 @end
@@ -66,7 +67,7 @@
      }];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-     if(!self.isMoreDataLoading)
+    if(!self.isMoreDataLoading && self.organizations.count!=0)
        {
            int scrollContentHeight=self.tableView.contentSize.height;
            int scrollOffsetThreshold = scrollContentHeight - self.tableView.bounds.size.height;
@@ -104,11 +105,12 @@
     NSMutableArray *likedOrgs= [PFUser.currentUser[@"likedOrgs"] mutableCopy];
     [likedOrgs addObject:likedOrg.ein];
     [self performSelectorInBackground:@selector(addOrgToFriendsList:) withObject:likedOrg];//add to list in background
-
-    
     PFUser.currentUser[@"likedOrgs"]=likedOrgs;
     [PFUser.currentUser saveInBackground];
-    
+    [Post createPost:nil withDescription:@"Liked an Organization" withEvent:nil withOrg:likedOrg withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        if(error)
+            [AppDelegate displayAlert:@"Error Posting" withMessage:error.localizedDescription on:self];
+    }];
 }
 - (void)didUnlikeOrg:(Organization*)unlikedOrg{
     NSMutableArray *likedOrgs= [PFUser.currentUser[@"likedOrgs"] mutableCopy];

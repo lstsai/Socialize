@@ -27,7 +27,7 @@
     self.postDescriptionLabel.text=self.post.postDescription;
     self.timeLabel.text=[self.post.createdAt shortTimeAgoSinceNow];
     
-    self.event=(Event *)self.post.relatedObject;
+    self.event=self.post.event;
     self.eventImage.file=self.event.image;
     [self.eventImage loadInBackground];
     self.eventNameLabel.text=self.event.name;

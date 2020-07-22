@@ -39,7 +39,7 @@
     newEvent.streetAddress=streetAddress;
     [newEvent saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded)
-            [Post createPost:nil withDescription:@"Created an event" withRelatedObject:newEvent withCompletion:completion];
+            [Post createPost:nil withDescription:@"Created an event" withEvent:newEvent withOrg:nil withCompletion:completion];
     }];
 }
 

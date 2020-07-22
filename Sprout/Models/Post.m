@@ -13,20 +13,25 @@
 @dynamic postID;
 @dynamic author;
 @dynamic postDescription;
-@dynamic relatedObject;
+@dynamic event;
 @dynamic image;
 @dynamic createdAt;
-
+@dynamic org;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";
 }
-+ (void) createPost:(UIImage * _Nullable )image withDescription:(NSString *)description withRelatedObject:(PFObject*)relatedObject withCompletion: (PFBooleanResultBlock  _Nullable)completion{
++ (void) createPost:(UIImage * _Nullable )image withDescription:(NSString *)description withEvent:(Event* _Nullable)event withOrg:(Organization* _Nullable)org withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Post *newPost= [Post new];
     newPost.author=PFUser.currentUser;
     newPost.image=[Helper getPFFileFromImage:image withName:@"postImage"];
     newPost.postDescription=description;
-    newPost.relatedObject=relatedObject;
+    newPost.event=event;
+    if(org)
+    {
+        
+        newPost.org=[Organization dictionaryWithOrg:org];
+    }
     [newPost saveInBackgroundWithBlock:completion];
 }
 

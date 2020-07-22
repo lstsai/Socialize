@@ -20,9 +20,12 @@
         self.category=dictionary[@"category"][@"categoryName"];
         self.cause=dictionary[@"cause"][@"causeName"];
         self.name=dictionary[@"charityName"];
-        self.imageURL=nil;
+        if(dictionary[@"imageURL"])
+            self.imageURL=[NSURL URLWithString:dictionary[@"imageURL"]];
+        else
+            self.imageURL=nil;
         self.location= [Location locationWithDictionary:dictionary[@"mailingAddress"]];
-
+        self.locationDictionary=dictionary[@"mailingAddress"];
         if(![dictionary[@"mission"] isEqual:[NSNull null]])
             self.missionStatement=dictionary[@"mission"];
             
@@ -45,6 +48,16 @@
         [orgs addObject:org];
     }
     return orgs;
+}
+
++ (NSDictionary *) dictionaryWithOrg:(Organization *)org{
+    NSDictionary* dictionary= @{@"ein":org.ein, @"category": @{@"categoryName":org.category}, @"cause":  @{@"causeName":org.cause}, @"charityName":org.name, @"imageURL":[org.imageURL absoluteString], @"mailingAddress":org.locationDictionary, @"mission":org.missionStatement, @"tagLine":org.tagLine, @"websiteURL": [org.website absoluteString]};
+    return dictionary;
+}
++ (Organization *) orgWithDictionary:(NSDictionary *)dictionary{
+    Organization *org= [Organization new];
+    org=[org initWithDictionary:dictionary];
+    return org;
 }
 
 @end

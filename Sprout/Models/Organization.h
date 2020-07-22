@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *missionStatement; // Display website
 @property (nonatomic, strong) NSString *tagLine; // Display website
 @property (nonatomic, strong) NSURL *website;
+@property (nonatomic,strong) NSDictionary *locationDictionary;
 @property (nonatomic,strong) NSURL * _Nullable imageURL;
 @property (nonatomic) NSInteger numFriendsLike;
 
@@ -25,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 + (NSMutableArray *)orgsWithArray:(NSArray *)dictionaries;
++ (NSDictionary *) dictionaryWithOrg:(Organization *)org;
++ (Organization *) orgWithDictionary:(NSDictionary *)dictionary;
 
 @end
 

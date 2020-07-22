@@ -38,7 +38,7 @@
         else{
             PFQuery *postsQ= [PFQuery queryWithClassName:@"Post"];
             [postsQ orderByDescending:@"createdAt"];
-            [postsQ includeKey:@"relatedObject"];
+            [postsQ includeKey:@"event"];
             [postsQ includeKey:@"author"];
             NSArray *friendsAndSelf=[friends arrayByAddingObject:PFUser.currentUser];
             [postsQ whereKey:@"author" containedIn:friendsAndSelf];
@@ -59,7 +59,7 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     Post *currPost=self.posts[indexPath.row];
-    if([currPost.relatedObject isKindOfClass:[Event class]])
+    if(currPost.event)
     {
         EventPostCell *epc=[tableView dequeueReusableCellWithIdentifier:@"EventPostCell" forIndexPath:indexPath];
         epc.post=currPost;

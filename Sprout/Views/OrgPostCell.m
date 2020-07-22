@@ -27,7 +27,8 @@
     self.postDescriptionLabel.text=self.post.postDescription;
     self.timeLabel.text=[self.post.createdAt shortTimeAgoSinceNow];
     
-    self.org=(Organization *)self.post.relatedObject;
+    self.org= [Organization orgWithDictionary:(NSDictionary*) self.post.org];
+    
     [self.orgImage setImageWithURL:self.org.imageURL];
  
     self.orgNameLabel.text=self.org.name;

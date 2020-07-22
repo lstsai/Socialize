@@ -8,6 +8,8 @@
 
 #import <Parse/Parse.h>
 #import "Helper.h"
+#import "Event.h"
+#import "Organization.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Post : PFObject<PFSubclassing>
@@ -15,11 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PFUser *author;
 @property (nonatomic, strong) NSString *postDescription;
 @property (nonatomic, strong) NSDate *createdAt;
-@property (nonatomic, strong) PFObject *relatedObject;
+@property (nonatomic, strong) Event *event;
+@property (nonatomic, strong) NSObject* org;
 @property (nonatomic, strong) PFFileObject *image;
 
 
-+ (void) createPost:(UIImage * _Nullable )image withDescription:(NSString *)description withRelatedObject:(PFObject*)relatedObject withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) createPost:(UIImage * _Nullable )image withDescription:(NSString *)description withEvent:(Event* _Nullable)event withOrg:(NSObject* _Nullable)org withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 

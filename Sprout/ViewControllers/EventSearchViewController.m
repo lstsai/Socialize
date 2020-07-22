@@ -14,6 +14,7 @@
 #import "EventVerticalCell.h"
 #import "Constants.h"
 #import "UIScrollView+EmptyDataSet.h"
+#import "Post.h"
 @import ListPlaceholder;
 @interface EventSearchViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, EventVerticalCellDelegate, EventDetailsViewControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
@@ -117,6 +118,10 @@
     
     PFUser.currentUser[@"likedEvents"]=likedEvents;
     [PFUser.currentUser saveInBackground];
+    [Post createPost:nil withDescription:@"Liked an Event" withEvent:likedEvent withOrg:nil withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        if(error)
+            [AppDelegate displayAlert:@"Error Posting" withMessage:error.localizedDescription on:self];
+    }];
 }
 - (void)didUnlikeEvent:(Event*)unlikedEvent{
     NSMutableArray *likedEvents= [PFUser.currentUser[@"likedEvents"] mutableCopy];

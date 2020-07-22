@@ -36,17 +36,6 @@
 
     return YES;
 }
-+(void)displayAlert:(NSString*)title withMessage:(NSString*)message on:(UIViewController  * _Nullable)senderVC{
-    if(senderVC)
-    {
-        UIAlertController* alert= [UIAlertController alertControllerWithTitle:title message:message preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            //nothing
-        }];
-        [alert addAction:okAction];
-        [senderVC presentViewController:alert animated:YES completion:nil];
-    }
-}
 
 #pragma mark - UISceneSession lifecycle
 

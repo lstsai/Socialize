@@ -10,7 +10,7 @@
 #import "MBProgressHUD.h"
 #import <Parse/Parse.h>
 #import "EventDetailsViewController.h"
-#import "AppDelegate.h"
+#import "Helper.h"
 #import "EventVerticalCell.h"
 #import "Constants.h"
 #import "UIScrollView+EmptyDataSet.h"
@@ -75,7 +75,7 @@
     }
     [eventsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)
-            [AppDelegate displayAlert:@"Error getting events" withMessage:error.localizedDescription on:self];
+            [Helper displayAlert:@"Error getting events" withMessage:error.localizedDescription on:self];
         else
         {
             self.events=[objects mutableCopy];

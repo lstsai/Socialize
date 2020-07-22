@@ -10,7 +10,7 @@
 #import "Constants.h"
 #import "Event.h"
 #import "MBProgressHUD.h"
-#import "AppDelegate.h"
+#import "Helper.h"
 @import GooglePlaces;
 
 @interface CreateViewController ()  <UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMSAutocompleteViewControllerDelegate>
@@ -70,7 +70,7 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         else{
-            [AppDelegate displayAlert:@"Error creating event" withMessage:error.localizedDescription on:self];
+            [Helper displayAlert:@"Error creating event" withMessage:error.localizedDescription on:self];
         }
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
@@ -130,7 +130,7 @@
 }
 
 - (void)viewController:(nonnull GMSAutocompleteViewController *)viewController didFailAutocompleteWithError:(nonnull NSError *)error {
-    [AppDelegate displayAlert:@"Error with location autocomplete" withMessage:error.localizedDescription on:self];
+    [Helper displayAlert:@"Error with location autocomplete" withMessage:error.localizedDescription on:self];
 
 }
 

@@ -9,7 +9,6 @@
 #import "ProfileViewController.h"
 #import "EventCollectionCell.h"
 #import "OrgCollectionCell.h"
-#import "AppDelegate.h"
 #import "MBProgressHUD.h"
 #import "EventDetailsViewController.h"
 #import "OrgDetailsViewController.h"
@@ -88,7 +87,7 @@
     [MBProgressHUD showHUDAddedTo:self.orgCollectionView animated:YES];
     [[APIManager shared] getOrgsWithEIN:self.user[@"likedOrgs"] completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
         if(error)
-            [AppDelegate displayAlert:@"Error getting liked organizations" withMessage:error.localizedDescription on:self];
+            [Helper displayAlert:@"Error getting liked organizations" withMessage:error.localizedDescription on:self];
         else{
             self.likedOrgs =organizations;
             NSLog(@"Success getting liked orgs");
@@ -104,7 +103,7 @@
     [eventQuery whereKey:@"objectId" containedIn:self.user[@"likedEvents"]];
     [eventQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)
-            [AppDelegate displayAlert:@"Error getting location of event" withMessage:error.localizedDescription on:self];
+            [Helper displayAlert:@"Error getting location of event" withMessage:error.localizedDescription on:self];
         else
         {
             self.likedEvents=objects;
@@ -330,7 +329,7 @@
 - (IBAction)didTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         if(error)
-            [AppDelegate displayAlert:@"Error Logging out" withMessage:error.localizedDescription on:self];
+            [Helper displayAlert:@"Error Logging out" withMessage:error.localizedDescription on:self];
         else
             NSLog(@"Success Logging out");
     }];

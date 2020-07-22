@@ -11,7 +11,6 @@
 #import "OrgPostCell.h"
 #import <Parse/Parse.h>
 #import "Constants.h"
-#import "AppDelegate.h"
 #import "Helper.h"
 #import "EventDetailsViewController.h"
 #import "OrgDetailsViewController.h"
@@ -58,7 +57,7 @@
 -(void) getPosts:( UIRefreshControl * _Nullable )refreshControl{
     [Helper getFriends:^(NSArray * _Nonnull friends, NSError * _Nonnull error) {
         if(error)
-            [AppDelegate displayAlert:@"Error getting friends" withMessage:error.localizedDescription on:self];
+            [Helper displayAlert:@"Error getting friends" withMessage:error.localizedDescription on:self];
         else{
             PFQuery *postsQ= [PFQuery queryWithClassName:@"Post"];
             [postsQ orderByDescending:@"createdAt"];
@@ -70,7 +69,7 @@
             [postsQ findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
                 if(error)
                 {
-                    [AppDelegate displayAlert:@"Error Loading Posts" withMessage:error.localizedDescription on:self];
+                    [Helper displayAlert:@"Error Loading Posts" withMessage:error.localizedDescription on:self];
                 }
                 else{
                     self.posts=[objects mutableCopy];

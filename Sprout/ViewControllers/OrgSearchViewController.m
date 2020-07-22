@@ -10,7 +10,6 @@
 #import "MBProgressHUD.h"
 #import "APIManager.h"
 #import "OrgDetailsViewController.h"
-#import "AppDelegate.h"
 #import "OrgCell.h"
 #import "Helper.h"
 #import "Post.h"
@@ -60,7 +59,7 @@
     NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchText, @"rated":@"TRUE", @"state": self.stateSearch, @"city": self.citySearch, @"pageSize":@(RESULTS_SIZE)};
      [[APIManager shared] getOrganizationsWithCompletion:params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
          if(error)
-            [AppDelegate displayAlert:@"Error getting organizations" withMessage:error.localizedDescription on:self];
+            [Helper displayAlert:@"Error getting organizations" withMessage:error.localizedDescription on:self];
          self.organizations=[organizations mutableCopy];
          [self.tableView reloadData];
          
@@ -93,7 +92,7 @@
     [[APIManager shared] getOrganizationsWithCompletion:params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
         if(error)
         {
-            [AppDelegate displayAlert:@"Error getting organizations" withMessage:error.localizedDescription on:self];
+            [Helper displayAlert:@"Error getting organizations" withMessage:error.localizedDescription on:self];
         }
         else{
             [self.organizations addObjectsFromArray:organizations];

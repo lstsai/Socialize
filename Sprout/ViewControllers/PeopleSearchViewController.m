@@ -8,7 +8,7 @@
 
 #import "PeopleSearchViewController.h"
 #import "MBProgressHUD.h"
-#import "AppDelegate.h"
+#import "Helper.h"
 #import "Constants.h"
 #import "ProfileViewController.h"
 #import "Constants.h"
@@ -90,7 +90,7 @@
     
     [userQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)
-            [AppDelegate displayAlert:@"Error getting people" withMessage:error.localizedDescription on:self];
+            [Helper displayAlert:@"Error getting people" withMessage:error.localizedDescription on:self];
         else
         {
             self.people=[objects mutableCopy];

@@ -7,7 +7,7 @@
 //
 
 #import "LoginViewController.h"
-#import "AppDelegate.h"
+#import "Helper.h"
 @interface LoginViewController ()
 
 @end
@@ -28,7 +28,7 @@
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
         if (error != nil)
         {
-            [AppDelegate displayAlert:@"Error Logging in" withMessage:error.localizedDescription on:self];
+            [Helper displayAlert:@"Error Logging in" withMessage:error.localizedDescription on:self];
             NSLog(@"User log in failed: %@", error.localizedDescription);
         }
         else
@@ -52,14 +52,14 @@
     
     if([newUser.username isEqualToString:@""] || [newUser.password isEqualToString:@""])
     {
-        [AppDelegate displayAlert:@"Error Signing up" withMessage:@"Username and/or password cannot be empty" on:self];
+        [Helper displayAlert:@"Error Signing up" withMessage:@"Username and/or password cannot be empty" on:self];
         [self.activityIndicator stopAnimating];
     }
     else{//only signup if there was no error
         [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
             if (error != nil) {
                 NSLog(@"Error: %@", error.localizedDescription);
-                [AppDelegate displayAlert:@"Error Signing up" withMessage:error.localizedDescription on:self];
+                [Helper displayAlert:@"Error Signing up" withMessage:error.localizedDescription on:self];
 
             } else {
                 NSLog(@"User registered successfully");

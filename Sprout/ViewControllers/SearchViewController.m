@@ -14,8 +14,7 @@
 #import "AFHTTPSessionManager.h"
 #import "MBProgressHUD.h"
 #import "OrgDetailsViewController.h"
-#import "AppDelegate.h"
-
+#import "Helper.h"
 @interface SearchViewController ()<UISearchBarDelegate, CLLocationManagerDelegate>
 
 @end
@@ -43,7 +42,7 @@
 - (IBAction)didTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         if(error)
-            [AppDelegate displayAlert:@"Error Logging out" withMessage:error.localizedDescription on:self];
+            [Helper displayAlert:@"Error Logging out" withMessage:error.localizedDescription on:self];
         else
             NSLog(@"Success Logging out");
     }];

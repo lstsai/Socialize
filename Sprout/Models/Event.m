@@ -8,6 +8,7 @@
 
 #import "Event.h"
 #import "Post.h"
+#import "Helper.h"
 
 @implementation Event
 

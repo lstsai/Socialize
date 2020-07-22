@@ -50,7 +50,7 @@
     [PFUser.currentUser saveInBackground];
     [Post createPost:nil withDescription:@"Liked an Organization" withEvent:nil withOrg:likedOrg withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(error)
-            [AppDelegate displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
+            [Helper displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
     }];
 }
 + (void)didUnlikeOrg:(Organization*)unlikedOrg{
@@ -128,7 +128,7 @@
     [PFUser.currentUser saveInBackground];
     [Post createPost:nil withDescription:@"Liked an Event" withEvent:likedEvent withOrg:nil withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(error)
-            [AppDelegate displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
+            [Helper displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
     }];
 }
 + (void)didUnlikeEvent:(Event*)unlikedEvent{
@@ -191,6 +191,17 @@
             [faAcess saveInBackground];
         }
     }];
+}
++(void)displayAlert:(NSString*)title withMessage:(NSString*)message on:(UIViewController  * _Nullable)senderVC{
+    if(senderVC)
+    {
+        UIAlertController* alert= [UIAlertController alertControllerWithTitle:title message:message preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //nothing
+        }];
+        [alert addAction:okAction];
+        [senderVC presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 

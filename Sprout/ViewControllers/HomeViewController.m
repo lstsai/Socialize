@@ -7,10 +7,12 @@
 //
 
 #import "HomeViewController.h"
-#import "PostCell.h"
+#import "EventPostCell.h"
+#import "OrgPostCell.h"
 #import <Parse/Parse.h>
 #import "Constants.h"
 #import "AppDelegate.h"
+#import "Helper.h"
 @interface HomeViewController ()<CreateViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @end
@@ -22,7 +24,7 @@
     // Do any additional setup after loading the view.
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
-    [self getPosts];
+    [self performSelectorInBackground:@selector(getPosts) withObject:nil];
 }
 
 -(void) didCreateEvent{
@@ -30,28 +32,46 @@
 }
 
 -(void) getPosts{
-    PFQuery *postsQ= [PFQuery queryWithClassName:@"Post"];
-    [postsQ orderByDescending:@"createdAt"];
-    [postsQ setLimit:RESULTS_SIZE];
-    [postsQ includeKey:@"relatedObject"];
-    [postsQ includeKey:@"author"];
-    [postsQ findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+    [Helper getFriends:^(NSArray * _Nonnull friends, NSError * _Nonnull error) {
         if(error)
-        {
-            [AppDelegate displayAlert:@"Error Loading Posts" withMessage:error.localizedDescription on:self];
-        }
+            [AppDelegate displayAlert:@"Error getting friends" withMessage:error.localizedDescription on:self];
         else{
-            self.posts=[objects mutableCopy];
-            [self.tableView reloadData];
+            PFQuery *postsQ= [PFQuery queryWithClassName:@"Post"];
+            [postsQ orderByDescending:@"createdAt"];
+            [postsQ includeKey:@"relatedObject"];
+            [postsQ includeKey:@"author"];
+            NSArray *friendsAndSelf=[friends arrayByAddingObject:PFUser.currentUser];
+            [postsQ whereKey:@"author" containedIn:friendsAndSelf];
+            [postsQ setLimit:RESULTS_SIZE];
+            [postsQ findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                if(error)
+                {
+                    [AppDelegate displayAlert:@"Error Loading Posts" withMessage:error.localizedDescription on:self];
+                }
+                else{
+                    self.posts=[objects mutableCopy];
+                    [self.tableView reloadData];
+                }
+            }];
         }
     }];
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    PostCell *postCell= [self.tableView dequeueReusableCellWithIdentifier:@"PostCell" forIndexPath:indexPath];
-    postCell.post=self.posts[indexPath.row];
-    [postCell loadData];
-    return postCell;
+    Post *currPost=self.posts[indexPath.row];
+    if([currPost.relatedObject isKindOfClass:[Event class]])
+    {
+        EventPostCell *epc=[tableView dequeueReusableCellWithIdentifier:@"EventPostCell" forIndexPath:indexPath];
+        epc.post=currPost;
+        [epc loadData];
+        return epc;
+    }
+    else{
+        OrgPostCell *opc=[tableView dequeueReusableCellWithIdentifier:@"OrgPostCell" forIndexPath:indexPath];
+        opc.post=currPost;
+        [opc loadData];
+        return opc;
+    }
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

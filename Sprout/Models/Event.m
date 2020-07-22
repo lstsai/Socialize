@@ -30,7 +30,7 @@
 + (void) postEvent:(UIImage * _Nullable )image withName:(NSString *)name withSTime:(NSDate*)stime withETime:(NSDate*)etime withLocation:(PFGeoPoint*)location withStreetAdress:(NSString*)streetAddress withDetails:(NSString*)details withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Event *newEvent= [Event new];
     newEvent.name=name;
-    newEvent.image= [Parse getPFFileFromImage:image withName:name];
+    newEvent.image= [Helper getPFFileFromImage:image withName:name];
     newEvent.details=details;
     newEvent.author=[PFUser currentUser];
     newEvent.location=location;

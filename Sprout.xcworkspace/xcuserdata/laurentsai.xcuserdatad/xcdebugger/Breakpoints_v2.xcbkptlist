@@ -378,26 +378,38 @@
             filePath = "Sprout/ViewControllers/HomeViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
          <BreakpointContent
-            uuid = "B822CF26-02CB-47C3-9600-DC9DC1B973C9"
+            uuid = "39B5A8CD-C783-4F71-8EFD-4C495801E87B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Sprout/ViewControllers/HomeViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "-getPosts"
-            landmarkType = "7">
+            symbolName = "warnBlockingOperationOnMainThread"
+            moduleName = "">
+            <Locations>
+               <Location
+                  uuid = "39B5A8CD-C783-4F71-8EFD-4C495801E87B - 29de84720515105b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "warnBlockingOperationOnMainThread"
+                  moduleName = "Bolts"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/laurentsai/Desktop/Sprout/Pods/Bolts/Bolts/Common/BFTask.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "11">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

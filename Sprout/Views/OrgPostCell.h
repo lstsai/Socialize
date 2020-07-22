@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *orgTaglineLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numLikeLabel;
+@property (weak, nonatomic) IBOutlet UIView *orgContainer;
+
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIImageView *orgImage;
 @property (strong, nonatomic) Organization* org;
@@ -28,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)loadData;
 -(void) getLikes;
+-(void) setShadow;
 
 @end
 

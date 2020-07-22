@@ -30,11 +30,26 @@
     self.org= [Organization orgWithDictionary:(NSDictionary*) self.post.org];
     
     [self.orgImage setImageWithURL:self.org.imageURL];
- 
+    [self setShadow];
+
     self.orgNameLabel.text=self.org.name;
+    self.orgTaglineLabel.text=self.org.tagLine;
     self.locationLabel.text=[self.org.location.city stringByAppendingFormat:@", %@", self.org.location.state];
     [self performSelectorInBackground:@selector(getLikes) withObject:nil];
 }
+-(void) setShadow{
+    self.orgContainer.layer.cornerRadius = CELL_CORNER_RADIUS*2;
+    self.orgContainer.layer.borderColor = [UIColor clearColor].CGColor;
+    self.orgContainer.layer.masksToBounds = YES;
+    self.orgContainer.clipsToBounds = YES;
+    self.orgContainer.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+    self.orgContainer.layer.shadowOffset = CGSizeMake(SHADOW_OFFSET/2, SHADOW_OFFSET/2);
+    self.orgContainer.layer.shadowRadius = SHADOW_RADIUS;
+    self.orgContainer.layer.shadowOpacity = SHADOW_OPACITY;
+    self.orgContainer.layer.masksToBounds = NO;
+    self.orgContainer.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.orgContainer.bounds cornerRadius:self.orgContainer.layer.cornerRadius].CGPath;
+}
+
 -(void) getLikes{
     PFQuery * friendAccessQ=[PFQuery queryWithClassName:@"UserAccessible"];
     [friendAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];

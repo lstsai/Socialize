@@ -23,10 +23,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      //Do any additional setup after loading the view.
-
+    
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
-
+    self.pageNum=1;
     self.organizations=[[NSMutableArray alloc]init];
     [self setupLoadingIndicators];
     [self.tableView reloadData];
@@ -49,9 +49,10 @@
 -(void) getOrgs:( UIRefreshControl * _Nullable )refreshControl{
     if([self.searchText isEqualToString:@""])
         return;
-    if(![refreshControl isKindOfClass:[UIRefreshControl class]])
+    if(![refreshControl isKindOfClass:[UIRefreshControl class]] &&self.organizations.count==0)
          [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.tableView showLoader];
+    else
+        [self.tableView showLoader];
     NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchText, @"rated":@"TRUE", @"state": self.stateSearch, @"city": self.citySearch, @"pageSize":@(RESULTS_SIZE)};
      [[APIManager shared] getOrganizationsWithCompletion:params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
          if(error)
@@ -61,8 +62,7 @@
          
          if([refreshControl isKindOfClass:[UIRefreshControl class]])
              [refreshControl endRefreshing];
-         else
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
          [self.tableView hideLoader];
      }];
 }

@@ -61,13 +61,13 @@
     Post *currPost=self.posts[indexPath.row];
     if(currPost.event)
     {
-        EventPostCell *epc=[tableView dequeueReusableCellWithIdentifier:@"EventPostCell" forIndexPath:indexPath];
+        EventPostCell *epc=[tableView dequeueReusableCellWithIdentifier:@"EventPostCell"];
         epc.post=currPost;
         [epc loadData];
         return epc;
     }
     else{
-        OrgPostCell *opc=[tableView dequeueReusableCellWithIdentifier:@"OrgPostCell" forIndexPath:indexPath];
+        OrgPostCell *opc=[tableView dequeueReusableCellWithIdentifier:@"OrgPostCell"];
         opc.post=currPost;
         [opc loadData];
         return opc;

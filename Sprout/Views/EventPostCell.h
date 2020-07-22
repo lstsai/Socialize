@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *postDescriptionLabel;
 @property (strong, nonnull) Post* post;
 @property (strong, nonnull) Event* event;
+@property (weak, nonatomic) IBOutlet UIView *eventContainer;
 
 @property (weak, nonatomic) IBOutlet PFImageView *eventImage;
 @property (weak, nonatomic) IBOutlet UILabel *eventNameLabel;
@@ -27,6 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *numLikeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 -(void) loadData;
+-(void) setShadow;
+-(void) getLikes;
+
 @end
 
 NS_ASSUME_NONNULL_END

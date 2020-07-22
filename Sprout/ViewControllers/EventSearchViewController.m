@@ -55,7 +55,6 @@
         return;
     if(![refreshControl isKindOfClass:[UIRefreshControl class]])
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.collectionView showLoader];
     
     PFQuery *eventsNameQuery=[PFQuery queryWithClassName:@"Event"];
     [eventsNameQuery whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchText]];
@@ -82,7 +81,6 @@
             [refreshControl endRefreshing];
         else
             [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self.collectionView hideLoader];
     }];
 }
 

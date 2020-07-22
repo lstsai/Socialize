@@ -30,13 +30,32 @@
     self.event=self.post.event;
     self.eventImage.file=self.event.image;
     [self.eventImage loadInBackground];
-    self.eventNameLabel.text=self.event.name;
+    self.eventImage.layer.cornerRadius = CELL_CORNER_RADIUS;
+    self.eventImage.layer.masksToBounds = YES;
+    self.eventImage.clipsToBounds = YES;
     
+    self.eventNameLabel.text=self.event.name;
+    [self setShadow];
+
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"E, d MMM yyyy h:mm a"];
     self.eventDateTime.text = [dateFormat stringFromDate:self.event.startTime];
     [self performSelectorInBackground:@selector(getLikes) withObject:nil];
 }
+
+-(void) setShadow{
+    self.eventContainer.layer.cornerRadius = CELL_CORNER_RADIUS*2;
+    self.eventContainer.layer.borderColor = [UIColor clearColor].CGColor;
+    self.eventContainer.layer.masksToBounds = YES;
+    self.eventContainer.clipsToBounds = YES;
+    self.eventContainer.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+    self.eventContainer.layer.shadowOffset = CGSizeMake(0, SHADOW_OFFSET/2);
+    self.eventContainer.layer.shadowRadius = SHADOW_RADIUS;
+    self.eventContainer.layer.shadowOpacity = SHADOW_OPACITY;
+    self.eventContainer.layer.masksToBounds = NO;
+    self.eventContainer.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.eventContainer.bounds cornerRadius:self.eventContainer.layer.cornerRadius].CGPath;
+}
+
 -(void) getLikes{
     PFQuery * friendAccessQ=[PFQuery queryWithClassName:@"UserAccessible"];
     [friendAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];

@@ -86,7 +86,7 @@
     [self getLikedEventInfo];
 }
 -(void)getLikedOrgInfo{
-    
+    [MBProgressHUD showHUDAddedTo:self.orgCollectionView animated:YES];
     [[APIManager shared] getOrgsWithEIN:self.user[@"likedOrgs"] completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
         if(error)
             [AppDelegate displayAlert:@"Error getting liked organizations" withMessage:error.localizedDescription on:self];
@@ -95,10 +95,12 @@
             NSLog(@"Success getting liked orgs");
             [self.orgCollectionView reloadData];
         }
+        [MBProgressHUD hideHUDForView:self.orgCollectionView animated:YES];
     }];
     
 }
 -(void)getLikedEventInfo{
+    [MBProgressHUD showHUDAddedTo:self.eventCollectionView animated:YES];
     PFQuery *eventQuery= [PFQuery queryWithClassName:@"Event"];
     [eventQuery whereKey:@"objectId" containedIn:self.user[@"likedEvents"]];
     [eventQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
@@ -109,6 +111,7 @@
             self.likedEvents=objects;
             [self.eventCollectionView reloadData];
         }
+        [MBProgressHUD hideHUDForView:self.eventCollectionView animated:YES];
     }];
 
 }

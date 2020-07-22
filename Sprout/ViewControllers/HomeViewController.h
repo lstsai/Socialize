@@ -8,14 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "CreateViewController.h"
+#import "InfiniteScrollActivityView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *posts;
+@property (nonatomic) int pageNum;
+@property (strong, nonatomic) InfiniteScrollActivityView* loadingMoreView;
 
 -(void) getPosts;
-
+-(void) setupLoadingIndicators;
 @end
 
 NS_ASSUME_NONNULL_END

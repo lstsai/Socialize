@@ -26,9 +26,26 @@
     // Do any additional setup after loading the view.
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    [self setupLoadingIndicators];
     [self performSelectorInBackground:@selector(getPosts) withObject:nil];
 }
+-(void) viewWillAppear:(BOOL)animated{
+    [self getPosts];
+}
+-(void) setupLoadingIndicators{
+    UIRefreshControl *refreshControl= [[UIRefreshControl alloc] init];//initialize the refresh control
+    [refreshControl addTarget:self action:@selector(getPosts) forControlEvents:UIControlEventValueChanged];//add an event listener
+    [self.tableView insertSubview:refreshControl atIndex:0];//add into the storyboard
 
+    CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+    self.loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
+    self.loadingMoreView.hidden = true;
+    [self.tableView addSubview:self.loadingMoreView];
+
+    UIEdgeInsets insets = self.tableView.contentInset;
+    insets.bottom += InfiniteScrollActivityView.defaultHeight;
+    self.tableView.contentInset = insets;
+}
 -(void) didCreateEvent{
     [self getPosts];
 }

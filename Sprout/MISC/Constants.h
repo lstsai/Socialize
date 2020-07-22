@@ -32,5 +32,7 @@ extern const int HIDE_ALPHA;
 extern const int NUM_PLACEHOLDER_CELLS;
 extern const NSString* ORG_POST_TEXT_PLACEHOLDER;
 extern const NSString* EVENT_POST_TEXT_PLACEHOLDER;
+extern const CGFloat EMPTY_TITLE_FONT_SIZE;
+extern const CGFloat EMPTY_MESSAGE_FONT_SIZE;
 
 #endif /* Constants_h */

@@ -37,6 +37,5 @@ const int NUM_PLACEHOLDER_CELLS=3;
 const NSString* ORG_POST_TEXT_PLACEHOLDER =@"Share something about this organization";
 const NSString* EVENT_POST_TEXT_PLACEHOLDER=@"Share something about this event";
 
-
-
-
+const CGFloat EMPTY_TITLE_FONT_SIZE=18;
+const CGFloat EMPTY_MESSAGE_FONT_SIZE=14;

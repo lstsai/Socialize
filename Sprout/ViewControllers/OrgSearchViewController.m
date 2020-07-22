@@ -222,7 +222,7 @@
 {
     NSString *text = @"No Organizations to Show";
     
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:EMPTY_TITLE_FONT_SIZE],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
     
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
@@ -235,7 +235,7 @@
     paragraph.lineBreakMode = NSLineBreakByWordWrapping;
     paragraph.alignment = NSTextAlignmentCenter;
     
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:EMPTY_MESSAGE_FONT_SIZE],
                                  NSForegroundColorAttributeName: [UIColor lightGrayColor],
                                  NSParagraphStyleAttributeName: paragraph};
                                  
@@ -247,12 +247,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0);
-    cell.contentView.alpha = 0.3;
+    cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, CELL_TOP_OFFSET, 0);
+    cell.contentView.alpha = SHOW_ALPHA*0.3;
 
-    [UIView animateWithDuration:0.75 animations:^{
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         cell.layer.transform =CATransform3DIdentity;
-        cell.contentView.alpha = 1;
+        cell.contentView.alpha = SHOW_ALPHA;
     }];
 }
 

@@ -16,6 +16,7 @@
 #import "Helper.h"
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
+#import "Constants.h"
 @interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end
@@ -60,7 +61,7 @@
         if([fAccess[@"friends"] containsObject:self.user.objectId])
             self.topButton.selected=YES;
     }
-    self.topButton.layer.cornerRadius=8;
+    self.topButton.layer.cornerRadius=CELL_CORNER_RADIUS*0.8;
     self.topButton.layer.masksToBounds=YES;
     
     self.nameLabel.text=self.user.username;

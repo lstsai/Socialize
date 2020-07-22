@@ -27,6 +27,8 @@
     self.postDescriptionLabel.text=self.post.postDescription;
     self.timeLabel.text=[self.post.createdAt shortTimeAgoSinceNow];
     
+    self.likeButton.selected=[PFUser.currentUser[@"likedEvents"] containsObject:self.event.objectId];
+    
     self.event=self.post.event;
     self.eventImage.file=self.event.image;
     [self.eventImage loadInBackground];

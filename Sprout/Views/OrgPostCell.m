@@ -35,6 +35,9 @@
     self.orgNameLabel.text=self.org.name;
     self.orgTaglineLabel.text=self.org.tagLine;
     self.locationLabel.text=[self.org.location.city stringByAppendingFormat:@", %@", self.org.location.state];
+    
+    self.likeButton.selected=[PFUser.currentUser[@"likedOrgs"] containsObject:self.org.ein];
+    
     [self performSelectorInBackground:@selector(getLikes) withObject:nil];
 }
 -(void) setShadow{

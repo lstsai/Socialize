@@ -46,6 +46,11 @@
 }
 
 -(void)loadProfile{
+    
+    PFQuery *accessQuery= [PFQuery queryWithClassName:@"UserAccessible"];
+    [accessQuery whereKey:@"username" equalTo:PFUser.currentUser.username];
+    PFObject *fAccess=[accessQuery getFirstObject];
+    
     if(self.user.username==PFUser.currentUser.username)
     {
         [self.topButton setTitle:@"Edit" forState:UIControlStateNormal];
@@ -54,10 +59,6 @@
     else{
         [self.topButton setTitle:@"+ Friend" forState:UIControlStateNormal];
         [self.topButton setTitle:@"Friends" forState:UIControlStateSelected];
-        
-        PFQuery *accessQuery= [PFQuery queryWithClassName:@"UserAccessible"];
-        [accessQuery whereKey:@"username" equalTo:PFUser.currentUser.username];
-        PFObject *fAccess=[accessQuery getFirstObject];
         if([fAccess[@"friends"] containsObject:self.user.objectId])
             self.topButton.selected=YES;
     }
@@ -77,9 +78,6 @@
         self.backgroundImage.file=self.user[@"backgroundPic"];
         [self.backgroundImage loadInBackground];
     }
-    PFQuery *accessQuery= [PFQuery queryWithClassName:@"UserAccessible"];
-    [accessQuery whereKey:@"username" equalTo:PFUser.currentUser.username];
-    PFObject *fAccess=[accessQuery getFirstObject];
     self.friendCount.text=[NSString stringWithFormat:@"%lu", ((NSArray*)fAccess[@"friends"]).count];
     self.orgCount.text=[NSString stringWithFormat:@"%lu",((NSArray*)self.user[@"likedOrgs"]).count];
     self.eventCount.text=[NSString stringWithFormat:@"%lu",((NSArray*)self.user[@"likedEvents"]).count];

@@ -10,13 +10,6 @@
 #import "Organization.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol OrgCellDelegate
-
-- (void)didLikeOrg:(Organization*)likedOrg;
-- (void)didUnlikeOrg:(Organization*)unlikedOrg;
-
-@end
-
 @interface OrgCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tagLineLabel;
@@ -24,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) Organization *org;
 @property (weak, nonatomic) IBOutlet UILabel *numLikesLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
-@property (weak, nonatomic) id<OrgCellDelegate> delegate;
 
 
 -(void) loadData;

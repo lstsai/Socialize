@@ -11,6 +11,7 @@
 #import "Constants.h"
 #import "UIImageView+AFNetworking.h"
 #import "APIManager.h"
+#import "Helper.h"
 @implementation OrgCell
 
 - (void)awakeFromNib {
@@ -64,12 +65,12 @@
     if(!self.likeButton.selected)
     {
         self.likeButton.selected=YES;
-        [self.delegate didLikeOrg:self.org];
+        [Helper didLikeOrg:self.org sender:nil];
 
     }
     else{
         self.likeButton.selected=NO;
-        [self.delegate didUnlikeOrg:self.org];
+        [Helper didUnlikeOrg:self.org];
 
     }
 }

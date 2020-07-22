@@ -70,6 +70,19 @@
         }
     }];
 }
+- (IBAction)didTapLike:(id)sender {
+    if(!self.likeButton.selected)
+    {
+        self.likeButton.selected=YES;
+        [Helper didLikeOrg:self.org sender:nil];
+
+    }
+    else{
+        self.likeButton.selected=NO;
+        [Helper didUnlikeOrg:self.org];
+
+    }
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

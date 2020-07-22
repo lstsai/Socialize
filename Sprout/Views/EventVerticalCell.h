@@ -11,12 +11,6 @@
 @import Parse;
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol EventVerticalCellDelegate
-
-- (void)didLikeEvent:(Event*)likedEvent;
-- (void)didUnlikeEvent:(Event*)unlikedEvent;
-
-@end
 
 @interface EventVerticalCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
@@ -28,7 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) Event *event;
 @property (weak, nonatomic) IBOutlet UIView *dateView;
 @property (weak, nonatomic) IBOutlet UILabel *numLikesLabel;
-@property (weak, nonatomic) id<EventVerticalCellDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 
 

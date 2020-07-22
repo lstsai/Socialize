@@ -13,6 +13,7 @@
 #import "APIManager.h"
 #import "UIImageView+AFNetworking.h"
 #import "CreatePostViewController.h"
+#import "Helper.h"
 @interface OrgDetailsViewController ()
 
 @end
@@ -62,12 +63,12 @@
     if(!self.likeButton.selected)
     {
         self.likeButton.selected=YES;
-        [self.delegate didLikeOrg:self.org];
+        [Helper didLikeOrg:self.org sender:self];
 
     }
     else{
         self.likeButton.selected=NO;
-        [self.delegate didUnlikeOrg:self.org];
+        [Helper didUnlikeOrg:self.org];
 
     }
 }

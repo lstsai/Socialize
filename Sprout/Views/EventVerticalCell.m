@@ -8,6 +8,7 @@
 
 #import "EventVerticalCell.h"
 #import "Constants.h"
+#import "Helper.h"
 @import GoogleMaps;
 
 @implementation EventVerticalCell
@@ -93,11 +94,11 @@
     if(!self.likeButton.selected)
     {
         self.likeButton.selected=YES;
-        [self.delegate didLikeEvent:self.event];
+        [Helper didLikeEvent:self.event senderVC:nil];
     }
     else{
         self.likeButton.selected=NO;
-        [self.delegate didUnlikeEvent:self.event];
+        [Helper didUnlikeEvent:self.event];
 
     }
 }

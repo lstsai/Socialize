@@ -10,6 +10,7 @@
 #import "EventDetailsViewController.h"
 #import "AppDelegate.h"
 #import "CreatePostViewController.h"
+#import "Helper.h"
 @import GooglePlaces;
 @import GoogleMaps;
 @interface EventDetailsViewController ()
@@ -73,11 +74,11 @@
     if(!self.likeButton.selected)
     {
         self.likeButton.selected=YES;
-        [self.delegate didLikeEvent:self.event];
+        [Helper didLikeEvent:self.event senderVC:self];
     }
     else{
         self.likeButton.selected=NO;
-        [self.delegate didUnlikeEvent:self.event];
+        [Helper didUnlikeEvent:self.event];
 
     }
 }

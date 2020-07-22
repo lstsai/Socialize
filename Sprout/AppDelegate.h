@@ -10,6 +10,6 @@
 #import <Parse/Parse.h>
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-+(void)displayAlert:(NSString*)title withMessage:(NSString*)message on:(UIViewController*)senderVC;
++(void)displayAlert:(NSString*)title withMessage:(NSString*)message on:(UIViewController * _Nullable)senderVC;
 @end
 

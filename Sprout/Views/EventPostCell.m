@@ -9,6 +9,7 @@
 #import "EventPostCell.h"
 #import "DateTools.h"
 #import "Constants.h"
+#import "Helper.h"
 @import Parse;
 @implementation EventPostCell
 
@@ -73,6 +74,20 @@
             self.numLikeLabel.alpha=HIDE_ALPHA;
         }
     }];
+}
+- (IBAction)didTapLike:(id)sender {
+    
+    if(!self.likeButton.selected)
+    {
+        self.likeButton.selected=YES;
+        [Helper didLikeEvent:self.event senderVC:nil];
+
+    }
+    else{
+        self.likeButton.selected=NO;
+        [Helper didUnlikeEvent:self.event];
+
+    }
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

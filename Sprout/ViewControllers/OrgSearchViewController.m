@@ -16,7 +16,7 @@
 #import "Post.h"
 #import "UIScrollView+EmptyDataSet.h"
 @import ListPlaceholder;
-@interface OrgSearchViewController ()<UITableViewDelegate, UITableViewDataSource, OrgCellDelegate, OrgDetailsViewControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+@interface OrgSearchViewController ()<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 @end
 
 @implementation OrgSearchViewController
@@ -105,86 +105,6 @@
     }];
 }
 
-- (void)didLikeOrg:(Organization*)likedOrg{
-    NSMutableArray *likedOrgs= [PFUser.currentUser[@"likedOrgs"] mutableCopy];
-    [likedOrgs addObject:likedOrg.ein];
-    [self performSelectorInBackground:@selector(addOrgToFriendsList:) withObject:likedOrg];//add to list in background
-    PFUser.currentUser[@"likedOrgs"]=likedOrgs;
-    [PFUser.currentUser saveInBackground];
-    [Post createPost:nil withDescription:@"Liked an Organization" withEvent:nil withOrg:likedOrg withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        if(error)
-            [AppDelegate displayAlert:@"Error Posting" withMessage:error.localizedDescription on:self];
-    }];
-}
-- (void)didUnlikeOrg:(Organization*)unlikedOrg{
-    NSMutableArray *likedOrgs= [PFUser.currentUser[@"likedOrgs"] mutableCopy];
-
-    [likedOrgs removeObject:unlikedOrg.ein];
-    [self performSelectorInBackground:@selector(deleteOrgFromFriendsList:) withObject:unlikedOrg];//add to list in background
-    PFUser.currentUser[@"likedOrgs"]=likedOrgs;
-    [PFUser.currentUser saveInBackground];
-}
-
--(void) addOrgToFriendsList:(Organization*)likedOrg{
-    /*
-     In order for Parse to actually save an object. It has to detect a significant enough change
-     in that object. Just adding/removing one object from an array is not enough for Parse to
-     save the object. Parse also does not allow users to modify attributes of other users. I added
-     a UserAccess pointer to each user, so that other are not directly modifying to user. The UserAccess
-     class contains an array of friend and dictionaries containing orgs/events that are liked by friends.
-     */
-    
-    [Helper getFriends:^(NSArray * _Nonnull friends, NSError * _Nonnull error) {
-        for(PFObject* friend in friends)//get the array of friends for current user
-        {
-            //if the friend alreay has other friends that like this org
-            PFObject * faAcess=friend[@"friendAccessible"];
-            if(faAcess[@"friendOrgs"][likedOrg.ein])
-            {
-                //add own username to that list of friends
-                NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
-                
-                NSMutableArray* list= [friendOrgs[likedOrg.ein] mutableCopy];
-                [list addObject:PFUser.currentUser.username];
-                
-                friendOrgs[likedOrg.ein]=list;
-                faAcess[@"friendOrgs"]= friendOrgs;
-            }
-            else
-            {
-                //create that array for the ein and add self as the person who liked it
-                NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
-                friendOrgs[likedOrg.ein]=@[PFUser.currentUser.username];
-                faAcess[@"friendOrgs"]= friendOrgs;
-            }
-            //save each friend
-            [faAcess saveInBackground];
-        }
-    }];
-}
--(void) deleteOrgFromFriendsList:(Organization*)unlikedOrg{
-    
-    [Helper getFriends:^(NSArray * _Nonnull friends, NSError * _Nonnull error) {
-        for(PFObject* friend in friends)//get the array of friends for current user
-        {
-            PFObject * faAcess=friend[@"friendAccessible"];
-            if(faAcess[@"friendOrgs"][unlikedOrg.ein])
-            {
-                //add own username to that list of friends
-                NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
-                
-                NSMutableArray* list= [friendOrgs[unlikedOrg.ein] mutableCopy];
-                [list removeObject:PFUser.currentUser.username];
-                
-                friendOrgs[unlikedOrg.ein]=list;
-                faAcess[@"friendOrgs"]= friendOrgs;
-            }
-            //save each friend
-            [faAcess saveInBackground];
-        }
-    }];
-}
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -197,14 +117,12 @@
         UITableViewCell *tappedCell= sender;
         NSIndexPath *tappedIndex= [self.tableView indexPathForCell:tappedCell];
         orgVC.org=self.organizations[tappedIndex.item];
-        orgVC.delegate=self;
         [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     OrgCell *orgCell= [tableView dequeueReusableCellWithIdentifier:@"OrgCell" forIndexPath:indexPath];
     orgCell.org=self.organizations[indexPath.item];
-    orgCell.delegate=self;
     [orgCell loadData];
     return orgCell;
 }

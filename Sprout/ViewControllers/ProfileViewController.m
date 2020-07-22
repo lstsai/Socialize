@@ -35,13 +35,7 @@
         self.user=PFUser.currentUser;
     }
     [self setupImagePicker];
-}
--(void) viewWillAppear:(BOOL)animated{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.user fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        [self loadProfile];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    }];
+    [self loadProfile];
 }
 
 -(void)loadProfile{
@@ -338,6 +332,18 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     sceneDelegate.window.rootViewController = loginViewController;
+}
+- (IBAction)didPullToRefresh:(id)sender {
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+        self.view.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, PULL_REFRESH_HEIGHT);
+        [self.user fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            [self loadProfile];
+            [UIView animateWithDuration:ANIMATION_DURATION/2 animations:^{
+                   self.view.transform =CGAffineTransformIdentity;
+                   self.view.alpha = SHOW_ALPHA;
+               }];
+        }];
+    }];
 }
 
 

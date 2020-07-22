@@ -34,5 +34,6 @@ extern const NSString* ORG_POST_TEXT_PLACEHOLDER;
 extern const NSString* EVENT_POST_TEXT_PLACEHOLDER;
 extern const CGFloat EMPTY_TITLE_FONT_SIZE;
 extern const CGFloat EMPTY_MESSAGE_FONT_SIZE;
+extern const CGFloat PULL_REFRESH_HEIGHT;
 
 #endif /* Constants_h */

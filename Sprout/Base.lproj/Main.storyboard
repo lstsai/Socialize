@@ -1310,6 +1310,7 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="UPL-1n-kKF" firstAttribute="trailing" secondItem="kQM-PC-l0c" secondAttribute="trailing" id="1y2-fh-ne2"/>
                             <constraint firstItem="pck-rJ-5T6" firstAttribute="leading" secondItem="lpq-hV-Iig" secondAttribute="trailing" constant="7" id="4I7-BT-kfH"/>
@@ -1354,6 +1355,9 @@
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                         </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="IyB-UI-Aru" appends="YES" id="LjA-Eg-luK"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="zt2-QA-4OA">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="TFg-d6-zco">
@@ -1391,6 +1395,11 @@
                         <action selector="didTapImagePicker:" destination="r4M-tQ-o4w" id="boa-uS-Zp8"/>
                     </connections>
                 </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="IyB-UI-Aru">
+                    <connections>
+                        <action selector="didPullToRefresh:" destination="r4M-tQ-o4w" id="xnJ-TN-Mh0"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2576.811594202899" y="1706.9196428571429"/>
         </scene>

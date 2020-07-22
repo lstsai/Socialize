@@ -39,9 +39,10 @@
 		DCB629DF24C207B300C42EFB /* PersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629DE24C207B300C42EFB /* PersonCell.m */; };
 		DCB629F124C620E400C42EFB /* OrgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629ED24C620E300C42EFB /* OrgCell.m */; };
 		DCB629F524C62C5D00C42EFB /* OrgCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629F424C62C5D00C42EFB /* OrgCollectionCell.m */; };
-		DCB65C1724C7513F005A43A9 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB65C1624C7513F005A43A9 /* PostCell.m */; };
 		DCB65C1A24C753C2005A43A9 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB65C1924C753C2005A43A9 /* Post.m */; };
-		DCB65C1D24C76201005A43A9 /* ParseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB65C1C24C76201005A43A9 /* ParseHelper.m */; };
+		DCB65C1D24C76201005A43A9 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB65C1C24C76201005A43A9 /* Helper.m */; };
+		DCB65C2324C7C44C005A43A9 /* OrgPostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB65C2224C7C44C005A43A9 /* OrgPostCell.m */; };
+		DCB65C2624C7C565005A43A9 /* EventPostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB65C2524C7C565005A43A9 /* EventPostCell.m */; };
 		DCE6FA4B24BFA447008091A3 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */; };
 		DCE6FA5124C0AA66008091A3 /* EventCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA5024C0AA66008091A3 /* EventCollectionCell.m */; };
 		DCE6FA5424C0AB58008091A3 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA5324C0AB58008091A3 /* ProfileViewController.m */; };
@@ -145,12 +146,14 @@
 		DCB629EF24C620E400C42EFB /* OrgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrgCell.h; sourceTree = "<group>"; };
 		DCB629F324C62C5D00C42EFB /* OrgCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrgCollectionCell.h; sourceTree = "<group>"; };
 		DCB629F424C62C5D00C42EFB /* OrgCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrgCollectionCell.m; sourceTree = "<group>"; };
-		DCB65C1524C7513F005A43A9 /* PostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
-		DCB65C1624C7513F005A43A9 /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		DCB65C1824C753C2005A43A9 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		DCB65C1924C753C2005A43A9 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
-		DCB65C1B24C76201005A43A9 /* ParseHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParseHelper.h; sourceTree = "<group>"; };
-		DCB65C1C24C76201005A43A9 /* ParseHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParseHelper.m; sourceTree = "<group>"; };
+		DCB65C1B24C76201005A43A9 /* Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		DCB65C1C24C76201005A43A9 /* Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
+		DCB65C2124C7C44C005A43A9 /* OrgPostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrgPostCell.h; sourceTree = "<group>"; };
+		DCB65C2224C7C44C005A43A9 /* OrgPostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrgPostCell.m; sourceTree = "<group>"; };
+		DCB65C2424C7C565005A43A9 /* EventPostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventPostCell.h; sourceTree = "<group>"; };
+		DCB65C2524C7C565005A43A9 /* EventPostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventPostCell.m; sourceTree = "<group>"; };
 		DCE6FA4924BFA447008091A3 /* EventDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventDetailsViewController.h; sourceTree = "<group>"; };
 		DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 		DCE6FA4F24C0AA66008091A3 /* EventCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCollectionCell.h; sourceTree = "<group>"; };
@@ -317,8 +320,10 @@
 				DCB629DE24C207B300C42EFB /* PersonCell.m */,
 				DCB629EF24C620E400C42EFB /* OrgCell.h */,
 				DCB629ED24C620E300C42EFB /* OrgCell.m */,
-				DCB65C1524C7513F005A43A9 /* PostCell.h */,
-				DCB65C1624C7513F005A43A9 /* PostCell.m */,
+				DCB65C2124C7C44C005A43A9 /* OrgPostCell.h */,
+				DCB65C2224C7C44C005A43A9 /* OrgPostCell.m */,
+				DCB65C2424C7C565005A43A9 /* EventPostCell.h */,
+				DCB65C2524C7C565005A43A9 /* EventPostCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -347,8 +352,8 @@
 				DC3CF1A924BD53A900C482F8 /* Constants.m */,
 				DC3CF1B824BE1D6100C482F8 /* LocationManager.h */,
 				DC3CF1B924BE1D6100C482F8 /* LocationManager.m */,
-				DCB65C1B24C76201005A43A9 /* ParseHelper.h */,
-				DCB65C1C24C76201005A43A9 /* ParseHelper.m */,
+				DCB65C1B24C76201005A43A9 /* Helper.h */,
+				DCB65C1C24C76201005A43A9 /* Helper.m */,
 			);
 			path = MISC;
 			sourceTree = "<group>";
@@ -662,11 +667,12 @@
 				DC3CF1AD24BD590D00C482F8 /* InfiniteScrollActivityView.m in Sources */,
 				DC3CF14C24BCB27900C482F8 /* AppDelegate.m in Sources */,
 				DC3CF1A124BD081300C482F8 /* OrgDetailsViewController.m in Sources */,
-				DCB65C1724C7513F005A43A9 /* PostCell.m in Sources */,
 				DCE6FA5124C0AA66008091A3 /* EventCollectionCell.m in Sources */,
-				DCB65C1D24C76201005A43A9 /* ParseHelper.m in Sources */,
+				DCB65C1D24C76201005A43A9 /* Helper.m in Sources */,
+				DCB65C2624C7C565005A43A9 /* EventPostCell.m in Sources */,
 				DC3CF1A724BD28DC00C482F8 /* WebViewController.m in Sources */,
 				DCB629DF24C207B300C42EFB /* PersonCell.m in Sources */,
+				DCB65C2324C7C44C005A43A9 /* OrgPostCell.m in Sources */,
 				DCB629D924C1FBE100C42EFB /* EventVerticalCell.m in Sources */,
 				DC3CF1C024BF644100C482F8 /* OrgSearchViewController.m in Sources */,
 				DC3CF15D24BCB27A00C482F8 /* main.m in Sources */,

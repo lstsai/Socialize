@@ -13,7 +13,7 @@
 #import "MBProgressHUD.h"
 #import "EventDetailsViewController.h"
 #import "OrgDetailsViewController.h"
-#import "ParseHelper.h"
+#import "Helper.h"
 @interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end
@@ -311,12 +311,12 @@
     if(picker==self.profileImagePicker){
         [self.profileImage setImage:editedImage];
         NSString *imageName=[PFUser.currentUser.username stringByAppendingString:@"ProfilePic"];
-        PFUser.currentUser[@"profilePic"]=[ParseHelper getPFFileFromImage:editedImage withName:imageName];
+        PFUser.currentUser[@"profilePic"]=[Helper getPFFileFromImage:editedImage withName:imageName];
     }
     else{
         [self.backgroundImage setImage:editedImage];
         NSString *imageName=[PFUser.currentUser.username stringByAppendingString:@"BackgroundPic"];
-        PFUser.currentUser[@"backgroundPic"]=[ParseHelper getPFFileFromImage:editedImage withName:imageName];
+        PFUser.currentUser[@"backgroundPic"]=[Helper getPFFileFromImage:editedImage withName:imageName];
     }
     [PFUser.currentUser saveInBackground];
     // Dismiss UIImagePickerController to go back to your original view controller

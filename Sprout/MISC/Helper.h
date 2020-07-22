@@ -1,5 +1,5 @@
 //
-//  ParseHelper.h
+//  Helper.h
 //  Sprout
 //
 //  Created by laurentsai on 7/21/20.
@@ -10,9 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ParseHelper : PFObject
+@interface Helper : PFObject
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image withName:(NSString*)imageName;
-
++ (void) getFriends:(void(^)(NSArray *friends, NSError *error))completion;
 @end
 
 NS_ASSUME_NONNULL_END

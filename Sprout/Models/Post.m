@@ -24,7 +24,7 @@
 + (void) createPost:(UIImage * _Nullable )image withDescription:(NSString *)description withRelatedObject:(PFObject*)relatedObject withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Post *newPost= [Post new];
     newPost.author=PFUser.currentUser;
-    newPost.image=[ParseHelper getPFFileFromImage:image withName:@"postImage"];
+    newPost.image=[Helper getPFFileFromImage:image withName:@"postImage"];
     newPost.postDescription=description;
     newPost.relatedObject=relatedObject;
     [newPost saveInBackgroundWithBlock:completion];

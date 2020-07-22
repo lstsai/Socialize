@@ -46,8 +46,7 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *eventDate = picker.date;
     [dateFormat setDateFormat:@"MM/dd/yy h:mm a"];
-    NSString *dateString = [dateFormat stringFromDate:eventDate];
-    self.startDateField.text = [NSString stringWithFormat:@"%@",dateString];
+    self.startDateField.text = [dateFormat stringFromDate:eventDate];
 }
 
 -(void) didUpdateEDate:(id)sender{
@@ -55,8 +54,7 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *eventDate = picker.date;
     [dateFormat setDateFormat:@"MM/dd/yy h:mm a"];
-    NSString *dateString = [dateFormat stringFromDate:eventDate];
-    self.endDateField.text = [NSString stringWithFormat:@"%@",dateString];
+    self.endDateField.text = [dateFormat stringFromDate:eventDate];
 }
 
 - (IBAction)didTapCreate:(id)sender {

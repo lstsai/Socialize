@@ -12,6 +12,7 @@
 #import "OrgDetailsViewController.h"
 #import "AppDelegate.h"
 #import "OrgCell.h"
+#import "Helper.h"
 @import ListPlaceholder;
 @interface OrgSearchViewController ()<UITableViewDelegate, UITableViewDataSource, OrgCellDelegate, OrgDetailsViewControllerDelegate>
 @end
@@ -119,63 +120,63 @@
 }
 
 -(void) addOrgToFriendsList:(Organization*)likedOrg{
-    PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
-    [selfAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
-    PFObject *friendAccess=[selfAccessQ getFirstObject];
-    for(NSString* friend in friendAccess[@"friends"])//get the array of friends for current user
-    {
-        PFQuery *friendQuery = [PFQuery queryWithClassName:@"_User"];
-        [friendQuery includeKey:@"friendAccessible"];
-        PFUser* friendProfile=[friendQuery getObjectWithId:friend];
-        //if the friend alreay has other friends that like this org
-        PFObject * faAcess=friendProfile[@"friendAccessible"];
-        if(faAcess[@"friendOrgs"][likedOrg.ein])
+    /*
+     In order for Parse to actually save an object. It has to detect a significant enough change
+     in that object. Just adding/removing one object from an array is not enough for Parse to
+     save the object. Parse also does not allow users to modify attributes of other users. I added
+     a UserAccess pointer to each user, so that other are not directly modifying to user. The UserAccess
+     class contains an array of friend and dictionaries containing orgs/events that are liked by friends.
+     */
+    
+    [Helper getFriends:^(NSArray * _Nonnull friends, NSError * _Nonnull error) {
+        for(PFObject* friend in friends)//get the array of friends for current user
         {
-            //add own username to that list of friends
-            NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
-            
-            NSMutableArray* list= [friendOrgs[likedOrg.ein] mutableCopy];
-            [list addObject:PFUser.currentUser.username];
-            
-            friendOrgs[likedOrg.ein]=list;
-            faAcess[@"friendOrgs"]= friendOrgs;
+            //if the friend alreay has other friends that like this org
+            PFObject * faAcess=friend[@"friendAccessible"];
+            if(faAcess[@"friendOrgs"][likedOrg.ein])
+            {
+                //add own username to that list of friends
+                NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
+                
+                NSMutableArray* list= [friendOrgs[likedOrg.ein] mutableCopy];
+                [list addObject:PFUser.currentUser.username];
+                
+                friendOrgs[likedOrg.ein]=list;
+                faAcess[@"friendOrgs"]= friendOrgs;
+            }
+            else
+            {
+                //create that array for the ein and add self as the person who liked it
+                NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
+                friendOrgs[likedOrg.ein]=@[PFUser.currentUser.username];
+                faAcess[@"friendOrgs"]= friendOrgs;
+            }
+            //save each friend
+            [faAcess saveInBackground];
         }
-        else
-        {
-            //create that array for the ein and add self as the person who liked it
-            NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
-            friendOrgs[likedOrg.ein]=@[PFUser.currentUser.username];
-            faAcess[@"friendOrgs"]= friendOrgs;
-        }
-        //save each friend
-        [faAcess saveInBackground];
-    }
+    }];
 }
 -(void) deleteOrgFromFriendsList:(Organization*)unlikedOrg{
-    PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
-    [selfAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
-    PFObject *friendAccess=[selfAccessQ getFirstObject];
-    for(NSString* friend in friendAccess[@"friends"])//get the array of friends for current user
-       {
-           PFQuery *friendQuery = [PFQuery queryWithClassName:@"_User"];
-           [friendQuery includeKey:@"friendAccessible"];
-           PFUser* friendProfile=[friendQuery getObjectWithId:friend];
-           //if the friend alreay has other friends that like this org
-           PFObject * faAcess=friendProfile[@"friendAccessible"];
-           if(faAcess[@"friendOrgs"][unlikedOrg.ein])
-           {
-               //add own username to that list of friends
-               NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
-               
-               NSMutableArray* list= [friendOrgs[unlikedOrg.ein] mutableCopy];
-               [list removeObject:PFUser.currentUser.username];
-               
-               friendOrgs[unlikedOrg.ein]=list;
-               faAcess[@"friendOrgs"]= friendOrgs;
-           }
-           //save each friend
-           [faAcess saveInBackground];
-       }
+    
+    [Helper getFriends:^(NSArray * _Nonnull friends, NSError * _Nonnull error) {
+        for(PFObject* friend in friends)//get the array of friends for current user
+        {
+            PFObject * faAcess=friend[@"friendAccessible"];
+            if(faAcess[@"friendOrgs"][unlikedOrg.ein])
+            {
+                //add own username to that list of friends
+                NSMutableDictionary *friendOrgs=[faAcess[@"friendOrgs"] mutableCopy];
+                
+                NSMutableArray* list= [friendOrgs[unlikedOrg.ein] mutableCopy];
+                [list removeObject:PFUser.currentUser.username];
+                
+                friendOrgs[unlikedOrg.ein]=list;
+                faAcess[@"friendOrgs"]= friendOrgs;
+            }
+            //save each friend
+            [faAcess saveInBackground];
+        }
+    }];
 }
 
 #pragma mark - Navigation

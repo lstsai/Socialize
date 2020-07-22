@@ -28,6 +28,7 @@
     self.tableView.dataSource=self;
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
+    self.tableView.keyboardDismissMode=UIScrollViewKeyboardDismissModeOnDrag;
     self.pageNum=1;
     self.organizations=[[NSMutableArray alloc]init];
     [self setupLoadingIndicators];

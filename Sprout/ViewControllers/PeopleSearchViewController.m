@@ -27,6 +27,7 @@
     self.collectionView.dataSource=self;
     self.collectionView.emptyDataSetSource = self;
     self.collectionView.emptyDataSetDelegate = self;
+    self.collectionView.keyboardDismissMode=UIScrollViewKeyboardDismissModeOnDrag;
     [self setupLoadingIndicators];
     [self setUpLayout];
     self.resultNum=1;

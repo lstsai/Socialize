@@ -27,9 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 -(void) getOrgs:( UIRefreshControl * _Nullable )refreshControl;
 -(void) loadMoreResults;
 
--(void) addOrgToFriendsList:(Organization*)likedOrg;
--(void) deleteOrgFromFriendsList:(Organization*)unlikedOrg;
-
 @end
 
 NS_ASSUME_NONNULL_END

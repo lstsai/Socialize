@@ -59,7 +59,6 @@
     self.layer.shadowRadius = SHADOW_RADIUS*2;
     self.layer.shadowOpacity = SHADOW_OPACITY;
     self.layer.masksToBounds = NO;
-    self.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.contentView.layer.cornerRadius].CGPath;
     
     self.dateView.layer.cornerRadius = CELL_CORNER_RADIUS/2;
     self.dateView.layer.borderColor = [UIColor clearColor].CGColor;
@@ -67,10 +66,9 @@
     self.dateView.clipsToBounds = YES;
     self.dateView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
     self.dateView.layer.shadowOffset = CGSizeMake(SHADOW_OFFSET, SHADOW_OFFSET);
-    self.dateView.layer.shadowRadius = SHADOW_RADIUS;
+    self.dateView.layer.shadowRadius = SHADOW_RADIUS*2;
     self.dateView.layer.shadowOpacity = SHADOW_OPACITY/2;
     self.dateView.layer.masksToBounds = NO;
-    self.dateView.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.dateView.bounds cornerRadius:self.dateView.layer.cornerRadius].CGPath;
 
 }
 

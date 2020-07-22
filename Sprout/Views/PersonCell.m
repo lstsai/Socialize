@@ -27,6 +27,5 @@
     self.layer.shadowRadius = SHADOW_RADIUS;
     self.layer.shadowOpacity = SHADOW_OPACITY;
     self.layer.masksToBounds = NO;
-    self.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.contentView.layer.cornerRadius].CGPath;
 }
 @end

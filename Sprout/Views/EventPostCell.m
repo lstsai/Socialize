@@ -53,7 +53,6 @@
     self.eventContainer.layer.shadowRadius = SHADOW_RADIUS;
     self.eventContainer.layer.shadowOpacity = SHADOW_OPACITY;
     self.eventContainer.layer.masksToBounds = NO;
-    self.eventContainer.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.eventContainer.bounds cornerRadius:self.eventContainer.layer.cornerRadius].CGPath;
 }
 
 -(void) getLikes{

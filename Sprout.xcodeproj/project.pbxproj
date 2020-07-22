@@ -310,8 +310,8 @@
 			children = (
 				DC3CF1AB24BD590D00C482F8 /* InfiniteScrollActivityView.h */,
 				DC3CF1AC24BD590D00C482F8 /* InfiniteScrollActivityView.m */,
-				DCE6FA5024C0AA66008091A3 /* EventCollectionCell.m */,
 				DCE6FA4F24C0AA66008091A3 /* EventCollectionCell.h */,
+				DCE6FA5024C0AA66008091A3 /* EventCollectionCell.m */,
 				DCB629F324C62C5D00C42EFB /* OrgCollectionCell.h */,
 				DCB629F424C62C5D00C42EFB /* OrgCollectionCell.m */,
 				DCB629D724C1FBE100C42EFB /* EventVerticalCell.h */,

@@ -35,15 +35,18 @@
     self.website.textColor=[UIColor linkColor];
     
     if(self.org.imageURL)//set image if available
+    {
         [self.backdropImage setImageWithURL:self.org.imageURL];
+        self.backdropImage.backgroundColor=[UIColor whiteColor];
+    }
     else{
         //fetch image if not available, set when complete
         [[APIManager shared] getOrgImage:self.org.name completion:^(NSURL * _Nonnull orgImage, NSError * _Nonnull error) {
             if(orgImage)
             {
                 self.org.imageURL=orgImage;
-                NSLog(@"%@", orgImage);
                 [self.backdropImage setImageWithURL:self.org.imageURL];
+                self.backdropImage.backgroundColor=[UIColor whiteColor];
             }
         }];
     }

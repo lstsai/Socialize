@@ -47,7 +47,7 @@
     self.orgContainer.layer.shadowRadius = SHADOW_RADIUS;
     self.orgContainer.layer.shadowOpacity = SHADOW_OPACITY;
     self.orgContainer.layer.masksToBounds = NO;
-    self.orgContainer.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.orgContainer.bounds cornerRadius:self.orgContainer.layer.cornerRadius].CGPath;
+
 }
 
 -(void) getLikes{

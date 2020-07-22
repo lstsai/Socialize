@@ -24,6 +24,7 @@
 }
 -(void) loadEventDetails{
     self.eventNameLabel.text=self.event.name;
+    [self.event.author fetchIfNeeded];
     self.eventAuthorLabel.text= self.event.author.username;
     
     GMSGeocoder *geocoder= [GMSGeocoder geocoder];

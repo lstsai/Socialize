@@ -13,6 +13,8 @@
 #import "Constants.h"
 #import "AppDelegate.h"
 #import "Helper.h"
+#import "EventDetailsViewController.h"
+#import "OrgDetailsViewController.h"
 @interface HomeViewController ()<CreateViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @end
@@ -90,6 +92,23 @@
         CreateViewController *createController = (CreateViewController*)navigationController.topViewController;
         createController.delegate = self;
     }
+    else if ([segue.identifier isEqualToString:@"eventSegue"])
+    {
+        EventDetailsViewController *evc= segue.destinationViewController;
+        UITableViewCell* tappedcell=sender;
+        NSIndexPath *tappedIndex= [self.tableView indexPathForCell:tappedcell];
+        evc.event=((EventPostCell*)tappedcell).event;
+        [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
+    }
+    else if ([segue.identifier isEqualToString:@"orgSegue"])
+    {
+        OrgDetailsViewController *ovc= segue.destinationViewController;
+        UITableViewCell* tappedcell=sender;
+        NSIndexPath *tappedIndex= [self.tableView indexPathForCell:tappedcell];
+        ovc.org=((OrgPostCell*)tappedcell).org;
+        [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
+    }
+    
 }
 
 

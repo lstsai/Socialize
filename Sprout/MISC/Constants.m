@@ -34,6 +34,8 @@ const int HIDE_ALPHA=0;
 
 const int NUM_PLACEHOLDER_CELLS=3;
 
+const NSString* ORG_POST_TEXT_PLACEHOLDER =@"Share something about this organization";
+const NSString* EVENT_POST_TEXT_PLACEHOLDER=@"Share something about this event";
 
 
 

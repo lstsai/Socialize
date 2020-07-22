@@ -43,6 +43,7 @@
 		DCB65C1D24C76201005A43A9 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB65C1C24C76201005A43A9 /* Helper.m */; };
 		DCB65C2324C7C44C005A43A9 /* OrgPostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB65C2224C7C44C005A43A9 /* OrgPostCell.m */; };
 		DCB65C2624C7C565005A43A9 /* EventPostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB65C2524C7C565005A43A9 /* EventPostCell.m */; };
+		DCB65C2C24C8BA08005A43A9 /* CreatePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB65C2B24C8BA08005A43A9 /* CreatePostViewController.m */; };
 		DCE6FA4B24BFA447008091A3 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */; };
 		DCE6FA5124C0AA66008091A3 /* EventCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA5024C0AA66008091A3 /* EventCollectionCell.m */; };
 		DCE6FA5424C0AB58008091A3 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA5324C0AB58008091A3 /* ProfileViewController.m */; };
@@ -154,6 +155,8 @@
 		DCB65C2224C7C44C005A43A9 /* OrgPostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrgPostCell.m; sourceTree = "<group>"; };
 		DCB65C2424C7C565005A43A9 /* EventPostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventPostCell.h; sourceTree = "<group>"; };
 		DCB65C2524C7C565005A43A9 /* EventPostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventPostCell.m; sourceTree = "<group>"; };
+		DCB65C2A24C8BA08005A43A9 /* CreatePostViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreatePostViewController.h; sourceTree = "<group>"; };
+		DCB65C2B24C8BA08005A43A9 /* CreatePostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreatePostViewController.m; sourceTree = "<group>"; };
 		DCE6FA4924BFA447008091A3 /* EventDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventDetailsViewController.h; sourceTree = "<group>"; };
 		DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 		DCE6FA4F24C0AA66008091A3 /* EventCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCollectionCell.h; sourceTree = "<group>"; };
@@ -301,6 +304,8 @@
 				DCE6FA5324C0AB58008091A3 /* ProfileViewController.m */,
 				DCB629DA24C206A900C42EFB /* PeopleSearchViewController.h */,
 				DCB629DB24C206A900C42EFB /* PeopleSearchViewController.m */,
+				DCB65C2A24C8BA08005A43A9 /* CreatePostViewController.h */,
+				DCB65C2B24C8BA08005A43A9 /* CreatePostViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -666,6 +671,7 @@
 				DC3CF1BA24BE1D6100C482F8 /* LocationManager.m in Sources */,
 				DC3CF1AD24BD590D00C482F8 /* InfiniteScrollActivityView.m in Sources */,
 				DC3CF14C24BCB27900C482F8 /* AppDelegate.m in Sources */,
+				DCB65C2C24C8BA08005A43A9 /* CreatePostViewController.m in Sources */,
 				DC3CF1A124BD081300C482F8 /* OrgDetailsViewController.m in Sources */,
 				DCE6FA5124C0AA66008091A3 /* EventCollectionCell.m in Sources */,
 				DCB65C1D24C76201005A43A9 /* Helper.m in Sources */,

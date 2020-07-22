@@ -30,6 +30,7 @@ extern const CGFloat CELL_TOP_OFFSET;
 extern const int SHOW_ALPHA;
 extern const int HIDE_ALPHA;
 extern const int NUM_PLACEHOLDER_CELLS;
-
+extern const NSString* ORG_POST_TEXT_PLACEHOLDER;
+extern const NSString* EVENT_POST_TEXT_PLACEHOLDER;
 
 #endif /* Constants_h */

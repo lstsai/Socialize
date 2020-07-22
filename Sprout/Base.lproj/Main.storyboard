@@ -403,7 +403,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JGG-J8-rPG"/>
                     </view>
-                    <navigationItem key="navigationItem" id="fPz-Ib-d3l"/>
+                    <navigationItem key="navigationItem" id="fPz-Ib-d3l">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="DrU-vy-T5Y">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aFr-9D-8D3">
+                                <rect key="frame" x="368.5" y="15" width="25.5" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="square.and.pencil" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                </state>
+                                <connections>
+                                    <segue destination="qgr-ec-JOc" kind="presentation" identifier="orgPostSegue" id="vmk-95-jLU"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="address" destination="dOO-My-ft0" id="Q9J-dS-kZK"/>
                         <outlet property="backdropImage" destination="mAG-bT-6og" id="8PT-hz-tMY"/>
@@ -454,7 +467,92 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BN0-pW-TxF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2080" y="3495"/>
+            <point key="canvasLocation" x="-2080" y="3629"/>
+        </scene>
+        <!--Create Post View Controller-->
+        <scene sceneID="ecp-9p-TNZ">
+            <objects>
+                <viewController id="qgr-ec-JOc" customClass="CreatePostViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kcF-Kl-i1O">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8r-ir-eW4">
+                                <rect key="frame" x="20" y="20" width="21" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="29s-g1-oBK"/>
+                                    <constraint firstAttribute="width" constant="21" id="2db-De-0oU"/>
+                                </constraints>
+                                <state key="normal" image="xmark" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapDismiss:" destination="qgr-ec-JOc" eventType="touchUpInside" id="G6y-gQ-QB4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Je8-b4-2Ke">
+                                <rect key="frame" x="371" y="20" width="23" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="5C5-v2-9pI"/>
+                                    <constraint firstAttribute="width" constant="23" id="oSo-25-l7v"/>
+                                </constraints>
+                                <state key="normal" image="square.and.arrow.up" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapPost:" destination="qgr-ec-JOc" eventType="touchUpInside" id="pBT-i9-2hY"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Post" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2iV-h3-HYO">
+                                <rect key="frame" x="156" y="20" width="102" height="23"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jdc-UQ-XMO" customClass="PFImageView">
+                                <rect key="frame" x="32" y="66.5" width="75" height="72.5"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="NvY-2p-siV"/>
+                                    <constraint firstAttribute="height" constant="75" id="Uqb-kB-y5l"/>
+                                </constraints>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hvH-c6-IAU">
+                                <rect key="frame" x="116" y="65" width="266" height="243"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="2iV-h3-HYO" firstAttribute="centerX" secondItem="OwJ-eq-d8q" secondAttribute="centerX" id="30t-H7-15d"/>
+                            <constraint firstItem="hvH-c6-IAU" firstAttribute="top" secondItem="jdc-UQ-XMO" secondAttribute="top" id="6gl-qS-YEF"/>
+                            <constraint firstItem="OwJ-eq-d8q" firstAttribute="trailing" secondItem="Je8-b4-2Ke" secondAttribute="trailing" constant="20" id="BIh-eJ-o1y"/>
+                            <constraint firstItem="jdc-UQ-XMO" firstAttribute="leading" secondItem="D8r-ir-eW4" secondAttribute="trailing" constant="-9" id="C6F-h0-Su9"/>
+                            <constraint firstItem="jdc-UQ-XMO" firstAttribute="top" secondItem="2iV-h3-HYO" secondAttribute="bottom" constant="22" id="KAg-Nq-r1a"/>
+                            <constraint firstItem="hvH-c6-IAU" firstAttribute="leading" secondItem="jdc-UQ-XMO" secondAttribute="trailing" constant="9" id="crP-g7-zt4"/>
+                            <constraint firstItem="Je8-b4-2Ke" firstAttribute="leading" secondItem="hvH-c6-IAU" secondAttribute="trailing" constant="-11" id="eyX-qn-5lE"/>
+                            <constraint firstItem="Je8-b4-2Ke" firstAttribute="top" secondItem="2iV-h3-HYO" secondAttribute="top" id="izl-Ko-kRk"/>
+                            <constraint firstItem="2iV-h3-HYO" firstAttribute="top" secondItem="D8r-ir-eW4" secondAttribute="top" id="kEp-an-JL3"/>
+                            <constraint firstItem="OwJ-eq-d8q" firstAttribute="bottom" secondItem="hvH-c6-IAU" secondAttribute="bottom" constant="500" id="qzS-XS-jjx"/>
+                            <constraint firstItem="D8r-ir-eW4" firstAttribute="leading" secondItem="OwJ-eq-d8q" secondAttribute="leading" constant="20" id="sbe-WO-Jr0"/>
+                            <constraint firstItem="D8r-ir-eW4" firstAttribute="top" secondItem="OwJ-eq-d8q" secondAttribute="top" constant="20" id="zWR-GU-rCY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="OwJ-eq-d8q"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5yJ-NO-pa2"/>
+                    <connections>
+                        <outlet property="dismissButton" destination="D8r-ir-eW4" id="thi-lT-8bA"/>
+                        <outlet property="postButton" destination="Je8-b4-2Ke" id="tEw-TP-LhK"/>
+                        <outlet property="postTextView" destination="hvH-c6-IAU" id="fPO-hm-LqF"/>
+                        <outlet property="profileImage" destination="jdc-UQ-XMO" id="xx9-PT-7Rh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gdE-Yu-9yH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1197.1014492753625" y="3660.9375"/>
         </scene>
         <!--Home-->
         <scene sceneID="A0V-rC-Ciq">
@@ -1733,7 +1831,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Iwv-9y-q5E"/>
                     </view>
-                    <navigationItem key="navigationItem" id="M4F-h2-XOd"/>
+                    <navigationItem key="navigationItem" id="M4F-h2-XOd">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="kNF-NN-awJ">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7Dd-YO-tTR">
+                                <rect key="frame" x="368.5" y="15" width="25.5" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="square.and.pencil" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                </state>
+                                <connections>
+                                    <segue destination="qgr-ec-JOc" kind="presentation" identifier="eventPostSegue" id="Jfi-X2-tcA"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="eventAuthorLabel" destination="wSc-eO-98M" id="ZnJ-Fy-plK"/>
                         <outlet property="eventDetailsLabel" destination="c99-LB-YHX" id="JeR-AS-SHQ"/>
@@ -1746,7 +1857,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PAp-W8-1vB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1038" y="2999"/>
+            <point key="canvasLocation" x="-1038" y="2948"/>
         </scene>
         <!--profile-->
         <scene sceneID="myu-dX-JwW">
@@ -1848,6 +1959,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="WTd-pV-B1j"/>
         <segue reference="YTV-Ne-fK9"/>
+        <segue reference="vmk-95-jLU"/>
         <segue reference="rff-eI-h6r"/>
     </inferredMetricsTieBreakers>
     <resources>

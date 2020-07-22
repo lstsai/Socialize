@@ -9,6 +9,7 @@
 
 #import "EventDetailsViewController.h"
 #import "AppDelegate.h"
+#import "CreatePostViewController.h"
 @import GooglePlaces;
 @import GoogleMaps;
 @interface EventDetailsViewController ()
@@ -81,14 +82,21 @@
     }
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if([segue.identifier isEqualToString:@"eventPostSegue"])
+    {
+        CreatePostViewController *createPostVC=segue.destinationViewController;
+        createPostVC.event=self.event;
+        createPostVC.org=nil;
+    }
 }
-*/
+
 
 @end

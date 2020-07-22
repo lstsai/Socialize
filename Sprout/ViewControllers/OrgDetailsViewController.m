@@ -12,6 +12,7 @@
 #import <Parse/Parse.h>
 #import "APIManager.h"
 #import "UIImageView+AFNetworking.h"
+#import "CreatePostViewController.h"
 @interface OrgDetailsViewController ()
 
 @end
@@ -81,6 +82,12 @@
     {
         WebViewController *webVC=segue.destinationViewController;
         webVC.link=self.org.website;
+    }
+    else if([segue.identifier isEqualToString:@"orgPostSegue"])
+    {
+        CreatePostViewController *createPostVC=segue.destinationViewController;
+        createPostVC.org=self.org;
+        createPostVC.event=nil;
     }
 }
 

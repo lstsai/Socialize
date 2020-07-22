@@ -8,13 +8,18 @@
 
 #import "EventCollectionCell.h"
 #import "Constants.h"
+#import "DateTools.h"
 @implementation EventCollectionCell
 -(void) loadEventCell:(Event*)event{
     
     self.eventImage.file=event.image;
     [self.eventImage loadInBackground];
     self.eventNameLabel.text=event.name;
-   
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM/dd/yy h:mm a"];
+    self.timeLabel.text = [dateFormat stringFromDate:event.startTime];
+    
     self.contentView.layer.cornerRadius = CELL_CORNER_RADIUS;
     self.contentView.layer.borderColor = [UIColor clearColor].CGColor;
     self.contentView.layer.masksToBounds = YES;

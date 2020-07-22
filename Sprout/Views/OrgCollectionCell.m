@@ -13,6 +13,7 @@
 @implementation OrgCollectionCell
 -(void) loadOrgCell:(Organization*)org{
     
+    self.orgImage.image=nil;
     if(org.imageURL)//set image if available
     {
         [self.orgImage setImageWithURL:org.imageURL];

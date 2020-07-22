@@ -33,9 +33,6 @@
     self.event=self.post.event;
     self.eventImage.file=self.event.image;
     [self.eventImage loadInBackground];
-    self.eventImage.layer.cornerRadius = CELL_CORNER_RADIUS;
-    self.eventImage.layer.masksToBounds = YES;
-    self.eventImage.clipsToBounds = YES;
     
     self.eventNameLabel.text=self.event.name;
     [self setShadow];

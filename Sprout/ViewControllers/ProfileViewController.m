@@ -14,6 +14,8 @@
 #import "EventDetailsViewController.h"
 #import "OrgDetailsViewController.h"
 #import "Helper.h"
+#import "LoginViewController.h"
+#import "SceneDelegate.h"
 @interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end
@@ -323,6 +325,19 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)didTapLogout:(id)sender {
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        if(error)
+            [AppDelegate displayAlert:@"Error Logging out" withMessage:error.localizedDescription on:self];
+        else
+            NSLog(@"Success Logging out");
+    }];
+    //go back to login
+    SceneDelegate *sceneDelegate = (SceneDelegate *) self.view.window.windowScene.delegate;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    sceneDelegate.window.rootViewController = loginViewController;
+}
 
 
 #pragma mark - Navigation

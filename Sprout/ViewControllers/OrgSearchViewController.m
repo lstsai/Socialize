@@ -14,8 +14,9 @@
 #import "OrgCell.h"
 #import "Helper.h"
 #import "Post.h"
+#import "UIScrollView+EmptyDataSet.h"
 @import ListPlaceholder;
-@interface OrgSearchViewController ()<UITableViewDelegate, UITableViewDataSource, OrgCellDelegate, OrgDetailsViewControllerDelegate>
+@interface OrgSearchViewController ()<UITableViewDelegate, UITableViewDataSource, OrgCellDelegate, OrgDetailsViewControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 @end
 
 @implementation OrgSearchViewController
@@ -26,10 +27,13 @@
     
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
     self.pageNum=1;
     self.organizations=[[NSMutableArray alloc]init];
     [self setupLoadingIndicators];
     [self.tableView reloadData];
+    self.tableView.tableFooterView = [UIView new];
 }
 -(void) setupLoadingIndicators{
     UIRefreshControl *refreshControl= [[UIRefreshControl alloc] init];//initialize the refresh control
@@ -208,6 +212,40 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.organizations.count;;
 }
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"emptySprout"];
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"No Organizations to Show";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"Search for more organizations to display";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+                                 
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    return self.organizations.count==0;
+}
+
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0);
     cell.contentView.alpha = 0.3;

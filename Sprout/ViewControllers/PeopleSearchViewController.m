@@ -12,8 +12,9 @@
 #import "Constants.h"
 #import "ProfileViewController.h"
 #import "Constants.h"
+#import "UIScrollView+EmptyDataSet.h"
 
-@interface PeopleSearchViewController ()< UICollectionViewDelegate, UICollectionViewDataSource>
+@interface PeopleSearchViewController ()< UICollectionViewDelegate, UICollectionViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @end
 
@@ -24,6 +25,8 @@
     // Do any additional setup after loading the view.
     self.collectionView.delegate=self;
     self.collectionView.dataSource=self;
+    self.collectionView.emptyDataSetSource = self;
+    self.collectionView.emptyDataSetDelegate = self;
     [self setupLoadingIndicators];
     [self setUpLayout];
     self.resultNum=1;
@@ -118,6 +121,40 @@
             [self getPeople:nil];
         }
     }
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"group"];
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"No Users to Show";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"Search for more users to display";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+                                 
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    return self.people.count==0;
 }
 
 #pragma mark - Navigation

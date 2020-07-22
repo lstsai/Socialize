@@ -13,8 +13,9 @@
 #import "AppDelegate.h"
 #import "EventVerticalCell.h"
 #import "Constants.h"
+#import "UIScrollView+EmptyDataSet.h"
 @import ListPlaceholder;
-@interface EventSearchViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, EventVerticalCellDelegate, EventDetailsViewControllerDelegate>
+@interface EventSearchViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, EventVerticalCellDelegate, EventDetailsViewControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @end
 
@@ -25,6 +26,8 @@
     // Do any additional setup after loading the view.
     self.collectionView.delegate=self;
     self.collectionView.dataSource=self;
+    self.collectionView.emptyDataSetSource = self;
+    self.collectionView.emptyDataSetDelegate = self;
     [self setupLoadingIndicators];
     [self setupLayout];
 }
@@ -206,7 +209,37 @@
         cell.contentView.alpha = SHOW_ALPHA;
     }];
 }
-
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"emptyEvent"];
+}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"No Events to show";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"Search for more events to display";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+                                 
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    return self.events.count==0;
+}
 
 #pragma mark - Navigation
 

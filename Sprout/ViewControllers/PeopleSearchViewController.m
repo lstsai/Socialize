@@ -81,7 +81,10 @@
 
 -(void) getPeople:( UIRefreshControl * _Nullable )refreshControl{
     if([self.searchText isEqualToString:@""])
+    {
+        [refreshControl endRefreshing];
         return;
+    }
     if(![refreshControl isKindOfClass:[UIRefreshControl class]])
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     

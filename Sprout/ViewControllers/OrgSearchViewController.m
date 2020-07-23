@@ -52,7 +52,11 @@
 
 -(void) getOrgs:( UIRefreshControl * _Nullable )refreshControl{
     if([self.searchText isEqualToString:@""])
+    {
+        if([refreshControl isKindOfClass:[UIRefreshControl class]])
+            [refreshControl endRefreshing];
         return;
+    }
     if(![refreshControl isKindOfClass:[UIRefreshControl class]] &&self.organizations.count==0)
          [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     else

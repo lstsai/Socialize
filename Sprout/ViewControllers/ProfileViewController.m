@@ -78,17 +78,25 @@
     [self getLikedEventInfo];
 }
 -(void)getLikedOrgInfo{
-    [MBProgressHUD showHUDAddedTo:self.orgCollectionView animated:YES];
-    [[APIManager shared] getOrgsWithEIN:self.user[@"likedOrgs"] completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
-        if(error)
-            [Helper displayAlert:@"Error getting liked organizations" withMessage:error.localizedDescription on:self];
-        else{
-            self.likedOrgs =organizations;
-            NSLog(@"Success getting liked orgs");
-            [self.orgCollectionView reloadData];
-        }
-        [MBProgressHUD hideHUDForView:self.orgCollectionView animated:YES];
-    }];
+    if(((NSArray*)self.user[@"likedOrgs"]).count!=0)
+    {
+        [MBProgressHUD showHUDAddedTo:self.orgCollectionView animated:YES];
+        [[APIManager shared] getOrgsWithEIN:self.user[@"likedOrgs"] completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
+            if(error)
+                [Helper displayAlert:@"Error getting liked organizations" withMessage:error.localizedDescription on:self];
+            else{
+                self.likedOrgs =organizations;
+                NSLog(@"Success getting liked orgs");
+                [self.orgCollectionView reloadData];
+            }
+            [MBProgressHUD hideHUDForView:self.orgCollectionView animated:YES];
+        }];
+    }
+    else
+    {
+        self.likedOrgs=@[];
+        [self.orgCollectionView reloadData];
+    }
     
 }
 -(void)getLikedEventInfo{

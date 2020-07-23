@@ -42,7 +42,7 @@
     [self setShadow];
 
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"E, d MMM yyyy h:mm a"];
+    [dateFormat setDateFormat:@"MM/dd/yy h:mm a"];
     self.eventDateTime.text = [dateFormat stringFromDate:self.event.startTime];
     [self performSelectorInBackground:@selector(getLikes) withObject:nil];
 }

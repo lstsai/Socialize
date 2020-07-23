@@ -41,37 +41,6 @@
     }];
     
 }
-- (IBAction)didTapSignUp:(id)sender {
-    [self.activityIndicator startAnimating];
-    PFUser *newUser = [PFUser user];
-    
-    newUser.username = self.usernameField.text;
-    newUser.password = self.passwordField.text;
-    PFObject *userAccessible= [PFObject objectWithClassName:@"UserAccessible"];
-    userAccessible[@"username"]=newUser.username;
-    
-    if([newUser.username isEqualToString:@""] || [newUser.password isEqualToString:@""])
-    {
-        [Helper displayAlert:@"Error Signing up" withMessage:@"Username and/or password cannot be empty" on:self];
-        [self.activityIndicator stopAnimating];
-    }
-    else{//only signup if there was no error
-        [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-            if (error != nil) {
-                NSLog(@"Error: %@", error.localizedDescription);
-                [Helper displayAlert:@"Error Signing up" withMessage:error.localizedDescription on:self];
-
-            } else {
-                NSLog(@"User registered successfully");
-                [userAccessible saveInBackground];
-                newUser[@"friendAccessible"]=userAccessible;
-                [newUser saveInBackground];
-                [self performSegueWithIdentifier:@"loginSegue" sender:nil];//go to timeline after login
-            }
-            [self.activityIndicator stopAnimating];
-        }];
-    }
-}
 
 /*
 #pragma mark - Navigation

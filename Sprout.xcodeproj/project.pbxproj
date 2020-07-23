@@ -34,6 +34,7 @@
 		DC3CF1BD24BE500C00C482F8 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1BC24BE500C00C482F8 /* Event.m */; };
 		DC3CF1C024BF644100C482F8 /* OrgSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1BF24BF644100C482F8 /* OrgSearchViewController.m */; };
 		DC3CF1C324BF645300C482F8 /* EventSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1C224BF645300C482F8 /* EventSearchViewController.m */; };
+		DC89989324C9FD00005B2DB9 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC89989224C9FD00005B2DB9 /* SignUpViewController.m */; };
 		DCB629D924C1FBE100C42EFB /* EventVerticalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629D824C1FBE100C42EFB /* EventVerticalCell.m */; };
 		DCB629DC24C206A900C42EFB /* PeopleSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629DB24C206A900C42EFB /* PeopleSearchViewController.m */; };
 		DCB629DF24C207B300C42EFB /* PersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629DE24C207B300C42EFB /* PersonCell.m */; };
@@ -123,6 +124,8 @@
 		DC3CF1BF24BF644100C482F8 /* OrgSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrgSearchViewController.m; sourceTree = "<group>"; };
 		DC3CF1C124BF645300C482F8 /* EventSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventSearchViewController.h; sourceTree = "<group>"; };
 		DC3CF1C224BF645300C482F8 /* EventSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventSearchViewController.m; sourceTree = "<group>"; };
+		DC89989124C9FD00005B2DB9 /* SignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		DC89989224C9FD00005B2DB9 /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		DCB629C424C1482B00C42EFB /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Animation.swift; path = ViewAnimator/Classes/Protocols/Animation.swift; sourceTree = "<group>"; };
 		DCB629C524C1482B00C42EFB /* AnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnimationType.swift; path = ViewAnimator/Classes/Models/AnimationType.swift; sourceTree = "<group>"; };
 		DCB629C624C1482B00C42EFB /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Direction.swift; path = ViewAnimator/Classes/Models/Direction.swift; sourceTree = "<group>"; };
@@ -306,6 +309,8 @@
 				DCB629DB24C206A900C42EFB /* PeopleSearchViewController.m */,
 				DCB65C2A24C8BA08005A43A9 /* CreatePostViewController.h */,
 				DCB65C2B24C8BA08005A43A9 /* CreatePostViewController.m */,
+				DC89989124C9FD00005B2DB9 /* SignUpViewController.h */,
+				DC89989224C9FD00005B2DB9 /* SignUpViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -673,6 +678,7 @@
 				DC3CF14C24BCB27900C482F8 /* AppDelegate.m in Sources */,
 				DCB65C2C24C8BA08005A43A9 /* CreatePostViewController.m in Sources */,
 				DC3CF1A124BD081300C482F8 /* OrgDetailsViewController.m in Sources */,
+				DC89989324C9FD00005B2DB9 /* SignUpViewController.m in Sources */,
 				DCE6FA5124C0AA66008091A3 /* EventCollectionCell.m in Sources */,
 				DCB65C1D24C76201005A43A9 /* Helper.m in Sources */,
 				DCB65C2624C7C565005A43A9 /* EventPostCell.m in Sources */,

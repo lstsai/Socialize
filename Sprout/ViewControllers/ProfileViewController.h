@@ -10,6 +10,8 @@
 #import "Organization.h"
 #import "Event.h"
 #import "APIManager.h"
+#import "UIScrollView+EmptyDataSet.h"
+
 @import Parse;
 NS_ASSUME_NONNULL_BEGIN
 

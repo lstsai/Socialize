@@ -16,7 +16,7 @@
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
 #import "Constants.h"
-@interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @end
 
@@ -29,6 +29,10 @@
     self.eventCollectionView.dataSource=self;
     self.orgCollectionView.delegate=self;
     self.orgCollectionView.dataSource=self;
+    self.orgCollectionView.emptyDataSetSource = self;
+    self.orgCollectionView.emptyDataSetDelegate = self;
+    self.eventCollectionView.emptyDataSetSource = self;
+    self.eventCollectionView.emptyDataSetDelegate = self;
     self.likedOrgs= [[NSMutableArray alloc]init];
     if(!self.user){
         [PFUser.currentUser fetchInBackground];
@@ -48,6 +52,7 @@
     {
         [self.topButton setTitle:@"Edit" forState:UIControlStateNormal];
         [self.topButton setTitle:@"Edit" forState:UIControlStateSelected];
+        self.topButton.alpha=0;
     }
     else{
         [self.topButton setTitle:@"+ Friend" forState:UIControlStateNormal];
@@ -352,6 +357,34 @@
                }];
         }];
     }];
+}
+
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    if((UICollectionView*)scrollView==self.eventCollectionView)
+        return [UIImage imageNamed:@"emptyEvent"];
+    else
+        return [UIImage imageNamed:@"emptySprout"];
+}
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
+    NSString *text;
+    if((UICollectionView*) scrollView== self.eventCollectionView)
+        text = @"No Liked Events";
+    else
+        text = @"No Liked Orgizations";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:EMPTY_TITLE_FONT_SIZE],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    if((UICollectionView*)scrollView==self.eventCollectionView)
+        return self.likedEvents.count==0;
+    else
+        return self.likedOrgs.count==0;
 }
 
 

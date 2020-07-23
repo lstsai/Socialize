@@ -15,12 +15,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="sprout.png" translatesAutoresizingMaskIntoConstraints="NO" id="YCA-2c-sE7">
-                                <rect key="frame" x="80" y="353" width="254" height="190"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="sprout.png" translatesAutoresizingMaskIntoConstraints="NO" id="YCA-2c-sE7">
+                                <rect key="frame" x="80" y="358" width="254" height="190"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.58402058915138289" green="0.74922668147208116" blue="0.6097390975753374" alpha="0.90196917808219179" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="YCA-2c-sE7" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="4ur-Ol-dfX"/>
+                            <constraint firstItem="YCA-2c-sE7" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="AAA-2I-6dd"/>
+                            <constraint firstItem="YCA-2c-sE7" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.212054" id="G8V-Ny-n8i"/>
+                            <constraint firstItem="YCA-2c-sE7" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.613527" id="weV-XF-VCI"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>

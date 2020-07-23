@@ -1,0 +1,80 @@
+PODS:
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
+  - Bolts/Tasks (1.9.1)
+  - DateTools (2.0.0)
+  - DZNEmptyDataSet (1.8.1)
+  - GoogleMaps (3.9.0):
+    - GoogleMaps/Maps (= 3.9.0)
+  - GoogleMaps/Base (3.9.0)
+  - GoogleMaps/Maps (3.9.0):
+    - GoogleMaps/Base
+  - GooglePlaces (3.9.0):
+    - GoogleMaps/Base (= 3.9.0)
+  - HMSegmentedControl (1.5.6)
+  - ListPlaceholder (1.4)
+  - MBProgressHUD (1.2.0)
+  - Parse (1.18.0):
+    - Parse/Core (= 1.18.0)
+  - Parse/Core (1.18.0):
+    - Bolts/Tasks (= 1.9.1)
+  - Parse/UI (1.18.0):
+    - Parse/Core
+  - "UITextView+Placeholder (1.4.0)"
+
+DEPENDENCIES:
+  - AFNetworking
+  - DateTools
+  - DZNEmptyDataSet
+  - GoogleMaps
+  - GooglePlaces
+  - HMSegmentedControl
+  - ListPlaceholder
+  - MBProgressHUD
+  - Parse
+  - Parse/UI
+  - "UITextView+Placeholder"
+
+SPEC REPOS:
+  trunk:
+    - AFNetworking
+    - Bolts
+    - DateTools
+    - DZNEmptyDataSet
+    - GoogleMaps
+    - GooglePlaces
+    - HMSegmentedControl
+    - ListPlaceholder
+    - MBProgressHUD
+    - Parse
+    - "UITextView+Placeholder"
+
+SPEC CHECKSUMS:
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
+  DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  GoogleMaps: 4b5346bddfe6911bb89155d43c903020170523ac
+  GooglePlaces: 1634d019549b969d40fe0ccb0b9513055adebe01
+  HMSegmentedControl: 34c1f54d822d8308e7b24f5d901ec674dfa31352
+  ListPlaceholder: 08ddaddf67520a20fc52cf37160fb56aa64d071d
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  Parse: 79bdda34fdb7eb2a707a43a951c8aae236cb3e34
+  "UITextView+Placeholder": d7b0c400921f66523f3a85d74f774512e14f6502
+
+PODFILE CHECKSUM: 8f14da890c1ecd8c062b705e888a469e1f6c1123
+
+COCOAPODS: 1.9.3

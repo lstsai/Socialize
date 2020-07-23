@@ -51,8 +51,10 @@
         if(userAccess[@"friendOrgs"][self.org.ein])
         {
             self.org.numFriendsLike=((NSArray*)userAccess[@"friendOrgs"][self.org.ein]).count;
-            self.numLikesLabel.text=[NSString stringWithFormat:@"%lu friends have liked this", self.org.numFriendsLike];
-            self.numLikesLabel.alpha=SHOW_ALPHA;
+            if(self.org.numFriendsLike>0){
+                self.numLikesLabel.text=[NSString stringWithFormat:@"%lu friends have liked this", self.org.numFriendsLike];
+                self.numLikesLabel.alpha=SHOW_ALPHA;
+            }
         }
         else
         {

@@ -166,11 +166,10 @@
     // Pass the selected object to the new view controller.
     if([segue.identifier isEqualToString:@"profileSegue"])
     {
-        ProfileViewController *profileVC=segue.destinationViewController;
+        ProfileViewController *profileVC= segue.destinationViewController;
         UICollectionViewCell *tappedCell= sender;
         NSIndexPath *tappedIndex= [self.collectionView indexPathForCell:tappedCell];
         profileVC.user=self.people[tappedIndex.item];
-        NSLog(@"user %@",profileVC.user.username);
         [self.collectionView deselectItemAtIndexPath:tappedIndex animated:YES];
     }
 }

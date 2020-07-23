@@ -130,6 +130,7 @@
     else if(self.searchControl.selectedSegmentIndex==PEOPLE_SEGMENT){
         self.peopleVC.searchText=self.searchBar.text;
         [self.searchBar setPlaceholder:[PEOPLE_SEARCH_PLACEHOLDER mutableCopy]];
+        [self.peopleVC getPeople:nil];
         [self.orgsView setHidden:YES];
         [self.eventsView setHidden:YES];
         [self.peopleView setHidden:NO];

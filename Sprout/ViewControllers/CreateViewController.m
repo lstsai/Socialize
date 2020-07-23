@@ -67,7 +67,6 @@
         {
             NSLog(@"Success creating event and post");
             [self.delegate didCreateEvent];
-            [self dismissViewControllerAnimated:YES completion:nil];
         }
         else{
             [Helper displayAlert:@"Error creating event" withMessage:error.localizedDescription on:self];

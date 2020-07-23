@@ -10,6 +10,7 @@
 #import "PersonCell.h"
 #import <Parse/Parse.h>
 #import "InfiniteScrollActivityView.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PeopleSearchViewController : UIViewController

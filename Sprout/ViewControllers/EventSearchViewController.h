@@ -27,10 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 -(void) loadMoreResults;
 -(void) setupLoadingIndicators;
 -(void) setupLayout;
--(void) addEventToFriendsList:(Event*)likedEvent;
--(void) deleteEventFromFriendsList:(Event*)unlikedEvent;
-
-
 @end
 
 NS_ASSUME_NONNULL_END

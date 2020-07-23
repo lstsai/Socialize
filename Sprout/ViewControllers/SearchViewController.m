@@ -15,7 +15,7 @@
 #import "MBProgressHUD.h"
 #import "OrgDetailsViewController.h"
 #import "Helper.h"
-@interface SearchViewController ()<UISearchBarDelegate, CLLocationManagerDelegate>
+@interface SearchViewController ()<UISearchBarDelegate, CLLocationManagerDelegate, CreateViewControllerDelegate>
 
 @end
 
@@ -131,6 +131,9 @@
         [self.peopleView setHidden:NO];
     }
 }
+- (void)didCreateEvent {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - Navigation
 
@@ -138,7 +141,16 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"createEventSegue"])
+    {
+        UINavigationController *navigationController = segue.destinationViewController;
+        CreateViewController *createController = (CreateViewController*)navigationController.topViewController;
+        createController.delegate = self;
+    }
 }
+
+
+
 
 
 @end

@@ -52,6 +52,7 @@
     self.tableView.contentInset = insets;
 }
 -(void) didCreateEvent{
+    [self dismissViewControllerAnimated:YES completion:nil];
     [self getPosts:nil];
 }
 

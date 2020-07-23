@@ -61,18 +61,36 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     UIDatePicker *spicker = (UIDatePicker*)self.startDateField.inputView;
     UIDatePicker *epicker = (UIDatePicker*)self.endDateField.inputView;
-
-    [Event postEvent:self.eventImage.image withName:self.eventNameField.text withSTime:spicker.date withETime:epicker.date withLocation:self.locationPoint withStreetAdress:self.locationField.text withDetails:self.detailsTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        if(succeeded)
-        {
-            NSLog(@"Success creating event and post");
-            [self.delegate didCreateEvent];
-        }
-        else{
-            [Helper displayAlert:@"Error creating event" withMessage:error.localizedDescription on:self];
-        }
+    
+    if([self.eventNameField.text isEqualToString:@""])
+    {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-    }];
+        [Helper displayAlert:@"Error Creating Event" withMessage:@"Please enter a name for the event" on:self];
+    }
+    else if([self.startDateField.text isEqualToString:@""])
+    {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [Helper displayAlert:@"Error Creating Event" withMessage:@"Please enter a start time" on:self];
+    }
+    
+    else if([self.locationField.text isEqualToString:@""])
+    {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [Helper displayAlert:@"Error Creating Event" withMessage:@"Please enter a location for the event" on:self];
+    }
+    else{
+        [Event postEvent:self.eventImage.image withName:self.eventNameField.text withSTime:spicker.date withETime:epicker.date withLocation:self.locationPoint withStreetAdress:self.locationField.text withDetails:self.detailsTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if(succeeded)
+            {
+                NSLog(@"Success creating event and post");
+                [self.delegate didCreateEvent];
+            }
+            else{
+                [Helper displayAlert:@"Error creating event" withMessage:error.localizedDescription on:self];
+            }
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }];
+    }
 }
 - (IBAction)didTapCancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

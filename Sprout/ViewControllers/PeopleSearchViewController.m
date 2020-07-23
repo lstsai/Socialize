@@ -82,7 +82,8 @@
 -(void) getPeople:( UIRefreshControl * _Nullable )refreshControl{
     if([self.searchText isEqualToString:@""])
     {
-        [refreshControl endRefreshing];
+        if([refreshControl isKindOfClass:[UIRefreshControl class]])
+            [refreshControl endRefreshing];
         return;
     }
     if(![refreshControl isKindOfClass:[UIRefreshControl class]])

@@ -72,8 +72,8 @@
     self.dateView.clipsToBounds = YES;
     self.dateView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
     self.dateView.layer.shadowOffset = CGSizeMake(SHADOW_OFFSET, SHADOW_OFFSET);
-    self.dateView.layer.shadowRadius = SHADOW_RADIUS*2;
-    self.dateView.layer.shadowOpacity = SHADOW_OPACITY/2;
+    self.dateView.layer.shadowRadius = SHADOW_RADIUS;
+    self.dateView.layer.shadowOpacity = SHADOW_OPACITY;
     self.dateView.layer.masksToBounds = NO;
 
 }

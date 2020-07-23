@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITextField *cityField;
 @property (weak, nonatomic) IBOutlet UITextField *stateField;
+@property (weak, nonatomic) IBOutlet UITextField *locationField;
 @property (weak, nonatomic) IBOutlet UIView *eventsView;
 @property (weak, nonatomic) IBOutlet UIView *orgsView;
 @property (weak, nonatomic) IBOutlet UIView *peopleView;

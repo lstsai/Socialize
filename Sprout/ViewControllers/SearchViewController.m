@@ -90,8 +90,7 @@
     }
     else if(self.searchControl.selectedSegmentIndex==EVENT_SEGMENT){
         self.eventsVC.searchText=self.searchBar.text;
-        self.eventsVC.citySearch=[self.cityField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        self.eventsVC.stateSearch=[[self.stateField.text uppercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        self.eventsVC.locationSearch=[self.locationField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         [self.eventsVC getEvents:refreshControl];
     }
     else if(self.searchControl.selectedSegmentIndex==PEOPLE_SEGMENT){
@@ -111,14 +110,19 @@
         [self.eventsView setHidden:YES];
         [self.peopleView setHidden:YES];
         [self.orgsView setHidden:NO];
+        self.cityField.alpha=SHOW_ALPHA;
+        self.stateField.alpha=SHOW_ALPHA;
+        self.locationField.alpha=HIDE_ALPHA;
     }
     else if (self.searchControl.selectedSegmentIndex==EVENT_SEGMENT)
     {
         self.eventsVC.searchText=self.searchBar.text;
-        self.eventsVC.citySearch=[self.cityField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        self.eventsVC.stateSearch=[[self.stateField.text uppercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        self.eventsVC.locationSearch=[self.locationField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         [self.eventsVC getEvents:nil];
         [self.searchBar setPlaceholder:[EVENT_SEARCH_PLACEHOLDER mutableCopy]];
+        self.cityField.alpha=HIDE_ALPHA;
+        self.stateField.alpha=HIDE_ALPHA;
+        self.locationField.alpha=SHOW_ALPHA;
         [self.orgsView setHidden:YES];
         [self.peopleView setHidden:YES];
         [self.eventsView setHidden:NO];

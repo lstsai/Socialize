@@ -84,7 +84,7 @@
 }
 -(void)getLikedOrgInfo{
     
-    self.likedOrgs=@[];
+    self.likedOrgs=@[].mutableCopy;
     if(((NSArray*)self.user[@"likedOrgs"]).count!=0)
     {
         [MBProgressHUD showHUDAddedTo:self.orgCollectionView animated:YES];
@@ -92,7 +92,7 @@
             if(error)
                 [Helper displayAlert:@"Error getting liked organizations" withMessage:error.localizedDescription on:self];
             else{
-                self.likedOrgs=[self.likedOrgs arrayByAddingObject:org];
+                [self.likedOrgs addObject:org];
                 NSLog(@"Success getting liked orgs");
                 [self.orgCollectionView reloadData];
             }

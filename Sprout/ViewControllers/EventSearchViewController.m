@@ -70,11 +70,9 @@
 
     PFQuery *eventsQuery=[PFQuery orQueryWithSubqueries:@[eventsNameQuery,eventsDetailsQuery]];
     [eventsQuery includeKey:@"author"];
-    if(![self.stateSearch isEqualToString:@""] || ![self.citySearch isEqualToString:@""])
-    {
-        [eventsQuery whereKey:@"streetAddress" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.citySearch]];
-        [eventsQuery whereKey:@"streetAddress" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.stateSearch]];
-    }
+    if(![self.locationSearch isEqualToString:@""])
+        [eventsQuery whereKey:@"streetAddress" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.locationSearch]];
+
     [eventsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)
             [Helper displayAlert:@"Error getting events" withMessage:error.localizedDescription on:self];

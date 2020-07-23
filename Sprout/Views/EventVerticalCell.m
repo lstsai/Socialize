@@ -40,10 +40,15 @@
     [geocoder reverseGeocodeCoordinate:cllocation completionHandler:^(GMSReverseGeocodeResponse * _Nullable address, NSError * _Nullable error) {
         if(error)
             NSLog(@"Error getting location of event %@", error.localizedDescription);
-        else
+        else{
             self.locationLabel.text=[[address firstResult] locality];
+            self.event.streetAddress =[[[address firstResult] lines] componentsJoinedByString:@"\n"];
+            [self.event saveInBackground];
+        }
 
     }];
+    
+    
     [self setupShadows];
     [self performSelectorInBackground:@selector(getLikes) withObject:nil];
     

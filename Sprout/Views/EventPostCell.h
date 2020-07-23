@@ -13,6 +13,10 @@
 @import Parse;
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol EventPostCellDelegate
+- (void)didTapUser: (PFUser *)user;
+@end
+
 @interface EventPostCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet PFImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -21,15 +25,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonnull) Post* post;
 @property (strong, nonnull) Event* event;
 @property (weak, nonatomic) IBOutlet UIView *eventContainer;
-
 @property (weak, nonatomic) IBOutlet PFImageView *eventImage;
 @property (weak, nonatomic) IBOutlet UILabel *eventNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventDateTime;
 @property (weak, nonatomic) IBOutlet UILabel *numLikeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (nonatomic, weak) id<EventPostCellDelegate> delegate;
+
+
 -(void) loadData;
 -(void) setShadow;
 -(void) getLikes;
+- (void) didTapUserProfile:(UITapGestureRecognizer *)sender;
 
 @end
 

@@ -18,6 +18,10 @@
     // Initialization code
 }
 -(void) loadData{
+    UIGestureRecognizer *profileTapGesture= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.profileImage setUserInteractionEnabled:YES];
+    [self.profileImage addGestureRecognizer:profileTapGesture];
+    
     self.nameLabel.text=self.post.author.username;
     
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
@@ -85,6 +89,9 @@
         [Helper didUnlikeEvent:self.event];
 
     }
+}
+- (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
+    [self.delegate didTapUser:self.post.author];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

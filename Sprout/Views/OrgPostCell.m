@@ -17,6 +17,10 @@
     // Initialization code
 }
 -(void) loadData{
+    UIGestureRecognizer *profileTapGesture= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.profileImage setUserInteractionEnabled:YES];
+    [self.profileImage addGestureRecognizer:profileTapGesture];
+    
     self.nameLabel.text=self.post.author.username;
     
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
@@ -69,6 +73,9 @@
             self.numLikeLabel.alpha=HIDE_ALPHA;
         }
     }];
+}
+- (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
+    [self.delegate didTapUser:self.post.author];
 }
 - (IBAction)didTapLike:(id)sender {
     if(!self.likeButton.selected)

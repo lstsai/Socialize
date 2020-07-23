@@ -11,12 +11,17 @@
 
 @implementation PersonCell
 -(void) loadData{
+    
     self.nameLabel.text=self.user.username;
     if(self.user[@"profilePic"])
     {
         self.profileImage.file=self.user[@"profilePic"];
         [self.profileImage loadInBackground];
     }
+    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+    self.profileImage.clipsToBounds = YES;
+    self.profileImage.layer.masksToBounds=YES;
+
     self.contentView.layer.cornerRadius = CELL_CORNER_RADIUS*2;
     self.contentView.layer.borderColor = [UIColor clearColor].CGColor;
     self.contentView.layer.masksToBounds = YES;
@@ -28,4 +33,5 @@
     self.layer.shadowOpacity = SHADOW_OPACITY;
     self.layer.masksToBounds = NO;
 }
+
 @end

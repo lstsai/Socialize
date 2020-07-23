@@ -862,6 +862,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="i1R-qH-E8j" id="qpD-VO-TR1"/>
+                        <segue destination="r4M-tQ-o4w" kind="show" identifier="profileSegue" id="n3j-lo-FYL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OC6-18-GqT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1951,7 +1952,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="166" height="204"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="2g0-Gx-YF6" customClass="PFImageView">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="2g0-Gx-YF6" customClass="PFImageView">
                                                     <rect key="frame" x="34.5" y="18.5" width="97" height="99"/>
                                                     <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -2005,10 +2006,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="WTd-pV-B1j"/>
-        <segue reference="YTV-Ne-fK9"/>
+        <segue reference="ByB-WX-yAM"/>
+        <segue reference="n3j-lo-FYL"/>
         <segue reference="vmk-95-jLU"/>
-        <segue reference="rff-eI-h6r"/>
+        <segue reference="eOz-I0-ZcM"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="calendar" catalog="system" width="128" height="106"/>

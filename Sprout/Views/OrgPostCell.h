@@ -12,6 +12,10 @@
 @import Parse;
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol OrgPostCellDelegate
+- (void)didTapUser: (PFUser *)user;
+@end
+
 @interface OrgPostCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet PFImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -22,16 +26,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numLikeLabel;
 @property (weak, nonatomic) IBOutlet UIView *orgContainer;
-
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIImageView *orgImage;
 @property (strong, nonatomic) Organization* org;
 @property (strong, nonatomic) Post* post;
+@property (nonatomic, weak) id<OrgPostCellDelegate> delegate;
+
 
 -(void)loadData;
 -(void) getLikes;
 -(void) setShadow;
-
+- (void) didTapUserProfile:(UITapGestureRecognizer *)sender;
 @end
 
 NS_ASSUME_NONNULL_END

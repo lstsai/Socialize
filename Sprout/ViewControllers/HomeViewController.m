@@ -15,8 +15,9 @@
 #import "EventDetailsViewController.h"
 #import "OrgDetailsViewController.h"
 #import "UIScrollView+EmptyDataSet.h"
+#import "ProfileViewController.h"
 
-@interface HomeViewController ()<CreateViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+@interface HomeViewController ()<CreateViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, OrgPostCellDelegate, EventPostCellDelegate>
 
 @end
 
@@ -88,12 +89,14 @@
     {
         EventPostCell *epc=[tableView dequeueReusableCellWithIdentifier:@"EventPostCell"];
         epc.post=currPost;
+        epc.delegate=self;
         [epc loadData];
         return epc;
     }
     else{
         OrgPostCell *opc=[tableView dequeueReusableCellWithIdentifier:@"OrgPostCell"];
         opc.post=currPost;
+        opc.delegate=self;
         [opc loadData];
         return opc;
     }
@@ -135,6 +138,9 @@
 {
     return self.posts.count==0;
 }
+-(void) didTapUser:(PFUser *)user{
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
+}
 
 #pragma mark - Navigation
 
@@ -163,6 +169,10 @@
         NSIndexPath *tappedIndex= [self.tableView indexPathForCell:tappedcell];
         ovc.org=((OrgPostCell*)tappedcell).org;
         [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
+    }
+    else if ([segue.identifier isEqualToString:@"profileSegue"]){
+        ProfileViewController* profileVC= segue.destinationViewController;
+        profileVC.user=(PFUser*)sender;
     }
     
 }

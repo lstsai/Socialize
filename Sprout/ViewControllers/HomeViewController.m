@@ -31,6 +31,7 @@
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
     self.tableView.tableFooterView = [UIView new];
+    self.pageNum=1;
     [self setupLoadingIndicators];
     [self performSelectorInBackground:@selector(getPosts:) withObject:nil];
 }
@@ -67,7 +68,7 @@
             [postsQ includeKey:@"author"];
             NSArray *friendsAndSelf=[friends arrayByAddingObject:PFUser.currentUser];
             [postsQ whereKey:@"author" containedIn:friendsAndSelf];
-            [postsQ setLimit:RESULTS_SIZE];
+            [postsQ setLimit:RESULTS_SIZE*self.pageNum];
             [postsQ findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
                 if(error)
                 {
@@ -79,6 +80,9 @@
                 }
                 if(refreshControl)
                     [refreshControl endRefreshing];
+                else
+                    [self.loadingMoreView stopAnimating];
+
             }];
         }
     }];
@@ -141,6 +145,25 @@
 }
 -(void) didTapUser:(PFUser *)user{
     [self performSegueWithIdentifier:@"profileSegue" sender:user];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if(!self.isMoreDataLoading && self.posts.count!=0)
+       {
+           int scrollContentHeight=self.tableView.contentSize.height;
+           int scrollOffsetThreshold = scrollContentHeight - self.tableView.bounds.size.height;
+
+           if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging)
+           {
+               self.isMoreDataLoading=YES;
+               self.pageNum++;
+               CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
+               self.loadingMoreView.frame = frame;
+               [self.loadingMoreView startAnimating];
+               [self getPosts:nil];
+           }
+
+       }
 }
 
 #pragma mark - Navigation

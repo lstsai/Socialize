@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSMutableArray *posts;
 @property (nonatomic) int pageNum;
 @property (strong, nonatomic) InfiniteScrollActivityView* loadingMoreView;
-
+@property (nonatomic) BOOL isMoreDataLoading;
 -(void) getPosts:( UIRefreshControl * _Nullable )refreshControl;
 -(void) setupLoadingIndicators;
 @end

@@ -15,7 +15,6 @@
 #import "Constants.h"
 #import "UIScrollView+EmptyDataSet.h"
 #import "Post.h"
-@import ListPlaceholder;
 @interface EventSearchViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @end

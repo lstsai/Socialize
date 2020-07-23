@@ -14,7 +14,6 @@
 #import "Helper.h"
 #import "Post.h"
 #import "UIScrollView+EmptyDataSet.h"
-@import ListPlaceholder;
 @interface OrgSearchViewController ()<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 @end
 
@@ -57,13 +56,11 @@
             [refreshControl endRefreshing];
         return;
     }
-    if(![refreshControl isKindOfClass:[UIRefreshControl class]] &&self.organizations.count==0)
+    if(![refreshControl isKindOfClass:[UIRefreshControl class]])
          [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    else
-        [self.tableView showLoader];
+
     NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchText, @"rated":@"TRUE", @"state": self.stateSearch, @"city": self.citySearch, @"pageSize":@(RESULTS_SIZE)};
      [[APIManager shared] getOrganizationsWithCompletion:params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
-         [self.tableView hideLoader];
          if(error && ![error.localizedDescription isEqualToString:@"Request failed: not found (404)"])
          {
              [Helper displayAlert:@"Error getting organizations" withMessage:error.localizedDescription on:self];

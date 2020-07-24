@@ -8,6 +8,7 @@
 
 #import "APIManager.h"
 #import "UIImageView+AFNetworking.h"
+#import "Constants.h"
 @implementation APIManager
 
 + (instancetype)shared {
@@ -48,7 +49,6 @@
         NSString *getString= [NSString stringWithFormat:@"https://api.data.charitynavigator.org/v2/Organizations/%@", ein];
         [self GET:getString parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             [orgDictionaries addObject:responseObject];
-
             if([ein isEqualToString:[eins lastObject]])
             {
                 NSArray *organizations=[Organization orgsWithArray:orgDictionaries];
@@ -56,8 +56,14 @@
             }
         
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"Error getting org: %@", error.localizedDescription);
-            completion(nil,error);
+            if(![error.localizedDescription isEqualToString:@"Request failed: not found (404)"])
+                completion(nil,error);
+            //if this ein cannot be found, move on to the next one
+            if([ein isEqualToString:[eins lastObject]])
+            {
+                NSArray *organizations=[Organization orgsWithArray:orgDictionaries];
+                completion(organizations,nil);
+            }
         }];
     }
 }
@@ -68,6 +74,37 @@
         NSURL *imageURL=[NSURL URLWithString:responseObject[@"items"][0][@"image"][@"thumbnailLink"]];
         completion(imageURL, nil);
         
+       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           NSLog(@"Error getting search %@", error.localizedDescription);
+           completion(nil,error);
+    }];
+}
+- (void)getOrgsNearLocation:(CLLocationCoordinate2D)coords withSearch:(NSString*) search withCompletion:(void(^)(NSArray *orgs, NSError *error))completion{
+    NSDictionary *params= @{@"key":[[NSProcessInfo processInfo] environment][@"Google-api-key"] , @"rankby": @"distance", @"location": [NSString stringWithFormat:@"%f,%f", coords.latitude, coords.longitude], @"type": @"fire_station"};
+
+    [self GET:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSMutableArray *cities= [NSMutableArray new];
+        NSString* vicinity, *city;
+        for(NSDictionary* place in (NSArray*)responseObject[@"results"])
+        {
+            vicinity=place[@"vicinity"];
+            city=[[vicinity componentsSeparatedByString:@","].lastObject stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];//get only the city part of the address
+            if(![cities containsObject:city])
+                [cities addObject:city];
+        }
+        NSMutableDictionary *orgParams= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":search, @"rated":@"TRUE", @"pageSize":@(RESULTS_SIZE)}.mutableCopy;
+        NSMutableArray* orgResults= [NSMutableArray new];
+        for(city in cities)
+        {
+            orgParams[@"city"]=city;
+            [self getOrganizationsWithCompletion:orgParams completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
+                if(organizations)
+                    [orgResults addObjectsFromArray:organizations];
+                if([city isEqualToString:cities.lastObject])
+                    completion(orgResults, nil);
+            }];
+        }
+
        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
            NSLog(@"Error getting search %@", error.localizedDescription);
            completion(nil,error);

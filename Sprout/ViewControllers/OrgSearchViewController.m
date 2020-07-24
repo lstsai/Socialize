@@ -14,6 +14,7 @@
 #import "Helper.h"
 #import "Post.h"
 #import "UIScrollView+EmptyDataSet.h"
+#import "LocationManager.h"
 @interface OrgSearchViewController ()<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 @end
 
@@ -50,30 +51,42 @@
 }
 
 -(void) getOrgs:( UIRefreshControl * _Nullable )refreshControl{
-    if([self.searchText isEqualToString:@""])
-    {
-        if([refreshControl isKindOfClass:[UIRefreshControl class]])
-            [refreshControl endRefreshing];
-        return;
-    }
-    if(![refreshControl isKindOfClass:[UIRefreshControl class]])
-         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
-    NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchText, @"rated":@"TRUE", @"state": self.stateSearch, @"city": self.citySearch, @"pageSize":@(RESULTS_SIZE)};
-     [[APIManager shared] getOrganizationsWithCompletion:params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
-         if(error && ![error.localizedDescription isEqualToString:@"Request failed: not found (404)"])
-         {
-             [Helper displayAlert:@"Error getting organizations" withMessage:error.localizedDescription on:self];
-             self.organizations=@[].mutableCopy;
-         }
-         else
-             self.organizations=[organizations mutableCopy];
+//    if([self.searchText isEqualToString:@""])
+//    {
+//        if([refreshControl isKindOfClass:[UIRefreshControl class]])
+//            [refreshControl endRefreshing];
+//        return;
+//    }
+//    if(![refreshControl isKindOfClass:[UIRefreshControl class]])
+//         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//
+//    NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchText, @"rated":@"TRUE", @"state": self.stateSearch, @"city": self.citySearch, @"pageSize":@(RESULTS_SIZE)};
+//     [[APIManager shared] getOrganizationsWithCompletion:params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
+//         if([error.localizedDescription isEqualToString:@"Request failed: not found (404)"])
+//         {
+//             [Helper displayAlert:@"Error getting organizations" withMessage:error.localizedDescription on:self];
+//             self.organizations=@[].mutableCopy;
+//         }
+//         else
+//             self.organizations=[organizations mutableCopy];
+//        [self.tableView reloadData];
+//
+//         if([refreshControl isKindOfClass:[UIRefreshControl class]])
+//             [refreshControl endRefreshing];
+//         [MBProgressHUD hideHUDForView:self.view animated:YES];
+//     }];
+    
+    
+    
+    [[APIManager shared] getOrgsNearLocation:[LocationManager sharedInstance].currentLocation.coordinate withSearch:self.searchText withCompletion:^(NSArray * _Nonnull orgs, NSError * _Nonnull error) {
+        if(error)
+            NSLog(@"%@", error.localizedDescription);
+        else
+            self.organizations=orgs.mutableCopy;
         [self.tableView reloadData];
-         
-         if([refreshControl isKindOfClass:[UIRefreshControl class]])
-             [refreshControl endRefreshing];
-         [MBProgressHUD hideHUDForView:self.view animated:YES];
-     }];
+    }];
+    
+    
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if(!self.isMoreDataLoading && self.organizations.count!=0)

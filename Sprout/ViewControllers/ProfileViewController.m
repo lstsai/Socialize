@@ -52,13 +52,17 @@
     {
         [self.topButton setTitle:@"Edit" forState:UIControlStateNormal];
         [self.topButton setTitle:@"Edit" forState:UIControlStateSelected];
-        self.topButton.alpha=0;
+        self.topButton.alpha=HIDE_ALPHA;
+        self.privateView.alpha=HIDE_ALPHA;
     }
     else{
         [self.topButton setTitle:@"+ Friend" forState:UIControlStateNormal];
         [self.topButton setTitle:@"Friends" forState:UIControlStateSelected];
         if([fAccess[@"friends"] containsObject:self.user.objectId])
+        {
             self.topButton.selected=YES;
+            self.privateView.alpha=HIDE_ALPHA;
+        }
     }
     self.topButton.layer.cornerRadius=CELL_CORNER_RADIUS*0.8;
     self.topButton.layer.masksToBounds=YES;

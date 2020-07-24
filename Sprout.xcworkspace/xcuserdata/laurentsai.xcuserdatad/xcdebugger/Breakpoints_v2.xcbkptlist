@@ -310,8 +310,8 @@
             filePath = "Sprout/ViewControllers/ProfileViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "-didTapLogout:"
             landmarkType = "7">
          </BreakpointContent>
@@ -358,8 +358,8 @@
             filePath = "Sprout/ViewControllers/ProfileViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
             landmarkName = "-didTapButton:"
             landmarkType = "7">
          </BreakpointContent>

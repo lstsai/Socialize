@@ -1457,6 +1457,32 @@
                                     <constraint firstItem="jXA-0H-nkc" firstAttribute="leading" secondItem="FS6-cp-trm" secondAttribute="trailing" constant="27" id="zMb-Yr-JJA"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ObE-0b-N90">
+                                <rect key="frame" x="0.0" y="346.5" width="414" height="412.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="if4-Jb-zEL">
+                                        <rect key="frame" x="156" y="26.5" width="102" height="91"/>
+                                        <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="thin"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add friend to see thier liked Organizations and Events" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4w-Ao-VEI">
+                                        <rect key="frame" x="90" y="126" width="234" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="if4-Jb-zEL" firstAttribute="width" secondItem="ObE-0b-N90" secondAttribute="width" multiplier="0.246377" id="9dm-dk-fqA"/>
+                                    <constraint firstItem="if4-Jb-zEL" firstAttribute="centerX" secondItem="ObE-0b-N90" secondAttribute="centerX" id="9iF-dI-l2P"/>
+                                    <constraint firstItem="v4w-Ao-VEI" firstAttribute="leading" secondItem="ObE-0b-N90" secondAttribute="leading" constant="90" id="TrR-Ky-LAx"/>
+                                    <constraint firstItem="if4-Jb-zEL" firstAttribute="height" secondItem="ObE-0b-N90" secondAttribute="height" multiplier="0.224242" id="YNY-pT-jfi"/>
+                                    <constraint firstItem="if4-Jb-zEL" firstAttribute="top" secondItem="ObE-0b-N90" secondAttribute="top" constant="26" id="lh2-IN-JhA"/>
+                                    <constraint firstItem="v4w-Ao-VEI" firstAttribute="top" secondItem="if4-Jb-zEL" secondAttribute="bottom" constant="7.5" id="pb8-OE-TM0"/>
+                                    <constraint firstItem="v4w-Ao-VEI" firstAttribute="centerX" secondItem="if4-Jb-zEL" secondAttribute="centerX" id="zHz-1Y-I9t"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
@@ -1474,10 +1500,13 @@
                             <constraint firstItem="h9o-Oq-qkP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pck-rJ-5T6" secondAttribute="trailing" constant="10" id="MkE-8k-JuQ"/>
                             <constraint firstItem="UPL-1n-kKF" firstAttribute="leading" secondItem="kQM-PC-l0c" secondAttribute="leading" id="OaX-0t-4ZW"/>
                             <constraint firstItem="Mij-2e-KRx" firstAttribute="centerX" secondItem="kQM-PC-l0c" secondAttribute="centerX" id="SI4-lg-U7f"/>
+                            <constraint firstItem="ObE-0b-N90" firstAttribute="trailing" secondItem="kQM-PC-l0c" secondAttribute="trailing" id="SQu-Fu-gsn"/>
+                            <constraint firstItem="ObE-0b-N90" firstAttribute="bottom" secondItem="kQM-PC-l0c" secondAttribute="bottom" id="TYb-dn-E8J"/>
                             <constraint firstItem="kQM-PC-l0c" firstAttribute="trailing" secondItem="h9o-Oq-qkP" secondAttribute="trailing" constant="20" id="UZ0-jK-x7O"/>
                             <constraint firstItem="lpq-hV-Iig" firstAttribute="width" secondItem="hnG-3Y-UpL" secondAttribute="width" multiplier="0.2657" constant="-16" id="Whz-Gc-o4u"/>
                             <constraint firstItem="9kz-Eg-8cF" firstAttribute="centerX" secondItem="kQM-PC-l0c" secondAttribute="centerX" id="WiA-hP-UuV"/>
                             <constraint firstItem="dMU-aF-xY4" firstAttribute="height" secondItem="Mij-2e-KRx" secondAttribute="height" id="Yss-ZG-2nU"/>
+                            <constraint firstItem="ObE-0b-N90" firstAttribute="top" secondItem="dMU-aF-xY4" secondAttribute="top" id="b3r-k5-l2E"/>
                             <constraint firstItem="Mij-2e-KRx" firstAttribute="top" secondItem="dMU-aF-xY4" secondAttribute="bottom" constant="15" id="bxa-YY-dYU"/>
                             <constraint firstItem="UPL-1n-kKF" firstAttribute="top" secondItem="kQM-PC-l0c" secondAttribute="top" id="c3d-4M-vl7"/>
                             <constraint firstItem="xU8-Tx-13m" firstAttribute="leading" secondItem="pck-rJ-5T6" secondAttribute="leading" id="c7D-fO-bO8"/>
@@ -1486,6 +1515,7 @@
                             <constraint firstItem="xU8-Tx-13m" firstAttribute="top" secondItem="pck-rJ-5T6" secondAttribute="bottom" constant="-5" id="g8C-41-sjD"/>
                             <constraint firstItem="kQM-PC-l0c" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Mij-2e-KRx" secondAttribute="bottom" constant="5" id="h3y-p8-B6c"/>
                             <constraint firstItem="dMU-aF-xY4" firstAttribute="centerX" secondItem="kQM-PC-l0c" secondAttribute="centerX" id="hSy-dX-2Ig"/>
+                            <constraint firstItem="ObE-0b-N90" firstAttribute="leading" secondItem="kQM-PC-l0c" secondAttribute="leading" id="jZ8-tO-dMO"/>
                             <constraint firstItem="lpq-hV-Iig" firstAttribute="leading" secondItem="kQM-PC-l0c" secondAttribute="leading" constant="26" id="p5t-Ay-UFT"/>
                             <constraint firstItem="pck-rJ-5T6" firstAttribute="top" secondItem="UPL-1n-kKF" secondAttribute="bottom" constant="4" id="wXd-be-qT6"/>
                             <constraint firstItem="dMU-aF-xY4" firstAttribute="height" secondItem="hnG-3Y-UpL" secondAttribute="height" multiplier="0.209026" id="y0f-tY-o9H"/>
@@ -1515,6 +1545,7 @@
                         <outlet property="nameLabel" destination="pck-rJ-5T6" id="n9W-oj-MWI"/>
                         <outlet property="orgCollectionView" destination="dMU-aF-xY4" id="xSb-Ln-Otw"/>
                         <outlet property="orgCount" destination="OPh-Ue-A1k" id="wl7-us-4xl"/>
+                        <outlet property="privateView" destination="ObE-0b-N90" id="Y7Y-v6-QSB"/>
                         <outlet property="profileImage" destination="lpq-hV-Iig" id="RhW-zo-2MJ"/>
                         <outlet property="topButton" destination="h9o-Oq-qkP" id="FaO-Uf-tLf"/>
                         <outlet property="usernameLabel" destination="xU8-Tx-13m" id="33J-wO-96L"/>
@@ -2226,9 +2257,22 @@
             </objects>
             <point key="canvasLocation" x="1582.608695652174" y="2545.9821428571427"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="QbR-u4-dOY">
+            <objects>
+                <viewController id="MYm-eo-NBs" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cgx-37-gvf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mOy-PQ-UUO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ByB-WX-yAM"/>
+        <segue reference="WTd-pV-B1j"/>
         <segue reference="aJJ-mB-qx8"/>
         <segue reference="vfU-9D-yV9"/>
         <segue reference="vmk-95-jLU"/>
@@ -2239,6 +2283,7 @@
         <image name="checkmark.rectangle.fill" catalog="system" width="128" height="93"/>
         <image name="globe" catalog="system" width="128" height="121"/>
         <image name="house" catalog="system" width="128" height="110"/>
+        <image name="lock.circle" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.badge.plus" catalog="system" width="128" height="116"/>

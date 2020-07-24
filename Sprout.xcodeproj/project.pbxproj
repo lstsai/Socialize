@@ -35,6 +35,8 @@
 		DC3CF1C024BF644100C482F8 /* OrgSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1BF24BF644100C482F8 /* OrgSearchViewController.m */; };
 		DC3CF1C324BF645300C482F8 /* EventSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1C224BF645300C482F8 /* EventSearchViewController.m */; };
 		DC89989324C9FD00005B2DB9 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC89989224C9FD00005B2DB9 /* SignUpViewController.m */; };
+		DC91239B24CA693F001A4022 /* RequestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC91239A24CA693F001A4022 /* RequestsViewController.m */; };
+		DC91239E24CA6A38001A4022 /* RequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC91239D24CA6A38001A4022 /* RequestCell.m */; };
 		DC9B5B8624CA409F00A9E162 /* noun_sprout_108654.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9B5B8524CA409E00A9E162 /* noun_sprout_108654.png */; };
 		DCB629D924C1FBE100C42EFB /* EventVerticalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629D824C1FBE100C42EFB /* EventVerticalCell.m */; };
 		DCB629DC24C206A900C42EFB /* PeopleSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629DB24C206A900C42EFB /* PeopleSearchViewController.m */; };
@@ -127,6 +129,10 @@
 		DC3CF1C224BF645300C482F8 /* EventSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventSearchViewController.m; sourceTree = "<group>"; };
 		DC89989124C9FD00005B2DB9 /* SignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		DC89989224C9FD00005B2DB9 /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		DC91239924CA693F001A4022 /* RequestsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestsViewController.h; sourceTree = "<group>"; };
+		DC91239A24CA693F001A4022 /* RequestsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestsViewController.m; sourceTree = "<group>"; };
+		DC91239C24CA6A38001A4022 /* RequestCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestCell.h; sourceTree = "<group>"; };
+		DC91239D24CA6A38001A4022 /* RequestCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestCell.m; sourceTree = "<group>"; };
 		DC9B5B8524CA409E00A9E162 /* noun_sprout_108654.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = noun_sprout_108654.png; path = ../../../noun_sprout_108654.png; sourceTree = "<group>"; };
 		DCB629C424C1482B00C42EFB /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Animation.swift; path = ViewAnimator/Classes/Protocols/Animation.swift; sourceTree = "<group>"; };
 		DCB629C524C1482B00C42EFB /* AnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnimationType.swift; path = ViewAnimator/Classes/Models/AnimationType.swift; sourceTree = "<group>"; };
@@ -313,6 +319,8 @@
 				DCB65C2B24C8BA08005A43A9 /* CreatePostViewController.m */,
 				DC89989124C9FD00005B2DB9 /* SignUpViewController.h */,
 				DC89989224C9FD00005B2DB9 /* SignUpViewController.m */,
+				DC91239924CA693F001A4022 /* RequestsViewController.h */,
+				DC91239A24CA693F001A4022 /* RequestsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -336,6 +344,8 @@
 				DCB65C2224C7C44C005A43A9 /* OrgPostCell.m */,
 				DCB65C2424C7C565005A43A9 /* EventPostCell.h */,
 				DCB65C2524C7C565005A43A9 /* EventPostCell.m */,
+				DC91239C24CA6A38001A4022 /* RequestCell.h */,
+				DC91239D24CA6A38001A4022 /* RequestCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -681,6 +691,7 @@
 				DC3CF1AD24BD590D00C482F8 /* InfiniteScrollActivityView.m in Sources */,
 				DC3CF14C24BCB27900C482F8 /* AppDelegate.m in Sources */,
 				DCB65C2C24C8BA08005A43A9 /* CreatePostViewController.m in Sources */,
+				DC91239B24CA693F001A4022 /* RequestsViewController.m in Sources */,
 				DC3CF1A124BD081300C482F8 /* OrgDetailsViewController.m in Sources */,
 				DC89989324C9FD00005B2DB9 /* SignUpViewController.m in Sources */,
 				DCE6FA5124C0AA66008091A3 /* EventCollectionCell.m in Sources */,
@@ -692,6 +703,7 @@
 				DCB629D924C1FBE100C42EFB /* EventVerticalCell.m in Sources */,
 				DC3CF1C024BF644100C482F8 /* OrgSearchViewController.m in Sources */,
 				DC3CF15D24BCB27A00C482F8 /* main.m in Sources */,
+				DC91239E24CA6A38001A4022 /* RequestCell.m in Sources */,
 				DC3CF1BD24BE500C00C482F8 /* Event.m in Sources */,
 				DCE6FA5424C0AB58008091A3 /* ProfileViewController.m in Sources */,
 				DCE6FA4B24BFA447008091A3 /* EventDetailsViewController.m in Sources */,

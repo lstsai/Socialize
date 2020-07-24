@@ -36,10 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)getLikedOrgInfo;
 -(void)getLikedEventInfo;
 -(void)loadProfile;
--(void)deleteFriendLikes:(NSArray*)users;
--(void)addFriendLikes:(NSArray*)users;
--(void) addFriend:(PFUser*) from toFriend:(PFUser*) to;
--(void) removeFriend:(PFUser*) from toFriend:(PFUser*) to;
 -(void) setupImagePicker;
 
 @end

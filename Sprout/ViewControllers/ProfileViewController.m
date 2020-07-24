@@ -146,141 +146,20 @@
     {
         if(!self.topButton.selected)
         {
-            //add this friend to friend list and update write acess
+            //send a request to this person
+            [self.topButton setTitle:@"Requested" forState:UIControlStateSelected];
             self.topButton.selected=YES;
-            [self addFriend:PFUser.currentUser toFriend:self.user];
-            [self addFriend:self.user toFriend:PFUser.currentUser];
+            [Helper addRequest:PFUser.currentUser forUser:self.user];
         }
         else
         {
             //remove friend from friend list and update write acess
             self.topButton.selected=NO;
-            [self removeFriend:PFUser.currentUser toFriend:self.user];
-            [self removeFriend:self.user toFriend:PFUser.currentUser];
+            [Helper removeFriend:PFUser.currentUser toFriend:self.user];
+            [Helper removeFriend:self.user toFriend:PFUser.currentUser];
         }
     }
 
-}
-
--(void) addFriend:(PFUser*) from toFriend:(PFUser*) to{
-    
-    PFQuery *accessQuery= [PFQuery queryWithClassName:@"UserAccessible"];
-    [accessQuery whereKey:@"username" equalTo:from.username];
-    PFObject *friendsAccess= [accessQuery getFirstObject];
-    NSMutableArray *friendsArray=friendsAccess[@"friends"];
-    [friendsArray addObject:to.objectId];
-    friendsAccess[@"friends"]=friendsArray;
-    [friendsAccess saveInBackground];
-    
-    [self performSelectorInBackground:@selector(addFriendLikes:) withObject:@[from, to]];
-}
-
--(void) removeFriend:(PFUser*) from toFriend:(PFUser*) to{
-    
-    PFQuery *accessQuery= [PFQuery queryWithClassName:@"UserAccessible"];
-    [accessQuery whereKey:@"username" equalTo:from.username];
-    PFObject *friendsAccess= [accessQuery getFirstObject];
-    NSMutableArray *friendsArray=friendsAccess[@"friends"];
-    [friendsArray removeObject:to.objectId];
-    friendsAccess[@"friends"]=friendsArray;
-    [friendsAccess saveInBackground];
-    [self performSelectorInBackground:@selector(deleteFriendLikes:) withObject:@[from, to]];
-
-}
-
--(void)addFriendLikes:(NSArray*)users{
-    
-    /*
-    HI JOHN if you're reading this the code ypou're about to see is super
-    duper chunky because Parse wouldn't save my objects otherwise.
-     You were warned :))
-     */
-    PFUser *fromUser= [users firstObject];
-    PFUser *toUser=[users lastObject];
-    PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
-    [selfAccessQ whereKey:@"username" equalTo:fromUser.username];
-    [selfAccessQ getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        PFObject* selfAccess=object;
-        PFObject *friendLikes=selfAccess[@"friendOrgs"];
-        for(NSString* ein in toUser[@"likedOrgs"])
-        {
-            if(friendLikes[ein])
-            {
-                NSMutableArray *list= [friendLikes[ein] mutableCopy];
-                [list addObject:toUser.username];
-                friendLikes[ein]=list;
-            }
-            else
-            {
-                friendLikes[ein]=@[toUser.username];
-            }
-        }
-        selfAccess[@"friendOrgs"]=friendLikes;
-        [selfAccess saveInBackground];
-
-
-        friendLikes=selfAccess[@"friendEvents"];
-        for(NSString *eventId in toUser[@"likedEvents"])
-        {
-            if(friendLikes[eventId])
-            {
-                NSMutableArray *list= [friendLikes[eventId] mutableCopy];
-                [list addObject:toUser];
-                friendLikes[eventId]=list;
-            }
-            else
-            {
-                friendLikes[eventId]=@[toUser.username];
-            }
-        }
-        selfAccess[@"friendEvents"]=friendLikes;
-        [selfAccess saveInBackground];
-    
-    }];
-}
--(void)deleteFriendLikes:(NSArray*)users{
-
-    PFUser *fromUser= [users firstObject];
-    PFUser *toUser=[users lastObject];
-    PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
-    [selfAccessQ whereKey:@"username" equalTo:fromUser.username];
-    [selfAccessQ getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        PFObject* selfAccess=object;
-        PFObject *friendLikes=selfAccess[@"friendOrgs"];
-        for(NSString* ein in toUser[@"likedOrgs"])
-        {
-            if(friendLikes[ein])
-            {
-                NSMutableArray *list= [friendLikes[ein] mutableCopy];
-                [list removeObject:toUser.username];
-                friendLikes[ein]=list;
-            }
-            else
-            {
-                friendLikes[ein]=@[toUser.username];
-            }
-        }
-        selfAccess[@"friendOrgs"]=friendLikes;
-        [selfAccess saveInBackground];
-
-        friendLikes=selfAccess[@"friendEvents"];
-        for(NSString *eventId in toUser[@"likedEvents"])
-        {
-            if(friendLikes[eventId])
-            {
-                NSMutableArray *list= [friendLikes[eventId] mutableCopy];
-                [list removeObject:toUser];
-                friendLikes[eventId]=list;
-            }
-            else
-            {
-                friendLikes[eventId]=@[toUser.username];
-            }
-        }
-        selfAccess[@"friendEvents"]=friendLikes;
-        [selfAccess saveInBackground];
-    
-    }];
 }
 
 -(void) setupImagePicker{

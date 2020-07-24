@@ -17,7 +17,7 @@
 #import "UIScrollView+EmptyDataSet.h"
 #import "ProfileViewController.h"
 
-@interface HomeViewController ()<CreateViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, OrgPostCellDelegate, EventPostCellDelegate>
+@interface HomeViewController ()<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, OrgPostCellDelegate, EventPostCellDelegate>
 
 @end
 
@@ -51,10 +51,6 @@
     UIEdgeInsets insets = self.tableView.contentInset;
     insets.bottom += InfiniteScrollActivityView.defaultHeight;
     self.tableView.contentInset = insets;
-}
--(void) didCreateEvent{
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [self getPosts:nil];
 }
 
 -(void) getPosts:( UIRefreshControl * _Nullable )refreshControl{
@@ -172,13 +168,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if([segue.identifier isEqualToString:@"CreateSegue"])
-    {
-        UINavigationController *navigationController = segue.destinationViewController;
-        CreateViewController *createController = (CreateViewController*)navigationController.topViewController;
-        createController.delegate = self;
-    }
-    else if ([segue.identifier isEqualToString:@"eventSegue"])
+    if ([segue.identifier isEqualToString:@"eventSegue"])
     {
         EventDetailsViewController *evc= segue.destinationViewController;
         UITableViewCell* tappedcell=sender;

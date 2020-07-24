@@ -175,6 +175,157 @@
 }
 
 
++ (void) addFriend:(PFUser*) from toFriend:(PFUser*) to{
+
+    PFObject *friendsAccess= [Helper getUserAccess:from];
+    NSMutableArray *friendsArray=friendsAccess[@"friends"];
+    [friendsArray addObject:to.objectId];
+    friendsAccess[@"friends"]=friendsArray;
+    [friendsAccess saveInBackground];
+    
+    [self performSelectorInBackground:@selector(addFriendLikes:) withObject:@[from, to]];
+}
+
++ (void) removeFriend:(PFUser*) from toFriend:(PFUser*) to{
+    
+    PFObject *friendsAccess= [Helper getUserAccess:from];
+    NSMutableArray *friendsArray=friendsAccess[@"friends"];
+    [friendsArray removeObject:to.objectId];
+    friendsAccess[@"friends"]=friendsArray;
+    [friendsAccess saveInBackground];
+    [self performSelectorInBackground:@selector(deleteFriendLikes:) withObject:@[from, to]];
+
+}
+
++ (void)addFriendLikes:(NSArray*)users{
+    
+    PFUser *fromUser= [users firstObject];
+    PFUser *toUser=[users lastObject];
+    PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
+    [selfAccessQ whereKey:@"username" equalTo:fromUser.username];
+    [selfAccessQ getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        PFObject* selfAccess=object;
+        PFObject *friendLikes=selfAccess[@"friendOrgs"];
+        for(NSString* ein in toUser[@"likedOrgs"])
+        {
+            if(friendLikes[ein])
+            {
+                NSMutableArray *list= [friendLikes[ein] mutableCopy];
+                [list addObject:toUser.username];
+                friendLikes[ein]=list;
+            }
+            else
+            {
+                friendLikes[ein]=@[toUser.username];
+            }
+        }
+        selfAccess[@"friendOrgs"]=friendLikes;
+        [selfAccess saveInBackground];
+
+
+        friendLikes=selfAccess[@"friendEvents"];
+        for(NSString *eventId in toUser[@"likedEvents"])
+        {
+            if(friendLikes[eventId])
+            {
+                NSMutableArray *list= [friendLikes[eventId] mutableCopy];
+                [list addObject:toUser.username];
+                friendLikes[eventId]=list;
+            }
+            else
+            {
+                friendLikes[eventId]=@[toUser.username];
+            }
+        }
+        selfAccess[@"friendEvents"]=friendLikes;
+        [selfAccess saveInBackground];
+    
+    }];
+}
++ (void)deleteFriendLikes:(NSArray*)users{
+
+    PFUser *fromUser= [users firstObject];
+    PFUser *toUser=[users lastObject];
+    PFQuery *selfAccessQ= [PFQuery queryWithClassName:@"UserAccessible"];
+    [selfAccessQ whereKey:@"username" equalTo:fromUser.username];
+    [selfAccessQ getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        PFObject* selfAccess=object;
+        PFObject *friendLikes=selfAccess[@"friendOrgs"];
+        for(NSString* ein in toUser[@"likedOrgs"])
+        {
+            if(friendLikes[ein])
+            {
+                NSMutableArray *list= [friendLikes[ein] mutableCopy];
+                [list removeObject:toUser.username];
+                friendLikes[ein]=list;
+            }
+            else
+            {
+                friendLikes[ein]=@[toUser.username];
+            }
+        }
+        selfAccess[@"friendOrgs"]=friendLikes;
+        [selfAccess saveInBackground];
+
+        friendLikes=selfAccess[@"friendEvents"];
+        for(NSString *eventId in toUser[@"likedEvents"])
+        {
+            if(friendLikes[eventId])
+            {
+                NSMutableArray *list= [friendLikes[eventId] mutableCopy];
+                [list removeObject:toUser.username];
+                friendLikes[eventId]=list;
+            }
+            else
+            {
+                friendLikes[eventId]=@[toUser.username];
+            }
+        }
+        selfAccess[@"friendEvents"]=friendLikes;
+        [selfAccess saveInBackground];
+    
+    }];
+}
+
++ (void) removeRequest:(PFUser *)current forUser:(PFUser *)requester{
+    PFObject *currentUserAccess= [Helper getUserAccess:current];
+    PFObject *requesterUserAccess= [Helper getUserAccess:requester];
+    //access the request list of the requester and the current
+    NSMutableArray *inRequests= currentUserAccess[@"inRequests"];
+    NSMutableArray *outRequests= requesterUserAccess[@"outRequests"];
+    
+    //remove the request from both
+    [inRequests removeObject:requester.objectId];
+    [outRequests removeObject:current.objectId];
+    
+    //assign the attributes to new list
+    currentUserAccess[@"inRequests"]=inRequests;
+    requesterUserAccess[@"outRequests"]=outRequests;
+    
+    //save
+    [PFObject saveAllInBackground:@[currentUserAccess, requesterUserAccess]];
+}
++ (void) addRequest:(PFUser *)current forUser:(PFUser *)requested{
+    
+    PFObject *currentUserAccess= [Helper getUserAccess:current];
+    PFObject *requestedUserAccess= [Helper getUserAccess:requested];
+    //access the request list of the requester and the current
+    NSMutableArray *outRequests= currentUserAccess[@"outRequests"];
+    NSMutableArray *inRequests= requestedUserAccess[@"inRequests"];
+    
+    //add the request to both
+    [outRequests addObject:requested.objectId];
+    [inRequests addObject:current.objectId];
+    
+    //assign the attributes to new list
+    currentUserAccess[@"outRequests"]=outRequests;
+    requestedUserAccess[@"inRequests"]=inRequests;
+    
+    //save
+    [PFObject saveAllInBackground:@[currentUserAccess, requestedUserAccess]];
+}
+
+
 
 
 @end

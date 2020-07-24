@@ -269,6 +269,8 @@
 }
 - (IBAction)didTapDecline:(id)sender {
     //remove request
+    self.requestView.alpha=HIDE_ALPHA;
+    self.topButton.userInteractionEnabled=YES;
     [Helper removeRequest:PFUser.currentUser forUser:self.user];
 }
 

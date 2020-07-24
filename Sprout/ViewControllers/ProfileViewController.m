@@ -44,9 +44,8 @@
 
 -(void)loadProfile{
     
-    PFQuery *accessQuery= [PFQuery queryWithClassName:@"UserAccessible"];
-    [accessQuery whereKey:@"username" equalTo:PFUser.currentUser.username];
-    PFObject *fAccess=[accessQuery getFirstObject];
+   
+    PFObject *fAccess=[Helper getUserAccess:PFUser.currentUser];
     
     if(self.user.username==PFUser.currentUser.username)
     {
@@ -57,11 +56,17 @@
     }
     else{
         [self.topButton setTitle:@"+ Friend" forState:UIControlStateNormal];
-        [self.topButton setTitle:@"Friends" forState:UIControlStateSelected];
+        [self.topButton setTitle:@"Requested" forState:UIControlStateSelected];
+
         if([fAccess[@"friends"] containsObject:self.user.objectId])
         {
+            [self.topButton setTitle:@"Friends" forState:UIControlStateSelected];
             self.topButton.selected=YES;
             self.privateView.alpha=HIDE_ALPHA;
+        }
+        else if ([fAccess[@"outRequests"] containsObject:self.user.objectId])
+        {
+            self.topButton.highlighted=YES;
         }
     }
     self.topButton.layer.cornerRadius=CELL_CORNER_RADIUS*0.8;
@@ -148,6 +153,7 @@
     
     if(self.user!=PFUser.currentUser)
     {
+        //has not requested and not already friends (button is +Friends)
         if(!self.topButton.selected)
         {
             //send a request to this person
@@ -155,10 +161,16 @@
             self.topButton.selected=YES;
             [Helper addRequest:PFUser.currentUser forUser:self.user];
         }
-        else
+        else if (self.topButton.selected && [self.topButton.titleLabel.text isEqualToString:@"Requested"])//if remove request
         {
-            //remove friend from friend list and update write acess
             self.topButton.selected=NO;
+            [Helper removeRequest:self.user forUser:PFUser.currentUser];
+        }
+        else//already friends and remove
+        {
+            //remove friend from friend list 
+            self.topButton.selected=NO;
+            self.privateView.alpha=SHOW_ALPHA;
             [Helper removeFriend:PFUser.currentUser toFriend:self.user];
             [Helper removeFriend:self.user toFriend:PFUser.currentUser];
         }

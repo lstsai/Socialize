@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="noun_sprout_108654.png" translatesAutoresizingMaskIntoConstraints="NO" id="H1c-Lh-5aM">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="noun_sprout.png" translatesAutoresizingMaskIntoConstraints="NO" id="H1c-Lh-5aM">
                                 <rect key="frame" x="91" y="337" width="232" height="232"/>
                             </imageView>
                         </subviews>
@@ -35,6 +35,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="noun_sprout_108654.png" width="416" height="416"/>
+        <image name="noun_sprout.png" width="416" height="416"/>
     </resources>
 </document>

@@ -37,7 +37,7 @@
 		DC89989324C9FD00005B2DB9 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC89989224C9FD00005B2DB9 /* SignUpViewController.m */; };
 		DC91239B24CA693F001A4022 /* RequestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC91239A24CA693F001A4022 /* RequestsViewController.m */; };
 		DC91239E24CA6A38001A4022 /* RequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC91239D24CA6A38001A4022 /* RequestCell.m */; };
-		DC9B5B8624CA409F00A9E162 /* noun_sprout_108654.png in Resources */ = {isa = PBXBuildFile; fileRef = DC9B5B8524CA409E00A9E162 /* noun_sprout_108654.png */; };
+		DC9123A024CB3330001A4022 /* noun_sprout.png in Resources */ = {isa = PBXBuildFile; fileRef = DC91239F24CB3330001A4022 /* noun_sprout.png */; };
 		DCB629D924C1FBE100C42EFB /* EventVerticalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629D824C1FBE100C42EFB /* EventVerticalCell.m */; };
 		DCB629DC24C206A900C42EFB /* PeopleSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629DB24C206A900C42EFB /* PeopleSearchViewController.m */; };
 		DCB629DF24C207B300C42EFB /* PersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB629DE24C207B300C42EFB /* PersonCell.m */; };
@@ -133,7 +133,7 @@
 		DC91239A24CA693F001A4022 /* RequestsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestsViewController.m; sourceTree = "<group>"; };
 		DC91239C24CA6A38001A4022 /* RequestCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestCell.h; sourceTree = "<group>"; };
 		DC91239D24CA6A38001A4022 /* RequestCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestCell.m; sourceTree = "<group>"; };
-		DC9B5B8524CA409E00A9E162 /* noun_sprout_108654.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = noun_sprout_108654.png; path = ../../../noun_sprout_108654.png; sourceTree = "<group>"; };
+		DC91239F24CB3330001A4022 /* noun_sprout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noun_sprout.png; sourceTree = "<group>"; };
 		DCB629C424C1482B00C42EFB /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Animation.swift; path = ViewAnimator/Classes/Protocols/Animation.swift; sourceTree = "<group>"; };
 		DCB629C524C1482B00C42EFB /* AnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnimationType.swift; path = ViewAnimator/Classes/Models/AnimationType.swift; sourceTree = "<group>"; };
 		DCB629C624C1482B00C42EFB /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Direction.swift; path = ViewAnimator/Classes/Models/Direction.swift; sourceTree = "<group>"; };
@@ -368,7 +368,7 @@
 		DC3CF1B724BE1C3E00C482F8 /* MISC */ = {
 			isa = PBXGroup;
 			children = (
-				DC9B5B8524CA409E00A9E162 /* noun_sprout_108654.png */,
+				DC91239F24CB3330001A4022 /* noun_sprout.png */,
 				DC3CF1A224BD23FC00C482F8 /* APIManager.h */,
 				DC3CF1A324BD23FC00C482F8 /* APIManager.m */,
 				DC3CF1A824BD539400C482F8 /* Constants.h */,
@@ -521,9 +521,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC9B5B8624CA409F00A9E162 /* noun_sprout_108654.png in Resources */,
 				DC3CF15A24BCB27A00C482F8 /* LaunchScreen.storyboard in Resources */,
 				DC3CF15724BCB27A00C482F8 /* Assets.xcassets in Resources */,
+				DC9123A024CB3330001A4022 /* noun_sprout.png in Resources */,
 				DC3CF15524BCB27900C482F8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

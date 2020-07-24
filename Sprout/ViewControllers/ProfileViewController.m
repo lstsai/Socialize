@@ -46,7 +46,6 @@
     
    
     PFObject *fAccess=[Helper getUserAccess:PFUser.currentUser];
-    
     if(self.user.username==PFUser.currentUser.username)
     {
         [self.topButton setTitle:@"Edit" forState:UIControlStateNormal];
@@ -67,6 +66,11 @@
         else if ([fAccess[@"outRequests"] containsObject:self.user.objectId])
         {
             self.topButton.highlighted=YES;
+        }
+        else if ([fAccess[@"inRequests"] containsObject:self.user.objectId])
+        {
+            self.requestView.alpha=SHOW_ALPHA;
+            self.topButton.userInteractionEnabled=NO;
         }
     }
     self.topButton.layer.cornerRadius=CELL_CORNER_RADIUS*0.8;
@@ -252,7 +256,21 @@
         }];
     }];
 }
-
+- (IBAction)didTapAccept:(id)sender {
+    self.requestView.alpha=HIDE_ALPHA;
+    self.topButton.userInteractionEnabled=YES;
+    [self.topButton setTitle:@"Friends" forState:UIControlStateSelected];
+    self.topButton.selected=YES;
+    self.privateView.alpha=HIDE_ALPHA;
+    
+    [Helper removeRequest:PFUser.currentUser forUser:self.user];
+    [Helper addFriend:PFUser.currentUser toFriend:self.user];
+    [Helper addFriend:self.user toFriend:PFUser.currentUser];
+}
+- (IBAction)didTapDecline:(id)sender {
+    //remove request
+    [Helper removeRequest:PFUser.currentUser forUser:self.user];
+}
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
 {

@@ -25,23 +25,24 @@
     self.profileImage.clipsToBounds = YES;
     self.profileImage.layer.masksToBounds=YES;
 }
-- (IBAction)didTapAccept:(id)sender {
-    
-    [self showStatus:@"Accepted"];
-    [Helper removeRequest:PFUser.currentUser forUser:self.requestUser];
-    [Helper addFriend:PFUser.currentUser toFriend:self.requestUser];
-    [Helper addFriend:self.requestUser toFriend:PFUser.currentUser];
 
-}
-- (IBAction)didTapDelete:(id)sender {
-    [self showStatus:@"Declined"];
-    [Helper removeRequest:PFUser.currentUser forUser:self.requestUser];
-}
 -(void) showStatus:(NSString*) message{
     self.acceptButton.alpha=HIDE_ALPHA;
     self.deleteButton.alpha=HIDE_ALPHA;
     self.statusLabel.text=message;
     self.statusLabel.alpha=SHOW_ALPHA;
+}
+- (IBAction)didTapAccept:(id)sender {
+    
+    [self showStatus:@"Accepted"];
+       [Helper removeRequest:PFUser.currentUser forUser:self.requestUser];
+       [Helper addFriend:PFUser.currentUser toFriend:self.requestUser];
+       [Helper addFriend:self.requestUser toFriend:PFUser.currentUser];
+}
+- (IBAction)didTapDelete:(id)sender {
+
+    [self showStatus:@"Declined"];
+    [Helper removeRequest:PFUser.currentUser forUser:self.requestUser];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

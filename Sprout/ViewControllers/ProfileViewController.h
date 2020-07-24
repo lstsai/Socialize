@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UIImagePickerController* profileImagePicker;
 @property (strong, nonatomic) UIImagePickerController* backgroundImagePicker;
 @property (weak, nonatomic) IBOutlet UIView *privateView;
+@property (weak, nonatomic) IBOutlet UIView *requestView;
 
 
 -(void)getLikedOrgInfo;

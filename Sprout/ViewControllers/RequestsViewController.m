@@ -7,7 +7,6 @@
 //
 
 #import "RequestsViewController.h"
-#import "RequestCell.h"
 #import "Helper.h"
 #import <Parse/Parse.h>
 #import "UIScrollView+EmptyDataSet.h"

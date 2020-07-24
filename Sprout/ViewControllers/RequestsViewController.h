@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RequestCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSArray* friendRequests;
 
 -(void) getFriendRequests;
+- (void)didTapAccept:(RequestCell*)sender;
+- (void)didTapDelete:(RequestCell*)sender;
+
 @end
 
 NS_ASSUME_NONNULL_END

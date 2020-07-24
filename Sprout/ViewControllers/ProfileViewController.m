@@ -101,11 +101,11 @@
     if(((NSArray*)self.user[@"likedOrgs"]).count!=0)
     {
         [MBProgressHUD showHUDAddedTo:self.orgCollectionView animated:YES];
-        [[APIManager shared] getOrgsWithEIN:self.user[@"likedOrgs"] completion:^(Organization * org, NSError * _Nonnull error) {
+        [[APIManager shared] getOrgsWithEIN:self.user[@"likedOrgs"] completion:^(NSArray * orgs, NSError * _Nonnull error) {
             if(error)
                 [Helper displayAlert:@"Error getting liked organizations" withMessage:error.localizedDescription on:self];
             else{
-                [self.likedOrgs addObject:org];
+                self.likedOrgs=orgs;
                 NSLog(@"Success getting liked orgs");
                 [self.orgCollectionView reloadData];
             }

@@ -40,14 +40,20 @@
     }];
 
 }
-- (void)getOrgsWithEIN:(NSArray*)eins completion:(void(^)(Organization * org, NSError *error))completion{
+- (void)getOrgsWithEIN:(NSArray*)eins completion:(void(^)(NSArray * orgs, NSError *error))completion{
     NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"]};
+    NSMutableArray *orgDictionaries= [NSMutableArray new];
     for(NSString* ein in eins)
     {
         NSString *getString= [NSString stringWithFormat:@"https://api.data.charitynavigator.org/v2/Organizations/%@", ein];
         [self GET:getString parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            Organization *org=[Organization orgWithDictionary:responseObject];
-            completion(org,nil);
+            [orgDictionaries addObject:responseObject];
+
+            if([ein isEqualToString:[eins lastObject]])
+            {
+                NSArray *organizations=[Organization orgsWithArray:orgDictionaries];
+                completion(organizations,nil);
+            }
         
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"Error getting org: %@", error.localizedDescription);

@@ -5,6 +5,9 @@
 //  Created by laurentsai on 7/13/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
+/*
+ Manages all the API calls for the app
+ */
 
 #import <AFNetworking/AFNetworking.h>
 #import <CoreLocation/CoreLocation.h>

@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/23/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+ View controller that is presented as the sign up page
+ */
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 

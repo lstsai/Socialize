@@ -18,6 +18,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
+/**
+Triggered when the user taps the signup button
+@param[in] sender the button that was pressed
+retrieves the username, password, and email the user enters and attempts to create a new
+the user with those credentials through Parse. Displays an error if there is one. Presents the search page
+if successful signup
+*/
 - (IBAction)didTapSignUp:(id)sender {
     [self.activityIndicator startAnimating];
     PFUser *newUser = [PFUser user];

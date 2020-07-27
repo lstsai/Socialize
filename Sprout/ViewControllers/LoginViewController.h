@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/13/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+ View controller for the login page
+ */
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 NS_ASSUME_NONNULL_BEGIN

@@ -19,6 +19,13 @@
     // Do any additional setup after loading the view.
 
 }
+/**
+ Triggered when the user taps the login button
+ @param[in] sender the button that was pressed
+ retrieves the username and password the user enters and attempts to login the user
+ with those credentials through Parse. Displays an error if there is one. Presents the search page
+ if successful login
+ */
 - (IBAction)didTapLogin:(id)sender {
     [self.activityIndicator startAnimating];
     

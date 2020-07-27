@@ -41,7 +41,7 @@ const CGFloat EMPTY_TITLE_FONT_SIZE=18;
 const CGFloat EMPTY_MESSAGE_FONT_SIZE=14;
 
 const CGFloat PULL_REFRESH_HEIGHT=50;
-const int SEARCH_RADIUS=10;//miles
+const int SEARCH_RADIUS=20;//miles
 const int MIN_RESULT_THRESHOLD=10;
 
 const int STATE_INDEX=2;

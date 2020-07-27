@@ -83,7 +83,7 @@
     }];
 }
 - (void)getOrgsNearLocation:(CLLocationCoordinate2D)coords withSearch:(NSString*) search withCompletion:(void(^)(NSArray *orgs, NSError *error))completion{
-    NSDictionary *params= @{@"radius":@(SEARCH_RADIUS*2), @"limit": @(RESULTS_SIZE/2), @"sort":@"-population"};
+    NSDictionary *params= @{@"radius":@(SEARCH_RADIUS), @"limit": @(MIN_RESULT_THRESHOLD), @"sort":@"-population"};
     NSString* getString=[NSString stringWithFormat:@"http://geodb-free-service.wirefreethought.com/v1/geo/locations/%f%f/nearbyCities", coords.latitude, coords.longitude];
     [self GET:getString parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSMutableArray *cities= [NSMutableArray new];
@@ -98,20 +98,12 @@
         for(NSString* city in cities)
         {
             orgParams[@"city"]=city;
-            if(orgResults.count<RESULTS_SIZE)
-            {
-                [self getOrganizationsWithCompletion:orgParams completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
+            [self getOrganizationsWithCompletion:orgParams completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
                     if(organizations)
                         [orgResults addObjectsFromArray:organizations];
                     if([city isEqualToString:cities.lastObject])
                         completion(orgResults, nil);
-                }];
-            }
-            else
-            {
-                completion(orgResults, nil);
-                break;
-            }
+            }];
         }
 
        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

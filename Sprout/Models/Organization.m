@@ -26,9 +26,10 @@
             self.imageURL=nil;
         self.location= [Location locationWithDictionary:dictionary[@"mailingAddress"]];
         self.locationDictionary=dictionary[@"mailingAddress"];
-        if(![dictionary[@"mission"] isEqual:[NSNull null]])
+        if(![dictionary[@"mission"] isEqual:[NSNull null]]){
             self.missionStatement=dictionary[@"mission"];
-            
+            self.missionStatement=[self.missionStatement stringByReplacingOccurrencesOfString:@"<br>" withString:@"\n"];
+        }
         if(![dictionary[@"tagLine"] isEqual:[NSNull null]])
             self.tagLine=dictionary[@"tagLine"];
         

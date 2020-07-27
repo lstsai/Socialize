@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/22/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+ View controller that is displayed as the user is creating a post about an organization or event
+ */
 #import <UIKit/UIKit.h>
 #import "Event.h"
 #import "Organization.h"

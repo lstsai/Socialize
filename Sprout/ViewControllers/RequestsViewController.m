@@ -29,7 +29,9 @@
     self.tableView.emptyDataSetDelegate = self;
     self.tableView.tableFooterView=[UIView new];
 }
-
+/**
+Makes a query to get all the friend requests the user has
+*/
 -(void) getFriendRequests{
     PFObject *selfAccess=[Helper getUserAccess:PFUser.currentUser];
     PFQuery *requestQuery= [PFQuery queryWithClassName:@"_User"];
@@ -42,22 +44,42 @@
         [self.tableView reloadData];
     }];
 }
-
+/**
+Table view delegate method. returns a requestcell to be shown. 
+@param[in] tableView the table that is calling this method
+@param[in] indexPath the path for the returned cell to be displayed
+@return the cell that should be shown in the passed indexpath
+*/
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     RequestCell *reqCell=[tableView dequeueReusableCellWithIdentifier:@"RequestCell" forIndexPath:indexPath];
     reqCell.requestUser=self.friendRequests[indexPath.row];
     [reqCell loadData];
     return reqCell;
 }
-
+/**
+Table view delegate method. returns the number of sections that the table has. This table only has
+ one section so it always returns the total number of requests
+@param[in] tableView the table that is calling this method
+@param[in] section the section in question
+@return the number of requests
+*/
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.friendRequests.count;
 }
+/**
+Empty collection view delegate method. Returns the image to be displayed when there are no posts
+@param[in] scrollView the collection view that is empty
+@return the image to be shown
+*/
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
 {
     return [UIImage imageNamed:@"emptyFriendRequest"];
 }
-
+/**
+Empty collection view delegate method. Returns the title to be displayed when there are no requests
+@param[in] scrollView the collection view that is empty
+@return the title to be shown
+*/
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
     NSString *text = @"No Friend Requests";
@@ -67,6 +89,13 @@
     
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
+/**
+Empty collection view delegate method. Returns if the empty view should be shown
+@param[in] scrollView the collection view that is empty
+@return if the empty view shouls be shown
+ YES: if there are no requests
+ NO: there are requests
+*/
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
 {
     return self.friendRequests.count==0;
@@ -78,7 +107,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if([segue.identifier isEqualToString:@"profileSegue"])
+    if([segue.identifier isEqualToString:@"profileSegue"])//takes the user to the profile page
     {
         ProfileViewController *profileVC= segue.destinationViewController;
         UITableViewCell *tappedCell=sender;

@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "LocationManager.h"
-#import "InfiniteScrollActivityView.h"
 #import "Event.h"
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,8 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CLLocationCoordinate2D locationCoord;
 @property (strong, nonatomic) LocationManager *locManager;
 @property (nonatomic) int pageNum;
-@property (nonatomic) BOOL isMoreDataLoading;
-@property (strong, nonatomic) InfiniteScrollActivityView* loadingMoreView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 -(void) getEvents:( UIRefreshControl * _Nullable )refreshControl;

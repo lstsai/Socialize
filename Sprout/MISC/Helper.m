@@ -9,8 +9,14 @@
 #import "Helper.h"
 
 @implementation Helper
+/**
+ Converts an UIImage to a PFFileObject in order to be stored in Parse
+ @param[in] image The image to be convered into a file
+ @param[in] imageName The image name for the file
+ @return the image data as a PFFileObject
+*/
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image withName:(NSString*)imageName {
-    if(image)//no image
+    if(image)
     {
         NSData *imageData = UIImagePNGRepresentation(image);
         imageName=[imageName stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -21,17 +27,28 @@
     
     return nil;//if image data or image is nil
 }
+/**
+ Get the UserAccessible Object for the specified User.
+ 
+ More info: The UserAccessible class is an object that each user has a pointer to. Since
+ parse does not let users modify other users' data, this pointer allows friends to
+ add to or delete from the the liked orgs/events list, and the friends list, without
+ actually modifying the user object.
+ 
+ @param[in] user The user whose UserAccessible object to retrieve
+ @return The UserAccessible object for the user.
+*/
 + (PFObject *) getUserAccess:(PFUser*) user{
-    /*
-     The UserAccessible class is an object that each user has a pointer to. Since
-     parse does not let users modify other users' data, this pointer allows friends to
-     add to or delete from the the liked orgs/events list, and the friends list, without
-     actually modifying the user object.
-     */
+
     PFQuery *accessQ= [PFQuery queryWithClassName:@"UserAccessible"];
     [accessQ whereKey:@"username" equalTo:user.username];
     return [accessQ getFirstObject];
 }
+/**
+ Get the Friends array for current user,
+ @param[in] completion the block to be called when finished fetching the objects.
+ returns an array of PFUsers which are the user's friends if retrieved, or return an error
+*/
 + (void) getFriends:(void(^)(NSArray *friends, NSError *error))completion{
     
     PFObject *friendAccess=[Helper getUserAccess:PFUser.currentUser];
@@ -47,7 +64,15 @@
     }];
     
 }
+/**
+ Called when the user has liked an organization from any view controller.
+ Adds the liked organization to the user's 'likedOrgs' in parse. Then calls
+ the addObjectToFriendsList: method in the background to update thier
+ friends's list. Also creates a post to signal the user has liked this org
+ @param[in] likedOrg the organization that was liked
+ @param[in] viewC the view controller that called this method
 
+ */
 + (void)didLikeOrg:(Organization*)likedOrg sender:(UIViewController* _Nullable)viewC{
     NSMutableArray *likedOrgs= [PFUser.currentUser[@"likedOrgs"] mutableCopy];
     [likedOrgs addObject:likedOrg.ein];
@@ -59,6 +84,14 @@
             [Helper displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
     }];
 }
+/**
+Called when the user has unlied an organization from any view controller.
+Removes the unliked organization to the user's 'likedOrgs' in parse. Then calls
+the deleteObjectToFriendsList: method in the background to update thier
+friends's list.
+@param[in] unlikedOrg the organization that was liked
+
+*/
 + (void)didUnlikeOrg:(Organization*)unlikedOrg{
     NSMutableArray *likedOrgs= [PFUser.currentUser[@"likedOrgs"] mutableCopy];
 
@@ -67,6 +100,15 @@
     PFUser.currentUser[@"likedOrgs"]=likedOrgs;
     [PFUser.currentUser saveInBackground];
 }
+/**
+Called when the user has liked an event from any view controller.
+Adds the liked event to the user's 'likedEvents' in parse. Then calls
+the addObjectToFriendsList: method in the background to update thier
+friends's list. Also creates a post to signal the user has liked this event
+@param[in] likedEvent the event that was liked
+@param[in] viewC the view controller that called this method
+
+*/
 +(void) didLikeEvent:(Event*)likedEvent senderVC:(UIViewController* _Nullable)viewC{
     NSMutableArray *likedEvents= [PFUser.currentUser[@"likedEvents"] mutableCopy];
     
@@ -80,6 +122,14 @@
             [Helper displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
     }];
 }
+/**
+Called when the user has unlied an event from any view controller.
+Removes the unliked event to the user's 'likedEvent' in parse. Then calls
+the deleteObjectToFriendsList: method in the background to update thier
+friends's list.
+@param[in] unlikedEvent the organization that was liked
+
+*/
 + (void)didUnlikeEvent:(Event*)unlikedEvent{
     NSMutableArray *likedEvents= [PFUser.currentUser[@"likedEvents"] mutableCopy];
 
@@ -89,15 +139,18 @@
     PFUser.currentUser[@"likedEvents"]=likedEvents;
     [PFUser.currentUser saveInBackground];
 }
+/**
+This method adds the liked org/event to every friend's list. The objKey is the identifier
+for a specific liked object, and the listName is the dictionary the liked object should be
+added to. In order for parse to 'save' an object, it needs to detect a change in that object,
+which is why there are  many variables. These are reassigned to the object at the very end
+so that Parse will actually save this change.
+@param[in] keys the Array of parameters. Since to perfrom methods in background there can only be at most one param.
+ the first object in keys is the name object to be added to the list
+ the second object in keys is the name of the attribute in parse to be changed
 
+*/
 + (void) addObjectToFriendsList:(NSArray*)keys{
-    /*
-     This method adds the liked org/event to every friend's list. The objKey is the identifier
-     for a specific liked object, and the listName is the dictionary the liked object should be
-     added to. In order for parse to 'save' an object, it needs to detect a change in that object,
-     which is why I have created many variables, that are reassigned to the object at the very end
-     so that Parse will actually save this change.
-     */
     
     NSString *objKey=keys.firstObject;
     NSString *listName=keys.lastObject;
@@ -132,6 +185,17 @@
            }
        }];
 }
+/**
+This method deletes the liked org/event to every friend's list. The objKey is the identifier
+for a specific liked object, and the listName is the dictionary the liked object should be
+added to. In order for parse to 'save' an object, it needs to detect a change in that object,
+which is why there are  many variables. These are reassigned to the object at the very end
+so that Parse will actually save this change.
+@param[in] keys the Array of parameters. Since to perfrom methods in background there can only be at most one param.
+ the first object in keys is the name object to be removed from the list
+ the second object in keys is the name of the attribute in parse to be changed
+
+*/
 + (void) deleteObjectFromFriendsList:(NSArray*)keys{
     NSString *objKey=keys.firstObject;
     NSString *listName=keys.lastObject;
@@ -160,7 +224,12 @@
     }];
 }
 
-
+/**
+ Displays an UIAlertController on the specified view controller
+@param[in] title the title of the alert to be displayed
+ @param[in] message the message of the alert ot be displayed
+ @param[in] senderVC the view controller to display the alert on
+*/
 
 +(void)displayAlert:(NSString*)title withMessage:(NSString*)message on:(UIViewController  * _Nullable)senderVC{
     if(senderVC)
@@ -174,7 +243,12 @@
     }
 }
 
-
+/**
+ Adds a friend(user)  to the friend's array of a certain user. And calls the addFriendLikes: method to
+ make sure the new friend's liked object are reflected in the user's UserAccessible object
+ @param[in] from the user that is adding a friend
+ @param[in] to the friend user to be added
+*/
 + (void) addFriend:(PFUser*) from toFriend:(PFUser*) to{
 
     PFObject *friendsAccess= [Helper getUserAccess:from];
@@ -185,7 +259,12 @@
     
     [self performSelectorInBackground:@selector(addFriendLikes:) withObject:@[from, to]];
 }
-
+/**
+ Removes a friend(user)  from the friend's array of a certain user. And calls the deleteFriendLikes: method to
+ make sure the new friend's liked object are removed from the user's UserAccessible object
+ @param[in] from the user that is removing a friend
+ @param[in] to the friend user to be removed
+*/
 + (void) removeFriend:(PFUser*) from toFriend:(PFUser*) to{
     
     PFObject *friendsAccess= [Helper getUserAccess:from];
@@ -196,7 +275,12 @@
     [self performSelectorInBackground:@selector(deleteFriendLikes:) withObject:@[from, to]];
 
 }
-
+/**
+ Adds a user's likes to the friend's UserAccessible object.
+ @param[in] users  the users that are involved.
+    the first user is the user whose UserAccessible Object is being modified, adding the second
+    user's liked object to thier 'friendOrgs" or 'friendEvents' list.
+*/
 + (void)addFriendLikes:(NSArray*)users{
     
     PFUser *fromUser= [users firstObject];
@@ -206,6 +290,7 @@
     [selfAccessQ getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         PFObject* selfAccess=object;
         PFObject *friendLikes=selfAccess[@"friendOrgs"];
+        //for each of the organizations that the friend has liked, add to the 'from' user's list
         for(NSString* ein in toUser[@"likedOrgs"])
         {
             if(friendLikes[ein])
@@ -224,6 +309,7 @@
 
 
         friendLikes=selfAccess[@"friendEvents"];
+        //for each of the events that the friend has liked, add to the 'from' user's list
         for(NSString *eventId in toUser[@"likedEvents"])
         {
             if(friendLikes[eventId])
@@ -242,6 +328,12 @@
     
     }];
 }
+/**
+ Delets a user's likes from the friend's UserAccessible object.
+ @param[in] users  the users that are involved.
+    the first user is the user whose UserAccessible Object is being modified, deleting the second
+    user's liked object from thier 'friendOrgs" or 'friendEvents' list.
+*/
 + (void)deleteFriendLikes:(NSArray*)users{
 
     PFUser *fromUser= [users firstObject];
@@ -251,6 +343,7 @@
     [selfAccessQ getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         PFObject* selfAccess=object;
         PFObject *friendLikes=selfAccess[@"friendOrgs"];
+        //for each of the organizations that the friend has liked, remove the friend's username from the list
         for(NSString* ein in toUser[@"likedOrgs"])
         {
             if(friendLikes[ein])
@@ -268,6 +361,7 @@
         [selfAccess saveInBackground];
 
         friendLikes=selfAccess[@"friendEvents"];
+        //for each of the events that the friend has liked, remove the friend's username from the list
         for(NSString *eventId in toUser[@"likedEvents"])
         {
             if(friendLikes[eventId])
@@ -286,7 +380,13 @@
     
     }];
 }
-
+/**
+ Delets a friend request
+ @param[in] current the user that declined the request
+ @param[in] requester  the user that requested
+ 
+ removes the 'inRequest' for the decliner and the 'outRequest' for the requester
+*/
 + (void) removeRequest:(PFUser *)current forUser:(PFUser *)requester{
     PFObject *currentUserAccess= [Helper getUserAccess:current];
     PFObject *requesterUserAccess= [Helper getUserAccess:requester];
@@ -305,6 +405,13 @@
     //save
     [PFObject saveAllInBackground:@[currentUserAccess, requesterUserAccess]];
 }
+/**
+ Adds a friend request
+ @param[in] current the user that sent a request
+ @param[in] requested  the user that is requested
+ 
+ Adds the 'inRequest' for the requested and the 'outRequest' for the current
+*/
 + (void) addRequest:(PFUser *)current forUser:(PFUser *)requested{
     
     PFObject *currentUserAccess= [Helper getUserAccess:current];

@@ -14,7 +14,9 @@
 @synthesize geoCoder;
 @synthesize currentPlacemark;
 
-//initialize a shared manager for all the view controllers to access.
+/**
+ initialize a shared manager for all the view controllers to access.
+*/
 static LocationManager *sharedManager;
 
 + (LocationManager *)sharedInstance {
@@ -78,7 +80,6 @@ Stop monitoring the user's location
         if(placemarks)
         {
             self.currentPlacemark=[placemarks firstObject];
-            //NSLog(@"Current loc %@", self.currentPlacemark.subThoroughfare);
         }
         else
             NSLog(@"Error geting location %@", error.localizedDescription);

@@ -6,6 +6,10 @@
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
 
+/*
+ File for all the helper methods of the program
+ */
+
 #import <Parse/Parse.h>
 #import "Post.h"
 #import "Organization.h"

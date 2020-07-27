@@ -11,6 +11,11 @@
 #import "APIManager.h"
 @implementation Organization
 
+/**
+ Creates and returns an Organization object from a dictionary
+ @param[in] dictionary the dictronary containing the information for the organization
+@return the created organization object
+ */
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
     self = [super init];
@@ -40,7 +45,11 @@
 
 }
 
-//add factory method that returns tweets when initialized with an array of tweet dictionaries
+/**
+ Creates and returns an array of Organizations object from an array of  dictionaries
+ @param[in] dictionaries the array of dictronaries containing the information for the organizations
+ @return the array of organization objects
+ */
 + (NSMutableArray *)orgsWithArray:(NSArray *)dictionaries{
     NSMutableArray *orgs = [NSMutableArray array];
     for (NSDictionary *dictionary in dictionaries) {
@@ -50,11 +59,21 @@
     }
     return orgs;
 }
-
+/**
+Creates and returns an dictionary  from an Organization so that It can be stored in Parse
+@param[in] org the Organization to be converted
+@return the dictionary conversion of the org
+*/
 + (NSDictionary *) dictionaryWithOrg:(Organization *)org{
     NSDictionary* dictionary= @{@"ein":org.ein, @"category": @{@"categoryName":org.category}, @"cause":  @{@"causeName":org.cause}, @"charityName":org.name, @"imageURL":[org.imageURL absoluteString], @"mailingAddress":org.locationDictionary, @"mission":org.missionStatement, @"tagLine":org.tagLine, @"websiteURL": [org.website absoluteString]};
     return dictionary;
 }
+
+/**
+Creates and returns an Organization from a single dictionary
+@param[in] dictionary the dictionary to be converted
+@return the org that was created 
+*/
 + (Organization *) orgWithDictionary:(NSDictionary *)dictionary{
     Organization *org= [Organization new];
     org=[org initWithDictionary:dictionary];

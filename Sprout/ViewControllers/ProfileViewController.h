@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UICollectionView *orgCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionView *eventCollectionView;
 @property (strong, nonatomic) PFUser *user;
-@property (strong, nonatomic) NSMutableArray *likedOrgs;
+@property (strong, nonatomic) NSArray *likedOrgs;
 @property (strong, nonatomic) NSArray *likedEvents;
 @property (weak, nonatomic) IBOutlet UIButton *topButton;
 @property (strong, nonatomic) UIImagePickerController* profileImagePicker;

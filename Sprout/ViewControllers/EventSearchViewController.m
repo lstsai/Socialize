@@ -37,14 +37,6 @@
     [refreshControl addTarget:self action:@selector(getEvents:) forControlEvents:UIControlEventValueChanged];//add an event listener
     [self.collectionView insertSubview:refreshControl atIndex:0];//add into the storyboard
 
-    CGRect frame = CGRectMake(0, self.collectionView.contentSize.height, self.collectionView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
-    self.loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
-    self.loadingMoreView.hidden = true;
-    [self.collectionView addSubview:self.loadingMoreView];
-
-    UIEdgeInsets insets = self.collectionView.contentInset;
-    insets.bottom += InfiniteScrollActivityView.defaultHeight;
-    self.collectionView.contentInset = insets;
 }
 
 -(void)setupLayout{
@@ -72,10 +64,7 @@
 
     PFQuery *eventsQuery=[PFQuery orQueryWithSubqueries:@[eventsNameQuery,eventsDetailsQuery]];
     [eventsQuery includeKey:@"author"];
-    [eventsQuery orderByAscending:@"startTime"];
-    if(![self.locationSearch isEqualToString:@""])
-        [eventsQuery whereKey:@"streetAddress" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.locationSearch]];
-
+    [eventsQuery whereKey:@"location" nearGeoPoint:[PFGeoPoint geoPointWithLatitude:self.locationCoord.latitude longitude:self.locationCoord.longitude]];
     [eventsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)
             [Helper displayAlert:@"Error getting events" withMessage:error.localizedDescription on:self];
@@ -89,28 +78,6 @@
         else
             [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if(!self.isMoreDataLoading)
-    {
-        int scrollContentHeight=self.collectionView.contentSize.height;
-        int scrollOffsetThreshold = scrollContentHeight - self.collectionView.bounds.size.height;
-        
-        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.collectionView.isDragging)
-        {
-            self.isMoreDataLoading=YES;
-            self.pageNum++;
-            CGRect frame = CGRectMake(0, self.collectionView.contentSize.height, self.collectionView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
-            self.loadingMoreView.frame = frame;
-            [self.loadingMoreView startAnimating];
-            [self loadMoreResults];
-        }
-        
-    }
-}
--(void) loadMoreResults{
-    [self.loadingMoreView stopAnimating];
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{

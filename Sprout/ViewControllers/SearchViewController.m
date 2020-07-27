@@ -15,7 +15,8 @@
 #import "MBProgressHUD.h"
 #import "OrgDetailsViewController.h"
 #import "Helper.h"
-@interface SearchViewController ()<UISearchBarDelegate, CLLocationManagerDelegate, CreateViewControllerDelegate>
+@import GooglePlaces;
+@interface SearchViewController ()<UISearchBarDelegate, CLLocationManagerDelegate, CreateViewControllerDelegate, GMSAutocompleteViewControllerDelegate>
 
 @end
 
@@ -29,6 +30,9 @@
     self.eventsVC=[self.childViewControllers objectAtIndex:EVENT_SEGMENT ];
     self.orgsVC=[self.childViewControllers objectAtIndex:ORG_SEGMENT];
     self.peopleVC=[self.childViewControllers objectAtIndex:PEOPLE_SEGMENT];
+    self.locManager=[[LocationManager sharedInstance] init];
+    self.citySearch=@"";
+    self.stateSearch=@"";
     [self.peopleView setHidden:YES];
     [self.eventsView setHidden:YES];
     [self.orgsView setHidden:NO];
@@ -52,45 +56,26 @@
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     sceneDelegate.window.rootViewController = loginViewController;
 }
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    
-    if (self.searchTimer != nil) {
-        [self.searchTimer invalidate];
-        self.searchTimer = nil;
-    }
-
-    // reschedule the search: in 1.0 second, call the searchForKeyword: method on the new textfield content
-    self.searchTimer = [NSTimer scheduledTimerWithTimeInterval: SEARCH_DELAY
-                                                        target: self
-                                                      selector: @selector(fetchResults:)
-                                                      userInfo: nil
-                                                       repeats: NO];
+- (IBAction)didTapSearch:(id)sender {
+    [self fetchResults:nil];
 }
-- (IBAction)didChangeLocation:(id)sender {
-    if (self.searchTimer != nil) {
-        [self.searchTimer invalidate];
-        self.searchTimer = nil;
-    }
-    // reschedule the search: in 1.0 second, call the searchForKeyword: method on the new textfield content
-    self.searchTimer = [NSTimer scheduledTimerWithTimeInterval: SEARCH_DELAY
-                                                        target: self
-                                                      selector: @selector(fetchResults:)
-                                                      userInfo: nil
-                                                       repeats: NO];
-}
+
 -(void) fetchResults:( UIRefreshControl * _Nullable )refreshControl{
-    
+    if([self.citySearch isEqualToString:@""]){
+        self.citySearch=self.locManager.currentPlacemark.locality;
+        self.locationCoord=self.locManager.currentLocation.coordinate;
+    }
     if(self.searchControl.selectedSegmentIndex==ORG_SEGMENT)
     {
         self.orgsVC.searchText=self.searchBar.text;
-        self.orgsVC.citySearch=[self.cityField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        self.orgsVC.stateSearch=[[self.stateField.text uppercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        self.orgsVC.citySearch=self.citySearch;
+        self.orgsVC.stateSearch=self.stateSearch;
+        self.orgsVC.locationCoord=self.locationCoord;
         [self.orgsVC getOrgs:refreshControl];
     }
     else if(self.searchControl.selectedSegmentIndex==EVENT_SEGMENT){
         self.eventsVC.searchText=self.searchBar.text;
-        self.eventsVC.locationSearch=[self.locationField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        self.eventsVC.locationCoord=self.locationCoord;
         [self.eventsVC getEvents:refreshControl];
     }
     else if(self.searchControl.selectedSegmentIndex==PEOPLE_SEGMENT){
@@ -103,26 +88,20 @@
     if(self.searchControl.selectedSegmentIndex==ORG_SEGMENT)
     {
         self.orgsVC.searchText=self.searchBar.text;
-        self.orgsVC.citySearch=[self.cityField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        self.orgsVC.stateSearch=[[self.stateField.text uppercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        self.orgsVC.citySearch=self.citySearch;
+        self.orgsVC.stateSearch=self.stateSearch;
+        self.orgsVC.locationCoord=self.locationCoord;
         [self.orgsVC getOrgs:nil];
         [self.searchBar setPlaceholder:[ORG_SEARCH_PLACEHOLDER mutableCopy]];
         [self.eventsView setHidden:YES];
         [self.peopleView setHidden:YES];
         [self.orgsView setHidden:NO];
-        self.cityField.alpha=SHOW_ALPHA;
-        self.stateField.alpha=SHOW_ALPHA;
-        self.locationField.alpha=HIDE_ALPHA;
     }
     else if (self.searchControl.selectedSegmentIndex==EVENT_SEGMENT)
     {
         self.eventsVC.searchText=self.searchBar.text;
-        self.eventsVC.locationSearch=[self.locationField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        [self.eventsVC getEvents:nil];
+        self.eventsVC.locationCoord=self.locationCoord;
         [self.searchBar setPlaceholder:[EVENT_SEARCH_PLACEHOLDER mutableCopy]];
-        self.cityField.alpha=HIDE_ALPHA;
-        self.stateField.alpha=HIDE_ALPHA;
-        self.locationField.alpha=SHOW_ALPHA;
         [self.orgsView setHidden:YES];
         [self.peopleView setHidden:YES];
         [self.eventsView setHidden:NO];
@@ -137,6 +116,41 @@
     }
 }
 - (void)didCreateEvent {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)didEditLocation:(id)sender {
+    [self.locationField resignFirstResponder];
+    GMSAutocompleteViewController *gmsAutocompleteVC=[[GMSAutocompleteViewController alloc]init];
+    gmsAutocompleteVC.delegate=self;
+    // Specify a filter to only cities
+    GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
+    filter.type = kGMSPlacesAutocompleteTypeFilterCity;
+    gmsAutocompleteVC.autocompleteFilter = filter;
+    [self presentViewController:gmsAutocompleteVC animated:YES completion:nil];
+    
+}
+- (void)viewController:(nonnull GMSAutocompleteViewController *)viewController didAutocompleteWithPlace:(nonnull GMSPlace *)place {
+    self.locationField.text=place.formattedAddress;
+    self.locationCoord=place.coordinate;
+    self.citySearch=place.name;
+    for(GMSAddressComponent* comp in place.addressComponents)
+    {
+        if([comp.types containsObject:@"administrative_area_level_1"])
+        {
+            self.stateSearch=comp.shortName;
+            break;
+        }
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)viewController:(nonnull GMSAutocompleteViewController *)viewController didFailAutocompleteWithError:(nonnull NSError *)error {
+    [Helper displayAlert:@"Error with location autocomplete" withMessage:error.localizedDescription on:self];
+
+}
+
+- (void)wasCancelled:(nonnull GMSAutocompleteViewController *)viewController {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

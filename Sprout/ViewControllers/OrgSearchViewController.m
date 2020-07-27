@@ -14,6 +14,7 @@
 #import "Helper.h"
 #import "Post.h"
 #import "UIScrollView+EmptyDataSet.h"
+#import "LocationManager.h"
 @interface OrgSearchViewController ()<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 @end
 
@@ -33,6 +34,7 @@
     [self setupLoadingIndicators];
     [self.tableView reloadData];
     self.tableView.tableFooterView = [UIView new];
+    self.params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"rated":@"TRUE", @"pageSize":@(RESULTS_SIZE)}.mutableCopy;
 }
 -(void) setupLoadingIndicators{
     UIRefreshControl *refreshControl= [[UIRefreshControl alloc] init];//initialize the refresh control
@@ -58,22 +60,50 @@
     }
     if(![refreshControl isKindOfClass:[UIRefreshControl class]])
          [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.pageNum=1;
+    [self.params setValue:self.searchText forKey:@"search"];
+    [self.params setValue:self.stateSearch forKey:@"state"];
+    [self.params setValue:self.citySearch forKey:@"city"];
+    [self.params setValue:@(self.pageNum) forKey:@"pageNum"];
 
-    NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchText, @"rated":@"TRUE", @"state": self.stateSearch, @"city": self.citySearch, @"pageSize":@(RESULTS_SIZE)};
-     [[APIManager shared] getOrganizationsWithCompletion:params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
-         if(error && ![error.localizedDescription isEqualToString:@"Request failed: not found (404)"])
+    [[APIManager shared] getOrganizationsWithCompletion:self.params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
+         if(error)
          {
              [Helper displayAlert:@"Error getting organizations" withMessage:error.localizedDescription on:self];
              self.organizations=@[].mutableCopy;
          }
-         else
+         else{
              self.organizations=[organizations mutableCopy];
-        [self.tableView reloadData];
-         
+             [self.tableView reloadData];
+             if(self.organizations.count<MIN_RESULT_THRESHOLD){
+                 UIAlertController* alert= [UIAlertController alertControllerWithTitle:@"Few Results in Your Area" message:@"Would you like to search further away?" preferredStyle:(UIAlertControllerStyleAlert)];
+                 UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                     [self getFurtherOrgs];
+                 }];
+                 UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                 }];
+                 [alert addAction:noAction];
+                 [alert addAction:yesAction];
+                 [self presentViewController:alert animated:YES completion:nil];
+             }
+         }
          if([refreshControl isKindOfClass:[UIRefreshControl class]])
              [refreshControl endRefreshing];
          [MBProgressHUD hideHUDForView:self.view animated:YES];
      }];
+    
+    
+}
+-(void)getFurtherOrgs{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[APIManager shared] getOrgsNearLocation:self.locationCoord withSearch:self.searchText withCompletion:^(NSArray * _Nonnull orgs, NSError * _Nonnull error) {
+        if(error)
+            NSLog(@"%@", error.localizedDescription);
+        else
+            self.organizations=orgs.mutableCopy;
+        [self.tableView reloadData];
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if(!self.isMoreDataLoading && self.organizations.count!=0)
@@ -94,8 +124,8 @@
        }
 }
 -(void) loadMoreResults{
-    NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchText, @"rated":@"TRUE", @"state": self.stateSearch, @"city": self.citySearch, @"pageNum": @(self.pageNum), @"pageSize":@(RESULTS_SIZE)};
-    [[APIManager shared] getOrganizationsWithCompletion:params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
+    [self.params setValue:@(self.pageNum) forKey:@"pageNum"];
+    [[APIManager shared] getOrganizationsWithCompletion:self.params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
         if(error && ![error.localizedDescription isEqualToString:@"Request failed: not found (404)"])
         {
             [Helper displayAlert:@"Error getting organizations" withMessage:error.localizedDescription on:self];

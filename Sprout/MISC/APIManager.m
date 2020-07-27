@@ -8,6 +8,7 @@
 
 #import "APIManager.h"
 #import "UIImageView+AFNetworking.h"
+#import "Constants.h"
 @implementation APIManager
 
 + (instancetype)shared {
@@ -36,22 +37,36 @@
         NSLog(@"Success getting orgs");
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Error getting orgs: %@", error.localizedDescription);
-        completion(nil,error);
+        if(![error.localizedDescription isEqualToString:@"Request failed: not found (404)"])
+            completion(nil,error);
+        else
+            completion(@[], nil);
     }];
 
 }
-- (void)getOrgsWithEIN:(NSArray*)eins completion:(void(^)(Organization * org, NSError *error))completion{
+- (void)getOrgsWithEIN:(NSArray*)eins completion:(void(^)(NSArray * orgs, NSError *error))completion{
     NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"]};
+    NSMutableArray *orgDictionaries= [NSMutableArray new];
     for(NSString* ein in eins)
     {
         NSString *getString= [NSString stringWithFormat:@"https://api.data.charitynavigator.org/v2/Organizations/%@", ein];
         [self GET:getString parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            Organization *org=[Organization orgWithDictionary:responseObject];
-            completion(org,nil);
+            [orgDictionaries addObject:responseObject];
+            if([ein isEqualToString:[eins lastObject]])
+            {
+                NSArray *organizations=[Organization orgsWithArray:orgDictionaries];
+                completion(organizations,nil);
+            }
         
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"Error getting org: %@", error.localizedDescription);
-            completion(nil,error);
+            if(![error.localizedDescription isEqualToString:@"Request failed: not found (404)"])
+                completion(nil,error);
+            //if this ein cannot be found, move on to the next one
+            if([ein isEqualToString:[eins lastObject]])
+            {
+                NSArray *organizations=[Organization orgsWithArray:orgDictionaries];
+                completion(organizations,nil);
+            }
         }];
     }
 }
@@ -65,6 +80,43 @@
        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
            NSLog(@"Error getting search %@", error.localizedDescription);
            completion(nil,error);
+    }];
+}
+- (void)getOrgsNearLocation:(CLLocationCoordinate2D)coords withSearch:(NSString*) search withCompletion:(void(^)(NSArray *orgs, NSError *error))completion{
+    NSDictionary *params= @{@"radius":@(SEARCH_RADIUS*2), @"limit": @(RESULTS_SIZE/2), @"sort":@"-population"};
+    NSString* getString=[NSString stringWithFormat:@"http://geodb-free-service.wirefreethought.com/v1/geo/locations/%f%f/nearbyCities", coords.latitude, coords.longitude];
+    [self GET:getString parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSMutableArray *cities= [NSMutableArray new];
+        for(NSDictionary* place in (NSArray*)responseObject[@"data"])
+        {
+            if ([place[@"city"] rangeOfString:@"County"].location == NSNotFound)
+                [cities addObject:place[@"city"]];
+        }
+        NSLog(@"%@", cities);
+        NSMutableDictionary *orgParams= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":search, @"rated":@"TRUE", @"pageSize":@(RESULTS_SIZE)}.mutableCopy;
+        NSMutableArray* orgResults= [NSMutableArray new];
+        for(NSString* city in cities)
+        {
+            orgParams[@"city"]=city;
+            if(orgResults.count<RESULTS_SIZE)
+            {
+                [self getOrganizationsWithCompletion:orgParams completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
+                    if(organizations)
+                        [orgResults addObjectsFromArray:organizations];
+                    if([city isEqualToString:cities.lastObject])
+                        completion(orgResults, nil);
+                }];
+            }
+            else
+            {
+                completion(orgResults, nil);
+                break;
+            }
+        }
+
+       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           NSLog(@"Error getting search %@", error.localizedDescription);
+          completion(nil,error);
     }];
 }
 @end

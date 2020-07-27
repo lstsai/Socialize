@@ -5,6 +5,9 @@
 //  Created by laurentsai on 7/13/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
+/*
+ File that contains the constants for the program
+ */
 #import <MapKit/MapKit.h>
 #ifndef Constants_h
 #define Constants_h

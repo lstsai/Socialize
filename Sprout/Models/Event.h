@@ -5,6 +5,9 @@
 //  Created by laurentsai on 7/14/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
+/*
+Object to represent an Event
+*/
 
 #import <Parse/Parse.h>
 NS_ASSUME_NONNULL_BEGIN

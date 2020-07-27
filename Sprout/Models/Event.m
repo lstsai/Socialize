@@ -24,10 +24,24 @@
 @dynamic startTime;
 @dynamic endTime;
 @dynamic numFriendsLike;
-
+/**
+Returns the class name for the Event object in parse
+@return the class name
+*/
 + (nonnull NSString *)parseClassName {
     return @"Event";
 }
+/**
+Creates a an event object to be saved in to Parse
+@param[in] image the image associated with the event
+@param[in] name name of event
+@param[in] stime start time of event
+@param[in] etime end time of event
+@param[in] location location of the event (geopoint)
+@param[in] streetAddress The string version of the location
+@param[in] details details about the event
+@param[in] completion the block to be called when the event is finised being saved
+*/
 + (void) postEvent:(UIImage * _Nullable )image withName:(NSString *)name withSTime:(NSDate*)stime withETime:(NSDate*)etime withLocation:(PFGeoPoint*)location withStreetAdress:(NSString*)streetAddress withDetails:(NSString*)details withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Event *newEvent= [Event new];
     newEvent.name=name;

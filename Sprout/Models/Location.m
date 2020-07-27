@@ -25,7 +25,7 @@ Creates and returns an Location  from a single dictionary
 }
 /**
 Creates and returns an formatted address from a location object
-@param[in] loc the lcoation to be converted
+@param[in] loc the location to be converted
 @return the address string that was created
 */
 + (NSString *)addressFromLocation:(Location*)loc{

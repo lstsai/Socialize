@@ -36,10 +36,16 @@
     [self performSelectorInBackground:@selector(getPosts:) withObject:nil];
 }
 /**
- Reload the posts before the view appears
+ Reload the posts before the view appears, and change color of requests button to indicate if there are
+ requests pending
  */
 -(void) viewWillAppear:(BOOL)animated{
     [self performSelectorInBackground:@selector(getPosts:) withObject:nil];
+    PFObject* selfAccess= [Helper getUserAccess:PFUser.currentUser];
+    if([(NSArray*)selfAccess[@"inRequests"] count]>0)//if the user has friend requests pending
+        self.requestsButton.tintColor=[UIColor systemBlueColor];
+    else
+        self.requestsButton.tintColor=[UIColor darkGrayColor];
 }
 /**
  setup the refresh control and infinite scroll indicators

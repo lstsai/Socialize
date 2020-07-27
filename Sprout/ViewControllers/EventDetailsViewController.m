@@ -22,6 +22,9 @@
     // Do any additional setup after loading the view.
     [self loadEventDetails];
 }
+/**
+Loads the view controller's views to reflect the event it is representing
+*/
 -(void) loadEventDetails{
     self.eventNameLabel.text=self.event.name;
     [self.event.author fetchIfNeeded];
@@ -32,7 +35,7 @@
     NSString *sdateString, *edateString;
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    
+    //display the start time and end time differently depending on if start and end are on same day
     if([[NSCalendar currentCalendar] isDate:self.event.startTime inSameDayAsDate:self.event.endTime])
     {
         [dateFormat setDateFormat:@"E, d MMM yyyy\nh:mm a"];
@@ -56,6 +59,11 @@
     if([PFUser.currentUser[@"likedEvents"] containsObject:self.event.objectId])
         self.likeButton.selected=YES;
 }
+/**
+Triggered when the user (un)likes this event. Calls the Helper method didLikeEvent or
+ didUnlikeEvent to update user fields on parse.
+ @param[in] sender the UIButton that was tapped
+*/
 - (IBAction)didTapLike:(id)sender {
     if(!self.likeButton.selected)
     {
@@ -77,7 +85,7 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if([segue.identifier isEqualToString:@"eventPostSegue"])
+    if([segue.identifier isEqualToString:@"eventPostSegue"])//takes the user to the page to create post about this event
     {
         CreatePostViewController *createPostVC=segue.destinationViewController;
         createPostVC.event=self.event;

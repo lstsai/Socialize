@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/13/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+ View Controller to display the details for a specified organization
+ */
 #import <UIKit/UIKit.h>
 #import "Organization.h"
 #import <Parse/Parse.h>

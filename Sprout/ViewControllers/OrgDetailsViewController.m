@@ -26,6 +26,9 @@
     
     [self loadOrgDetails];
 }
+/**
+ Loads the view controller's views to reflect the organization it is representing
+ */
 -(void) loadOrgDetails{
     self.name.text=self.org.name;
     self.category.text=self.org.category;
@@ -55,10 +58,18 @@
     if([PFUser.currentUser[@"likedOrgs"] containsObject:self.org.ein])
         self.likeButton.selected=YES;
 }
-
+/**
+ Triggered when the user taps the link of the website and presents the webviewcontroller
+ @param[in] sender the link that was tapped
+ */
 - (IBAction)didTapLink:(id)sender {
     [self performSegueWithIdentifier:@"webSegue" sender:nil];
 }
+/**
+Triggered when the user (un)likes this organization. Calls the Helper method didLikeOrg or
+ didUnlikeOrg to update user fields on parse.
+ @param[in] sender the UIButton that was tapped
+*/
 - (IBAction)didTapLike:(id)sender {
     if(!self.likeButton.selected)
     {
@@ -79,12 +90,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if([segue.identifier isEqualToString:@"webSegue"])
+    if([segue.identifier isEqualToString:@"webSegue"])//takes the user to the webview controller
     {
         WebViewController *webVC=segue.destinationViewController;
         webVC.link=self.org.website;
     }
-    else if([segue.identifier isEqualToString:@"orgPostSegue"])
+    else if([segue.identifier isEqualToString:@"orgPostSegue"])//takes the user to the page to create a post about this org
     {
         CreatePostViewController *createPostVC=segue.destinationViewController;
         createPostVC.org=self.org;

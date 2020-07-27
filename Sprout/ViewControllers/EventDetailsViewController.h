@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/15/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+View Controller to display the details for a specified event
+*/
 #import <UIKit/UIKit.h>
 #import "Event.h"
 @import Parse;

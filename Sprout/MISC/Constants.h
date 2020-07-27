@@ -35,5 +35,8 @@ extern const NSString* EVENT_POST_TEXT_PLACEHOLDER;
 extern const CGFloat EMPTY_TITLE_FONT_SIZE;
 extern const CGFloat EMPTY_MESSAGE_FONT_SIZE;
 extern const CGFloat PULL_REFRESH_HEIGHT;
+extern const int SEARCH_RADIUS;
+extern const int MIN_RESULT_THRESHOLD;
+extern const int STATE_INDEX;
 
 #endif /* Constants_h */

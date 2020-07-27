@@ -37,7 +37,10 @@
         NSLog(@"Success getting orgs");
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Error getting orgs: %@", error.localizedDescription);
-        completion(nil,error);
+        if(![error.localizedDescription isEqualToString:@"Request failed: not found (404)"])
+            completion(nil,error);
+        else
+            completion(@[], nil);
     }];
 
 }
@@ -80,34 +83,39 @@
     }];
 }
 - (void)getOrgsNearLocation:(CLLocationCoordinate2D)coords withSearch:(NSString*) search withCompletion:(void(^)(NSArray *orgs, NSError *error))completion{
-    NSDictionary *params= @{@"key":[[NSProcessInfo processInfo] environment][@"Google-api-key"] , @"rankby": @"distance", @"location": [NSString stringWithFormat:@"%f,%f", coords.latitude, coords.longitude], @"type": @"fire_station"};
-
-    [self GET:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSDictionary *params= @{@"radius":@(SEARCH_RADIUS*2), @"limit": @(RESULTS_SIZE/2), @"sort":@"-population"};
+    NSString* getString=[NSString stringWithFormat:@"http://geodb-free-service.wirefreethought.com/v1/geo/locations/%f%f/nearbyCities", coords.latitude, coords.longitude];
+    [self GET:getString parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSMutableArray *cities= [NSMutableArray new];
-        NSString* vicinity, *city;
-        for(NSDictionary* place in (NSArray*)responseObject[@"results"])
+        for(NSDictionary* place in (NSArray*)responseObject[@"data"])
         {
-            vicinity=place[@"vicinity"];
-            city=[[vicinity componentsSeparatedByString:@","].lastObject stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];//get only the city part of the address
-            if(![cities containsObject:city])
-                [cities addObject:city];
+            [cities addObject:place[@"city"]];
         }
+        NSLog(@"%@", cities);
         NSMutableDictionary *orgParams= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":search, @"rated":@"TRUE", @"pageSize":@(RESULTS_SIZE)}.mutableCopy;
         NSMutableArray* orgResults= [NSMutableArray new];
-        for(city in cities)
+        for(NSString* city in cities)
         {
             orgParams[@"city"]=city;
-            [self getOrganizationsWithCompletion:orgParams completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
-                if(organizations)
-                    [orgResults addObjectsFromArray:organizations];
-                if([city isEqualToString:cities.lastObject])
-                    completion(orgResults, nil);
-            }];
+            if(orgResults.count<RESULTS_SIZE)
+            {
+                [self getOrganizationsWithCompletion:orgParams completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
+                    if(organizations)
+                        [orgResults addObjectsFromArray:organizations];
+                    if([city isEqualToString:cities.lastObject])
+                        completion(orgResults, nil);
+                }];
+            }
+            else
+            {
+                completion(orgResults, nil);
+                break;
+            }
         }
 
        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
            NSLog(@"Error getting search %@", error.localizedDescription);
-           completion(nil,error);
+          completion(nil,error);
     }];
 }
 @end

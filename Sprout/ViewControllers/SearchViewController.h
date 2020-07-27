@@ -19,20 +19,19 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UITextField *cityField;
-@property (weak, nonatomic) IBOutlet UITextField *stateField;
 @property (weak, nonatomic) IBOutlet UITextField *locationField;
 @property (weak, nonatomic) IBOutlet UIView *eventsView;
 @property (weak, nonatomic) IBOutlet UIView *orgsView;
 @property (weak, nonatomic) IBOutlet UIView *peopleView;
-@property (weak, nonatomic) IBOutlet EventSearchViewController *eventsVC;
-@property (weak, nonatomic) IBOutlet OrgSearchViewController *orgsVC;
-@property (weak, nonatomic) IBOutlet PeopleSearchViewController *peopleVC;
-
+@property (weak, nonatomic) EventSearchViewController *eventsVC;
+@property (weak, nonatomic) OrgSearchViewController *orgsVC;
+@property (weak, nonatomic) PeopleSearchViewController *peopleVC;
+@property (strong, nonatomic) LocationManager *locManager;
+@property (nonatomic) CLLocationCoordinate2D locationCoord;
+@property (strong, nonatomic) NSString* citySearch;
+@property (strong, nonatomic) NSString* stateSearch;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *searchControl;
-@property (strong, nonatomic) NSTimer * _Nullable searchTimer;
 
 -(void) setupSegmentControl;
 -(void) fetchResults:(UIRefreshControl * _Nullable)refreshControl;

@@ -73,8 +73,8 @@
     PFQuery *eventsQuery=[PFQuery orQueryWithSubqueries:@[eventsNameQuery,eventsDetailsQuery]];
     [eventsQuery includeKey:@"author"];
     [eventsQuery orderByAscending:@"startTime"];
-    if(![self.locationSearch isEqualToString:@""])
-        [eventsQuery whereKey:@"streetAddress" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.locationSearch]];
+//    if(![self.locationSearch isEqualToString:@""])
+//        [eventsQuery whereKey:@"streetAddress" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.locationSearch]];
 
     [eventsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)

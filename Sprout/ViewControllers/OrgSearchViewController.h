@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LocationManager.h"
 #import "Organization.h"
 #import "InfiniteScrollActivityView.h"
+#import <CoreLocation/CoreLocation.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OrgSearchViewController : UIViewController
@@ -17,11 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString* searchText;
 @property (strong, nonatomic) NSString* stateSearch;
 @property (strong, nonatomic) NSString* citySearch;
-@property (strong, nonatomic) LocationManager *locManager;
+@property (nonatomic) CLLocationCoordinate2D locationCoord;
 @property (nonatomic) int pageNum;
 @property (nonatomic) BOOL isMoreDataLoading;
 @property (strong, nonatomic) InfiniteScrollActivityView* loadingMoreView;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 -(void) getOrgs:( UIRefreshControl * _Nullable )refreshControl;

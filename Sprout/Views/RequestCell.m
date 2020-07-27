@@ -17,6 +17,9 @@
     self.deleteButton.alpha=SHOW_ALPHA;
     self.statusLabel.alpha=HIDE_ALPHA;
 }
+/**
+ Loads the views for the cell
+ */
 -(void) loadData{
     self.nameLabel.text=self.requestUser.username;
     self.profileImage.file=self.requestUser[@"profilePic"];
@@ -25,13 +28,20 @@
     self.profileImage.clipsToBounds = YES;
     self.profileImage.layer.masksToBounds=YES;
 }
-
+/**
+Shows the status message of the request after being accepted/declined. also hides the accept and delete buttons
+ @param[in] message the message to be shown as the status
+ */
 -(void) showStatus:(NSString*) message{
     self.acceptButton.alpha=HIDE_ALPHA;
     self.deleteButton.alpha=HIDE_ALPHA;
     self.statusLabel.text=message;
     self.statusLabel.alpha=SHOW_ALPHA;
 }
+/**
+Triggered when the user presses the 'accept' button. Calls the showStatus: method to show 'Accepted' status
+ @param[in] sender the UIbuttont that is pressed
+ */
 - (IBAction)didTapAccept:(id)sender {
     
     [self showStatus:@"Accepted"];
@@ -39,6 +49,10 @@
        [Helper addFriend:PFUser.currentUser toFriend:self.requestUser];
        [Helper addFriend:self.requestUser toFriend:PFUser.currentUser];
 }
+/**
+Triggered when the user presses the 'delete' button. Calls the showStatus: method to show 'Declined' status
+ @param[in] sender the UIbuttont that is pressed
+ */
 - (IBAction)didTapDelete:(id)sender {
 
     [self showStatus:@"Declined"];

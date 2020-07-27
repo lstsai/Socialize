@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/23/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+ Table view cell that represents a friend request
+ */
 #import <UIKit/UIKit.h>
 @import Parse;
 NS_ASSUME_NONNULL_BEGIN

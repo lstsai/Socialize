@@ -32,6 +32,9 @@
     [self setUpLayout];
     self.resultNum=1;
 }
+/**
+Set up the refresh control and infinite scroll for the collection view
+*/
 -(void) setupLoadingIndicators{
     UIRefreshControl *refreshControl= [[UIRefreshControl alloc] init];//initialize the refresh control
     [refreshControl addTarget:self action:@selector(getPeople:) forControlEvents:UIControlEventValueChanged];//add an event listener
@@ -46,6 +49,9 @@
     insets.bottom += InfiniteScrollActivityView.defaultHeight;
     self.collectionView.contentInset = insets;
 }
+/**
+Setup the layout for the collection view to have 2 cells per row and margins
+*/
 -(void)setUpLayout{
     
     self.collectionView.frame=self.view.frame;
@@ -56,18 +62,36 @@
     CGFloat itemWidth=(self.collectionView.frame.size.width-layout.minimumInteritemSpacing*(PEOPLE_PER_LINE-1)-(2*MIN_MARGINS)-(2*SECTION_INSETS))/PEOPLE_PER_LINE;
     layout.itemSize=CGSizeMake(itemWidth, itemWidth);
 }
-
+/**
+Collection view delegate method. returns a cell to be shown at the index path
+@param[in] collectionView the collection view that is calling this method
+@param[in] indexPath the path for the returned cell to be displayed
+@return the cell that should be shown in the passed indexpath
+*/
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     PersonCell *personCell=[collectionView dequeueReusableCellWithReuseIdentifier:@"PersonCell" forIndexPath:indexPath];
     personCell.user = self.people[indexPath.item];
     [personCell loadData];
     return personCell;
 }
-
+/**
+Collection view delegate method. returns the number of sections that the collection has. This collection only has
+ one section so it always returns the total number of profiles
+@param[in] collectionView the collection view that is calling this method
+@param[in] section the section in question
+@return the number of profiles
+*/
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.people.count;
 }
-
+/**
+Collection view delegate method. Configures the animations for the cell that is about to be shown.
+ Shifts the cell's starting top position lower and animates it so that the it shifts up when scrolled.
+  Also makes gradually makes the cell more opaque
+@param[in] collectionView the table view that is empty
+@param[in] cell the cell that is about to be shown
+@param[in] indexPath the index path of the cell
+*/
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
 
     cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, CELL_TOP_OFFSET, 0);
@@ -78,7 +102,10 @@
         cell.contentView.alpha = SHOW_ALPHA;
     }];
 }
-
+/**
+Makes a query to get the users whose username matches the search
+@param[in] refreshControl the activity indicator that is animating if there is one
+*/
 -(void) getPeople:( UIRefreshControl * _Nullable )refreshControl{
     if([self.searchText isEqualToString:@""])
     {
@@ -109,7 +136,12 @@
         }
     }];
 }
-
+/**
+Triggered when the user scrolls on the collection view. Determines if the program should load more data
+ depending on how far the user has scrolled and if more data is already loading. Calls the getPeople method
+ if more users are needed. Update result number to retrieve new users
+@param[in] scrollView collection view that is being scrolled
+*/
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if(!self.isMoreDataLoading)
     {
@@ -127,12 +159,20 @@
         }
     }
 }
-
+/**
+Empty collection view delegate method. Returns the image to be displayed when there are no users
+@param[in] scrollView the collection view that is empty
+@return the image to be shown
+*/
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
 {
     return [UIImage imageNamed:@"group"];
 }
-
+/**
+Empty collection view delegate method. Returns the title to be displayed when there are no users
+@param[in] scrollView the collection view that is empty
+@return the title to be shown
+*/
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
     NSString *text = @"No Users to Show";
@@ -142,7 +182,11 @@
     
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
-
+/**
+Empty collection view delegate method. Returns the message to be displayed when there are no users
+@param[in] scrollView the collection view that is empty
+@return the message to be shown
+*/
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
     NSString *text = @"Search for more users to display";
@@ -157,6 +201,13 @@
                                  
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
+/**
+Empty collection view delegate method. Returns if the empty view should be shown
+@param[in] scrollView the collection view that is empty
+@return if the empty view shouls be shown
+ YES: if there are no users
+ NO: there are users
+*/
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
 {
     return self.people.count==0;
@@ -168,7 +219,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if([segue.identifier isEqualToString:@"profileSegue"])
+    if([segue.identifier isEqualToString:@"profileSegue"])//takes the user to the profile page
     {
         ProfileViewController *profileVC= segue.destinationViewController;
         UICollectionViewCell *tappedCell= sender;

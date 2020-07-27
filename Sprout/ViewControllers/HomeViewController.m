@@ -35,9 +35,15 @@
     [self setupLoadingIndicators];
     [self performSelectorInBackground:@selector(getPosts:) withObject:nil];
 }
+/**
+ Reload the posts before the view appears
+ */
 -(void) viewWillAppear:(BOOL)animated{
     [self performSelectorInBackground:@selector(getPosts:) withObject:nil];
 }
+/**
+ setup the refresh control and infinite scroll indicators
+ */
 -(void) setupLoadingIndicators{
     UIRefreshControl *refreshControl= [[UIRefreshControl alloc] init];//initialize the refresh control
     [refreshControl addTarget:self action:@selector(getPosts:) forControlEvents:UIControlEventValueChanged];//add an event listener
@@ -52,7 +58,11 @@
     insets.bottom += InfiniteScrollActivityView.defaultHeight;
     self.tableView.contentInset = insets;
 }
-
+/**
+ Fetches the posts from Parse to be displayed on the user's timeline. Only includes posts created by the user and friends.
+ Orders the posts by time creates (top is newest post).
+ @param[in] refreshControl the refresh control that is animating if there is one
+ */
 -(void) getPosts:( UIRefreshControl * _Nullable )refreshControl{
     [Helper getFriends:^(NSArray * _Nonnull friends, NSError * _Nonnull error) {
         if(error)
@@ -83,7 +93,13 @@
         }
     }];
 }
-
+/**
+ Table view delegate method. returns a cell to be shown. Depending on which type of post is at the index path,
+ show either a event post or a organization post
+ @param[in] tableView the table that is calling this method
+ @param[in] indexPath the path for the returned cell to be displayed
+ @return the cell that should be shown in the passed indexpath
+ */
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     Post *currPost=self.posts[indexPath.row];
     if(currPost.event)
@@ -102,16 +118,30 @@
         return opc;
     }
 }
-
+/**
+Table view delegate method. returns the number of sections that the table has. This table only has
+ one section so it always returns the total number of posts
+@param[in] tableView the table that is calling this method
+@param[in] section the section in question
+@return the number of posts
+*/
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.posts.count;
 }
-
+/**
+Empty table view delegate method. Returns the image to be displayed when there are no posts
+@param[in] scrollView the table view that is empty
+@return the image to be shown
+*/
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
 {
     return [UIImage imageNamed:@"share-post"];
 }
-
+/**
+Empty table view delegate method. Returns the title to be displayed when there are no posts
+@param[in] scrollView the table view that is empty
+@return the title to be shown
+*/
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
     NSString *text = @"No Posts to Show";
@@ -121,6 +151,11 @@
     
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
+/**
+Empty table view delegate method. Returns the message to be displayed when there are no posts
+@param[in] scrollView the table view that is empty
+@return the message to be shown
+*/
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
     NSString *text = @"Add friends, like some events or organizations, or create a post!";
@@ -135,14 +170,31 @@
                                  
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
+/**
+Empty table view delegate method. Returns if the empty view should be shown
+@param[in] scrollView the table view that is empty
+@return if the empty view shouls be shown
+ YES: if there are no posts
+ NO: there are posts
+*/
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
 {
     return self.posts.count==0;
 }
+/**
+ Triggered when the user taps on a profile image on a post. Takes the user to the
+ tapped user's profile page
+ @param[in] user the user that was tapped
+ */
 -(void) didTapUser:(PFUser *)user{
     [self performSegueWithIdentifier:@"profileSegue" sender:user];
 }
-
+/**
+Triggered when the user scrolls on the table view. Determines if the program should load more data
+ depending on how far the user has scrolled and if more data is already loading. Calls the getPosts method
+ if more posts are needed.
+@param[in] scrollView table view that is being scrolled
+*/
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if(!self.isMoreDataLoading && self.posts.count!=0)
        {
@@ -168,7 +220,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"eventSegue"])
+    if ([segue.identifier isEqualToString:@"eventSegue"])//presents the event details page
     {
         EventDetailsViewController *evc= segue.destinationViewController;
         UITableViewCell* tappedcell=sender;
@@ -176,7 +228,7 @@
         evc.event=((EventPostCell*)tappedcell).event;
         [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
     }
-    else if ([segue.identifier isEqualToString:@"orgSegue"])
+    else if ([segue.identifier isEqualToString:@"orgSegue"])//presents the org details page
     {
         OrgDetailsViewController *ovc= segue.destinationViewController;
         UITableViewCell* tappedcell=sender;
@@ -184,7 +236,7 @@
         ovc.org=((OrgPostCell*)tappedcell).org;
         [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
     }
-    else if ([segue.identifier isEqualToString:@"profileSegue"]){
+    else if ([segue.identifier isEqualToString:@"profileSegue"]){//presents the user's profile page
         ProfileViewController* profileVC= segue.destinationViewController;
         profileVC.user=(PFUser*)sender;
     }

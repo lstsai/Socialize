@@ -32,20 +32,30 @@
     [self setupLoadingIndicators];
     [self setupLayout];
 }
+/**
+Set up the refresh control for the collection view
+*/
 -(void) setupLoadingIndicators{
     UIRefreshControl *refreshControl= [[UIRefreshControl alloc] init];//initialize the refresh control
     [refreshControl addTarget:self action:@selector(getEvents:) forControlEvents:UIControlEventValueChanged];//add an event listener
     [self.collectionView insertSubview:refreshControl atIndex:0];//add into the storyboard
 
 }
-
+/**
+ Setup the layout for the collection view to have some spacing between each cell
+ 
+ */
 -(void)setupLayout{
     
     self.collectionView.frame=self.view.frame;
     UICollectionViewFlowLayout *layout= (UICollectionViewFlowLayout *) self.collectionView.collectionViewLayout;//cast to supress warning
     layout.minimumLineSpacing=MIN_MARGINS*3;
 }
-
+/**
+Makes a query to get the events based on the search. Ordered by how close the event location is to the
+ search location. 
+@param[in] refreshControl the activity indicator that is animating if there is one
+*/
 -(void) getEvents:( UIRefreshControl * _Nullable )refreshControl{
     if([self.searchText isEqualToString:@""])
     {
@@ -79,18 +89,36 @@
             [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
-
+/**
+Collection view delegate method. returns a cell to be shown at the index path
+@param[in] collectionView the collection view that is calling this method
+@param[in] indexPath the path for the returned cell to be displayed
+@return the cell that should be shown in the passed indexpath
+*/
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     EventVerticalCell *eventCell=[collectionView dequeueReusableCellWithReuseIdentifier:@"EventVerticalCell" forIndexPath:indexPath];
     eventCell.event = self.events[indexPath.item];
     [eventCell loadData];
     return eventCell;
 }
-
+/**
+Collection view delegate method. returns the number of sections that the collection has. This collection only has
+ one section so it always returns the total number of events
+@param[in] collectionView the collection view that is calling this method
+@param[in] section the section in question
+@return the number of events
+*/
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.events.count;
 }
-
+/**
+Collection view delegate method. Configures the animations for the cell that is about to be shown.
+ Shifts the cell's starting top position lower and animates it so that the it shifts up when scrolled.
+  Also makes gradually makes the cell more opaque
+@param[in] collectionView the table view that is empty
+@param[in] cell the cell that is about to be shown
+@param[in] indexPath the index path of the cell
+*/
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
 
     cell.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, CELL_TOP_OFFSET, 0);
@@ -100,10 +128,20 @@
         cell.contentView.alpha = SHOW_ALPHA;
     }];
 }
+/**
+Empty collection view delegate method. Returns the image to be displayed when there are no events
+@param[in] scrollView the collection view that is empty
+@return the image to be shown
+*/
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
 {
     return [UIImage imageNamed:@"emptyEvent"];
 }
+/**
+Empty collection view delegate method. Returns the title to be displayed when there are no events
+@param[in] scrollView the collection view that is empty
+@return the title to be shown
+*/
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
     NSString *text = @"No Events to show";
@@ -113,6 +151,11 @@
     
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
+/**
+Empty collection view delegate method. Returns the message to be displayed when there are no events
+@param[in] scrollView the collection view that is empty
+@return the message to be shown
+*/
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
     NSString *text = @"Search for more events to display";
@@ -127,6 +170,13 @@
                                  
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
+/**
+Empty collection view delegate method. Returns if the empty view should be shown
+@param[in] scrollView the collection view that is empty
+@return if the empty view shouls be shown
+ YES: if there are no events
+ NO: there are events
+*/
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
 {
     return self.events.count==0;
@@ -138,7 +188,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if([segue.identifier isEqualToString:@"detailSegue"])
+    if([segue.identifier isEqualToString:@"detailSegue"])//takes the user to the details page of event
     {
         EventDetailsViewController *eventVC=segue.destinationViewController;
         UICollectionViewCell *tappedCell= sender;

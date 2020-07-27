@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/15/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+ Child view controller of the search view controller that displays the organization search results
+ */
 #import <UIKit/UIKit.h>
 #import "Organization.h"
 #import "InfiniteScrollActivityView.h"

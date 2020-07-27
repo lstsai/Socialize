@@ -89,7 +89,8 @@
         NSMutableArray *cities= [NSMutableArray new];
         for(NSDictionary* place in (NSArray*)responseObject[@"data"])
         {
-            [cities addObject:place[@"city"]];
+            if ([place[@"city"] rangeOfString:@"County"].location == NSNotFound)
+                [cities addObject:place[@"city"]];
         }
         NSLog(@"%@", cities);
         NSMutableDictionary *orgParams= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":search, @"rated":@"TRUE", @"pageSize":@(RESULTS_SIZE)}.mutableCopy;

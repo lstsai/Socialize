@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/14/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+View Controller presented when user is creating an event
+*/
 #import <UIKit/UIKit.h>
 #import "LocationManager.h"
 #import <Parse/Parse.h>

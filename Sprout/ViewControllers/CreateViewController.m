@@ -25,6 +25,9 @@
     [self setupDatePicker];
     
 }
+/**
+ Set the input type of the start and end time fields to be date pickers
+ */
 -(void) setupDatePicker{
     UIDatePicker *datePicker = [[UIDatePicker alloc]init];
     [datePicker setDate:[NSDate date]];
@@ -41,6 +44,10 @@
     [self.endDateField setInputView:eDatePicker];
 
 }
+/**
+ Triggered when the user changes the start date field and changes the field's text accordingly
+ @param[in] sender the start date field
+ */
 -(void) didUpdateSDate:(id)sender{
     UIDatePicker *picker = (UIDatePicker*)self.startDateField.inputView;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -48,7 +55,10 @@
     [dateFormat setDateFormat:@"MM/dd/yy h:mm a"];
     self.startDateField.text = [dateFormat stringFromDate:eventDate];
 }
-
+/**
+Triggered when the user changes the end date field and changes the field's text accordingly
+@param[in] sender the end date field
+*/
 -(void) didUpdateEDate:(id)sender{
     UIDatePicker *picker = (UIDatePicker*)self.endDateField.inputView;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -56,7 +66,12 @@
     [dateFormat setDateFormat:@"MM/dd/yy h:mm a"];
     self.endDateField.text = [dateFormat stringFromDate:eventDate];
 }
-
+/**
+Triggered when the user presses the create/post button for the event. Gathers the information the user has
+ entered about the event and creates a parse event. Displays errors if applicable. calls the delegate method
+ to dismiss the view controller
+@param[in] sender the create/post button
+*/
 - (IBAction)didTapCreate:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     UIDatePicker *spicker = (UIDatePicker*)self.startDateField.inputView;
@@ -92,10 +107,17 @@
         }];
     }
 }
+/**
+Triggered when the user presses the cancel button. Dismisses the view controller
+@param[in] sender the dismiss button
+*/
 - (IBAction)didTapCancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
+/**
+Triggered when the user presses the backdrop image. Presents the image picker(photo album) so the user can choose an image for the event.
+@param[in] sender the background image that was tapped
+*/
 - (IBAction)didTapImagePicker:(id)sender {
     
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
@@ -104,7 +126,11 @@
     imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
-
+/**
+Triggered when the user chooses an event to be the event image. Sets the background image to be the image selected
+@param[in] picker the image picker that has the selected image
+ @param[in] info the dictionary that contains the picked image
+*/
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
@@ -114,6 +140,11 @@
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+/**
+Triggered when the user presses the location field. Presents the GMSAutocompleteViewController so that the user
+ can easily select a location for the event
+@param[in] sender the location field
+*/
 - (IBAction)didEditLocation:(id)sender {
     [self.locationField resignFirstResponder];
     GMSAutocompleteViewController *gmsAutocompleteVC=[[GMSAutocompleteViewController alloc]init];
@@ -132,18 +163,31 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+/**
+Delegate method for the GMSAutocompleteViewController. Called when the user presses an autocomplete result. Updates
+ the location properties of the viewcontroller to match the user's selection. dismisses the
+ autocomplete view controller after
+@param[in] viewController the GMSAutocompleteViewController that was used to select the result
+ @param[in] place the place that the user selected
+*/
 - (void)viewController:(nonnull GMSAutocompleteViewController *)viewController didAutocompleteWithPlace:(nonnull GMSPlace *)place {
     self.locationField.text=place.formattedAddress;
     self.locationPoint= [PFGeoPoint geoPointWithLatitude:place.coordinate.latitude longitude:place.coordinate.longitude];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
+/**
+Delegate method for the GMSAutocompleteViewController. Triggered when there is an error with autocomplete. Then displays the alert to the user
+@param[in] viewController the GMSAutocompleteViewController which had an error
+ @param[in] error the error that occured
+*/
 - (void)viewController:(nonnull GMSAutocompleteViewController *)viewController didFailAutocompleteWithError:(nonnull NSError *)error {
     [Helper displayAlert:@"Error with location autocomplete" withMessage:error.localizedDescription on:self];
 
 }
-
+/**
+Delegate method for the GMSAutocompleteViewController. Triggered when the user cancels the location search
+@param[in] viewController the GMSAutocompleteViewController to be dismissed
+*/
 - (void)wasCancelled:(nonnull GMSAutocompleteViewController *)viewController {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

@@ -13,7 +13,9 @@
 @end
 
 @implementation WebViewController
-
+/**
+ Loads the link that was passed to this controller
+ */
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

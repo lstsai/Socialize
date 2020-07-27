@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/13/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/**
+ Table view cell to represent organizations in the search page
+ */
 #import <UIKit/UIKit.h>
 #import "Organization.h"
 NS_ASSUME_NONNULL_BEGIN

@@ -16,7 +16,11 @@
     [super awakeFromNib];
     // Initialization code
 }
+/**
+ Loads the views of the cell to represent the post
+ */
 -(void) loadData{
+    //add a tap gesture recognizer so user can tap on the profile image and be taken to the profile page
     UIGestureRecognizer *profileTapGesture= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
     [self.profileImage setUserInteractionEnabled:YES];
     [self.profileImage addGestureRecognizer:profileTapGesture];
@@ -31,6 +35,7 @@
     self.postDescriptionLabel.text=self.post.postDescription;
     self.timeLabel.text=[self.post.createdAt shortTimeAgoSinceNow];
     
+    //convert the dictionary back into a organization
     self.org= [Organization orgWithDictionary:(NSDictionary*) self.post.org];
     
     [self.orgImage setImageWithURL:self.org.imageURL];
@@ -44,6 +49,9 @@
     
     [self performSelectorInBackground:@selector(getLikes) withObject:nil];
 }
+/**
+ setup the shadoes and rounded cell corners
+ */
 -(void) setShadow{
     self.orgContainer.layer.cornerRadius = CELL_CORNER_RADIUS*2;
     self.orgContainer.layer.borderColor = [UIColor clearColor].CGColor;
@@ -56,7 +64,9 @@
     self.orgContainer.layer.masksToBounds = NO;
 
 }
-
+/**
+Calculates the number of friends that have liked the organization the post is about
+ */
 -(void) getLikes{
     PFQuery * friendAccessQ=[PFQuery queryWithClassName:@"UserAccessible"];
     [friendAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
@@ -76,9 +86,20 @@
         }
     }];
 }
+/**
+ Triggered when the user taps on the user profile image
+ @param[in] sender the gesture recognizer that was triggered
+ call the delegate method to segue to the profile page
+ */
 - (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
     [self.delegate didTapUser:self.post.author];
 }
+/**
+ Triggered when the user taps the like button and updates the user profiles accordingly by
+ calling a helper method
+ @param[in] sender the UIbutton that was pressed
+
+ */
 - (IBAction)didTapLike:(id)sender {
     if(!self.likeButton.selected)
     {

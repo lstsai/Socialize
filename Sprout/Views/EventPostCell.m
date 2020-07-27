@@ -17,6 +17,9 @@
     [super awakeFromNib];
     // Initialization code
 }
+/**
+Loads the views of the cell to represent the post
+*/
 -(void) loadData{
     UIGestureRecognizer *profileTapGesture= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
     [self.profileImage setUserInteractionEnabled:YES];
@@ -46,7 +49,9 @@
     self.eventDateTime.text = [dateFormat stringFromDate:self.event.startTime];
     [self performSelectorInBackground:@selector(getLikes) withObject:nil];
 }
-
+/**
+setup the shadoes and rounded cell corners
+*/
 -(void) setShadow{
     self.eventContainer.layer.cornerRadius = CELL_CORNER_RADIUS*2;
     self.eventContainer.layer.borderColor = [UIColor clearColor].CGColor;
@@ -58,7 +63,9 @@
     self.eventContainer.layer.shadowOpacity = SHADOW_OPACITY;
     self.eventContainer.layer.masksToBounds = NO;
 }
-
+/**
+Calculates the number of friends that have liked the event the post is about
+ */
 -(void) getLikes{
     PFQuery * friendAccessQ=[PFQuery queryWithClassName:@"UserAccessible"];
     [friendAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
@@ -78,6 +85,12 @@
         }
     }];
 }
+/**
+Triggered when the user taps the like button and updates the user profiles accordingly by
+calling a helper method
+@param[in] sender the UIbutton that was pressed
+
+*/
 - (IBAction)didTapLike:(id)sender {
     
     if(!self.likeButton.selected)
@@ -92,6 +105,11 @@
 
     }
 }
+/**
+Triggered when the user taps on the user profile image
+@param[in] sender the gesture recognizer that was triggered
+call the delegate method to segue to the profile page
+*/
 - (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
     [self.delegate didTapUser:self.post.author];
 }

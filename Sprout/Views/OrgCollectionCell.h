@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/16/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+Collection view cells for the organizations that display on the Profile page
+*/
 #import <UIKit/UIKit.h>
 #import "Organization.h"
 #import "UIImageView+AFNetworking.h"

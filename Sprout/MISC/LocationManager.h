@@ -5,6 +5,9 @@
 //  Created by laurentsai on 7/14/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
+/*
+ Manages the location information of the user.
+ */
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
@@ -24,6 +27,5 @@
 + (LocationManager *)sharedInstance;
 - (void)start;
 - (void)stop;
-- (void)getLocalPlaces:(NSString*)searchTerm completion:(void(^)(NSArray *mapItems, NSError *error))completion;
 
 @end

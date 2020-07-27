@@ -14,7 +14,7 @@
 @synthesize geoCoder;
 @synthesize currentPlacemark;
 
-
+//initialize a shared manager for all the view controllers to access.
 static LocationManager *sharedManager;
 
 + (LocationManager *)sharedInstance {
@@ -49,37 +49,28 @@ static LocationManager *sharedManager;
 }
 
 #pragma mark - Public Methods
-
+/**
+ Start monitoring the user's location
+ */
 - (void)start {
 
   [locationManager startUpdatingLocation];
 
 }
-
+/**
+Stop monitoring the user's location
+*/
 - (void)stop {
 
   [locationManager stopUpdatingLocation];
 }
 
-- (void)getLocalPlaces:(NSString*)searchTerm completion:(void(^)(NSArray *mapItems, NSError *error))completion{
-    MKLocalSearchRequest *searchRequest = [[MKLocalSearchRequest alloc] init];
-    searchRequest.naturalLanguageQuery = searchTerm;
-
-    // Set the region to an associated map view's region.
-    searchRequest.region=MKCoordinateRegionMake(self.currentLocation.coordinate, MKCoordinateSpanMake(0.07, 0.07));
-
-    MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:searchRequest];
-    [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
-        if (response) {
-            completion([response mapItems], nil);
-        } else if (error) {
-            // Handle the error.
-            completion(nil, error);
-        }
-    }];
-}
-
 #pragma mark - Delegate Methods
+/**
+ Tells the delegate that new location data is available, Uses a geocoder to update the placemark variable (to get the human readable location data)
+@param[in] manager The location manager object that generated the update event.
+@param[in] locations An array of CLLocation objects containing the location data. The most recent location update is at the end of the array.
+*/
 -(void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
     self.currentLocation=[locations lastObject];
 

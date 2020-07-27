@@ -17,10 +17,21 @@
 @dynamic image;
 @dynamic createdAt;
 @dynamic org;
-
+/**
+Returns the class name for the Event object in parse
+@return the class name
+*/
 + (nonnull NSString *)parseClassName {
     return @"Post";
 }
+/**
+Creates a a Post object to be saved in to Parse
+@param[in] image the image associated with the Post
+@param[in] description decription/caption of the post
+@param[in] event associated event (if applicable)
+@param[in] org associated organization (if applicable)
+@param[in] completion the block to be called when the event is finised being saved
+*/
 + (void) createPost:(UIImage * _Nullable )image withDescription:(NSString *)description withEvent:(Event* _Nullable)event withOrg:(Organization* _Nullable)org withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Post *newPost= [Post new];
     newPost.author=PFUser.currentUser;

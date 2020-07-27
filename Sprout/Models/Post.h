@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/21/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+Object to represent a Post
+*/
 #import <Parse/Parse.h>
 #import "Helper.h"
 #import "Event.h"

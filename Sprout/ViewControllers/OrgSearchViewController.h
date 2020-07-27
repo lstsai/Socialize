@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL isMoreDataLoading;
 @property (strong, nonatomic) InfiniteScrollActivityView* loadingMoreView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (strong, nonatomic) NSMutableDictionary *params;
 -(void) getOrgs:( UIRefreshControl * _Nullable )refreshControl;
 -(void) loadMoreResults;
 

@@ -134,7 +134,14 @@
     self.locationField.text=place.formattedAddress;
     self.locationCoord=place.coordinate;
     self.citySearch=place.name;
-    self.stateSearch=place.addressComponents[STATE_INDEX].shortName;
+    for(GMSAddressComponent* comp in place.addressComponents)
+    {
+        if([comp.types containsObject:@"administrative_area_level_1"])
+        {
+            self.stateSearch=comp.shortName;
+            break;
+        }
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

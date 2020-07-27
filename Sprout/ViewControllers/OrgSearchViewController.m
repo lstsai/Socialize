@@ -34,6 +34,7 @@
     [self setupLoadingIndicators];
     [self.tableView reloadData];
     self.tableView.tableFooterView = [UIView new];
+    self.params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"rated":@"TRUE", @"pageSize":@(RESULTS_SIZE)}.mutableCopy;
 }
 -(void) setupLoadingIndicators{
     UIRefreshControl *refreshControl= [[UIRefreshControl alloc] init];//initialize the refresh control
@@ -59,9 +60,13 @@
     }
     if(![refreshControl isKindOfClass:[UIRefreshControl class]])
          [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.pageNum=1;
+    [self.params setValue:self.searchText forKey:@"search"];
+    [self.params setValue:self.stateSearch forKey:@"state"];
+    [self.params setValue:self.citySearch forKey:@"city"];
+    [self.params setValue:@(self.pageNum) forKey:@"pageNum"];
 
-    NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchText, @"rated":@"TRUE", @"state": self.stateSearch, @"city":self.citySearch, @"pageSize":@(RESULTS_SIZE)};
-     [[APIManager shared] getOrganizationsWithCompletion:params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
+    [[APIManager shared] getOrganizationsWithCompletion:self.params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
          if(error)
          {
              [Helper displayAlert:@"Error getting organizations" withMessage:error.localizedDescription on:self];
@@ -119,8 +124,8 @@
        }
 }
 -(void) loadMoreResults{
-    NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":self.searchText, @"rated":@"TRUE", @"state": self.stateSearch, @"city": self.citySearch, @"pageNum": @(self.pageNum), @"pageSize":@(RESULTS_SIZE)};
-    [[APIManager shared] getOrganizationsWithCompletion:params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
+    [self.params setValue:@(self.pageNum) forKey:@"pageNum"];
+    [[APIManager shared] getOrganizationsWithCompletion:self.params completion:^(NSArray * _Nonnull organizations, NSError * _Nonnull error) {
         if(error && ![error.localizedDescription isEqualToString:@"Request failed: not found (404)"])
         {
             [Helper displayAlert:@"Error getting organizations" withMessage:error.localizedDescription on:self];

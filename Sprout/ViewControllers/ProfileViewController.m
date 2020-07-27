@@ -41,7 +41,9 @@
     [self setupImagePicker];
     [self loadProfile];
 }
-
+/**
+ Fetches data about the user from Parse and updates the views of the page accordingly
+ */
 -(void)loadProfile{
     
    
@@ -95,6 +97,9 @@
     [self getLikedOrgInfo];
     [self getLikedEventInfo];
 }
+/**
+ Calls the helper method to fetch the organizations teh user has liked
+ */
 -(void)getLikedOrgInfo{
     
     self.likedOrgs=@[].mutableCopy;
@@ -116,6 +121,9 @@
         [self.orgCollectionView reloadData];
     
 }
+/**
+Creates a parse query and fetches the events the user has liked
+*/
 -(void)getLikedEventInfo{
     [MBProgressHUD showHUDAddedTo:self.eventCollectionView animated:YES];
     PFQuery *eventQuery= [PFQuery queryWithClassName:@"Event"];
@@ -132,7 +140,14 @@
     }];
 
 }
-
+/**
+Collection view delegate method. returns a cell to be shown at the index path for a collection view.
+ If the collection view calling the method is the events one, creates an event cell.
+ else will create an organization cell
+@param[in] collectionView the collection view that is calling this method
+@param[in] indexPath the path for the returned cell to be displayed
+@return the cell that should be shown in the passed indexpath
+*/
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     if(collectionView==self.eventCollectionView)
     {
@@ -146,13 +161,25 @@
         return orgcc;
     }
 }
-
+/**
+Collection view delegate method. returns the number of sections that the collection has. Each collection only has
+ one section. if the collection view calling the method is the events one, will return the number of liked events
+ else will return the number of liked organizations
+@param[in] collectionView the collection view that is calling this method
+@param[in] section the section in question
+@return the number of liked objects
+*/
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if(collectionView==self.eventCollectionView)
         return self.likedEvents.count;
     else
         return self.likedOrgs.count;
 }
+/**
+ Triggered when the user presses the top button to request/unfriends a user.
+ reconfigues the button to match the current state, and calls the correct helper methods.
+ @param[in] sender the button that was pressed
+ */
 - (IBAction)didTapButton:(id)sender {
     
     if(self.user!=PFUser.currentUser)
@@ -181,7 +208,9 @@
     }
 
 }
-
+/**
+ sets up the image pickers for the background image and the profile image view
+ */
 -(void) setupImagePicker{
     self.profileImagePicker=[UIImagePickerController new];
     self.profileImagePicker.allowsEditing=YES;
@@ -195,7 +224,11 @@
     self.backgroundImagePicker.allowsEditing=YES;
     self.backgroundImagePicker.delegate=self;
 }
-
+/**
+Triggered when the user presses the profile or backdrop image. Presents the image picker(photo album or camera) so the user can choose an image for the
+ tapped image view.
+@param[in] sender the imageview  that was tapped
+*/
 - (IBAction)didTapImagePicker:(id)sender {
     UIImagePickerController* imagePickerVC;
     
@@ -213,7 +246,11 @@
     }
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
-
+/**
+Triggered when the user chooses an image to be the profile/background image. Sets the image view to be the image selected
+@param[in] picker the image picker that has the selected image
+ @param[in] info the dictionary that contains the picked image
+*/
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
     if(picker==self.profileImagePicker){
@@ -230,7 +267,11 @@
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
+/**
+Triggered when the user taps the logout button. Logs the user out and
+ presents the login page.
+@param[in]  sender the logout button
+*/
 - (IBAction)didTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         if(error)
@@ -244,6 +285,11 @@
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     sceneDelegate.window.rootViewController = loginViewController;
 }
+/**
+Mimics the pull to refresh function of the table and collecton views. Animates the view to look like the
+ user is pulling, and refreshes the user data.
+@param[in]  sender the sqipe gesture recognizer
+*/
 - (IBAction)didPullToRefresh:(id)sender {
     [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         self.view.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, PULL_REFRESH_HEIGHT);
@@ -256,6 +302,12 @@
         }];
     }];
 }
+/**
+Triggered when the user accepts the friend request from the profile page, calls the
+ helper methods to update user data. removes the private view so the user can see
+ the other users data
+@param[in]  sender the accept buttons
+*/
 - (IBAction)didTapAccept:(id)sender {
     self.requestView.alpha=HIDE_ALPHA;
     self.topButton.userInteractionEnabled=YES;
@@ -267,13 +319,22 @@
     [Helper addFriend:PFUser.currentUser toFriend:self.user];
     [Helper addFriend:self.user toFriend:PFUser.currentUser];
 }
+/**
+Triggered when the user declins the friend request from the profile page, calls the
+ helper methods to update user data
+@param[in]  sender the delete buttons
+*/
 - (IBAction)didTapDecline:(id)sender {
     //remove request
     self.requestView.alpha=HIDE_ALPHA;
     self.topButton.userInteractionEnabled=YES;
     [Helper removeRequest:PFUser.currentUser forUser:self.user];
 }
-
+/**
+Empty collection view delegate method. Returns the image to be displayed when there are no events/orgs
+@param[in] scrollView the collection view that is empty
+@return the image to be shown
+*/
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
 {
     if((UICollectionView*)scrollView==self.eventCollectionView)
@@ -281,6 +342,11 @@
     else
         return [UIImage imageNamed:@"emptySprout"];
 }
+/**
+Empty collection view delegate method. Returns the title to be displayed when there are no events/orgs
+@param[in] scrollView the collection view that is empty
+@return the title to be shown
+*/
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
     NSString *text;
     if((UICollectionView*) scrollView== self.eventCollectionView)
@@ -293,6 +359,13 @@
     
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
+/**
+Empty collection view delegate method. Returns if the empty view should be shown
+@param[in] scrollView the collection view that is empty
+@return if the empty view shouls be shown
+ YES: if there are no events/orgs
+ NO: there are events/orgs
+*/
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
 {
     if((UICollectionView*)scrollView==self.eventCollectionView)
@@ -308,7 +381,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if([segue.identifier isEqualToString:@"orgSegue"])
+    if([segue.identifier isEqualToString:@"orgSegue"])//takes the user to the orgs details page
     {
         OrgDetailsViewController *orgVC= segue.destinationViewController;
         UICollectionViewCell *tappedCell=sender;
@@ -316,7 +389,7 @@
         orgVC.org=self.likedOrgs[tappedIndex.item];
         [self.orgCollectionView deselectItemAtIndexPath:tappedIndex animated:YES];
     }
-    else if([segue.identifier isEqualToString:@"eventSegue"])
+    else if([segue.identifier isEqualToString:@"eventSegue"])//takes user to the events details page
     {
         EventDetailsViewController *eventVC= segue.destinationViewController;
         UICollectionViewCell *tappedCell=sender;

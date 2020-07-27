@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/16/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+ View controller that displays information about a specific user
+ */
 #import <UIKit/UIKit.h>
 #import "Organization.h"
 #import "Event.h"

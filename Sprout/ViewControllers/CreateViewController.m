@@ -127,7 +127,7 @@ Triggered when the user presses the backdrop image. Presents the image picker(ph
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 /**
-Triggered when the user chooses an event to be the event image. Sets the background image to be the image selected
+Triggered when the user chooses an image to be the event image. Sets the background image to be the image selected
 @param[in] picker the image picker that has the selected image
  @param[in] info the dictionary that contains the picked image
 */

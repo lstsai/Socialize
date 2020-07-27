@@ -19,6 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+    self.profileImage.clipsToBounds = YES;
+    self.profileImage.layer.masksToBounds=YES;
     self.profileImage.file=PFUser.currentUser[@"profilePic"];
     [self.profileImage loadInBackground];
 }

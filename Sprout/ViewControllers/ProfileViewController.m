@@ -81,6 +81,9 @@
     self.nameLabel.text=self.user.username;
     self.usernameLabel.text=self.user.username;
 
+    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+    self.profileImage.clipsToBounds = YES;
+    self.profileImage.layer.masksToBounds=YES;
     if(self.user[@"profilePic"])
     {
         self.profileImage.file=self.user[@"profilePic"];
@@ -215,10 +218,6 @@ Collection view delegate method. returns the number of sections that the collect
     self.profileImagePicker=[UIImagePickerController new];
     self.profileImagePicker.allowsEditing=YES;
     self.profileImagePicker.delegate=self;
-    
-    self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
-    self.profileImage.clipsToBounds = YES;
-    self.profileImage.layer.masksToBounds=YES;
     
     self.backgroundImagePicker=[UIImagePickerController new];
     self.backgroundImagePicker.allowsEditing=YES;

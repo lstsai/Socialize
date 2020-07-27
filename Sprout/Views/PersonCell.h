@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/17/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+ Collection view cell to represent users in the people search page
+ */
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN

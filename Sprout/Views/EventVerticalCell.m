@@ -12,8 +12,11 @@
 @import GoogleMaps;
 
 @implementation EventVerticalCell
-
+/**
+Loads the cell data from the event
+*/
 -(void) loadData{
+    //format the date
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd"];
     NSString *dateString = [dateFormat stringFromDate:self.event.startTime];
@@ -26,15 +29,16 @@
     self.timeLabel.text=timeString;
     
     self.nameLabel.text=self.event.name;
-    
+    //if the user has liked this event, set the like button to 'liked'
     if([PFUser.currentUser[@"likedEvents"] containsObject:self.event.objectId])
         self.likeButton.selected=YES;
     else
         self.likeButton.selected=NO;
-    
+    //load the event image
     self.eventImage.file=self.event.image;
     [self.eventImage loadInBackground];
     
+    //Use the google maps geocoder to find the city of the event using the coordinates of the event
     GMSGeocoder *geocoder= [GMSGeocoder geocoder];
     CLLocationCoordinate2D cllocation= CLLocationCoordinate2DMake(self.event.location.latitude, self.event.location.longitude);
     [geocoder reverseGeocodeCoordinate:cllocation completionHandler:^(GMSReverseGeocodeResponse * _Nullable address, NSError * _Nullable error) {
@@ -54,6 +58,9 @@
     
 
 }
+/**
+ configure the shadow and rounded corners for the cell
+ */
 -(void) setupShadows{
     
     self.contentView.layer.cornerRadius = CELL_CORNER_RADIUS;
@@ -77,7 +84,10 @@
     self.dateView.layer.masksToBounds = NO;
 
 }
-
+/**
+ calculates the number of friends that have liked this specific event
+ only shows the label if at least one friend has liked it
+ */
 -(void) getLikes{
     PFQuery * friendAccessQ=[PFQuery queryWithClassName:@"UserAccessible"];
     [friendAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
@@ -97,6 +107,11 @@
         }
     }];
 }
+/**
+Triggered when the user (un)likes this event. Calls the Helper method didLikeEvent or
+ didUnlikeEvent to update user fields on parse.
+ @param[in] sender the UIButton that was tapped
+*/
 - (IBAction)didTapLike:(id)sender {
     if(!self.likeButton.selected)
     {

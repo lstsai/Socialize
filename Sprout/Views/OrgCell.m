@@ -18,6 +18,9 @@
     [super awakeFromNib];
     // Initialization code
 }
+/**
+ Loads the views of the cell to reflect the represented organization 
+ */
 -(void) loadData{
     self.nameLabel.text=self.org.name;
     self.tagLineLabel.text=self.org.tagLine;
@@ -43,6 +46,10 @@
         self.likeButton.selected=NO;
     [self performSelectorInBackground:@selector(getLikes) withObject:nil];
 }
+/**
+calculates the number of friends that have liked this specific organization
+only shows the label if at least one friend has liked it
+*/
 -(void) getLikes{
     PFQuery * friendAccessQ=[PFQuery queryWithClassName:@"UserAccessible"];
     [friendAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
@@ -62,6 +69,11 @@
         }
     }];
 }
+/**
+Triggered when the user (un)likes this organization. Calls the Helper method didLikeOrg or
+ didUnlikeOrg to update user fields on parse.
+ @param[in] sender the UIButton that was tapped
+*/
 - (IBAction)didTapLike:(id)sender {
     
     if(!self.likeButton.selected)

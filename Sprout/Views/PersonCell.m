@@ -10,18 +10,22 @@
 #import "Constants.h"
 
 @implementation PersonCell
+/**
+ Loads the cell's views to reflect the represented user
+ */
 -(void) loadData{
     
     self.nameLabel.text=self.user.username;
-    if(self.user[@"profilePic"])
+    if(self.user[@"profilePic"])//show profile image if available
     {
         self.profileImage.file=self.user[@"profilePic"];
         [self.profileImage loadInBackground];
     }
+    //circular profile image
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
     self.profileImage.clipsToBounds = YES;
     self.profileImage.layer.masksToBounds=YES;
-
+    //rounded corners and shadows for the cell
     self.contentView.layer.cornerRadius = CELL_CORNER_RADIUS*2;
     self.contentView.layer.borderColor = [UIColor clearColor].CGColor;
     self.contentView.layer.masksToBounds = YES;

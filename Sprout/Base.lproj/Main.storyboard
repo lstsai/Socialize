@@ -1642,9 +1642,6 @@
                             <constraint firstItem="dMU-aF-xY4" firstAttribute="height" secondItem="hnG-3Y-UpL" secondAttribute="height" multiplier="0.209026" id="y0f-tY-o9H"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kQM-PC-l0c"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="IyB-UI-Aru" appends="YES" id="LjA-Eg-luK"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="zt2-QA-4OA">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="TFg-d6-zco">
@@ -1687,11 +1684,6 @@
                         <action selector="didTapImagePicker:" destination="r4M-tQ-o4w" id="boa-uS-Zp8"/>
                     </connections>
                 </tapGestureRecognizer>
-                <swipeGestureRecognizer direction="down" id="IyB-UI-Aru">
-                    <connections>
-                        <action selector="didPullToRefresh:" destination="r4M-tQ-o4w" id="xnJ-TN-Mh0"/>
-                    </connections>
-                </swipeGestureRecognizer>
                 <tapGestureRecognizer id="WxU-cR-xUb">
                     <connections>
                         <action selector="didTapFriends:" destination="r4M-tQ-o4w" id="OUL-yf-Jef"/>
@@ -2512,6 +2504,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="tOJ-YD-oiC"/>
         <segue reference="WTd-pV-B1j"/>
         <segue reference="elc-GK-NJh"/>
         <segue reference="vfU-9D-yV9"/>

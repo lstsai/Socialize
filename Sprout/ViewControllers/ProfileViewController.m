@@ -40,6 +40,12 @@
         self.user=PFUser.currentUser;
     }
     [self setupImagePicker];
+}
+/**
+ Called right before the view appears. Reloads the user data
+ */
+-(void) viewWillAppear:(BOOL)animated{
+    [self.user fetch];
     [self loadProfile];
 }
 /**
@@ -302,23 +308,6 @@ Triggered when the user taps the logout button. Logs the user out and
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     sceneDelegate.window.rootViewController = loginViewController;
-}
-/**
-Mimics the pull to refresh function of the table and collecton views. Animates the view to look like the
- user is pulling, and refreshes the user data.
-@param[in]  sender the sqipe gesture recognizer
-*/
-- (IBAction)didPullToRefresh:(id)sender {
-    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
-        self.view.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, PULL_REFRESH_HEIGHT);
-        [self.user fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-            [self loadProfile];
-            [UIView animateWithDuration:ANIMATION_DURATION/2 animations:^{
-                   self.view.transform =CGAffineTransformIdentity;
-                   self.view.alpha = SHOW_ALPHA;
-               }];
-        }];
-    }];
 }
 /**
 Triggered when the user accepts the friend request from the profile page, calls the

@@ -16,6 +16,7 @@
 -(void) loadData{
     
     self.nameLabel.text=self.user.username;
+    self.bioLabel.text=self.user[@"bio"];
     if(self.user[@"profilePic"])//show profile image if available
     {
         self.profileImage.file=self.user[@"profilePic"];

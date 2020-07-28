@@ -181,6 +181,7 @@ Collection view delegate method. returns the number of sections that the collect
 /**
  Triggered when the user presses the top button to request/unfriends a user.
  reconfigues the button to match the current state, and calls the correct helper methods.
+ If the profile is for the current user, it allows the user to change their bio
  @param[in] sender the button that was pressed
  */
 - (IBAction)didTapButton:(id)sender {

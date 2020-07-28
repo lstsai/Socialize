@@ -116,10 +116,13 @@ Makes a query to get the users whose username matches the search
     if(![refreshControl isKindOfClass:[UIRefreshControl class]])
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    PFQuery *userQuery=[PFQuery queryWithClassName:@"_User"];
-    [userQuery whereKey:@"username" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchText]];
-    [userQuery setLimit:self.resultNum*RESULTS_SIZE];
+    PFQuery *nameQuery=[PFQuery queryWithClassName:@"_User"];
+    [nameQuery whereKey:@"username" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchText]];
+    PFQuery *bioQuery=[PFQuery queryWithClassName:@"_User"];
+    [bioQuery whereKey:@"bio" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchText]];
     
+    PFQuery* userQuery=[PFQuery orQueryWithSubqueries:@[nameQuery, bioQuery]];
+    [userQuery setLimit:self.resultNum*RESULTS_SIZE];
     [userQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)
             [Helper displayAlert:@"Error getting people" withMessage:error.localizedDescription on:self];

@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/28/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+ View controller that displays the selected user's friends
+ */
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 NS_ASSUME_NONNULL_BEGIN

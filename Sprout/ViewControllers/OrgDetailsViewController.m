@@ -15,6 +15,7 @@
 #import "CreatePostViewController.h"
 #import "Helper.h"
 #import "MapViewController.h"
+#import "Constants.h"
 @interface OrgDetailsViewController ()
 
 @end
@@ -59,6 +60,31 @@
     }
     if([PFUser.currentUser[@"likedOrgs"] containsObject:self.org.ein])
         self.likeButton.selected=YES;
+    [self performSelectorInBackground:@selector(getLikes) withObject:nil];
+
+}
+/**
+ calculates the number of friends that have liked this specific org
+ only shows the label if at least one friend has liked it
+ */
+-(void) getLikes{
+    PFQuery * friendAccessQ=[PFQuery queryWithClassName:@"UserAccessible"];
+    [friendAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
+    [friendAccessQ getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        PFObject* userAccess=object;
+        if(userAccess[@"friendOrgs"][self.org.ein])
+        {
+            self.org.numFriendsLike=((NSArray*)userAccess[@"friendOrgs"][self.org.ein]).count;
+            if(self.org.numFriendsLike>0){
+                self.numLikesLabel.text=[NSString stringWithFormat:@"%lu friends liked this", self.org.numFriendsLike];
+                self.numLikesLabel.alpha=SHOW_ALPHA;
+            }
+        }
+        else
+        {
+            self.numLikesLabel.alpha=HIDE_ALPHA;
+        }
+    }];
 }
 -(void) getCoords{
     [[APIManager shared] getCoordsFromAddress:[self.org.location streetAddress] completion:^(CLLocationCoordinate2D coords, NSError * _Nullable error) {

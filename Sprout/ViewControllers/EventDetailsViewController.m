@@ -11,7 +11,7 @@
 #import "CreatePostViewController.h"
 #import "Helper.h"
 #import "MapViewController.h"
-
+#import "Constants.h"
 @interface EventDetailsViewController ()
 
 @end
@@ -59,6 +59,31 @@ Loads the view controller's views to reflect the event it is representing
     }
     if([PFUser.currentUser[@"likedEvents"] containsObject:self.event.objectId])
         self.likeButton.selected=YES;
+    [self performSelectorInBackground:@selector(getLikes) withObject:nil];
+
+}
+/**
+ calculates the number of friends that have liked this specific event
+ only shows the label if at least one friend has liked it
+ */
+-(void) getLikes{
+    PFQuery * friendAccessQ=[PFQuery queryWithClassName:@"UserAccessible"];
+    [friendAccessQ whereKey:@"username" equalTo:PFUser.currentUser.username];
+    [friendAccessQ getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        PFObject* userAccess=object;
+        if(userAccess[@"friendEvents"][self.event.objectId])
+        {
+            self.event.numFriendsLike=((NSArray*)userAccess[@"friendEvents"][self.event.objectId]).count;
+            if(self.event.numFriendsLike>0){
+                self.numLikesLabel.text=[NSString stringWithFormat:@"%lu friends have liked this", self.event.numFriendsLike];
+                self.numLikesLabel.alpha=SHOW_ALPHA;
+            }
+        }
+        else
+        {
+            self.numLikesLabel.alpha=HIDE_ALPHA;
+        }
+    }];
 }
 /**
 Triggered when the user (un)likes this event. Calls the Helper method didLikeEvent or

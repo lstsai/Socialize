@@ -23,10 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *eventDetailsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) Event *event;
+@property (weak, nonatomic) IBOutlet UILabel *numLikesLabel;
 
 -(void) loadEventDetails;
-
-
+-(void) getLikes;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -28,11 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *detailContainerView;
 @property (nonatomic) CLLocationCoordinate2D coord;
 @property (nonatomic) BOOL gotCoords;
+@property (weak, nonatomic) IBOutlet UILabel *numLikesLabel;
 
 
 -(void) loadOrgDetails;
 -(void) getCoords;
-
+-(void) getLikes;
 @end
 
 NS_ASSUME_NONNULL_END

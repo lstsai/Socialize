@@ -28,7 +28,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.searchBar.delegate=self;
-    [self setupSegmentControl];
     self.eventsVC=[self.childViewControllers objectAtIndex:EVENT_SEGMENT ];
     self.orgsVC=[self.childViewControllers objectAtIndex:ORG_SEGMENT];
     self.peopleVC=[self.childViewControllers objectAtIndex:PEOPLE_SEGMENT];
@@ -39,13 +38,6 @@
     [self.eventsView setHidden:YES];
     [self.orgsView setHidden:NO];
     
-}
-/**
-Setup the segmented control that determines the search type
- */
--(void) setupSegmentControl{
-    self.searchControl.backgroundColor=[UIColor whiteColor];
-    self.searchControl.tintColor=[UIColor clearColor];    
 }
 /**
 Triggered when the user presses the logout button. Then logs the user out and shows the login page

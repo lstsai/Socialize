@@ -37,7 +37,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString* stateSearch;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *searchControl;
 
--(void) setupSegmentControl;
 -(void) fetchResults:(UIRefreshControl * _Nullable)refreshControl;
 
 @end

@@ -44,7 +44,7 @@ const CGFloat PULL_REFRESH_HEIGHT=50;
 const int SEARCH_RADIUS=20;//miles
 const int MIN_RESULT_THRESHOLD=10;
 
-const int STATE_INDEX=2;
+const int MAP_ZOOM=15;
 
 
 

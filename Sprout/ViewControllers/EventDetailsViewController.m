@@ -10,6 +10,7 @@
 #import "EventDetailsViewController.h"
 #import "CreatePostViewController.h"
 #import "Helper.h"
+#import "MapViewController.h"
 
 @interface EventDetailsViewController ()
 
@@ -76,6 +77,13 @@ Triggered when the user (un)likes this event. Calls the Helper method didLikeEve
 
     }
 }
+/**
+Triggered when the user taps the address of the event and presents the MapViewController
+@param[in] sender the address that was tapped
+*/
+- (IBAction)didTapAddress:(id)sender {
+    [self performSegueWithIdentifier:@"mapSegue" sender:nil];
+}
 
 
 #pragma mark - Navigation
@@ -90,6 +98,12 @@ Triggered when the user (un)likes this event. Calls the Helper method didLikeEve
         CreatePostViewController *createPostVC=segue.destinationViewController;
         createPostVC.event=self.event;
         createPostVC.org=nil;
+    }
+    else if([segue.identifier isEqualToString:@"mapSegue"])//shows the user the map view of the event location
+    {
+        MapViewController *mapVC=segue.destinationViewController;
+        mapVC.name=self.event.name;
+        mapVC.coords=CLLocationCoordinate2DMake(self.event.location.latitude, self.event.location.longitude);
     }
 }
 

@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 #import "Organization.h"
 #import <Parse/Parse.h>
-
+#import <CoreLocation/CoreLocation.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OrgDetailsViewController : UIViewController
@@ -26,8 +26,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *cause;
 @property (weak, nonatomic) IBOutlet UILabel *website;
 @property (weak, nonatomic) IBOutlet UIView *detailContainerView;
+@property (nonatomic) CLLocationCoordinate2D coord;
+@property (nonatomic) BOOL gotCoords;
+
 
 -(void) loadOrgDetails;
+-(void) getCoords;
 
 @end
 

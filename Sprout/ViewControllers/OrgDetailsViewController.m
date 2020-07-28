@@ -14,6 +14,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "CreatePostViewController.h"
 #import "Helper.h"
+#import "MapViewController.h"
 @interface OrgDetailsViewController ()
 
 @end
@@ -25,6 +26,7 @@
     // Do any additional setup after loading the view.
     
     [self loadOrgDetails];
+    [self getCoords];
 }
 /**
  Loads the view controller's views to reflect the organization it is representing
@@ -57,6 +59,29 @@
     }
     if([PFUser.currentUser[@"likedOrgs"] containsObject:self.org.ein])
         self.likeButton.selected=YES;
+}
+-(void) getCoords{
+    [[APIManager shared] getCoordsFromAddress:[self.org.location streetAddress] completion:^(CLLocationCoordinate2D coords, NSError * _Nullable error) {
+        if(error)
+        {
+            [Helper displayAlert:@"Error getting location" withMessage:@"Could not determine the location of this organization" on:self];
+            self.gotCoords=NO;
+        }
+        else
+        {
+            self.coord=coords;
+            self.gotCoords=YES;
+        }
+    }];
+}
+/**
+Triggered when the user taps the address of the org and presents the MapViewController
+@param[in] sender the address that was tapped
+*/
+- (IBAction)didTapAddress:(id)sender {
+    if(self.gotCoords){
+        [self performSegueWithIdentifier:@"mapSegue" sender:nil];
+    }
 }
 /**
  Triggered when the user taps the link of the website and presents the webviewcontroller
@@ -100,6 +125,12 @@ Triggered when the user (un)likes this organization. Calls the Helper method did
         CreatePostViewController *createPostVC=segue.destinationViewController;
         createPostVC.org=self.org;
         createPostVC.event=nil;
+    }
+    else if([segue.identifier isEqualToString:@"mapSegue"])//shows user the map view
+    {
+        MapViewController *mapVC=segue.destinationViewController;
+        mapVC.coords=self.coord;
+        mapVC.name=self.org.name;
     }
 }
 

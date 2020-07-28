@@ -145,4 +145,23 @@
           completion(nil,error);
     }];
 }
+/**
+ Calls the GoogleMaps Geocoding API to convert a street address into it's coordinates
+ @param[in] address the address to convert
+ @param[in] completion the block to execute when finished
+ */
+- (void)getCoordsFromAddress:(NSString*)address completion:(void(^)(CLLocationCoordinate2D coords, NSError * _Nullable error))completion{
+    NSDictionary *params= @{@"key":[[NSProcessInfo processInfo] environment][@"Google-api-key"] , @"address":address};
+    [self GET:@"https://maps.googleapis.com/maps/api/geocode/json" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary* location= [responseObject[@"results"] firstObject][@"geometry"][@"location"];
+        
+        CLLocationCoordinate2D coord= CLLocationCoordinate2DMake([location[@"lat"] doubleValue], [location[@"lng"] doubleValue]);
+        completion(coord, nil);
+        
+       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           NSLog(@"Error getting search %@", error.localizedDescription);
+           CLLocationCoordinate2D coord=CLLocationCoordinate2DMake(0, 0);
+           completion(coord,error);
+    }];
+}
 @end

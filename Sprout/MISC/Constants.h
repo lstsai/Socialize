@@ -40,6 +40,7 @@ extern const CGFloat EMPTY_MESSAGE_FONT_SIZE;
 extern const CGFloat PULL_REFRESH_HEIGHT;
 extern const int SEARCH_RADIUS;
 extern const int MIN_RESULT_THRESHOLD;
-extern const int STATE_INDEX;
+extern const int MAP_ZOOM;
+
 
 #endif /* Constants_h */

@@ -35,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UIImagePickerController* backgroundImagePicker;
 @property (weak, nonatomic) IBOutlet UIView *privateView;
 @property (weak, nonatomic) IBOutlet UIView *requestView;
+@property (weak, nonatomic) IBOutlet UILabel *bioLabel;
+@property (weak, nonatomic) IBOutlet UITextField *bioField;
 
 
 -(void)getLikedOrgInfo;

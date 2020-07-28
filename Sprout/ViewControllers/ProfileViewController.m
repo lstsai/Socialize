@@ -51,8 +51,7 @@
     if(self.user.username==PFUser.currentUser.username)
     {
         [self.topButton setTitle:@"Edit" forState:UIControlStateNormal];
-        [self.topButton setTitle:@"Edit" forState:UIControlStateSelected];
-        self.topButton.alpha=HIDE_ALPHA;
+        [self.topButton setTitle:@"Save" forState:UIControlStateSelected];
         self.privateView.alpha=HIDE_ALPHA;
     }
     else{
@@ -80,7 +79,8 @@
     
     self.nameLabel.text=self.user.username;
     self.usernameLabel.text=self.user.username;
-
+    self.bioLabel.text=self.user[@"bio"];
+    
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
     self.profileImage.clipsToBounds = YES;
     self.profileImage.layer.masksToBounds=YES;
@@ -207,6 +207,23 @@ Collection view delegate method. returns the number of sections that the collect
             self.privateView.alpha=SHOW_ALPHA;
             [Helper removeFriend:PFUser.currentUser toFriend:self.user];
             [Helper removeFriend:self.user toFriend:PFUser.currentUser];
+        }
+    }
+    else
+    {
+        if(!self.topButton.selected)
+        {
+            //User wants to edit profile
+            self.topButton.selected=YES;
+            self.bioField.alpha=SHOW_ALPHA;
+        }
+        else
+        {
+            self.topButton.selected=NO;
+            self.bioField.alpha=HIDE_ALPHA;
+            self.bioLabel.text=self.bioField.text;
+            PFUser.currentUser[@"bio"]=self.bioField.text;
+            [PFUser.currentUser saveInBackground];
         }
     }
 

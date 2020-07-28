@@ -36,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSString* citySearch;
 @property (strong, nonatomic) NSString* stateSearch;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *searchControl;
+@property (weak, nonatomic) IBOutlet UILabel *locationText;
 
 -(void) fetchResults:(UIRefreshControl * _Nullable)refreshControl;
 

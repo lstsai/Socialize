@@ -110,6 +110,14 @@ Calls the correct method in the child view controllers depending on the type of 
         [self.eventsView setHidden:YES];
         [self.peopleView setHidden:YES];
         [self.orgsView setHidden:NO];
+        [UIView animateWithDuration:ANIMATION_DURATION/2 animations:^{
+            self.searchControl.layer.transform = CATransform3DIdentity;
+            self.peopleView.layer.transform= CATransform3DIdentity;
+            self.orgsView.layer.transform= CATransform3DIdentity;
+            self.eventsView.layer.transform= CATransform3DIdentity;
+            self.locationField.alpha=SHOW_ALPHA;
+            self.locationText.alpha=SHOW_ALPHA;
+        }];
     }
     else if (self.searchControl.selectedSegmentIndex==EVENT_SEGMENT)
     {
@@ -119,6 +127,15 @@ Calls the correct method in the child view controllers depending on the type of 
         [self.orgsView setHidden:YES];
         [self.peopleView setHidden:YES];
         [self.eventsView setHidden:NO];
+        [UIView animateWithDuration:ANIMATION_DURATION/2 animations:^{
+            self.searchControl.layer.transform = CATransform3DIdentity;
+            self.peopleView.layer.transform= CATransform3DIdentity;
+            self.orgsView.layer.transform= CATransform3DIdentity;
+            self.eventsView.layer.transform= CATransform3DIdentity;
+            self.locationField.alpha=SHOW_ALPHA;
+            self.locationText.alpha=SHOW_ALPHA;
+
+        }];
     }
     else if(self.searchControl.selectedSegmentIndex==PEOPLE_SEGMENT){
         self.peopleVC.searchText=self.searchBar.text;
@@ -127,6 +144,16 @@ Calls the correct method in the child view controllers depending on the type of 
         [self.orgsView setHidden:YES];
         [self.eventsView setHidden:YES];
         [self.peopleView setHidden:NO];
+        [UIView animateWithDuration:ANIMATION_DURATION/2 animations:^{
+            self.searchControl.layer.transform = CATransform3DTranslate(CATransform3DIdentity, 0, -1*self.locationField.frame.size.height, 0);
+            self.peopleView.layer.transform= CATransform3DTranslate(CATransform3DIdentity, 0, -1*self.locationField.frame.size.height, 0);
+            self.orgsView.layer.transform= CATransform3DTranslate(CATransform3DIdentity, 0, -1*self.locationField.frame.size.height, 0);
+            self.eventsView.layer.transform= CATransform3DTranslate(CATransform3DIdentity, 0, -1*self.locationField.frame.size.height, 0);
+            self.locationField.alpha=HIDE_ALPHA;
+            self.locationText.alpha=HIDE_ALPHA;
+
+        }];
+        
     }
 }
 /**

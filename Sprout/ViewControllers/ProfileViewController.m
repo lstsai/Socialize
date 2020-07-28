@@ -16,6 +16,7 @@
 #import "LoginViewController.h"
 #import "SceneDelegate.h"
 #import "Constants.h"
+#import "FriendsViewController.h"
 @interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @end
@@ -390,7 +391,13 @@ Empty collection view delegate method. Returns if the empty view should be shown
     else
         return self.likedOrgs.count==0;
 }
-
+/**
+ Triggered when user taps the friends Label
+ @param[in] sender  the label that was tapped
+ */
+- (IBAction)didTapFriends:(id)sender {
+    [self performSegueWithIdentifier:@"friendsSegue" sender:nil];
+}
 
 #pragma mark - Navigation
 
@@ -413,6 +420,11 @@ Empty collection view delegate method. Returns if the empty view should be shown
         NSIndexPath *tappedIndex=[self.eventCollectionView indexPathForCell:tappedCell];
         eventVC.event=self.likedEvents[tappedIndex.item];
         [self.eventCollectionView deselectItemAtIndexPath:tappedIndex animated:YES];
+    }
+    else if([segue.identifier isEqualToString:@"friendsSegue"])//takes user to the events details page
+    {
+        FriendsViewController *friendsVC= segue.destinationViewController;
+        friendsVC.user=self.user;
     }
 }
 

@@ -35,6 +35,8 @@
 		DC3CF1C024BF644100C482F8 /* OrgSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1BF24BF644100C482F8 /* OrgSearchViewController.m */; };
 		DC3CF1C324BF645300C482F8 /* EventSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF1C224BF645300C482F8 /* EventSearchViewController.m */; };
 		DC4732F524D07735006DAE01 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC4732F424D07735006DAE01 /* MapViewController.m */; };
+		DC4732F824D09CDC006DAE01 /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC4732F724D09CDC006DAE01 /* FriendsViewController.m */; };
+		DC4732FB24D09F3B006DAE01 /* FriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC4732FA24D09F3B006DAE01 /* FriendCell.m */; };
 		DC89989324C9FD00005B2DB9 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC89989224C9FD00005B2DB9 /* SignUpViewController.m */; };
 		DC91239B24CA693F001A4022 /* RequestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC91239A24CA693F001A4022 /* RequestsViewController.m */; };
 		DC91239E24CA6A38001A4022 /* RequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC91239D24CA6A38001A4022 /* RequestCell.m */; };
@@ -130,6 +132,10 @@
 		DC3CF1C224BF645300C482F8 /* EventSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventSearchViewController.m; sourceTree = "<group>"; };
 		DC4732F324D07735006DAE01 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		DC4732F424D07735006DAE01 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		DC4732F624D09CDC006DAE01 /* FriendsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
+		DC4732F724D09CDC006DAE01 /* FriendsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendsViewController.m; sourceTree = "<group>"; };
+		DC4732F924D09F3B006DAE01 /* FriendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FriendCell.h; sourceTree = "<group>"; };
+		DC4732FA24D09F3B006DAE01 /* FriendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FriendCell.m; sourceTree = "<group>"; };
 		DC89989124C9FD00005B2DB9 /* SignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		DC89989224C9FD00005B2DB9 /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		DC91239924CA693F001A4022 /* RequestsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestsViewController.h; sourceTree = "<group>"; };
@@ -326,6 +332,8 @@
 				DC91239A24CA693F001A4022 /* RequestsViewController.m */,
 				DC4732F324D07735006DAE01 /* MapViewController.h */,
 				DC4732F424D07735006DAE01 /* MapViewController.m */,
+				DC4732F624D09CDC006DAE01 /* FriendsViewController.h */,
+				DC4732F724D09CDC006DAE01 /* FriendsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -351,6 +359,8 @@
 				DCB65C2524C7C565005A43A9 /* EventPostCell.m */,
 				DC91239C24CA6A38001A4022 /* RequestCell.h */,
 				DC91239D24CA6A38001A4022 /* RequestCell.m */,
+				DC4732F924D09F3B006DAE01 /* FriendCell.h */,
+				DC4732FA24D09F3B006DAE01 /* FriendCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -700,9 +710,11 @@
 				DC3CF1A124BD081300C482F8 /* OrgDetailsViewController.m in Sources */,
 				DC89989324C9FD00005B2DB9 /* SignUpViewController.m in Sources */,
 				DCE6FA5124C0AA66008091A3 /* EventCollectionCell.m in Sources */,
+				DC4732FB24D09F3B006DAE01 /* FriendCell.m in Sources */,
 				DCB65C1D24C76201005A43A9 /* Helper.m in Sources */,
 				DCB65C2624C7C565005A43A9 /* EventPostCell.m in Sources */,
 				DC3CF1A724BD28DC00C482F8 /* WebViewController.m in Sources */,
+				DC4732F824D09CDC006DAE01 /* FriendsViewController.m in Sources */,
 				DCB629DF24C207B300C42EFB /* PersonCell.m in Sources */,
 				DCB65C2324C7C44C005A43A9 /* OrgPostCell.m in Sources */,
 				DCB629D924C1FBE100C42EFB /* EventVerticalCell.m in Sources */,

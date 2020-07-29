@@ -41,6 +41,7 @@
 		DC47330124D1D6EA006DAE01 /* EventGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC47330024D1D6EA006DAE01 /* EventGroupCell.m */; };
 		DC47330424D1DE27006DAE01 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC47330324D1DE27006DAE01 /* CommentCell.m */; };
 		DC47330724D1E074006DAE01 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = DC47330624D1E074006DAE01 /* Comment.m */; };
+		DC47330A24D1EA16006DAE01 /* CommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC47330924D1EA16006DAE01 /* CommentsViewController.m */; };
 		DC89989324C9FD00005B2DB9 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC89989224C9FD00005B2DB9 /* SignUpViewController.m */; };
 		DC91239B24CA693F001A4022 /* RequestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC91239A24CA693F001A4022 /* RequestsViewController.m */; };
 		DC91239E24CA6A38001A4022 /* RequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC91239D24CA6A38001A4022 /* RequestCell.m */; };
@@ -148,6 +149,8 @@
 		DC47330324D1DE27006DAE01 /* CommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
 		DC47330524D1E074006DAE01 /* Comment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		DC47330624D1E074006DAE01 /* Comment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		DC47330824D1EA16006DAE01 /* CommentsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentsViewController.h; sourceTree = "<group>"; };
+		DC47330924D1EA16006DAE01 /* CommentsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentsViewController.m; sourceTree = "<group>"; };
 		DC89989124C9FD00005B2DB9 /* SignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		DC89989224C9FD00005B2DB9 /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		DC91239924CA693F001A4022 /* RequestsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestsViewController.h; sourceTree = "<group>"; };
@@ -348,6 +351,8 @@
 				DC4732F724D09CDC006DAE01 /* FriendsViewController.m */,
 				DC4732FC24D0E6E5006DAE01 /* EventGroupViewController.h */,
 				DC4732FD24D0E6E5006DAE01 /* EventGroupViewController.m */,
+				DC47330824D1EA16006DAE01 /* CommentsViewController.h */,
+				DC47330924D1EA16006DAE01 /* CommentsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -747,6 +752,7 @@
 				DCE6FA4B24BFA447008091A3 /* EventDetailsViewController.m in Sources */,
 				DC3CF1A424BD23FC00C482F8 /* APIManager.m in Sources */,
 				DC3CF18724BCC85900C482F8 /* SearchViewController.m in Sources */,
+				DC47330A24D1EA16006DAE01 /* CommentsViewController.m in Sources */,
 				DC3CF1B324BE05BB00C482F8 /* HomeViewController.m in Sources */,
 				DC3CF1C324BF645300C482F8 /* EventSearchViewController.m in Sources */,
 				DC3CF14F24BCB27900C482F8 /* SceneDelegate.m in Sources */,

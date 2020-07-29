@@ -17,6 +17,7 @@
 @dynamic image;
 @dynamic createdAt;
 @dynamic org;
+@dynamic groupPost;
 /**
 Returns the class name for the Event object in parse
 @return the class name
@@ -32,15 +33,15 @@ Creates a a Post object to be saved in to Parse
 @param[in] org associated organization (if applicable)
 @param[in] completion the block to be called when the event is finised being saved
 */
-+ (void) createPost:(UIImage * _Nullable )image withDescription:(NSString *)description withEvent:(Event* _Nullable)event withOrg:(Organization* _Nullable)org withCompletion: (PFBooleanResultBlock  _Nullable)completion{
++ (void) createPost:(UIImage * _Nullable )image withDescription:(NSString *)description withEvent:(Event* _Nullable)event withOrg:(NSObject* _Nullable)org groupPost:(BOOL)groupPost withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Post *newPost= [Post new];
     newPost.author=PFUser.currentUser;
     newPost.image=[Helper getPFFileFromImage:image withName:@"postImage"];
     newPost.postDescription=description;
     newPost.event=event;
+    newPost.groupPost=groupPost;
     if(org)
     {
-        
         newPost.org=[Organization dictionaryWithOrg:org];
     }
     [newPost saveInBackgroundWithBlock:completion];

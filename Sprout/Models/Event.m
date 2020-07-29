@@ -54,7 +54,7 @@ Creates a an event object to be saved in to Parse
     newEvent.streetAddress=streetAddress;
     [newEvent saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded)
-            [Post createPost:nil withDescription:@"Created an event" withEvent:newEvent withOrg:nil withCompletion:completion];
+            [Post createPost:nil withDescription:@"Created an event" withEvent:newEvent withOrg:nil groupPost:NO withCompletion:completion];
     }];
 }
 

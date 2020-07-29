@@ -151,6 +151,8 @@ Triggered when the user (un)likes this organization. Calls the Helper method did
         CreatePostViewController *createPostVC=segue.destinationViewController;
         createPostVC.org=self.org;
         createPostVC.event=nil;
+        createPostVC.isGroupPost=NO;
+
     }
     else if([segue.identifier isEqualToString:@"mapSegue"])//shows user the map view
     {

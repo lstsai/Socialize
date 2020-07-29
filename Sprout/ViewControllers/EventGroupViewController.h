@@ -8,16 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "Event.h"
+@import Parse;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface EventGroupViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UIImageView *eventImageView;
+@property (weak, nonatomic) IBOutlet PFImageView *eventImageView;
 @property (weak, nonatomic) IBOutlet UILabel *eventNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) Event* event;
+@property (strong, nonatomic) NSArray* posts;
+-(void) getPosts;
+-(void) loadDetails;
 @end
 
 NS_ASSUME_NONNULL_END

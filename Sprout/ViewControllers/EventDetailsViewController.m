@@ -12,6 +12,7 @@
 #import "Helper.h"
 #import "MapViewController.h"
 #import "Constants.h"
+#import "EventGroupViewController.h"
 @interface EventDetailsViewController ()
 
 @end
@@ -123,12 +124,18 @@ Triggered when the user taps the address of the event and presents the MapViewCo
         CreatePostViewController *createPostVC=segue.destinationViewController;
         createPostVC.event=self.event;
         createPostVC.org=nil;
+        createPostVC.isGroupPost=NO;
     }
     else if([segue.identifier isEqualToString:@"mapSegue"])//shows the user the map view of the event location
     {
         MapViewController *mapVC=segue.destinationViewController;
         mapVC.name=self.event.name;
         mapVC.coords=CLLocationCoordinate2DMake(self.event.location.latitude, self.event.location.longitude);
+    }
+    else if([segue.identifier isEqualToString:@"eventGroupSegue"])//shows the user the map view of the event location
+    {
+        EventGroupViewController *eventgroupVC=segue.destinationViewController;
+        eventgroupVC.event=self.event;
     }
 }
 

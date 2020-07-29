@@ -10,7 +10,7 @@
 #import "MBProgressHUD.h"
 #import "Post.h"
 #import "Constants.h"
-@interface CreatePostViewController ()
+@interface CreatePostViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end
 
@@ -23,6 +23,11 @@
     self.profileImage.clipsToBounds = YES;
     self.profileImage.layer.masksToBounds=YES;
     self.profileImage.file=PFUser.currentUser[@"profilePic"];
+    if(self.isGroupPost)
+    {
+        self.attachImageLabel.alpha=SHOW_ALPHA;
+        self.attachedImage.alpha=SHOW_ALPHA;
+    }
     [self.profileImage loadInBackground];
 }
 /**
@@ -50,10 +55,35 @@ Triggered when the user presses the pst button, calls the helper method to creat
  */
 - (IBAction)didTapPost:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Post createPost:nil withDescription:self.postTextView.text withEvent:self.event withOrg:self.org withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Post createPost:self.attachedImage.image withDescription:self.postTextView.text withEvent:self.event withOrg:self.org groupPost:self.isGroupPost withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
+}
+/**
+Triggered when the user presses the backdrop image. Presents the image picker(photo album) so the user can choose an image for the event.
+@param[in] sender the background image that was tapped
+*/
+- (IBAction)didTapImagePicker:(id)sender {
+    
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+    imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+/**
+Triggered when the user chooses an image to be the event image. Sets the background image to be the image selected
+@param[in] picker the image picker that has the selected image
+ @param[in] info the dictionary that contains the picked image
+*/
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    [self.attachedImage setImage:editedImage];
+    
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

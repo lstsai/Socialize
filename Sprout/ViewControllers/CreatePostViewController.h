@@ -23,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextView *postTextView;
 @property (strong, nonatomic) Organization * _Nullable org;
 @property (strong, nonatomic) Event * _Nullable event;
+@property (nonatomic) BOOL isGroupPost;
+@property (weak, nonatomic) IBOutlet UILabel *attachImageLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *attachedImage;
 @end
 
 NS_ASSUME_NONNULL_END

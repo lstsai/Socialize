@@ -20,38 +20,31 @@
     self.profileImage.layer.cornerRadius=self.profileImage.frame.size.width/2;
     self.profileImage.layer.masksToBounds=YES;
     self.profileImage.clipsToBounds=YES;
+    UIGestureRecognizer *profileTapGesture= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.profileImage setUserInteractionEnabled:YES];
+    [self.profileImage addGestureRecognizer:profileTapGesture];
+    
     self.nameLabel.text=self.post.author.username;
     self.captionLabel.text=self.post.postDescription;
     self.timeLabel.text=[self.post.createdAt shortTimeAgoSinceNow];
-    self.postImage.image=nil;
     if(self.post.image)
     {
         self.postImage.hidden=NO;
         self.postImage.file=self.post.image;
         [self.postImage loadInBackground];
     }
-    else{
+    else
+    {
         self.postImage.hidden=YES;
     }
-    self.tableView.hidden=YES;
-    self.writeCommentView.hidden=YES;
 }
 - (IBAction)didTapComment:(id)sender {
-    UIButton* commentButton=sender;
-    if(!commentButton.selected){
-        commentButton.selected=YES;
-        self.tableView.hidden=NO;
-        self.writeCommentView.hidden=NO;
-    }
-    if(commentButton.selected){
-        commentButton.selected=NO;
-        self.tableView.hidden=YES;
-        self.writeCommentView.hidden=YES;
-    }
-    
+    [self.delegate didTapComment:self.post];
 }
-- (IBAction)didTapPost:(id)sender {
+-(void) didTapUserProfile:(UITapGestureRecognizer*) sender{
+    [self.delegate didTapUser:self.post.author];
 }
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

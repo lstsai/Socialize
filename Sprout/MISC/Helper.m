@@ -79,9 +79,9 @@
     [Helper performSelectorInBackground:@selector(addObjectToFriendsList:) withObject:@[likedOrg.ein, @"friendOrgs"]];//add to list in background
     PFUser.currentUser[@"likedOrgs"]=likedOrgs;
     [PFUser.currentUser saveInBackground];
-    [Post createPost:nil withDescription:@"Liked an Organization" withEvent:nil withOrg:likedOrg withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Post createPost:nil withDescription:@"Liked an Organization" withEvent:nil withOrg:likedOrg groupPost:NO withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(error)
-            [Helper displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
+        [Helper displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
     }];
 }
 /**
@@ -117,10 +117,10 @@ friends's list. Also creates a post to signal the user has liked this event
 
     PFUser.currentUser[@"likedEvents"]=likedEvents;
     [PFUser.currentUser saveInBackground];
-    [Post createPost:nil withDescription:@"Liked an Event" withEvent:likedEvent withOrg:nil withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        if(error)
-            [Helper displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
-    }];
+    [Post createPost:nil withDescription:@"Liked an Event" withEvent:likedEvent withOrg:nil groupPost:NO withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+           if(error)
+           [Helper displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
+       }];
 }
 /**
 Called when the user has unlied an event from any view controller.

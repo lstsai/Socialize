@@ -11,18 +11,22 @@
 @import Parse;
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol EventGroupCellDelegate
+- (void)didTapUser: (PFUser *)user;
+- (void)didTapComment: (Post *)post;
+@end
+
 @interface EventGroupCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet PFImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
-@property (weak, nonatomic) IBOutlet PFImageView *postImage;
 @property (strong, nonatomic) Post* post;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
-@property (weak, nonatomic) IBOutlet UITextField *commentTextField;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIView *writeCommentView;
+@property (weak, nonatomic) IBOutlet PFImageView *postImage;
+@property (nonatomic, weak) id<EventGroupCellDelegate> delegate;
 
+-(void) didTapUserProfile:(UITapGestureRecognizer*) sender;
 -(void) loadDetails;
 @end
 

@@ -59,7 +59,10 @@ Loads the view controller's views to reflect the event it is representing
         [self.eventImageView loadInBackground];
     }
     if([PFUser.currentUser[@"likedEvents"] containsObject:self.event.objectId])
+    {
         self.likeButton.selected=YES;
+        self.groupButton.alpha=SHOW_ALPHA;
+    }
     [self performSelectorInBackground:@selector(getLikes) withObject:nil];
 
 }
@@ -76,7 +79,7 @@ Loads the view controller's views to reflect the event it is representing
         {
             self.event.numFriendsLike=((NSArray*)userAccess[@"friendEvents"][self.event.objectId]).count;
             if(self.event.numFriendsLike>0){
-                self.numLikesLabel.text=[NSString stringWithFormat:@"%lu friends have liked this", self.event.numFriendsLike];
+                self.numLikesLabel.text=[NSString stringWithFormat:@"%lu friends liked this", self.event.numFriendsLike];
                 self.numLikesLabel.alpha=SHOW_ALPHA;
             }
         }
@@ -95,12 +98,13 @@ Triggered when the user (un)likes this event. Calls the Helper method didLikeEve
     if(!self.likeButton.selected)
     {
         self.likeButton.selected=YES;
+        self.groupButton.alpha=SHOW_ALPHA;
         [Helper didLikeEvent:self.event senderVC:self];
     }
     else{
         self.likeButton.selected=NO;
+        self.groupButton.alpha=HIDE_ALPHA;
         [Helper didUnlikeEvent:self.event];
-
     }
 }
 /**

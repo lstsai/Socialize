@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) Event *event;
 @property (weak, nonatomic) IBOutlet UILabel *numLikesLabel;
+@property (weak, nonatomic) IBOutlet UIButton *groupButton;
 
 -(void) loadEventDetails;
 -(void) getLikes;

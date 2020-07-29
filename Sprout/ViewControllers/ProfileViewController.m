@@ -17,6 +17,7 @@
 #import "SceneDelegate.h"
 #import "Constants.h"
 #import "FriendsViewController.h"
+#import "MapViewController.h"
 @interface ProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @end
@@ -387,6 +388,12 @@ Empty collection view delegate method. Returns if the empty view should be shown
 - (IBAction)didTapFriends:(id)sender {
     [self performSegueWithIdentifier:@"friendsSegue" sender:nil];
 }
+- (IBAction)didTapOrganizations:(id)sender {
+    [self performSegueWithIdentifier:@"mapSegue" sender:self.likedOrgs];
+}
+- (IBAction)didTapEvents:(id)sender {
+    [self performSegueWithIdentifier:@"mapSegue" sender:self.likedEvents];
+}
 
 #pragma mark - Navigation
 
@@ -414,6 +421,11 @@ Empty collection view delegate method. Returns if the empty view should be shown
     {
         FriendsViewController *friendsVC= segue.destinationViewController;
         friendsVC.user=self.user;
+    }
+    else if([segue.identifier isEqualToString:@"mapSegue"])//takes user to the map page
+    {
+        MapViewController *mapVC= segue.destinationViewController;
+        mapVC.objects=(NSArray*)sender;
     }
 }
 

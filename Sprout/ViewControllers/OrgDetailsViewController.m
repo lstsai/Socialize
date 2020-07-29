@@ -157,8 +157,7 @@ Triggered when the user (un)likes this organization. Calls the Helper method did
     else if([segue.identifier isEqualToString:@"mapSegue"])//shows user the map view
     {
         MapViewController *mapVC=segue.destinationViewController;
-        mapVC.coords=self.coord;
-        mapVC.name=self.org.name;
+        mapVC.objects=@[self.org];
     }
 }
 

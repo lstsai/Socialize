@@ -8,6 +8,10 @@
 
 #import "MapViewController.h"
 #import "Constants.h"
+#import "Event.h"
+#import "Organization.h"
+#import <Parse/Parse.h>
+#import "APIManager.h"
 @interface MapViewController ()
 
 @end
@@ -23,11 +27,43 @@
 Instantiates the map view to show the given location with a marker
 */
 -(void) setUpMap{
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.coords.latitude longitude:self.coords.longitude zoom:MAP_ZOOM];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:CAMERA_LAT longitude:CAMERA_LNG zoom:MAP_ZOOM];
+    [self.mapView setMinZoom:1 maxZoom:MAP_ZOOM];
     self.mapView.camera=camera;
-    GMSMarker* marker= [GMSMarker markerWithPosition:self.coords];
-    marker.title=self.name;
-    marker.map=self.mapView;
+    NSMutableArray* markers=[NSMutableArray new];
+
+    if([[self.objects firstObject] isKindOfClass:[Event class]])
+    {
+        for(Event* event in self.objects)
+        {
+            GMSMarker* marker= [GMSMarker markerWithPosition:CLLocationCoordinate2DMake(event.location.latitude, event.location.longitude)];
+            marker.title=event.name;
+            marker.map=self.mapView;
+            [markers addObject:marker];
+        }
+        [self updateCameraPositionWithMarkers:markers];
+    }
+    else
+    {
+        for(Organization* org in self.objects)
+        {
+            [[APIManager shared] getCoordsFromAddress:[org.location streetAddress] completion:^(CLLocationCoordinate2D coords, NSError * _Nullable error) {
+                GMSMarker* marker= [GMSMarker markerWithPosition:coords];
+                marker.title=org.name;
+                marker.map=self.mapView;
+                [markers addObject:marker];
+                if([org isEqual:[self.objects lastObject]])
+                    [self updateCameraPositionWithMarkers:markers];
+            }];
+        }
+    }
+
+}
+-(void) updateCameraPositionWithMarkers:(NSArray*) markers{
+    GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] init];
+    for (GMSMarker *marker in markers)
+        bounds = [bounds includingCoordinate:marker.position];
+    [self.mapView animateWithCameraUpdate:[GMSCameraUpdate fitBounds:bounds]];
 }
 /**
  Triggered when the user taps the cancel button. Dismisses the map view controller

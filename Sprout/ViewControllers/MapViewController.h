@@ -12,10 +12,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MapViewController : UIViewController
-@property (nonatomic) CLLocationCoordinate2D coords;
-@property (nonatomic) NSString* name;
+@property (nonatomic) NSArray* objects;
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 -(void) setUpMap;
+-(void) updateCameraPositionWithMarkers:(NSArray*) markers;
 @end
 
 NS_ASSUME_NONNULL_END

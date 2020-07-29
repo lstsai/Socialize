@@ -133,8 +133,7 @@ Triggered when the user taps the address of the event and presents the MapViewCo
     else if([segue.identifier isEqualToString:@"mapSegue"])//shows the user the map view of the event location
     {
         MapViewController *mapVC=segue.destinationViewController;
-        mapVC.name=self.event.name;
-        mapVC.coords=CLLocationCoordinate2DMake(self.event.location.latitude, self.event.location.longitude);
+        mapVC.objects=@[self.event];
     }
     else if([segue.identifier isEqualToString:@"eventGroupSegue"])//shows the user the map view of the event location
     {

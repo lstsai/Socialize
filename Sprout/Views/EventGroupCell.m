@@ -14,6 +14,9 @@
     [super awakeFromNib];
     // Initialization code
 }
+/**
+ Loads the details for the cell according to the event
+ */
 -(void) loadDetails{
     self.profileImage.file=self.post.author[@"profilePic"];
     [self.profileImage loadInBackground];
@@ -41,9 +44,19 @@
     [self.contentView layoutSubviews];
 
 }
+/**
+ Triggered when the user taps the comment button on the cell. Shows the comment page
+ by calling the delegate.
+ @param[in] sender the button that was tapped
+ */
 - (IBAction)didTapComment:(id)sender {
     [self.delegate didTapComment:self.post];
 }
+/**
+Triggered when the user taps the  profile pic on the cell. Shows the profile page
+by calling the delegate.
+@param[in] sender the button that was tapped
+*/
 -(void) didTapUserProfile:(UITapGestureRecognizer*) sender{
     [self.delegate didTapUser:self.post.author];
 }

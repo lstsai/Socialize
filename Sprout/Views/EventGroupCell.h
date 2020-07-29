@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/29/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+ Cell representing a post in the event group page
+ */
 #import <UIKit/UIKit.h>
 #import "Post.h"
 @import Parse;

@@ -41,6 +41,8 @@ extern const CGFloat PULL_REFRESH_HEIGHT;
 extern const int SEARCH_RADIUS;
 extern const int MIN_RESULT_THRESHOLD;
 extern const int MAP_ZOOM;
+extern const double CAMERA_LAT;
+extern const double CAMERA_LNG;
 
 
 #endif /* Constants_h */

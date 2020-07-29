@@ -15,6 +15,7 @@
 #import "CreatePostViewController.h"
 #import "UIScrollView+EmptyDataSet.h"
 #import "Constants.h"
+#import "MapViewController.h"
 
 @interface EventGroupViewController ()<EventGroupCellDelegate, UITableViewDelegate, UITableViewDataSource, CreatePostViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
@@ -210,6 +211,11 @@ Empty table view delegate method. Returns if the empty view should be shown
         createVC.org=nil;
         createVC.isGroupPost=YES;
         createVC.delegate=self;
+    }
+    else if([segue.identifier isEqualToString:@"mapSegue"])//shows the user the map view of the event location
+    {
+        MapViewController *mapVC=segue.destinationViewController;
+        mapVC.objects=@[self.event];
     }
 }
 

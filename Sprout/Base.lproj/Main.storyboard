@@ -824,7 +824,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search posts" translatesAutoresizingMaskIntoConstraints="NO" id="LKm-WX-bDn">
-                                <rect key="frame" x="0.0" y="56" width="356" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="356" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <scopeButtonTitles>
                                     <string>Title</string>
@@ -832,7 +832,7 @@
                                 </scopeButtonTitles>
                             </searchBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nU1-WJ-0hx">
-                                <rect key="frame" x="0.0" y="112" width="414" height="730"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Zem-0w-vG0">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1160"/>
@@ -868,12 +868,22 @@
                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123 Main Street, Cupertino, CA 95014" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIT-hJ-sZG">
+                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIT-hJ-sZG">
                                                         <rect key="frame" x="82" y="134.5" width="306" height="21.5"/>
                                                         <gestureRecognizers/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <attributedString key="attributedText">
+                                                            <fragment content="123 Main Street, Cupertino, CA 95014">
+                                                                <attributes>
+                                                                    <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <font key="NSFont" metaFont="system" size="18"/>
+                                                                    <integer key="NSUnderline" value="1"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
                                                         <nil key="highlightedColor"/>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="09g-Es-20l" appends="YES" id="z6T-D8-rfc"/>
+                                                        </connections>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date and Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K69-NA-J20">
                                                         <rect key="frame" x="82" y="47.5" width="104" height="19.5"/>
@@ -1049,7 +1059,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="g4s-CU-Oxn"/>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sys-AX-FjU">
-                                <rect key="frame" x="356" y="69" width="48" height="30"/>
+                                <rect key="frame" x="356" y="13" width="48" height="30"/>
                                 <state key="normal" title="Search"/>
                                 <connections>
                                     <action selector="didTapSearch:" destination="2xX-Q4-nYC" eventType="touchUpInside" id="L4X-3D-ps8"/>
@@ -1097,6 +1107,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z5Q-Wf-tMc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="09g-Es-20l">
+                    <connections>
+                        <segue destination="11j-rX-5mI" kind="presentation" identifier="mapSegue" id="S5K-16-W1A"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1171.0144927536232" y="4446.4285714285716"/>
         </scene>
@@ -1662,7 +1677,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UPL-1n-kKF" customClass="PFImageView">
-                                <rect key="frame" x="0.0" y="56" width="414" height="145.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="145.5"/>
                                 <color key="backgroundColor" red="0.23921568627450979" green="0.25098039215686274" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -1670,7 +1685,7 @@
                                 </connections>
                             </imageView>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lpq-hV-Iig" customClass="PFImageView">
-                                <rect key="frame" x="26" y="164" width="94" height="93"/>
+                                <rect key="frame" x="26" y="108" width="94" height="93"/>
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -1678,13 +1693,13 @@
                                 </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="746" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pck-rJ-5T6">
-                                <rect key="frame" x="130" y="205.5" width="103" height="28"/>
+                                <rect key="frame" x="130" y="149.5" width="103" height="28"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dMU-aF-xY4">
-                                <rect key="frame" x="26" y="346.5" width="362" height="176"/>
+                                <rect key="frame" x="26" y="290.5" width="362" height="176"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SUU-lY-qs8">
                                     <size key="itemSize" width="109" height="155"/>
@@ -1734,7 +1749,7 @@
                                 </cells>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Mij-2e-KRx">
-                                <rect key="frame" x="26" y="537.5" width="362" height="176"/>
+                                <rect key="frame" x="26" y="481.5" width="362" height="176"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cO7-nQ-QDA">
                                     <size key="itemSize" width="181" height="165"/>
@@ -1795,7 +1810,7 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h9o-Oq-qkP">
-                                <rect key="frame" x="312" y="208" width="82" height="29"/>
+                                <rect key="frame" x="312" y="152" width="82" height="29"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.47843137250000001" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="82" id="W5Z-Zm-VZk"/>
@@ -1810,19 +1825,23 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="746" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xU8-Tx-13m">
-                                <rect key="frame" x="130" y="228.5" width="103" height="24"/>
+                                <rect key="frame" x="130" y="172.5" width="103" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9kz-Eg-8cF">
-                                <rect key="frame" x="40" y="280.5" width="334" height="49"/>
+                                <rect key="frame" x="40" y="224.5" width="334" height="49"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="mZ5-66-glg">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="mZ5-66-glg">
                                         <rect key="frame" x="282" y="0.5" width="19.5" height="23"/>
+                                        <gestureRecognizers/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Pc0-a9-oXq" appends="YES" id="iTX-3R-5Cm"/>
+                                        </connections>
                                     </label>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xWC-yG-y4O">
                                         <rect key="frame" x="20" y="21.5" width="50.5" height="18"/>
@@ -1834,17 +1853,25 @@
                                             <outletCollection property="gestureRecognizers" destination="WxU-cR-xUb" appends="YES" id="3hK-Jr-lWu"/>
                                         </connections>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Organizations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jXA-0H-nkc">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Organizations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jXA-0H-nkc">
                                         <rect key="frame" x="123.5" y="21.5" width="93.5" height="18"/>
+                                        <gestureRecognizers/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                         <color key="textColor" red="0.23921568627450979" green="0.25098039215686274" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Bme-He-yfa" appends="YES" id="g3v-Bu-gwG"/>
+                                        </connections>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zfy-ZV-Dy3">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zfy-ZV-Dy3">
                                         <rect key="frame" x="269" y="21.5" width="45.5" height="18"/>
+                                        <gestureRecognizers/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                         <color key="textColor" red="0.23921568627450979" green="0.25098039215686274" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="O37-vg-jRO" appends="YES" id="S7U-g1-wZi"/>
+                                        </connections>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FS6-cp-trm">
                                         <rect key="frame" x="95.5" y="-2.5" width="1" height="42"/>
@@ -1862,11 +1889,15 @@
                                             <constraint firstAttribute="height" constant="42" id="wZd-hN-Og9"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="OPh-Ue-A1k">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="OPh-Ue-A1k">
                                         <rect key="frame" x="160.5" y="0.5" width="19.5" height="23"/>
+                                        <gestureRecognizers/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Eqa-a2-v3G" appends="YES" id="oRO-A7-yuj"/>
+                                        </connections>
                                     </label>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="V6b-7a-tKX">
                                         <rect key="frame" x="35.5" y="0.5" width="19.5" height="23"/>
@@ -1901,15 +1932,15 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ObE-0b-N90">
-                                <rect key="frame" x="0.0" y="346.5" width="414" height="412.5"/>
+                                <rect key="frame" x="0.0" y="290.5" width="414" height="517.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="if4-Jb-zEL">
-                                        <rect key="frame" x="156" y="26.5" width="102" height="91"/>
+                                        <rect key="frame" x="156" y="26.5" width="102" height="114.5"/>
                                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="thin"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add friend to see thier liked organizations and events" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4w-Ao-VEI">
-                                        <rect key="frame" x="90" y="126" width="234" height="41"/>
+                                        <rect key="frame" x="90" y="149.5" width="234" height="41"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1927,7 +1958,7 @@
                                 </constraints>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Js9-lZ-G7y">
-                                <rect key="frame" x="0.0" y="56" width="414" height="53"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="53"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This user has sent you a friend request" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8C-bW-SwX">
                                         <rect key="frame" x="20" y="6" width="176" height="41"/>
@@ -1970,13 +2001,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bio" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cie-ay-jTI">
-                                <rect key="frame" x="130" y="243" width="24.5" height="21"/>
+                                <rect key="frame" x="130" y="187" width="24.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Bio" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VMk-LM-v3U">
-                                <rect key="frame" x="130" y="239" width="264" height="34"/>
+                                <rect key="frame" x="130" y="183" width="264" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -2059,6 +2090,7 @@
                         <outlet property="topButton" destination="h9o-Oq-qkP" id="FaO-Uf-tLf"/>
                         <outlet property="usernameLabel" destination="xU8-Tx-13m" id="33J-wO-96L"/>
                         <segue destination="JII-9P-SBh" kind="show" identifier="friendsSegue" id="tOJ-YD-oiC"/>
+                        <segue destination="11j-rX-5mI" kind="presentation" identifier="mapSegue" id="l9q-sS-em3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hA2-xA-jQq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2080,6 +2112,26 @@
                 <tapGestureRecognizer id="bCv-1i-c3v">
                     <connections>
                         <action selector="didTapFriends:" destination="r4M-tQ-o4w" id="Aad-9d-co1"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Bme-He-yfa">
+                    <connections>
+                        <action selector="didTapOrganizations:" destination="r4M-tQ-o4w" id="PxC-RA-fLV"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Eqa-a2-v3G">
+                    <connections>
+                        <action selector="didTapOrganizations:" destination="r4M-tQ-o4w" id="KBr-1t-sl0"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="O37-vg-jRO">
+                    <connections>
+                        <action selector="didTapEvents:" destination="r4M-tQ-o4w" id="O70-wj-TP1"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Pc0-a9-oXq">
+                    <connections>
+                        <action selector="didTapEvents:" destination="r4M-tQ-o4w" id="uQG-Vu-dXG"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -2832,7 +2884,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qlQ-Mq-ISE">
-                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendCell" rowHeight="98" id="C8I-bv-uPa" customClass="FriendCell">
@@ -3077,12 +3129,12 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="WSj-CW-WDh"/>
-        <segue reference="ByB-WX-yAM"/>
+        <segue reference="WTd-pV-B1j"/>
         <segue reference="2WE-KE-m3C"/>
         <segue reference="vVA-Vw-9fQ"/>
-        <segue reference="vmk-95-jLU"/>
-        <segue reference="eOz-I0-ZcM"/>
-        <segue reference="I4d-GF-en2"/>
+        <segue reference="Jfi-X2-tcA"/>
+        <segue reference="rff-eI-h6r"/>
+        <segue reference="l9q-sS-em3"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bubble.left" catalog="system" width="128" height="110"/>

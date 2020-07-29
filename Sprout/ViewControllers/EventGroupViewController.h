@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/28/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+ View controller to display more posts about a event, only users that have liked the event can see the page
+ */
 #import <UIKit/UIKit.h>
 #import "Event.h"
 @import Parse;

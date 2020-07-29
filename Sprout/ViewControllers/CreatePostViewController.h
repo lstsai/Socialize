@@ -15,7 +15,9 @@
 @import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
-
+@protocol CreatePostViewController
+- (void)didCreatePost;
+@end
 @interface CreatePostViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *dismissButton;
 @property (weak, nonatomic) IBOutlet UIButton *postButton;
@@ -26,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL isGroupPost;
 @property (weak, nonatomic) IBOutlet UILabel *attachImageLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *attachedImage;
+@property (nonatomic, weak) id<CreatePostViewController> delegate;
+
 @end
 
 NS_ASSUME_NONNULL_END

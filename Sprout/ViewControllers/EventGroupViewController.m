@@ -13,7 +13,7 @@
 #import "Helper.h"
 #import "MBProgressHUD.h"
 #import "CreatePostViewController.h"
-@interface EventGroupViewController ()<EventGroupCellDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface EventGroupViewController ()<EventGroupCellDelegate, UITableViewDelegate, UITableViewDataSource, CreatePostViewController>
 
 @end
 
@@ -86,6 +86,9 @@
     [self performSegueWithIdentifier:@"profileSegue" sender:user];
 
 }
+-(void) didCreatePost{
+    [self getPosts];
+}
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     EventGroupCell *egc=[tableView dequeueReusableCellWithIdentifier:@"EventGroupCell" forIndexPath:indexPath];
@@ -122,6 +125,7 @@
         createVC.event=self.event;
         createVC.org=nil;
         createVC.isGroupPost=YES;
+        createVC.delegate=self;
     }
 }
 

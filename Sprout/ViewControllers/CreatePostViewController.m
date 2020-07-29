@@ -38,7 +38,7 @@
     if(self.isGroupPost)
     {
         self.attachImageLabel.alpha=SHOW_ALPHA;
-        self.attachedImage.alpha=SHOW_ALPHA;
+        self.attachedImage.alpha=SHOW_ALPHA*0.3;
     }
     else
     {
@@ -65,6 +65,7 @@ Triggered when the user presses the pst button, calls the helper method to creat
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
+    [self.delegate didCreatePost];
 }
 /**
 Triggered when the user presses the backdrop image. Presents the image picker(photo album) so the user can choose an image for the event.

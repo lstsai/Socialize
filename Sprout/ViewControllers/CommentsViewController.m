@@ -10,7 +10,10 @@
 #import "Comment.h"
 #import "CommentCell.h"
 #import "ProfileViewController.h"
-@interface CommentsViewController ()<UITableViewDelegate, UITableViewDataSource, CommentCellDelegate>
+#import "UIScrollView+EmptyDataSet.h"
+#import "Constants.h"
+
+@interface CommentsViewController ()<UITableViewDelegate, UITableViewDataSource, CommentCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @end
 
@@ -20,6 +23,9 @@
     [super viewDidLoad];
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
+    self.tableView.emptyDataSetSource=self;
+    self.tableView.emptyDataSetDelegate = self;
+    self.tableView.tableFooterView = [UIView new];
      //Do any additional setup after loading the view.
     [self loadProfileImage];
     [self getPostComments];
@@ -92,7 +98,59 @@
 - (void)didTapUser:(nonnull PFUser *)user {
     [self performSegueWithIdentifier:@"commentProfileSegue" sender:user];
 }
-
+/**
+Empty table view delegate method. Returns the image to be displayed when there are no posts
+@param[in] scrollView the table view that is empty
+@return the image to be shown
+*/
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"comment"];
+}
+/**
+Empty table view delegate method. Returns the title to be displayed when there are no posts
+@param[in] scrollView the table view that is empty
+@return the title to be shown
+*/
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"No Comments to Show";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:EMPTY_TITLE_FONT_SIZE],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+/**
+Empty collection view delegate method. Returns the message to be displayed when there are no users
+@param[in] scrollView the collection view that is empty
+@return the message to be shown
+*/
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"Be the first to leave a comment!";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:EMPTY_MESSAGE_FONT_SIZE],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+                                 
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+/**
+Empty table view delegate method. Returns if the empty view should be shown
+@param[in] scrollView the table view that is empty
+@return if the empty view shouls be shown
+ YES: if there are no posts
+ NO: there are posts
+*/
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    return self.comments.count==0;
+}
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

@@ -23,11 +23,6 @@
     self.profileImage.clipsToBounds = YES;
     self.profileImage.layer.masksToBounds=YES;
     self.profileImage.file=PFUser.currentUser[@"profilePic"];
-    if(self.isGroupPost)
-    {
-        self.attachImageLabel.alpha=SHOW_ALPHA;
-        self.attachedImage.alpha=SHOW_ALPHA;
-    }
     [self.profileImage loadInBackground];
 }
 /**
@@ -39,6 +34,17 @@
         self.postTextView.placeholder=[ORG_POST_TEXT_PLACEHOLDER mutableCopy];
     else
         self.postTextView.placeholder=[EVENT_POST_TEXT_PLACEHOLDER mutableCopy];
+    
+    if(self.isGroupPost)
+    {
+        self.attachImageLabel.alpha=SHOW_ALPHA;
+        self.attachedImage.alpha=SHOW_ALPHA;
+    }
+    else
+    {
+        self.attachImageLabel.alpha=HIDE_ALPHA;
+        self.attachedImage.alpha=HIDE_ALPHA;
+    }
 
 }
 /**
@@ -80,6 +86,7 @@ Triggered when the user chooses an image to be the event image. Sets the backgro
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    self.attachedImage.alpha=SHOW_ALPHA;
     [self.attachedImage setImage:editedImage];
     
     // Dismiss UIImagePickerController to go back to your original view controller

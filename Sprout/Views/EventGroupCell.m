@@ -37,6 +37,9 @@
     {
         self.postImage.hidden=YES;
     }
+    [self.stackView layoutIfNeeded];
+    [self.contentView layoutSubviews];
+
 }
 - (IBAction)didTapComment:(id)sender {
     [self.delegate didTapComment:self.post];

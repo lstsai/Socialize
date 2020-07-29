@@ -66,6 +66,7 @@
 }
 /**
  Fetches the posts from Parse to be displayed on the user's timeline. Only includes posts created by the user and friends.
+ Or posts that are related to a liked event
  Orders the posts by time creates (top is newest post).
  @param[in] refreshControl the refresh control that is animating if there is one
  */
@@ -74,13 +75,25 @@
         if(error)
             [Helper displayAlert:@"Error getting friends" withMessage:error.localizedDescription on:self];
         else{
-            PFQuery *postsQ= [PFQuery queryWithClassName:@"Post"];
-            [postsQ orderByDescending:@"createdAt"];
+            PFQuery *regpostsQ= [PFQuery queryWithClassName:@"Post"];
+            [regpostsQ whereKey:@"groupPost" equalTo:@(NO)];
+            NSArray *friendsAndSelf=[friends arrayByAddingObject:PFUser.currentUser];
+            [regpostsQ whereKey:@"author" containedIn:friendsAndSelf];
+            PFQuery* groupPostQ=[PFQuery queryWithClassName:@"Post"];
+            [regpostsQ whereKey:@"groupPost" equalTo:@(YES)];
+            NSMutableArray* eventsList=[NSMutableArray new];
+            //get all the events that the user has liked
+            for(NSString* eventID in PFUser.currentUser[@"likedEvents"])
+            {
+                [eventsList addObject:[PFQuery getObjectOfClass:@"Event" objectId:eventID]];
+            }
+            [groupPostQ whereKey:@"event" containedIn:eventsList];
+            PFQuery* postsQ=[PFQuery orQueryWithSubqueries:@[regpostsQ, groupPostQ]];
             [postsQ includeKey:@"event"];
             [postsQ includeKey:@"author"];
-            NSArray *friendsAndSelf=[friends arrayByAddingObject:PFUser.currentUser];
-            [postsQ whereKey:@"author" containedIn:friendsAndSelf];
+            [postsQ orderByDescending:@"createdAt"];
             [postsQ setLimit:RESULTS_SIZE*self.pageNum];
+
             [postsQ findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
                 if(error)
                 {

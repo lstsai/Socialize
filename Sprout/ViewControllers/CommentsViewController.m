@@ -29,9 +29,9 @@
 -(void) loadProfileImage{
     self.profileImage.layer.masksToBounds=YES;
     self.profileImage.layer.cornerRadius=self.profileImage.bounds.size.width/2;
-    if(PFUser.currentUser[@"profilePicture"])
+    if(PFUser.currentUser[@"profilePic"])
     {
-        self.profileImage.file=PFUser.currentUser[@"profilePicture"];
+        self.profileImage.file=PFUser.currentUser[@"profilePic"];
         [self.profileImage loadInBackground];
     }
 }
@@ -56,6 +56,9 @@
         }
     }];
 }
+- (IBAction)didTapDismiss:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (IBAction)didTapPost:(id)sender {
     [Comment postComment:self.commentTextField.text forPost:self.post withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
@@ -76,6 +79,7 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     CommentCell *currCell= [tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
+    currCell.comment=self.comments[indexPath.row];
     currCell.delegate=self;
     [currCell loadComment];
     return currCell;

@@ -64,6 +64,7 @@
     [postsQuery whereKey:@"event" equalTo:self.event];
     [postsQuery whereKey:@"groupPost" equalTo:@(YES)];
     [postsQuery orderByDescending:@"createdAt"];
+    [postsQuery includeKey:@"author"];
     [postsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if(error)

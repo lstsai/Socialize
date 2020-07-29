@@ -113,6 +113,9 @@ Calculates the number of friends that have liked the organization the post is ab
 
     }
 }
+- (IBAction)didTapComment:(id)sender {
+    [self.delegate didTapComment:self.post];
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

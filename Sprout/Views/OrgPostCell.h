@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol OrgPostCellDelegate
 - (void)didTapUser: (PFUser *)user;
+- (void)didTapComment: (Post *)post;
 @end
 
 @interface OrgPostCell : UITableViewCell

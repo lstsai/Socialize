@@ -16,7 +16,8 @@
 #import "OrgDetailsViewController.h"
 #import "UIScrollView+EmptyDataSet.h"
 #import "ProfileViewController.h"
-
+#import "CommentsViewController.h"
+#import "MBProgressHUD.h"
 @interface HomeViewController ()<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, OrgPostCellDelegate, EventPostCellDelegate>
 
 @end
@@ -33,6 +34,7 @@
     self.tableView.tableFooterView = [UIView new];
     self.pageNum=1;
     [self setupLoadingIndicators];
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     [self performSelectorInBackground:@selector(getPosts:) withObject:nil];
 }
 /**
@@ -40,6 +42,7 @@
  requests pending
  */
 -(void) viewWillAppear:(BOOL)animated{
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     [self performSelectorInBackground:@selector(getPosts:) withObject:nil];
     PFObject* selfAccess= [Helper getUserAccess:PFUser.currentUser];
     if([(NSArray*)selfAccess[@"inRequests"] count]>0)//if the user has friend requests pending
@@ -107,6 +110,7 @@
                     [refreshControl endRefreshing];
                 else
                     [self.loadingMoreView stopAnimating];
+                [MBProgressHUD hideHUDForView:self.tableView animated:YES];
 
             }];
         }
@@ -209,6 +213,13 @@ Empty table view delegate method. Returns if the empty view should be shown
     [self performSegueWithIdentifier:@"profileSegue" sender:user];
 }
 /**
+ Triggered when the uses presses the comment button on a particular post
+ @param[in] post the post that the user tapped on
+ */
+- (void)didTapComment:(nonnull Post *)post {
+    [self performSegueWithIdentifier:@"commentSegue" sender:post];
+}
+/**
 Triggered when the user scrolls on the table view. Determines if the program should load more data
  depending on how far the user has scrolled and if more data is already loading. Calls the getPosts method
  if more posts are needed.
@@ -258,6 +269,11 @@ Triggered when the user scrolls on the table view. Determines if the program sho
     else if ([segue.identifier isEqualToString:@"profileSegue"]){//presents the user's profile page
         ProfileViewController* profileVC= segue.destinationViewController;
         profileVC.user=(PFUser*)sender;
+    }
+    else if([segue.identifier isEqualToString:@"commentSegue"])
+    {
+        CommentsViewController *commentVC=segue.destinationViewController;
+        commentVC.post=(Post*)sender;
     }
     
 }

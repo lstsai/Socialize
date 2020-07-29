@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol EventPostCellDelegate
 - (void)didTapUser: (PFUser *)user;
+- (void)didTapComment: (Post *)post;
 @end
 
 @interface EventPostCell : UITableViewCell

@@ -105,6 +105,9 @@ calling a helper method
 
     }
 }
+- (IBAction)didTapComment:(id)sender {
+    [self.delegate didTapComment:self.post];
+}
 /**
 Triggered when the user taps on the user profile image
 @param[in] sender the gesture recognizer that was triggered

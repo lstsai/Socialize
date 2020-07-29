@@ -15,12 +15,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet PFImageView *eventImageView;
 @property (weak, nonatomic) IBOutlet UILabel *eventNameLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *dateTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) Event* event;
 @property (strong, nonatomic) NSArray* posts;
--(void) getPosts;
+-(void) getPosts:(NSString*)search;
 -(void) loadDetails;
 @end
 

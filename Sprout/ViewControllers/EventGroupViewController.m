@@ -24,9 +24,10 @@
     // Do any additional setup after loading the view.
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
-    [self getPosts];
+    [self getPosts:@""];
     [self loadDetails];
-
+    self.scrollView.keyboardDismissMode=UIScrollViewKeyboardDismissModeOnDrag;
+    self.tableView.keyboardDismissMode=UIScrollViewKeyboardDismissModeOnDrag;
 
 }
 -(void) loadDetails{
@@ -58,11 +59,12 @@
         [self.eventImageView loadInBackground];
     }
 }
--(void) getPosts{
+-(void) getPosts:(NSString*)search{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFQuery* postsQuery= [PFQuery queryWithClassName:@"Post"];
     [postsQuery whereKey:@"event" equalTo:self.event];
     [postsQuery whereKey:@"groupPost" equalTo:@(YES)];
+    [postsQuery whereKey:@"postDescription" matchesRegex:[NSString stringWithFormat:@"(?i)%@",search]];
     [postsQuery orderByDescending:@"createdAt"];
     [postsQuery includeKey:@"author"];
     [postsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
@@ -86,8 +88,12 @@
     [self performSegueWithIdentifier:@"profileSegue" sender:user];
 
 }
+- (IBAction)didTapSearch:(id)sender {
+    [self getPosts:self.searchBar.text];
+    [self.searchBar endEditing:YES];
+}
 -(void) didCreatePost{
-    [self getPosts];
+    [self getPosts:@""];
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {

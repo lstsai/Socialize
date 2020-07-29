@@ -190,6 +190,14 @@ Empty table view delegate method. Returns if the empty view should be shown
         CommentsViewController *commentVC=segue.destinationViewController;
         commentVC.post=(Post*)sender;
     }
+    else if([segue.identifier isEqualToString:@"cellCommentSegue"])
+    {
+        CommentsViewController *commentVC=segue.destinationViewController;
+        UITableViewCell* tappedCell= sender;
+        NSIndexPath* tappedIndex=[self.tableView indexPathForCell:tappedCell];
+        commentVC.post=self.posts[tappedIndex.row];
+        [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
+    }
     else if([segue.identifier isEqualToString:@"profileSegue"])
     {
         ProfileViewController *profileVC=segue.destinationViewController;

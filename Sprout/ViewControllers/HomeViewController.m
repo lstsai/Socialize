@@ -83,7 +83,7 @@
             NSArray *friendsAndSelf=[friends arrayByAddingObject:PFUser.currentUser];
             [regpostsQ whereKey:@"author" containedIn:friendsAndSelf];
             PFQuery* groupPostQ=[PFQuery queryWithClassName:@"Post"];
-            [regpostsQ whereKey:@"groupPost" equalTo:@(YES)];
+            [groupPostQ whereKey:@"groupPost" equalTo:@(YES)];
             NSMutableArray* eventsList=[NSMutableArray new];
             //get all the events that the user has liked
             for(NSString* eventID in PFUser.currentUser[@"likedEvents"])

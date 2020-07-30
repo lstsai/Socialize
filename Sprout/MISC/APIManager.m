@@ -153,10 +153,8 @@
  */
 - (void)getCoordsFromAddress:(NSString*)address completion:(void(^)(CLLocationCoordinate2D coords, NSError * _Nullable error))completion{
     NSDictionary *params= @{@"key":[[NSProcessInfo processInfo] environment][@"Google-api-key"] , @"address":address};
-    NSLog(@"%@", address);
     [self GET:@"https://maps.googleapis.com/maps/api/geocode/json" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary* location= [responseObject[@"results"] firstObject][@"geometry"][@"location"];
-        NSLog(@"%@", responseObject);
         CLLocationCoordinate2D coord= CLLocationCoordinate2DMake([location[@"lat"] doubleValue], [location[@"lng"] doubleValue]);
         completion(coord, nil);
         

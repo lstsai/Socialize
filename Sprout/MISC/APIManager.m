@@ -95,8 +95,8 @@
 */
 - (void)getOrgImage:(NSString*)orgName completion:(void(^)(NSURL *orgImage, NSError *error))completion{
     NSString *searchTerm= [orgName stringByAppendingString:@" logo"];
-    NSDictionary *params= @{@"key":[[NSProcessInfo processInfo] environment][@"Google-api-key"] , @"q": searchTerm, @"cx": @"001132024093895335480:hdk45weoe1u", @"searchType": @"image", @"num": @(1)};
-    [self GET:@"https://www.googleapis.com/customsearch/v1" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSDictionary *params= @{@"key":[[NSProcessInfo processInfo] environment][@"Google-api-key"] , @"q": searchTerm, @"cx": @"001132024093895335480:lvqxumrcfh0", @"searchType":@"image", @"num": @(1)};
+    [self GET:@"https://customsearch.googleapis.com/customsearch/v1" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSURL *imageURL=[NSURL URLWithString:responseObject[@"items"][0][@"image"][@"thumbnailLink"]];
         completion(imageURL, nil);
         

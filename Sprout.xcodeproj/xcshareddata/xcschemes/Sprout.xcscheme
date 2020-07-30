@@ -77,6 +77,11 @@
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
+            key = "Google-image-api"
+            value = "AIzaSyDkmihZO6q3MNuRcCgUHzEes2lk79bAkus"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
             key = "B4A-app-id"
             value = "clKW60zPwPdQCFcdDXWqFM6QQfF73cRLefZhStBR"
             isEnabled = "YES">

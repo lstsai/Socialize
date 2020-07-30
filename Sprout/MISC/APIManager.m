@@ -118,15 +118,16 @@
     NSString* getString=[NSString stringWithFormat:@"http://geodb-free-service.wirefreethought.com/v1/geo/locations/%f%f/nearbyCities", coords.latitude, coords.longitude];
     [self GET:getString parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSMutableArray *cities= [NSMutableArray new];
-        
+        NSString* state;
         //add the name of the city to an array. exclude county results
         for(NSDictionary* place in (NSArray*)responseObject[@"data"])
         {
             if ([place[@"city"] rangeOfString:@"County"].location == NSNotFound)
                 [cities addObject:place[@"city"]];
+            state=place[@"regionCode"];
         }
         //params for the charity navigator api.
-        NSMutableDictionary *orgParams= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":search, @"rated":@"TRUE", @"pageSize":@(RESULTS_SIZE)}.mutableCopy;
+        NSMutableDictionary *orgParams= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"], @"search":search, @"state":state, @"rated":@"TRUE", @"pageSize":@(RESULTS_SIZE)}.mutableCopy;
         NSMutableArray* orgResults= [NSMutableArray new];
         //search for more organizations matching search in near cities, call api and append to results
         for(NSString* city in cities)
@@ -152,9 +153,10 @@
  */
 - (void)getCoordsFromAddress:(NSString*)address completion:(void(^)(CLLocationCoordinate2D coords, NSError * _Nullable error))completion{
     NSDictionary *params= @{@"key":[[NSProcessInfo processInfo] environment][@"Google-api-key"] , @"address":address};
+    NSLog(@"%@", address);
     [self GET:@"https://maps.googleapis.com/maps/api/geocode/json" parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary* location= [responseObject[@"results"] firstObject][@"geometry"][@"location"];
-        
+        NSLog(@"%@", responseObject);
         CLLocationCoordinate2D coord= CLLocationCoordinate2DMake([location[@"lat"] doubleValue], [location[@"lng"] doubleValue]);
         completion(coord, nil);
         

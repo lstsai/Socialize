@@ -67,6 +67,15 @@ Triggered when the user presses thesearch button. Calls the fetchResults method 
     [self.searchBar endEditing:YES];
 }
 /**
+Triggered when the user presses thesearch button on the keyboard. Calls the fetchResults method to get
+ data and dismisses the keyboard
+ @param[in] searchBar the search bar being searched 
+ */
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [self fetchResults:nil];
+    [self.searchBar endEditing:YES];
+}
+/**
  Calls the correct method in the child view controllers depending on the type of search indicated by the segmented control
  after the search button is pressed
  @param[in] refreshControl the refreshControl that is animating if there is one

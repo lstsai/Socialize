@@ -87,7 +87,7 @@
     }];
 }
 -(void) getCoords{
-    [[APIManager shared] getCoordsFromAddress:[self.org.location streetAddress] completion:^(CLLocationCoordinate2D coords, NSError * _Nullable error) {
+    [[APIManager shared] getCoordsFromAddress:[Location  addressFromLocation:self.org.location] completion:^(CLLocationCoordinate2D coords, NSError * _Nullable error) {
         if(error)
         {
             [Helper displayAlert:@"Error getting location" withMessage:@"Could not determine the location of this organization" on:self];

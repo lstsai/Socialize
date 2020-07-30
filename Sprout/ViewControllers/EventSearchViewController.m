@@ -69,12 +69,20 @@ Makes a query to get the events based on the search. Ordered by how close the ev
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     PFQuery *eventsNameQuery=[PFQuery queryWithClassName:@"Event"];
-    [eventsNameQuery whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchText]];
-    
+    PFQuery *totalNameQ=eventsNameQuery;
     PFQuery *eventsDetailsQuery=[PFQuery queryWithClassName:@"Event"];
-    [eventsDetailsQuery whereKey:@"details" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchText]];
+    PFQuery *totalDetialsQ=eventsDetailsQuery;
+    
+    NSArray* search= [self.searchText componentsSeparatedByString:@" "];
+    for(NSString* word in search)//match the words (ignore case) one by one
+    {
+        [eventsNameQuery whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",word]];
+        [eventsDetailsQuery whereKey:@"details" matchesRegex:[NSString stringWithFormat:@"(?i)%@",word]];
+        totalNameQ=[PFQuery orQueryWithSubqueries:@[eventsNameQuery,totalNameQ]];
+        totalDetialsQ=[PFQuery orQueryWithSubqueries:@[eventsDetailsQuery,totalDetialsQ]];
+    }
 
-    PFQuery *eventsQuery=[PFQuery orQueryWithSubqueries:@[eventsNameQuery,eventsDetailsQuery]];
+    PFQuery *eventsQuery=[PFQuery orQueryWithSubqueries:@[totalNameQ,totalDetialsQ]];
     [eventsQuery includeKey:@"author"];
     [eventsQuery whereKey:@"location" nearGeoPoint:[PFGeoPoint geoPointWithLatitude:self.locationCoord.latitude longitude:self.locationCoord.longitude]];
     [eventsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {

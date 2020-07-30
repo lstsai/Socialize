@@ -48,7 +48,7 @@ Instantiates the map view to show the given location with a marker
     {
         for(Organization* org in self.objects)
         {
-            [[APIManager shared] getCoordsFromAddress:[org.location streetAddress] completion:^(CLLocationCoordinate2D coords, NSError * _Nullable error) {
+            [[APIManager shared] getCoordsFromAddress:[Location addressFromLocation:org.location] completion:^(CLLocationCoordinate2D coords, NSError * _Nullable error) {
                 GMSMarker* marker= [GMSMarker markerWithPosition:coords];
                 marker.title=org.name;
                 marker.map=self.mapView;
@@ -65,6 +65,7 @@ Instantiates the map view to show the given location with a marker
     for (GMSMarker *marker in markers)
         bounds = [bounds includingCoordinate:marker.position];
     [self.mapView animateWithCameraUpdate:[GMSCameraUpdate fitBounds:bounds]];
+    [self.mapView setMinZoom:0 maxZoom:MAP_ZOOM*2];
 }
 /**
  Triggered when the user taps the cancel button. Dismisses the map view controller

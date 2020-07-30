@@ -29,6 +29,7 @@ Instantiates the map view to show the given location with a marker
 -(void) setUpMap{
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:CAMERA_LAT longitude:CAMERA_LNG zoom:MAP_ZOOM/5];
     [self.mapView setMinZoom:MAP_ZOOM/5 maxZoom:MAP_ZOOM];
+    
     self.mapView.camera=camera;
     NSMutableArray* markers=[NSMutableArray new];
 

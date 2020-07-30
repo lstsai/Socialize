@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)removeFriend:(PFUser*) from toFriend:(PFUser*) to;
 + (void)removeRequest:(PFUser*) current forUser:(PFUser*) requester;
 + (void) addRequest:(PFUser *) current forUser:(PFUser *)requested;
+
 @end
 
 NS_ASSUME_NONNULL_END

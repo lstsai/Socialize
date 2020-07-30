@@ -115,6 +115,31 @@ Triggered when the user taps the address of the event and presents the MapViewCo
     [self performSegueWithIdentifier:@"mapSegue" sender:nil];
 }
 
+/**
+Triggered when the user taps the time of the event and creates a calander event
+@param[in] sender the time that was tapped
+*/
+- (IBAction)didTapTime:(id)sender {
+    UIAlertController* alert= [UIAlertController alertControllerWithTitle:@"Add Event to Calendar" message:@"Would you like to add this event to your calender?" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        EKEventStore *store = [EKEventStore new];
+        [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+            if (!granted) { return; }
+            EKEvent *event = [EKEvent eventWithEventStore:store];
+            event.title = self.event.name;
+            event.startDate = self.event.startTime; //today
+            event.endDate = self.event.endTime;
+            event.calendar = [store defaultCalendarForNewEvents];
+            NSError *err = nil;
+            [store saveEvent:event span:EKSpanThisEvent commit:YES error:&err];
+        }];
+    }];
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:noAction];
+    [alert addAction:okAction];
+
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 #pragma mark - Navigation
 

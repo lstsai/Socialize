@@ -10,6 +10,7 @@ View Controller to display the details for a specified event
 */
 #import <UIKit/UIKit.h>
 #import "Event.h"
+#import <EventKit/EventKit.h>
 @import Parse;
 NS_ASSUME_NONNULL_BEGIN
 

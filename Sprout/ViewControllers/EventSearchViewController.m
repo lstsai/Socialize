@@ -68,21 +68,21 @@ Makes a query to get the events based on the search. Ordered by how close the ev
     if(![refreshControl isKindOfClass:[UIRefreshControl class]])
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    PFQuery *eventsNameQuery=[PFQuery queryWithClassName:@"Event"];
-    PFQuery *totalNameQ=eventsNameQuery;
-    PFQuery *eventsDetailsQuery=[PFQuery queryWithClassName:@"Event"];
-    PFQuery *totalDetialsQ=eventsDetailsQuery;
-    
     NSArray* search= [self.searchText componentsSeparatedByString:@" "];
+    
+    NSString *regexString = @"^"; //start off the regex
     for(NSString* word in search)//match the words (ignore case) one by one
     {
-        [eventsNameQuery whereKey:@"name" matchesRegex:[NSString stringWithFormat:@"(?i)%@",word]];
-        [eventsDetailsQuery whereKey:@"details" matchesRegex:[NSString stringWithFormat:@"(?i)%@",word]];
-        totalNameQ=[PFQuery orQueryWithSubqueries:@[eventsNameQuery,totalNameQ]];
-        totalDetialsQ=[PFQuery orQueryWithSubqueries:@[eventsDetailsQuery,totalDetialsQ]];
+        regexString = [NSString stringWithFormat:@"%@(?=.*(?i)%@)", regexString, word];
     }
+    regexString = [NSString stringWithFormat:@"(?i)%@.*$", regexString]; //finish off the regex
 
-    PFQuery *eventsQuery=[PFQuery orQueryWithSubqueries:@[totalNameQ,totalDetialsQ]];
+    PFQuery *eventsNameQuery=[PFQuery queryWithClassName:@"Event"];
+    PFQuery *eventsDetailsQuery=[PFQuery queryWithClassName:@"Event"];
+    [eventsNameQuery whereKey:@"name" matchesRegex:regexString];
+    [eventsDetailsQuery whereKey:@"details" matchesRegex:regexString];
+
+    PFQuery *eventsQuery=[PFQuery orQueryWithSubqueries:@[eventsNameQuery,eventsDetailsQuery]];
     [eventsQuery includeKey:@"author"];
     [eventsQuery whereKey:@"location" nearGeoPoint:[PFGeoPoint geoPointWithLatitude:self.locationCoord.latitude longitude:self.locationCoord.longitude]];
     [eventsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {

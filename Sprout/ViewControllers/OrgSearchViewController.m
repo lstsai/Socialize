@@ -15,6 +15,7 @@
 #import "Post.h"
 #import "UIScrollView+EmptyDataSet.h"
 #import "LocationManager.h"
+#import "MapViewController.h"
 @interface OrgSearchViewController ()<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 @end
 
@@ -175,6 +176,11 @@ Makes the API call to get more organizations based on the search.
         NSIndexPath *tappedIndex= [self.tableView indexPathForCell:tappedCell];
         orgVC.org=self.organizations[tappedIndex.item];
         [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
+    }
+    else if([segue.identifier isEqualToString:@"mapSegue"])//takes user to the map page
+    {
+        MapViewController *mapVC= segue.destinationViewController;
+        mapVC.objects=self.organizations;
     }
 }
 /**

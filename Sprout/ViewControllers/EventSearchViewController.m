@@ -15,6 +15,8 @@
 #import "Constants.h"
 #import "UIScrollView+EmptyDataSet.h"
 #import "Post.h"
+#import "MapViewController.h"
+
 @interface EventSearchViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @end
@@ -195,6 +197,11 @@ Empty collection view delegate method. Returns if the empty view should be shown
         NSIndexPath *tappedIndex= [self.collectionView indexPathForCell:tappedCell];
         eventVC.event=self.events[tappedIndex.row];
         [self.collectionView deselectItemAtIndexPath:tappedIndex animated:YES];
+    }
+    else if([segue.identifier isEqualToString:@"mapSegue"])//takes user to the map page
+    {
+        MapViewController *mapVC= segue.destinationViewController;
+        mapVC.objects=self.events;
     }
 }
 

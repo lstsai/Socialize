@@ -15,6 +15,7 @@
 #import "MBProgressHUD.h"
 #import "OrgDetailsViewController.h"
 #import "Helper.h"
+#import "MapViewController.h"
 @import GooglePlaces;
 @interface SearchViewController ()<UISearchBarDelegate, CLLocationManagerDelegate, CreateViewControllerDelegate, GMSAutocompleteViewControllerDelegate>
 
@@ -228,6 +229,21 @@ Delegate method for the GMSAutocompleteViewController. Triggered when the user c
         UINavigationController *navigationController = segue.destinationViewController;
         CreateViewController *createController = (CreateViewController*)navigationController.topViewController;
         createController.delegate = self;
+    }
+    else if([segue.identifier isEqualToString:@"mapSegue"])//takes the user to the map view
+    {
+        MapViewController *mapVC = segue.destinationViewController;
+        if(self.searchControl.selectedSegmentIndex==ORG_SEGMENT)
+        {
+            if(self.orgsVC.organizations.count>0)
+                mapVC.objects=self.orgsVC.organizations;
+            else
+                mapVC.objects=self.orgsVC.organizations;
+        }
+        else if(self.searchControl.selectedSegmentIndex==EVENT_SEGMENT)
+        {
+            mapVC.objects= self.eventsVC.events;
+        }
     }
 }
 

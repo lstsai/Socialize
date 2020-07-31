@@ -8,6 +8,8 @@
 
 #import "SignUpViewController.h"
 #import "Helper.h"
+#import "Constants.h"
+#import "ProfileViewController.h"
 @interface SignUpViewController ()
 
 @end
@@ -51,21 +53,27 @@ if successful signup
                 [userAccessible saveInBackground];
                 newUser[@"friendAccessible"]=userAccessible;
                 [newUser saveInBackground];
-                [self performSegueWithIdentifier:@"signupSegue" sender:nil];//go to timeline after login
+                [self performSegueWithIdentifier:@"signupSegue" sender:newUser];//go to timeline after login
             }
             [self.activityIndicator stopAnimating];
         }];
     }
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"signupSegue"])
+    {
+        UINavigationController* navVC=[((UITabBarController *)segue.destinationViewController).viewControllers objectAtIndex:PEOPLE_SEGMENT];
+        [Helper shared].currProfVC=(ProfileViewController*)navVC.topViewController;
+        [Helper shared].currProfVC.user=sender;
+    }
 }
-*/
+
 
 @end

@@ -9,6 +9,16 @@
 #import "Helper.h"
 
 @implementation Helper
++ (instancetype)shared
+{
+    static Helper *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[Helper alloc] init];
+        // Do any other initialisation stuff here
+    });
+    return sharedInstance;
+}
 /**
  Converts an UIImage to a PFFileObject in order to be stored in Parse
  @param[in] image The image to be convered into a file

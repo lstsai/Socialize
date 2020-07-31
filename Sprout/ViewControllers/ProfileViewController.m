@@ -40,6 +40,7 @@
         [PFUser.currentUser fetchInBackground];
         self.user=PFUser.currentUser;
     }
+    NSLog(@"%@ self %@", [Helper shared].currProfVC, self);
     [self setupImagePicker];
 }
 /**

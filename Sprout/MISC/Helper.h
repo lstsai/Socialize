@@ -14,9 +14,12 @@
 #import "Post.h"
 #import "Organization.h"
 #import "Event.h"
+#import "ProfileViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Helper : PFObject
+@interface Helper : NSObject
+@property (strong, nonatomic) ProfileViewController* currProfVC;
++ (instancetype)shared;
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image withName:(NSString*)imageName;
 + (void) getFriends:(void(^)(NSArray *friends, NSError *error))completion;
 + (PFObject *) getUserAccess:(PFUser*) user;

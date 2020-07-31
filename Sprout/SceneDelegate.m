@@ -10,6 +10,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import "Helper.h"
 #import "Constants.h"
+#import "APIManager.h"
 @interface SceneDelegate ()
 
 @end
@@ -28,6 +29,9 @@ If there is cached data about the current user, present the search page instead 
         [PFUser.currentUser fetchInBackground];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
+        UINavigationController* navVC=[((UITabBarController *)self.window.rootViewController).viewControllers objectAtIndex:PEOPLE_SEGMENT];
+        [Helper shared].currProfVC=(ProfileViewController*)navVC.topViewController;
+        [Helper shared].currProfVC.user=PFUser.currentUser;
     }
     UNUserNotificationCenter* center=UNUserNotificationCenter.currentNotificationCenter;
     UNAuthorizationOptions options = UNAuthorizationOptionBadge | UNAuthorizationOptionAlert | UNAuthorizationOptionSound;

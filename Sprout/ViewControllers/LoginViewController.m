@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 #import "Helper.h"
+#import "ProfileViewController.h"
+#import "Constants.h"
 @interface LoginViewController ()
 
 @end
@@ -41,7 +43,7 @@
         else
         {
             NSLog(@"User logged in successfully");
-            [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+            [self performSegueWithIdentifier:@"loginSegue" sender:user];
         }
         [self.activityIndicator stopAnimating];
 
@@ -49,14 +51,20 @@
     
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"loginSegue"])
+    {
+        UINavigationController* navVC=[((UITabBarController *)segue.destinationViewController).viewControllers objectAtIndex:PEOPLE_SEGMENT];
+        [Helper shared].currProfVC=(ProfileViewController*)navVC.topViewController;
+        [Helper shared].currProfVC.user=sender;
+    }
 }
-*/
+
 
 @end

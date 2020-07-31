@@ -64,8 +64,8 @@ Triggered when the user presses the pst button, calls the helper method to creat
     [Post createPost:self.attachedImage.image withDescription:self.postTextView.text withEvent:self.event withOrg:self.org groupPost:self.isGroupPost withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self dismissViewControllerAnimated:YES completion:nil];
+        [self.delegate didCreatePost];
     }];
-    [self.delegate didCreatePost];
 }
 /**
 Triggered when the user presses the backdrop image. Presents the image picker(photo album) so the user can choose an image for the event.

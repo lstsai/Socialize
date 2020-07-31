@@ -7,7 +7,9 @@
 //
 
 #import "SceneDelegate.h"
-
+#import <UserNotifications/UserNotifications.h>
+#import "Helper.h"
+#import "Constants.h"
 @interface SceneDelegate ()
 
 @end
@@ -15,7 +17,8 @@
 @implementation SceneDelegate
 
 /**
-If there is cached data about the current user, present the search page instead of login (persisted login)
+If there is cached data about the current user, present the search page instead of login (persisted login).
+ Also asks for permission to display notifications
  */
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -26,6 +29,14 @@ If there is cached data about the current user, present the search page instead 
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
     }
+    UNUserNotificationCenter* center=UNUserNotificationCenter.currentNotificationCenter;
+    UNAuthorizationOptions options = UNAuthorizationOptionBadge | UNAuthorizationOptionAlert | UNAuthorizationOptionSound;
+    [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if(!granted)
+        {
+            [Helper displayAlert:@"Notification Disabled" withMessage:@"You have disabled notifications for this app. To enable it in the future, visit the settings page." on:self.window.rootViewController];
+        }
+    }];
 }
 
 

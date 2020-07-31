@@ -49,3 +49,4 @@ const double CAMERA_LAT=39.50;
 const double CAMERA_LNG=-98.35;
 
 const CGFloat PINCH_SCALE=1;
+const int NOTIF_REMINDER_TIME=1;

@@ -13,6 +13,7 @@
 #import "MapViewController.h"
 #import "Constants.h"
 #import "EventGroupViewController.h"
+#import <UserNotifications/UserNotifications.h>
 @interface EventDetailsViewController ()
 
 @end
@@ -116,7 +117,7 @@ Triggered when the user taps the address of the event and presents the MapViewCo
 }
 
 /**
-Triggered when the user taps the time of the event and creates a calander event
+Triggered when the user taps the time of the event and creates a calander event and reminder
 @param[in] sender the time that was tapped
 */
 - (IBAction)didTapTime:(id)sender {
@@ -132,6 +133,22 @@ Triggered when the user taps the time of the event and creates a calander event
             event.calendar = [store defaultCalendarForNewEvents];
             NSError *err = nil;
             [store saveEvent:event span:EKSpanThisEvent commit:YES error:&err];
+            
+            //create a notification for this event, one hour before start time
+            UNMutableNotificationContent* eventNotif= [[UNMutableNotificationContent alloc] init];
+            eventNotif.title=@"Reminder: Upcoming Event";
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+            [dateFormat setDateFormat:@"Today at h:mm a"];
+            eventNotif.body=[NSString stringWithFormat:@"%@ on %@", self.event.name, [dateFormat stringFromDate:self.event.startTime]];
+            NSCalendar *calendar = [NSCalendar currentCalendar];
+            NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:self.event.startTime];
+            components.hour-=NOTIF_REMINDER_TIME;//one hour before event
+            UNCalendarNotificationTrigger* trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:components repeats:NO];
+            UNNotificationRequest* request= [UNNotificationRequest requestWithIdentifier:[[NSUUID UUID] UUIDString] content:eventNotif trigger:trigger];
+            [UNUserNotificationCenter.currentNotificationCenter addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+                if(error)
+                    [Helper displayAlert:@"Error with notification" withMessage:error.localizedDescription on:self];
+            }];
         }];
     }];
     UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:nil];

@@ -38,7 +38,6 @@
     [self.peopleView setHidden:YES];
     [self.eventsView setHidden:YES];
     [self.orgsView setHidden:NO];
-    
 }
 /**
 Triggered when the user presses the logout button. Then logs the user out and shows the login page

@@ -44,6 +44,7 @@ extern const int MAP_ZOOM;
 extern const double CAMERA_LAT;
 extern const double CAMERA_LNG;
 extern const CGFloat PINCH_SCALE;
+extern const int NOTIF_REMINDER_TIME;
 
 
 

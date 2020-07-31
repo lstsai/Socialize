@@ -44,6 +44,12 @@
 -(void) viewWillAppear:(BOOL)animated{
     [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     [self performSelectorInBackground:@selector(getPosts:) withObject:nil];
+    [self getRequest];
+}
+/**
+ Gets the friend requests for the user
+ */
+-(void) getRequest{
     PFObject* selfAccess= [Helper getUserAccess:PFUser.currentUser];
     if([(NSArray*)selfAccess[@"inRequests"] count]>0)//if the user has friend requests pending
         self.requestsButton.tintColor=[UIColor systemBlueColor];

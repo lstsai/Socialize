@@ -35,7 +35,6 @@ This app lets users more easily find ways to engage with social causes in their 
     * implement table view to see overview of the organizations
 * User can tap on a organization to see more details (details page)
     * location of the org (map)
-    * pictures?
     * mission/description statement
     * link to website (open web view)
 * User can pull to refresh data
@@ -49,6 +48,26 @@ This app lets users more easily find ways to engage with social causes in their 
 * User can create events and share with friends/public
 * user can take pictures and post on their profile
 * User can logout
+#### Requirement Demos
+- Your app has multiple views
+<img src='http://g.recordit.co/nLCvmZSLAJ.gif'alt='Multiple Views'/>
+- Your app interacts with a database (e.g. Parse)
+<img src='http://g.recordit.co/85XTlXW5fb.gif' alt='Parse Database for Posts and Events'/>
+- You can log in/log out of your app as a user
+<img src='http://g.recordit.co/Zd17UTic32.gif' alt='Log in and out'/>
+- You can sign up with a new user profile
+<img src='http://g.recordit.co/PWRhJuIXQ1.gif' alt='New User Signin'/>
+- Somewhere in your app you can use the camera to take a picture and do something with the picture (e.g. take a photo and share it to a feed, or take a photo and set a user’s profile picture)
+<img src='http://g.recordit.co/YD03L5Ni3w.gif' alt='Camera for Profile Pic'/>
+- Your app integrates with a SDK (e.g. Google Maps SDK, Facebook SDK)
+<img src='http://g.recordit.co/2iXI5s3puD.gif' alt='Google Maps SDK'/>
+- Your app contains at least one more complex algorithm (talk over this with your manager)
+- Your app uses gesture recognizers (e.g. double tap to like, e.g. pinch to scale)
+<img src='http://g.recordit.co/QIHOzetNWr.gif' alt='Pinch to Zoom'/>
+- Your app use an animation (doesn’t have to be fancy) (e.g. fade in/out, e.g. animating a view growing and shrinking)
+<img src='http://g.recordit.co/KnHZZ45Rod.gif' alt='Private View Fade Out'/>
+- Your app incorporates an external library to add visual polish
+<img src='http://g.recordit.co/hm4547P20J.gif' alt='Empty Data Placeholder'/>
 
 **Optional Nice-to-have Stories**
 
@@ -107,12 +126,6 @@ This app lets users more easily find ways to engage with social causes in their 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
 <img src="wireframe.png" width=600>
-
-
-
-### [BONUS] Digital Wireframes & Mockups
-
-### [BONUS] Interactive Prototype
 
 ## Schema 
 [This section will be completed in Unit 9]

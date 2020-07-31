@@ -124,8 +124,24 @@ Triggered when the user presses the backdrop image. Presents the image picker(ph
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
-    imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    [self presentViewController:imagePickerVC animated:YES completion:nil];
+
+    UIAlertController* imageAlert = [UIAlertController alertControllerWithTitle:@"Choose an Image Source" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+    UIAlertAction* camera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+           imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+           [self presentViewController:imagePickerVC animated:YES completion:nil];
+    }];
+    UIAlertAction* library = [UIAlertAction actionWithTitle:@"Photo Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+           imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+           [self presentViewController:imagePickerVC animated:YES completion:nil];
+    }];
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    
+    [imageAlert addAction:camera];
+    [imageAlert addAction:library];
+    [imageAlert addAction:cancel];
+    
+    [self presentViewController:imageAlert animated:YES completion:nil];
 }
 /**
 Triggered when the user chooses an image to be the event image. Sets the background image to be the image selected

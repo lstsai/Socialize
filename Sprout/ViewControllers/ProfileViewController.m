@@ -211,7 +211,9 @@ Collection view delegate method. returns the number of sections that the collect
         {
             //remove friend from friend list 
             self.topButton.selected=NO;
-            self.privateView.alpha=SHOW_ALPHA;
+            [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+                self.privateView.alpha=SHOW_ALPHA;
+            }];
             [Helper removeFriend:PFUser.currentUser toFriend:self.user];
             [Helper removeFriend:self.user toFriend:PFUser.currentUser];
         }
@@ -260,14 +262,27 @@ Triggered when the user presses the profile or backdrop image. Presents the imag
     else
         imagePickerVC=self.backgroundImagePicker;
     //check if this device has a camera before presenting the picker
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    UIAlertController* imageAlert = [UIAlertController alertControllerWithTitle:@"Choose an Image Source"
+                                   message:nil
+                                   preferredStyle:UIAlertControllerStyleActionSheet];
+     
+    UIAlertAction* camera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault
+    handler:^(UIAlertAction * action) {
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    }
-    else {
-        NSLog(@"No camera available, using image picker");
+        [self presentViewController:imagePickerVC animated:YES completion:nil];
+    }];
+    UIAlertAction* library = [UIAlertAction actionWithTitle:@"Photo Library" style:UIAlertActionStyleDefault
+    handler:^(UIAlertAction * action) {
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
-    [self presentViewController:imagePickerVC animated:YES completion:nil];
+        [self presentViewController:imagePickerVC animated:YES completion:nil];
+    }];
+    UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+
+    [imageAlert addAction:camera];
+    [imageAlert addAction:library];
+    [imageAlert addAction:cancel];
+
+    [self presentViewController:imageAlert animated:YES completion:nil];
 }
 /**
 Triggered when the user chooses an image to be the profile/background image. Sets the image view to be the image selected
@@ -319,7 +334,9 @@ Triggered when the user accepts the friend request from the profile page, calls 
     self.topButton.userInteractionEnabled=YES;
     [self.topButton setTitle:@"Friends" forState:UIControlStateSelected];
     self.topButton.selected=YES;
-    self.privateView.alpha=HIDE_ALPHA;
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+        self.privateView.alpha=HIDE_ALPHA;
+    }];
     
     [Helper removeRequest:PFUser.currentUser forUser:self.user];
     [Helper addFriend:PFUser.currentUser toFriend:self.user];

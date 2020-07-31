@@ -7,7 +7,7 @@
 //
 
 #import "Helper.h"
-
+#import <UIKit/UIKit.h>
 @implementation Helper
 + (instancetype)shared
 {
@@ -256,6 +256,27 @@ so that Parse will actually save this change.
         [senderVC presentViewController:alert animated:YES completion:nil];
     }
 }
+/**
+ Displays an UIAlertController Action sheet on the specified view controller to ask image source
+ @param[in] senderVC the view controller to display the alert on
+*/
++ (void)displayImageActionSheetOn:(UIViewController * _Nullable)senderVC withSource:(UIImagePickerControllerSourceType*) sourceType{
+    UIAlertController* imageAlert = [UIAlertController alertControllerWithTitle:@"Choose an Image Source"
+                                   message:nil
+                                   preferredStyle:UIAlertControllerStyleActionSheet];
+     
+    UIAlertAction* camera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault
+    handler:^(UIAlertAction * action) {
+    }];
+    UIAlertAction* library = [UIAlertAction actionWithTitle:@"Photo Library" style:UIAlertActionStyleDefault
+    handler:^(UIAlertAction * action) {
+    }];
+
+    [imageAlert addAction:camera];
+    [imageAlert addAction:library];
+    [senderVC presentViewController:imageAlert animated:YES completion:nil];
+}
+
 
 /**
  Adds a friend(user)  to the friend's array of a certain user. And calls the addFriendLikes: method to

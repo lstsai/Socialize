@@ -65,7 +65,6 @@ Instantiates the map view to show the given location with a marker
     for (GMSMarker *marker in markers)
         bounds = [bounds includingCoordinate:marker.position];
     [self.mapView animateWithCameraUpdate:[GMSCameraUpdate fitBounds:bounds]];
-    [self.mapView setMinZoom:0 maxZoom:MAP_ZOOM*2];
 }
 /**
  Triggered when the user taps the cancel button. Dismisses the map view controller

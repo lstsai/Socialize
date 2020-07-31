@@ -64,12 +64,13 @@
     //the params for the api call
     NSDictionary *params= @{@"app_id": [[NSProcessInfo processInfo] environment][@"CNapp-id"], @"app_key": [[NSProcessInfo processInfo] environment][@"CNapp-key"]};
     NSMutableArray *orgDictionaries= [NSMutableArray new];
-    for(NSString* ein in eins)
+    for(int i=0; i<eins.count; i++)
     {
+        NSString* ein=eins[i];
         NSString *getString= [NSString stringWithFormat:@"https://api.data.charitynavigator.org/v2/Organizations/%@", ein];
         [self GET:getString parameters:params headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             [orgDictionaries addObject:responseObject];
-            if([ein isEqualToString:[eins lastObject]])//only call completion when it is done fetching for orgs
+            if(i==eins.count-1)//only call completion when it is done fetching for orgs
             {
                 NSArray *organizations=[Organization orgsWithArray:orgDictionaries];
                 completion(organizations,nil);
@@ -79,7 +80,7 @@
             if(![error.localizedDescription isEqualToString:@"Request failed: not found (404)"])
                 completion(nil,error);
             //if this ein cannot be found, move on to the next one
-            if([ein isEqualToString:[eins lastObject]])//only call completion when it is done fetching for orgs
+            if(i==eins.count-1)//only call completion when it is done fetching for orgs
             {
                 NSArray *organizations=[Organization orgsWithArray:orgDictionaries];
                 completion(organizations,nil);

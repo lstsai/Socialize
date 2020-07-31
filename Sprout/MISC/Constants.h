@@ -43,6 +43,8 @@ extern const int MIN_RESULT_THRESHOLD;
 extern const int MAP_ZOOM;
 extern const double CAMERA_LAT;
 extern const double CAMERA_LNG;
+extern const CGFloat PINCH_SCALE;
+
 
 
 #endif /* Constants_h */

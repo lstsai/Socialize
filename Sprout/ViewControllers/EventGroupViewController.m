@@ -123,6 +123,33 @@ Triggered after the user creates a new post for this group, reloads the table vi
     [self getPosts:@""];
 }
 /**
+ Triggered when the user pinches to zoom on the image. Will animate back to original
+ state when the user stops pinching.
+ @param[in] sender the pinch gesture that was triggered
+ */
+- (IBAction)didPinchImage:(id)sender {
+
+    UIPinchGestureRecognizer* pinch= sender;
+    //end pinching, go back to original
+    if(UIGestureRecognizerStateEnded == [pinch state]){
+        [UIView animateWithDuration:ANIMATION_DURATION/3 animations:^{
+            self.eventImageView.transform=CGAffineTransformIdentity;
+        }];
+    }
+    UIView *pinchView = pinch.view;
+    CGRect bounds = pinchView.bounds;
+    CGPoint pinchCenter = [pinch locationInView:pinchView];
+    pinchCenter.x -= CGRectGetMidX(bounds);
+    pinchCenter.y -= CGRectGetMidY(bounds);
+    CGAffineTransform transform = pinchView.transform;
+    transform = CGAffineTransformTranslate(transform, pinchCenter.x, pinchCenter.y);
+    CGFloat scale = pinch.scale;
+    transform = CGAffineTransformScale(transform, scale, scale);
+    transform = CGAffineTransformTranslate(transform, -pinchCenter.x, -pinchCenter.y);
+    pinchView.transform = transform;
+    pinch.scale = PINCH_SCALE;
+}
+/**
 Table view delegate method. returns a postcell to be shown.
 @param[in] tableView the table that is calling this method
 @param[in] indexPath the path for the returned cell to be displayed

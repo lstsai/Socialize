@@ -40,14 +40,7 @@
         [PFUser.currentUser fetchInBackground];
         self.user=PFUser.currentUser;
     }
-    NSLog(@"%@ self %@", [Helper shared].currProfVC, self);
     [self setupImagePicker];
-}
-/**
- Called right before the view appears. Reloads the user data
- */
--(void) viewWillAppear:(BOOL)animated{
-    [self.user fetch];
     [self loadProfile];
 }
 /**
@@ -55,7 +48,7 @@
  */
 -(void)loadProfile{
     
-   
+   [self.user fetch];
     PFObject *fAccess=[Helper getUserAccess:PFUser.currentUser];
     if(self.user.username==PFUser.currentUser.username)
     {
@@ -117,7 +110,8 @@
     self.likedOrgs=@[].mutableCopy;
     if(((NSArray*)self.user[@"likedOrgs"]).count!=0)
     {
-        [MBProgressHUD showHUDAddedTo:self.orgCollectionView animated:YES];
+        if(self.beingPresented)
+            [MBProgressHUD showHUDAddedTo:self.orgCollectionView animated:YES];
         [[APIManager shared] getOrgsWithEIN:self.user[@"likedOrgs"] completion:^(NSArray * orgs, NSError * _Nonnull error) {
             if(error)
                 [Helper displayAlert:@"Error getting liked organizations" withMessage:error.localizedDescription on:self];
@@ -126,7 +120,8 @@
                 NSLog(@"Success getting liked orgs");
                 [self.orgCollectionView reloadData];
             }
-            [MBProgressHUD hideHUDForView:self.orgCollectionView animated:YES];
+            if(self.beingPresented)
+                [MBProgressHUD hideHUDForView:self.orgCollectionView animated:YES];
         }];
     }
     else
@@ -137,7 +132,8 @@
 Creates a parse query and fetches the events the user has liked
 */
 -(void)getLikedEventInfo{
-    [MBProgressHUD showHUDAddedTo:self.eventCollectionView animated:YES];
+    if(self.beingPresented)
+        [MBProgressHUD showHUDAddedTo:self.orgCollectionView animated:YES];
     PFQuery *eventQuery= [PFQuery queryWithClassName:@"Event"];
     [eventQuery whereKey:@"objectId" containedIn:self.user[@"likedEvents"]];
     [eventQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
@@ -148,7 +144,8 @@ Creates a parse query and fetches the events the user has liked
             self.likedEvents=objects;
             [self.eventCollectionView reloadData];
         }
-        [MBProgressHUD hideHUDForView:self.eventCollectionView animated:YES];
+        if(self.beingPresented)
+            [MBProgressHUD hideHUDForView:self.eventCollectionView animated:YES];
     }];
 
 }

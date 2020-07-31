@@ -17,7 +17,7 @@
 #import "Constants.h"
 #import "MapViewController.h"
 
-@interface EventGroupViewController ()<EventGroupCellDelegate, UITableViewDelegate, UITableViewDataSource, CreatePostViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+@interface EventGroupViewController ()<EventGroupCellDelegate, UITableViewDelegate, UITableViewDataSource, CreatePostViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UISearchBarDelegate>
 
 @end
 
@@ -31,6 +31,7 @@
     self.tableView.emptyDataSetSource=self;
     self.tableView.emptyDataSetDelegate = self;
     self.tableView.tableFooterView = [UIView new];
+    self.searchBar.delegate=self;
     [self getPosts:@""];
     [self loadDetails];
     self.scrollView.keyboardDismissMode=UIScrollViewKeyboardDismissModeOnDrag;
@@ -113,6 +114,15 @@ Triggered when the uses presses the search button. Reloads the table view to get
 @param[in] sender  the button the user pressed
 */
 - (IBAction)didTapSearch:(id)sender {
+    [self getPosts:self.searchBar.text];
+    [self.searchBar endEditing:YES];
+}
+/**
+Triggered when the user presses thesearch button on the keyboard. Calls the getposts method to get
+ data and dismisses the keyboard
+ @param[in] searchBar the search bar being searched
+ */
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [self getPosts:self.searchBar.text];
     [self.searchBar endEditing:YES];
 }

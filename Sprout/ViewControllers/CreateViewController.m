@@ -13,7 +13,7 @@
 #import "Helper.h"
 @import GooglePlaces;
 
-@interface CreateViewController ()  <UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMSAutocompleteViewControllerDelegate>
+@interface CreateViewController ()  <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, GMSAutocompleteViewControllerDelegate>
 
 @end
 
@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.detailsTextView.delegate=self;
     [self setupDatePicker];
     
 }
@@ -151,6 +152,25 @@ Triggered when the user presses the location field. Presents the GMSAutocomplete
     gmsAutocompleteVC.delegate=self;
     [self presentViewController:gmsAutocompleteVC animated:YES completion:nil];
     
+}
+/**
+ Textview delegate method. Triggered when the user enters the textview
+ @param[in] textView the textview that started editing
+ */
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    [UIView animateWithDuration:ANIMATION_DURATION/3 animations:^{
+        self.view.layer.transform= CATransform3DTranslate(CATransform3DIdentity, 0, -1*self.eventImage.frame.size.height, 0);
+    }];
+}
+/**
+Triggered when the user taps out of the text view
+ @param[in] sender the tap gesture recognizer
+*/
+- (IBAction)didTapOutside:(id)sender {
+    [UIView animateWithDuration:ANIMATION_DURATION/3 animations:^{
+        self.view.layer.transform=CATransform3DIdentity;
+        [self.detailsTextView endEditing:YES];
+    }];
 }
 
 

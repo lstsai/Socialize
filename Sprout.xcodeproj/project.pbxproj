@@ -158,20 +158,6 @@
 		DC91239C24CA6A38001A4022 /* RequestCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestCell.h; sourceTree = "<group>"; };
 		DC91239D24CA6A38001A4022 /* RequestCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestCell.m; sourceTree = "<group>"; };
 		DC91239F24CB3330001A4022 /* noun_sprout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noun_sprout.png; sourceTree = "<group>"; };
-		DCB629C424C1482B00C42EFB /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Animation.swift; path = ViewAnimator/Classes/Protocols/Animation.swift; sourceTree = "<group>"; };
-		DCB629C524C1482B00C42EFB /* AnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnimationType.swift; path = ViewAnimator/Classes/Models/AnimationType.swift; sourceTree = "<group>"; };
-		DCB629C624C1482B00C42EFB /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Direction.swift; path = ViewAnimator/Classes/Models/Direction.swift; sourceTree = "<group>"; };
-		DCB629C724C1482B00C42EFB /* UICollectionView + ViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UICollectionView + ViewAnimator.swift"; path = "ViewAnimator/Classes/Extensions/UICollectionView + ViewAnimator.swift"; sourceTree = "<group>"; };
-		DCB629C824C1482B00C42EFB /* UITableView + ViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITableView + ViewAnimator.swift"; path = "ViewAnimator/Classes/Extensions/UITableView + ViewAnimator.swift"; sourceTree = "<group>"; };
-		DCB629C924C1482B00C42EFB /* ViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewAnimator.swift; path = ViewAnimator/Classes/ViewAnimator.swift; sourceTree = "<group>"; };
-		DCB629CA24C1482B00C42EFB /* ViewAnimatorConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewAnimatorConfig.swift; path = ViewAnimator/Classes/ViewAnimatorConfig.swift; sourceTree = "<group>"; };
-		DCB629CB24C1482B00C42EFB /* ViewAnimator.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = ViewAnimator.modulemap; path = "Sprout/Target Support Files/ViewAnimator/ViewAnimator.modulemap"; sourceTree = "<group>"; };
-		DCB629CC24C1482B00C42EFB /* ViewAnimator-dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "ViewAnimator-dummy.m"; path = "Sprout/Target Support Files/ViewAnimator/ViewAnimator-dummy.m"; sourceTree = "<group>"; };
-		DCB629CD24C1482B00C42EFB /* ViewAnimator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "ViewAnimator-Info.plist"; path = "Sprout/Target Support Files/ViewAnimator/ViewAnimator-Info.plist"; sourceTree = "<group>"; };
-		DCB629CE24C1482B00C42EFB /* ViewAnimator-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ViewAnimator-prefix.pch"; path = "Sprout/Target Support Files/ViewAnimator/ViewAnimator-prefix.pch"; sourceTree = "<group>"; };
-		DCB629CF24C1482B00C42EFB /* ViewAnimator-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ViewAnimator-umbrella.h"; path = "Sprout/Target Support Files/ViewAnimator/ViewAnimator-umbrella.h"; sourceTree = "<group>"; };
-		DCB629D024C1482B00C42EFB /* ViewAnimator.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = ViewAnimator.debug.xcconfig; path = "Sprout/Target Support Files/ViewAnimator/ViewAnimator.debug.xcconfig"; sourceTree = "<group>"; };
-		DCB629D124C1482B00C42EFB /* ViewAnimator.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = ViewAnimator.release.xcconfig; path = "Sprout/Target Support Files/ViewAnimator/ViewAnimator.release.xcconfig"; sourceTree = "<group>"; };
 		DCB629D724C1FBE100C42EFB /* EventVerticalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventVerticalCell.h; sourceTree = "<group>"; };
 		DCB629D824C1FBE100C42EFB /* EventVerticalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventVerticalCell.m; sourceTree = "<group>"; };
 		DCB629DA24C206A900C42EFB /* PeopleSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeopleSearchViewController.h; sourceTree = "<group>"; };
@@ -291,7 +277,6 @@
 				DC3CF15824BCB27A00C482F8 /* LaunchScreen.storyboard */,
 				DC3CF15B24BCB27A00C482F8 /* Info.plist */,
 				DC3CF15C24BCB27A00C482F8 /* main.m */,
-				DCB629D324C1482B00C42EFB /* ViewAnimator */,
 			);
 			path = Sprout;
 			sourceTree = "<group>";
@@ -419,36 +404,6 @@
 				DCB65C1C24C76201005A43A9 /* Helper.m */,
 			);
 			path = MISC;
-			sourceTree = "<group>";
-		};
-		DCB629D224C1482B00C42EFB /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				DCB629CB24C1482B00C42EFB /* ViewAnimator.modulemap */,
-				DCB629CC24C1482B00C42EFB /* ViewAnimator-dummy.m */,
-				DCB629CD24C1482B00C42EFB /* ViewAnimator-Info.plist */,
-				DCB629CE24C1482B00C42EFB /* ViewAnimator-prefix.pch */,
-				DCB629CF24C1482B00C42EFB /* ViewAnimator-umbrella.h */,
-				DCB629D024C1482B00C42EFB /* ViewAnimator.debug.xcconfig */,
-				DCB629D124C1482B00C42EFB /* ViewAnimator.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/ViewAnimator";
-			sourceTree = "<group>";
-		};
-		DCB629D324C1482B00C42EFB /* ViewAnimator */ = {
-			isa = PBXGroup;
-			children = (
-				DCB629C424C1482B00C42EFB /* Animation.swift */,
-				DCB629C524C1482B00C42EFB /* AnimationType.swift */,
-				DCB629C624C1482B00C42EFB /* Direction.swift */,
-				DCB629C724C1482B00C42EFB /* UICollectionView + ViewAnimator.swift */,
-				DCB629C824C1482B00C42EFB /* UITableView + ViewAnimator.swift */,
-				DCB629C924C1482B00C42EFB /* ViewAnimator.swift */,
-				DCB629CA24C1482B00C42EFB /* ViewAnimatorConfig.swift */,
-				DCB629D224C1482B00C42EFB /* Support Files */,
-			);
-			path = ViewAnimator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

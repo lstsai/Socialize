@@ -25,6 +25,7 @@
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.messages=[[NSArray alloc]init];
+    self.pageNum=1;
     [self setupLoadingIndicators];
     [self getMessages:nil];
 }
@@ -51,10 +52,10 @@
 -(void) getMessages:(UIRefreshControl* _Nullable)refreshControl{
     PFQuery* messageQ=[PFQuery queryWithClassName:@"Message"];
     [messageQ includeKeys:@[@"sender", @"receiver"]];
-//    [messageQ whereKey:@"sender" containedIn:@[self.user, PFUser.currentUser]];
-//    [messageQ whereKey:@"receiver" containedIn:@[self.user, PFUser.currentUser]];
-//    [messageQ orderByDescending:@"createdAt"];
-//    [messageQ setLimit:RESULTS_SIZE*self.pageNum];
+    [messageQ whereKey:@"sender" containedIn:@[self.user, PFUser.currentUser]];
+    [messageQ whereKey:@"receiver" containedIn:@[self.user, PFUser.currentUser]];
+    [messageQ orderByDescending:@"createdAt"];
+    [messageQ setLimit:RESULTS_SIZE*self.pageNum];
     [messageQ findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)
             [Helper displayAlert:@"Error loading messages" withMessage:error.localizedDescription on:self];
@@ -126,9 +127,11 @@ Table view delegate method. returns the number of sections that the table has. T
 }
 /**
  Triggered when the user sends the messages. Will post the message in chat
+ and clear the field
  @param[in] sender the button that was tapped
  */
 - (IBAction)didTapSend:(id)sender {
+    self.messageTextField.text=@"";
     [Message sendMessage:self.messageTextField.text toUser:self.user withImage:nil withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(error)
             [Helper displayAlert:@"Error sending message" withMessage:error.localizedDescription on:self];

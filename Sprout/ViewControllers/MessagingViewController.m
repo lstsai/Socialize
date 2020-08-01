@@ -29,20 +29,17 @@
     self.messages=[[NSArray alloc]init];
     self.pageNum=1;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [NSTimer scheduledTimerWithTimeInterval:CHAT_RELOAD target:self selector:@selector(getMessages) userInfo:nil repeats:true];//schedule reload every second
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardOffScreen:) name:UIKeyboardWillHideNotification object:nil];
     self.navigationItem.title=self.user.username;
     [self setupLoadingIndicators];
-    [self getMessages:nil];
+    [self getMessages];
 }
 /**
- setup the refresh control and infinite scroll indicators
+ setup the infinite scroll indicators
  */
 -(void) setupLoadingIndicators{
-    UIRefreshControl *refreshControl= [[UIRefreshControl alloc] init];//initialize the refresh control
-    [refreshControl addTarget:self action:@selector(getMessages:) forControlEvents:UIControlEventValueChanged];//add an event listener
-    [self.tableView insertSubview:refreshControl atIndex:0];//add into the storyboard
-
     CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
     self.loadingMoreView = [[InfiniteScrollActivityView alloc] initWithFrame:frame];
     self.loadingMoreView.hidden = true;
@@ -55,7 +52,7 @@
 /**
  Parse Query for the messages with this user
  */
--(void) getMessages:(UIRefreshControl* _Nullable)refreshControl{
+-(void) getMessages{
     PFQuery* messageQ=[PFQuery queryWithClassName:@"Message"];
     [messageQ includeKeys:@[@"sender", @"receiver"]];
     [messageQ whereKey:@"sender" containedIn:@[self.user, PFUser.currentUser]];
@@ -70,6 +67,7 @@
             self.messages=objects;
             [self.tableView reloadData];
         }
+        [self.loadingMoreView stopAnimating];
     }];
 }
 /**
@@ -123,7 +121,7 @@ Triggered when the user scrolls on the table view. Determines if the program sho
                CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
                self.loadingMoreView.frame = frame;
                [self.loadingMoreView startAnimating];
-               [self getMessages:nil];
+               [self getMessages];
            }
 
        }
@@ -175,7 +173,7 @@ Table view delegate method. returns the number of sections that the table has. T
         if(error)
             [Helper displayAlert:@"Error sending message" withMessage:error.localizedDescription on:self];
         else{
-            [self getMessages:nil];
+            [self getMessages];
             [Helper performSelectorInBackground:@selector(updateMessageOrder:) withObject:self.user];
         }
         self.messageTextField.text=@"";

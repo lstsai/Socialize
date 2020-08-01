@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) int pageNum;
 @property (strong, nonatomic) InfiniteScrollActivityView* loadingMoreView;
 @property (nonatomic) BOOL isMoreDataLoading;
--(void) getMessages:(UIRefreshControl* _Nullable)refreshControl;
+-(void) getMessages;
 - (IBAction)didTapSend:(id)sender;
 -(void)keyboardOnScreen:(NSNotification *)notification;
 -(void)keyboardOffScreen:(NSNotification *)notification;

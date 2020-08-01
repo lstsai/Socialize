@@ -12,6 +12,7 @@
 #import "UIScrollView+EmptyDataSet.h"
 #import "MessagingViewController.h"
 #import "Constants.h"
+#import "FriendCell.h"
 @interface DMViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @end
@@ -30,7 +31,6 @@
     self.isSearch=NO;
     self.messageThreads=[[NSMutableArray alloc] init];
     self.messageUsers=[[NSMutableArray alloc] init];
-
     [self getMessageThreads:nil];
 }
 /**
@@ -83,19 +83,21 @@ Triggered when the user presses thesearch button on the keyboard. Calls the fetc
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    DMCell* dmc=[tableView dequeueReusableCellWithIdentifier:@"DMCell" forIndexPath:indexPath];
     if(self.isSearch)
     {
-        dmc.user=self.friends[indexPath.row];
-        dmc.latestMessage=nil;
-        [dmc loadData];
+        FriendCell* friendc=[tableView dequeueReusableCellWithIdentifier:@"FriendCell" forIndexPath:indexPath];
+        friendc.user=self.friends[indexPath.row];
+        [friendc loadDetails];
+        return friendc;
     }
     else{
+        DMCell* dmc=[tableView dequeueReusableCellWithIdentifier:@"DMCell" forIndexPath:indexPath];
         dmc.latestMessage=self.messageThreads[indexPath.row];;
         dmc.user=self.messageUsers[indexPath.row];
         [dmc loadData];
+        return dmc;
+
     }
-    return dmc;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

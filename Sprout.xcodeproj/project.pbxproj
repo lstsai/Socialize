@@ -58,6 +58,10 @@
 		DCB65C2324C7C44C005A43A9 /* OrgPostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB65C2224C7C44C005A43A9 /* OrgPostCell.m */; };
 		DCB65C2624C7C565005A43A9 /* EventPostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB65C2524C7C565005A43A9 /* EventPostCell.m */; };
 		DCB65C2C24C8BA08005A43A9 /* CreatePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCB65C2B24C8BA08005A43A9 /* CreatePostViewController.m */; };
+		DCE4B9FC24D50EAE001FADAF /* IncomingMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE4B9FB24D50EAE001FADAF /* IncomingMessageCell.m */; };
+		DCE4B9FF24D50EBA001FADAF /* OutgoingMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE4B9FE24D50EBA001FADAF /* OutgoingMessageCell.m */; };
+		DCE4BA0224D51207001FADAF /* DMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE4BA0124D51207001FADAF /* DMViewController.m */; };
+		DCE4BA0524D51210001FADAF /* MessagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE4BA0424D51210001FADAF /* MessagingViewController.m */; };
 		DCE6FA4B24BFA447008091A3 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */; };
 		DCE6FA5124C0AA66008091A3 /* EventCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA5024C0AA66008091A3 /* EventCollectionCell.m */; };
 		DCE6FA5424C0AB58008091A3 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA5324C0AB58008091A3 /* ProfileViewController.m */; };
@@ -184,6 +188,14 @@
 		DCB65C2524C7C565005A43A9 /* EventPostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventPostCell.m; sourceTree = "<group>"; };
 		DCB65C2A24C8BA08005A43A9 /* CreatePostViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreatePostViewController.h; sourceTree = "<group>"; };
 		DCB65C2B24C8BA08005A43A9 /* CreatePostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreatePostViewController.m; sourceTree = "<group>"; };
+		DCE4B9FA24D50EAE001FADAF /* IncomingMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IncomingMessageCell.h; sourceTree = "<group>"; };
+		DCE4B9FB24D50EAE001FADAF /* IncomingMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IncomingMessageCell.m; sourceTree = "<group>"; };
+		DCE4B9FD24D50EBA001FADAF /* OutgoingMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutgoingMessageCell.h; sourceTree = "<group>"; };
+		DCE4B9FE24D50EBA001FADAF /* OutgoingMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutgoingMessageCell.m; sourceTree = "<group>"; };
+		DCE4BA0024D51207001FADAF /* DMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DMViewController.h; sourceTree = "<group>"; };
+		DCE4BA0124D51207001FADAF /* DMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DMViewController.m; sourceTree = "<group>"; };
+		DCE4BA0324D51210001FADAF /* MessagingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessagingViewController.h; sourceTree = "<group>"; };
+		DCE4BA0424D51210001FADAF /* MessagingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagingViewController.m; sourceTree = "<group>"; };
 		DCE6FA4924BFA447008091A3 /* EventDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventDetailsViewController.h; sourceTree = "<group>"; };
 		DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 		DCE6FA4F24C0AA66008091A3 /* EventCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCollectionCell.h; sourceTree = "<group>"; };
@@ -344,6 +356,10 @@
 				DC4732FD24D0E6E5006DAE01 /* EventGroupViewController.m */,
 				DC47330824D1EA16006DAE01 /* CommentsViewController.h */,
 				DC47330924D1EA16006DAE01 /* CommentsViewController.m */,
+				DCE4BA0024D51207001FADAF /* DMViewController.h */,
+				DCE4BA0124D51207001FADAF /* DMViewController.m */,
+				DCE4BA0324D51210001FADAF /* MessagingViewController.h */,
+				DCE4BA0424D51210001FADAF /* MessagingViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -377,6 +393,10 @@
 				DC47330324D1DE27006DAE01 /* CommentCell.m */,
 				DC27436F24D5017A00B6B077 /* DMCell.h */,
 				DC27437024D5017A00B6B077 /* DMCell.m */,
+				DCE4B9FA24D50EAE001FADAF /* IncomingMessageCell.h */,
+				DCE4B9FB24D50EAE001FADAF /* IncomingMessageCell.m */,
+				DCE4B9FD24D50EBA001FADAF /* OutgoingMessageCell.h */,
+				DCE4B9FE24D50EBA001FADAF /* OutgoingMessageCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -692,6 +712,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCB629F524C62C5D00C42EFB /* OrgCollectionCell.m in Sources */,
+				DCE4BA0524D51210001FADAF /* MessagingViewController.m in Sources */,
 				DC3CF1BA24BE1D6100C482F8 /* LocationManager.m in Sources */,
 				DC3CF1AD24BD590D00C482F8 /* InfiniteScrollActivityView.m in Sources */,
 				DC47330424D1DE27006DAE01 /* CommentCell.m in Sources */,
@@ -699,6 +720,9 @@
 				DCB65C2C24C8BA08005A43A9 /* CreatePostViewController.m in Sources */,
 				DC91239B24CA693F001A4022 /* RequestsViewController.m in Sources */,
 				DC3CF1A124BD081300C482F8 /* OrgDetailsViewController.m in Sources */,
+				DCE4BA0224D51207001FADAF /* DMViewController.m in Sources */,
+				DCE4B9FC24D50EAE001FADAF /* IncomingMessageCell.m in Sources */,
+				DCE4B9FF24D50EBA001FADAF /* OutgoingMessageCell.m in Sources */,
 				DC89989324C9FD00005B2DB9 /* SignUpViewController.m in Sources */,
 				DC27437424D501FD00B6B077 /* Message.m in Sources */,
 				DCE6FA5124C0AA66008091A3 /* EventCollectionCell.m in Sources */,

@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/29/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+ Cell representing a comment on a post
+ */
 #import <UIKit/UIKit.h>
 #import "Comment.h"
 @import Parse;

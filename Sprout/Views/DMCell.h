@@ -5,7 +5,9 @@
 //  Created by laurentsai on 7/31/20.
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
-
+/*
+ Cell representing a message thread with another user
+ */
 #import <UIKit/UIKit.h>
 #import "Message.h"
 @import Parse;

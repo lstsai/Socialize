@@ -17,8 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PFUser *receiver;
 @property (nonatomic, strong) NSString *messageText;
 @property (nonatomic, strong) NSDate *createdAt;
+@property (nonatomic, strong) PFFileObject *image;
 
-+ (void) sendChat:( NSString * _Nullable )chat toUser:(PFUser*)toUser withCompletion: (PFBooleanResultBlock  _Nullable)completion;
+
++ (void) sendChat:( NSString * _Nullable )message toUser:(PFUser*)toUser withImage:(UIImage*_Nullable) image withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1139,25 +1139,131 @@
             </objects>
             <point key="canvasLocation" x="-1171.0144927536232" y="4445.7589285714284"/>
         </scene>
-        <!--View Controller-->
+        <!--Messaging View Controller-->
         <scene sceneID="1eD-yE-m6m">
             <objects>
-                <viewController id="wWa-Le-a8r" sceneMemberID="viewController">
+                <viewController id="wWa-Le-a8r" customClass="MessagingViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bqA-QB-1bS">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MHG-uW-abB">
+                                <rect key="frame" x="0.0" y="56" width="414" height="633"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IncomingMessageCell" id="NGk-ad-N8s" customClass="IncomingMessageCell">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="37"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NGk-ad-N8s" id="pRv-56-unB">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="37"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incoming Message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IEE-wm-8Hx">
+                                                    <rect key="frame" x="17" y="5" width="152" height="21.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SJL-yA-JYm">
+                                                    <rect key="frame" x="17" y="31.5" width="380" height="0.5"/>
+                                                    <subviews>
+                                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JJp-ZG-N8d" customClass="PFImageView">
+                                                            <rect key="frame" x="0.0" y="0.0" width="380" height="253"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="253" id="5eh-9a-WUF"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="IEE-wm-8Hx" firstAttribute="leading" secondItem="pRv-56-unB" secondAttribute="leading" constant="17" id="2Xh-pa-bHp"/>
+                                                <constraint firstItem="IEE-wm-8Hx" firstAttribute="top" secondItem="pRv-56-unB" secondAttribute="top" constant="5" id="6mZ-kk-dSZ"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="IEE-wm-8Hx" secondAttribute="trailing" constant="20" id="E64-dx-Sac"/>
+                                                <constraint firstItem="SJL-yA-JYm" firstAttribute="top" secondItem="IEE-wm-8Hx" secondAttribute="bottom" constant="5" id="JUt-el-qhU"/>
+                                                <constraint firstItem="SJL-yA-JYm" firstAttribute="width" secondItem="pRv-56-unB" secondAttribute="width" multiplier="0.917874" id="MPM-qL-kuV"/>
+                                                <constraint firstAttribute="bottom" secondItem="SJL-yA-JYm" secondAttribute="bottom" constant="5" id="Tje-re-hKC"/>
+                                                <constraint firstItem="JJp-ZG-N8d" firstAttribute="centerX" secondItem="pRv-56-unB" secondAttribute="centerX" id="Z1F-yM-DrZ"/>
+                                                <constraint firstItem="JJp-ZG-N8d" firstAttribute="leading" secondItem="IEE-wm-8Hx" secondAttribute="leading" id="ZBS-QP-zMa"/>
+                                                <constraint firstItem="SJL-yA-JYm" firstAttribute="leading" secondItem="IEE-wm-8Hx" secondAttribute="leading" id="Zen-Vs-Dc3"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="messageImage" destination="JJp-ZG-N8d" id="CgF-rY-Ngy"/>
+                                            <outlet property="messageLabel" destination="IEE-wm-8Hx" id="LYu-Qf-bZj"/>
+                                            <outlet property="stackView" destination="SJL-yA-JYm" id="19H-L5-Kke"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OutgoingMessageCell" id="TTr-KA-fS1" customClass="OutgoingMessageCell">
+                                        <rect key="frame" x="0.0" y="65" width="414" height="37"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TTr-KA-fS1" id="dBb-jy-hpo">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="37"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Outgoing Message" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xe1-jx-MOt">
+                                                    <rect key="frame" x="244.5" y="5" width="152.5" height="21.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7PA-jU-snK">
+                                                    <rect key="frame" x="17" y="31.5" width="380" height="0.5"/>
+                                                    <subviews>
+                                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8P8-VA-1m9" customClass="PFImageView">
+                                                            <rect key="frame" x="0.0" y="0.0" width="380" height="253"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="253" id="Fdn-TP-cyP"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="xe1-jx-MOt" secondAttribute="trailing" constant="17" id="5zZ-bn-Ppm"/>
+                                                <constraint firstItem="xe1-jx-MOt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dBb-jy-hpo" secondAttribute="leading" constant="20" id="98f-xT-PTg"/>
+                                                <constraint firstItem="7PA-jU-snK" firstAttribute="trailing" secondItem="xe1-jx-MOt" secondAttribute="trailing" id="Gvj-Yt-sXh"/>
+                                                <constraint firstItem="xe1-jx-MOt" firstAttribute="top" secondItem="dBb-jy-hpo" secondAttribute="top" constant="5" id="PHN-z6-IPk"/>
+                                                <constraint firstAttribute="bottom" secondItem="7PA-jU-snK" secondAttribute="bottom" constant="5" id="Sey-LB-VoX"/>
+                                                <constraint firstItem="8P8-VA-1m9" firstAttribute="centerX" secondItem="dBb-jy-hpo" secondAttribute="centerX" id="ZT6-TX-fap"/>
+                                                <constraint firstItem="7PA-jU-snK" firstAttribute="top" secondItem="xe1-jx-MOt" secondAttribute="bottom" constant="5" id="ok5-2L-KXd"/>
+                                                <constraint firstItem="7PA-jU-snK" firstAttribute="width" secondItem="dBb-jy-hpo" secondAttribute="width" multiplier="0.917874" id="y9r-eo-fXQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="messageImage" destination="8P8-VA-1m9" id="Eqj-c3-KdO"/>
+                                            <outlet property="messageLabel" destination="xe1-jx-MOt" id="LSY-hZ-Eew"/>
+                                            <outlet property="stackView" destination="7PA-jU-snK" id="N4Z-nv-KFL"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJm-sj-xn1">
+                                <rect key="frame" x="353" y="708" width="36" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Send"/>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UcE-fj-id5">
+                                <rect key="frame" x="20" y="706" width="325" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="L9j-no-pTz"/>
                     </view>
+                    <navigationItem key="navigationItem" id="VU7-s1-OiT"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tdb-FM-fg6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="167" y="1713"/>
+            <point key="canvasLocation" x="166.66666666666669" y="1712.9464285714284"/>
         </scene>
         <!--Messages-->
         <scene sceneID="1l6-am-5p5">
             <objects>
-                <viewController id="YtQ-Ka-zB3" sceneMemberID="viewController">
+                <viewController id="YtQ-Ka-zB3" customClass="DMViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="603-hu-Z6J">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1218,6 +1324,7 @@
                                             <outlet property="nameLabel" destination="S2G-Hg-ahS" id="LgB-lP-kGl"/>
                                             <outlet property="profileImage" destination="X4c-8h-XFT" id="RoJ-MF-5Yj"/>
                                             <outlet property="timeLabel" destination="pFS-Ym-n0w" id="tZa-Fb-Dt3"/>
+                                            <segue destination="wWa-Le-a8r" kind="show" id="MfY-AX-SkQ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -3294,13 +3401,13 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="LBG-0O-M7m"/>
+        <segue reference="WSj-CW-WDh"/>
         <segue reference="ByB-WX-yAM"/>
-        <segue reference="n3j-lo-FYL"/>
+        <segue reference="2WE-KE-m3C"/>
         <segue reference="vVA-Vw-9fQ"/>
-        <segue reference="Jfi-X2-tcA"/>
+        <segue reference="xa9-7C-NBu"/>
         <segue reference="eOz-I0-ZcM"/>
-        <segue reference="l9q-sS-em3"/>
+        <segue reference="S5K-16-W1A"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bubble.left" catalog="system" width="128" height="110"/>

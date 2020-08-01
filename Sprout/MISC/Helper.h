@@ -34,7 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (void) deleteObjectFromFriendsList:(NSArray*)keys;
 
 + (void)displayAlert:(NSString*)title withMessage:(NSString*)message on:(UIViewController * _Nullable)senderVC;
-+ (void)displayImageActionSheetOn:(UIViewController * _Nullable)senderVC;
 
 + (void)deleteFriendLikes:(NSArray*)users;
 + (void)addFriendLikes:(NSArray*)users;

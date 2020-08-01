@@ -23,7 +23,7 @@
     
     self.messageLabel.text=self.latestMessage.messageText;
     self.timeLabel.text=[self.latestMessage.createdAt shortTimeAgoSinceNow];
-    self.nameLabel.text=self.latestMessage.sender.username;
+    self.nameLabel.text=self.user.username;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

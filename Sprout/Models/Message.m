@@ -26,7 +26,7 @@ Creates and saves a comment in parse.
  @param[in] toUser the user the chat is being sent to
  @param[in] completion the completion block to be executed when the message is sent
  */
-+ (void) sendChat:( NSString * _Nullable )message toUser:(PFUser*)toUser withImage:(UIImage*_Nullable) image withCompletion: (PFBooleanResultBlock  _Nullable)completion{
++ (void) sendMessage:( NSString * _Nullable )message toUser:(PFUser*)toUser withImage:(UIImage*_Nullable) image withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     //create post with given info
     Message *newMessage= [Message new];
     newMessage.image=[Helper getPFFileFromImage:image withName:message];

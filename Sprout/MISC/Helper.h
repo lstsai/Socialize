@@ -42,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)removeRequest:(PFUser*) current forUser:(PFUser*) requester;
 + (void) addRequest:(PFUser *) current forUser:(PFUser *)requested;
 
++ (void) updateMessageOrder:(PFUser *)toUser;
 @end
 
 NS_ASSUME_NONNULL_END

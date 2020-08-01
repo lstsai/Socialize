@@ -466,6 +466,32 @@ so that Parse will actually save this change.
     //save
     [PFObject saveAllInBackground:@[currentUserAccess, requestedUserAccess]];
 }
+/**
+Updates the ordered message thread list in UserAccess for the 2 users messaging
+ @param[in] toUser  the user that the messages are  with
+ Adds the 'inRequest' for the requested and the 'outRequest' for the current
+*/
++ (void) updateMessageOrder:(PFUser *)toUser{
+    PFObject *currentUserAccess= [Helper getUserAccess:PFUser.currentUser];
+    PFObject *requestedUserAccess= [Helper getUserAccess:toUser];
+    //access the messageThread list of the users
+    NSMutableArray *currMessageT= currentUserAccess[@"messageThreads"];
+    NSMutableArray *otherMessageT= requestedUserAccess[@"messageThreads"];
+    
+    //remove the users from the current order
+    [currMessageT removeObject:toUser.objectId];
+    [currMessageT removeObject:PFUser.currentUser.objectId];
+    //add the object id of both users to the beginning of the list
+    [currMessageT insertObject:toUser.objectId atIndex:0];
+    [otherMessageT insertObject:PFUser.currentUser.objectId atIndex:0];
+    
+    //assign the attributes to new list
+    currentUserAccess[@"messageThreads"]=currMessageT;
+    requestedUserAccess[@"messageThreads"]=otherMessageT;
+    //save
+    [PFObject saveAllInBackground:@[currentUserAccess, requestedUserAccess]];
+}
+
 
 
 

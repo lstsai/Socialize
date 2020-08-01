@@ -86,7 +86,12 @@ Triggered when the user scrolls on the table view. Determines if the program sho
 
        }
 }
-
+/**
+Table view delegate method. returns a messageCell to be shown.
+@param[in] tableView the table that is calling this method
+@param[in] indexPath the path for the returned cell to be displayed
+@return the cell that should be shown in the passed indexpath
+*/
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     Message* currMess= self.messages[indexPath.row];
     if([currMess.sender.username isEqualToString:PFUser.currentUser.username])
@@ -106,9 +111,29 @@ Triggered when the user scrolls on the table view. Determines if the program sho
         return imc;
     }
 }
-
+/**
+Table view delegate method. returns the number of sections that the table has. This table only has
+ one section so it always returns the total number of messages
+@param[in] tableView the table that is calling this method
+@param[in] section the section in question
+@return the number of messages
+*/
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.messages.count;
+}
+/**
+ Triggered when the user sends the messages. Will post the message in chat
+ @param[in] sender the button that was tapped
+ */
+- (IBAction)didTapSend:(id)sender {
+    [Message sendMessage:self.messageTextField.text toUser:self.user withImage:nil withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        if(error)
+            [Helper displayAlert:@"Error sending message" withMessage:error.localizedDescription on:self];
+        else{
+            [self getMessages:nil];
+            [Helper performSelectorInBackground:@selector(updateMessageOrder:) withObject:self.user];
+        }
+    }];
 }
 /*
 #pragma mark - Navigation

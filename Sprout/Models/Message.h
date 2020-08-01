@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PFFileObject *image;
 
 
-+ (void) sendChat:( NSString * _Nullable )message toUser:(PFUser*)toUser withImage:(UIImage*_Nullable) image withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) sendMessage:( NSString * _Nullable )message toUser:(PFUser*)toUser withImage:(UIImage*_Nullable) image withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 @end
 
 NS_ASSUME_NONNULL_END

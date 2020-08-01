@@ -22,6 +22,7 @@
  */
 -(void) loadData{
     self.nameLabel.text=self.requestUser.username;
+    self.bioLabel.text=self.requestUser[@"bio"];
     self.profileImage.file=self.requestUser[@"profilePic"];
     [self.profileImage loadInBackground];
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
@@ -45,9 +46,9 @@ Triggered when the user presses the 'accept' button. Calls the showStatus: metho
 - (IBAction)didTapAccept:(id)sender {
     
     [self showStatus:@"Accepted"];
-       [Helper removeRequest:PFUser.currentUser forUser:self.requestUser];
-       [Helper addFriend:PFUser.currentUser toFriend:self.requestUser];
-       [Helper addFriend:self.requestUser toFriend:PFUser.currentUser];
+    [Helper removeRequest:PFUser.currentUser forUser:self.requestUser];
+    [Helper addFriend:PFUser.currentUser toFriend:self.requestUser];
+    [Helper addFriend:self.requestUser toFriend:PFUser.currentUser];
 }
 /**
 Triggered when the user presses the 'delete' button. Calls the showStatus: method to show 'Declined' status

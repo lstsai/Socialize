@@ -72,7 +72,7 @@
         }
         else if ([fAccess[@"inRequests"] containsObject:self.user.objectId])
         {
-            self.requestView.alpha=SHOW_ALPHA;
+            self.requestView.alpha=SHOW_ALPHA*0.8;
             self.topButton.userInteractionEnabled=NO;
         }
     }

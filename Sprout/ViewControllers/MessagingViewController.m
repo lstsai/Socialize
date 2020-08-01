@@ -24,6 +24,7 @@
     self.tableView.transform = CGAffineTransformMakeScale(1, -1);//flip the table view upside down
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    self.messages=[[NSArray alloc]init];
     [self setupLoadingIndicators];
     [self getMessages:nil];
 }
@@ -49,16 +50,18 @@
  */
 -(void) getMessages:(UIRefreshControl* _Nullable)refreshControl{
     PFQuery* messageQ=[PFQuery queryWithClassName:@"Message"];
-    [messageQ whereKey:@"sender" containedIn:@[self.user, PFUser.currentUser]];
-    [messageQ whereKey:@"receiver" containedIn:@[self.user, PFUser.currentUser]];
-    [messageQ orderByDescending:@"createdAt"];
-    [messageQ setLimit:RESULTS_SIZE*self.pageNum];
+    [messageQ includeKeys:@[@"sender", @"receiver"]];
+//    [messageQ whereKey:@"sender" containedIn:@[self.user, PFUser.currentUser]];
+//    [messageQ whereKey:@"receiver" containedIn:@[self.user, PFUser.currentUser]];
+//    [messageQ orderByDescending:@"createdAt"];
+//    [messageQ setLimit:RESULTS_SIZE*self.pageNum];
     [messageQ findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)
             [Helper displayAlert:@"Error loading messages" withMessage:error.localizedDescription on:self];
         else
         {
             self.messages=objects;
+            [self.tableView reloadData];
         }
     }];
 }

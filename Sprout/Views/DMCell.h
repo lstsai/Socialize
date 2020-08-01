@@ -1,0 +1,24 @@
+//
+//  DMCell.h
+//  Sprout
+//
+//  Created by laurentsai on 7/31/20.
+//  Copyright © 2020 laurentsai. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "Message.h"
+@import Parse;
+NS_ASSUME_NONNULL_BEGIN
+
+@interface DMCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet PFImageView *profileImage;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (strong,nonatomic) PFUser* user;
+@property (strong, nonatomic) Message *latestMessage;
+-(void) loadData;
+@end
+
+NS_ASSUME_NONNULL_END

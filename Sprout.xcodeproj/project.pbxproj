@@ -10,6 +10,8 @@
 		71634D24B2F97121BD50AC61 /* Pods_Sprout_SproutUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31E3EC0E29B307EF944F558A /* Pods_Sprout_SproutUITests.framework */; };
 		81AB72F45FD1E8B0011E42B5 /* Pods_SproutTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1698646DDBF05D74B80F63 /* Pods_SproutTests.framework */; };
 		96914DC97B5D7FEB18F9ECEA /* Pods_Sprout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C799452D22C3D09EFCAA65B /* Pods_Sprout.framework */; };
+		DC27437124D5017A00B6B077 /* DMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC27437024D5017A00B6B077 /* DMCell.m */; };
+		DC27437424D501FD00B6B077 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = DC27437324D501FD00B6B077 /* Message.m */; };
 		DC3CF14C24BCB27900C482F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF14B24BCB27900C482F8 /* AppDelegate.m */; };
 		DC3CF14F24BCB27900C482F8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF14E24BCB27900C482F8 /* SceneDelegate.m */; };
 		DC3CF15524BCB27900C482F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC3CF15324BCB27900C482F8 /* Main.storyboard */; };
@@ -88,6 +90,10 @@
 		733354DC791A13785ABCB2C4 /* Pods-Sprout-SproutUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sprout-SproutUITests.debug.xcconfig"; path = "Target Support Files/Pods-Sprout-SproutUITests/Pods-Sprout-SproutUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		824BECA0D530B3988AD16333 /* Pods-Sprout-SproutUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sprout-SproutUITests.release.xcconfig"; path = "Target Support Files/Pods-Sprout-SproutUITests/Pods-Sprout-SproutUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A52894B29F3980A550B6F8EC /* Pods-SproutTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SproutTests.release.xcconfig"; path = "Target Support Files/Pods-SproutTests/Pods-SproutTests.release.xcconfig"; sourceTree = "<group>"; };
+		DC27436F24D5017A00B6B077 /* DMCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DMCell.h; sourceTree = "<group>"; };
+		DC27437024D5017A00B6B077 /* DMCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DMCell.m; sourceTree = "<group>"; };
+		DC27437224D501FD00B6B077 /* Message.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		DC27437324D501FD00B6B077 /* Message.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		DC3CF14724BCB27900C482F8 /* Sprout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sprout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC3CF14A24BCB27900C482F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DC3CF14B24BCB27900C482F8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -369,6 +375,8 @@
 				DC47330024D1D6EA006DAE01 /* EventGroupCell.m */,
 				DC47330224D1DE27006DAE01 /* CommentCell.h */,
 				DC47330324D1DE27006DAE01 /* CommentCell.m */,
+				DC27436F24D5017A00B6B077 /* DMCell.h */,
+				DC27437024D5017A00B6B077 /* DMCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -386,6 +394,8 @@
 				DCB65C1924C753C2005A43A9 /* Post.m */,
 				DC47330524D1E074006DAE01 /* Comment.h */,
 				DC47330624D1E074006DAE01 /* Comment.m */,
+				DC27437224D501FD00B6B077 /* Message.h */,
+				DC27437324D501FD00B6B077 /* Message.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -690,6 +700,7 @@
 				DC91239B24CA693F001A4022 /* RequestsViewController.m in Sources */,
 				DC3CF1A124BD081300C482F8 /* OrgDetailsViewController.m in Sources */,
 				DC89989324C9FD00005B2DB9 /* SignUpViewController.m in Sources */,
+				DC27437424D501FD00B6B077 /* Message.m in Sources */,
 				DCE6FA5124C0AA66008091A3 /* EventCollectionCell.m in Sources */,
 				DC4732FB24D09F3B006DAE01 /* FriendCell.m in Sources */,
 				DCB65C1D24C76201005A43A9 /* Helper.m in Sources */,
@@ -712,6 +723,7 @@
 				DC3CF1C324BF645300C482F8 /* EventSearchViewController.m in Sources */,
 				DC3CF14F24BCB27900C482F8 /* SceneDelegate.m in Sources */,
 				DC47330724D1E074006DAE01 /* Comment.m in Sources */,
+				DC27437124D5017A00B6B077 /* DMCell.m in Sources */,
 				DC47330124D1D6EA006DAE01 /* EventGroupCell.m in Sources */,
 				DC3CF19424BCE2DA00C482F8 /* Organization.m in Sources */,
 				DC4732F524D07735006DAE01 /* MapViewController.m in Sources */,

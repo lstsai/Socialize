@@ -6,7 +6,7 @@
 //  Copyright © 2020 laurentsai. All rights reserved.
 //
 /*
- Object to represent a comment for the group page
+ Object to represent a comment on Posts
  */
 #import <Parse/Parse.h>
 #import "Post.h"

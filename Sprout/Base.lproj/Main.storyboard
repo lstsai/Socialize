@@ -2468,11 +2468,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XE6-QZ-nQQ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="596"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XE6-QZ-nQQ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4lz-S4-Wq5">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="811.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4lz-S4-Wq5">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2210.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D0l-97-NnY" customClass="PFImageView">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="210.5"/>
@@ -2482,8 +2482,8 @@
                                                     <outletCollection property="gestureRecognizers" destination="2ix-7w-0gB" appends="YES" id="I4L-18-wZ3"/>
                                                 </connections>
                                             </imageView>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0A7-SH-Kxj">
-                                                <rect key="frame" x="0.0" y="210.5" width="414" height="601"/>
+                                            <view contentMode="scaleToFill" verticalHuggingPriority="997" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="0A7-SH-Kxj">
+                                                <rect key="frame" x="0.0" y="210.5" width="414" height="2000"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="PYt-Rh-PTM">
                                                         <rect key="frame" x="25" y="120.5" width="43" height="37"/>
@@ -2537,22 +2537,12 @@
                                                             <outletCollection property="gestureRecognizers" destination="YsM-VM-AaK" appends="YES" id="hrU-pm-Yi4"/>
                                                         </connections>
                                                     </label>
-                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGg-BF-W5c">
+                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123 Main Street, Cupertino, CA 95014" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGg-BF-W5c">
                                                         <rect key="frame" x="81" y="209" width="306" height="21.5"/>
                                                         <gestureRecognizers/>
-                                                        <attributedString key="attributedText">
-                                                            <fragment content="123 Main Street, Cupertino, CA 95014">
-                                                                <attributes>
-                                                                    <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <font key="NSFont" metaFont="system" size="18"/>
-                                                                    <integer key="NSUnderline" value="1"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                        </attributedString>
+                                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
-                                                        <connections>
-                                                            <outletCollection property="gestureRecognizers" destination="nHU-5Y-Zzv" appends="YES" id="y4h-87-ala"/>
-                                                        </connections>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date and Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8d7-Jc-JfV">
                                                         <rect key="frame" x="81" y="122" width="104" height="19.5"/>
@@ -2563,12 +2553,6 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p5R-aE-TbN">
                                                         <rect key="frame" x="81" y="185.5" width="61.5" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
-                                                        <color key="textColor" red="0.20502752590000001" green="0.20502752590000001" blue="0.20502752590000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c99-LB-YHX">
-                                                        <rect key="frame" x="25" y="250.5" width="364" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.20502752590000001" green="0.20502752590000001" blue="0.20502752590000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -2613,11 +2597,23 @@
                                                             <action selector="didTapLike:" destination="awX-v5-WsL" eventType="touchUpInside" id="WeE-MZ-u4L"/>
                                                         </connections>
                                                     </button>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b7l-oR-8hw" customClass="GMSMapView">
+                                                        <rect key="frame" x="25" y="249" width="364" height="237"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="237" id="71p-1X-hAx"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c99-LB-YHX">
+                                                        <rect key="frame" x="25" y="513" width="364" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" red="0.20502752590000001" green="0.20502752590000001" blue="0.20502752590000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="ae9-sM-b3O" secondAttribute="trailing" constant="25.5" id="0VV-aX-qhc"/>
-                                                    <constraint firstItem="c99-LB-YHX" firstAttribute="top" secondItem="dGg-BF-W5c" secondAttribute="bottom" constant="20" id="2jF-2l-TYO"/>
                                                     <constraint firstItem="c99-LB-YHX" firstAttribute="leading" secondItem="0A7-SH-Kxj" secondAttribute="leading" constant="25" id="2mk-do-y2M"/>
                                                     <constraint firstItem="ae9-sM-b3O" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mgK-8z-I7g" secondAttribute="trailing" constant="20" id="4It-n2-Ne2"/>
                                                     <constraint firstItem="wSc-eO-98M" firstAttribute="leading" secondItem="RB4-54-CdT" secondAttribute="trailing" constant="4.5" id="4aj-QN-npo"/>
@@ -2625,7 +2621,7 @@
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ayc-nq-DVV" secondAttribute="trailing" constant="25" id="6ce-ei-GPl"/>
                                                     <constraint firstAttribute="trailing" secondItem="h05-ro-AFz" secondAttribute="trailing" id="9fR-mI-IwN"/>
                                                     <constraint firstItem="mgK-8z-I7g" firstAttribute="top" secondItem="0A7-SH-Kxj" secondAttribute="top" constant="22" id="Dva-Vo-1GB"/>
-                                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="c99-LB-YHX" secondAttribute="bottom" constant="20" id="E7b-kZ-iCH"/>
+                                                    <constraint firstItem="c99-LB-YHX" firstAttribute="top" secondItem="b7l-oR-8hw" secondAttribute="bottom" constant="27" id="FXp-jy-uwo"/>
                                                     <constraint firstItem="PYt-Rh-PTM" firstAttribute="top" secondItem="8d7-Jc-JfV" secondAttribute="bottom" constant="-22" id="Ifa-kC-8tJ"/>
                                                     <constraint firstItem="h05-ro-AFz" firstAttribute="top" secondItem="xWB-jv-snb" secondAttribute="bottom" constant="3.5" id="K1d-iU-MRW"/>
                                                     <constraint firstItem="p5R-aE-TbN" firstAttribute="leading" secondItem="xmQ-4a-a3P" secondAttribute="trailing" constant="13" id="LpG-Hf-fQF"/>
@@ -2634,6 +2630,8 @@
                                                     <constraint firstAttribute="trailing" secondItem="xWB-jv-snb" secondAttribute="trailing" constant="17" id="NRi-X9-J8f"/>
                                                     <constraint firstItem="xmQ-4a-a3P" firstAttribute="top" secondItem="p5R-aE-TbN" secondAttribute="bottom" constant="-18" id="Nbc-n9-QKo"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wSc-eO-98M" secondAttribute="trailing" constant="40" id="O0s-aG-yaO"/>
+                                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="c99-LB-YHX" secondAttribute="bottom" constant="20" id="OPS-rf-QWK"/>
+                                                    <constraint firstItem="b7l-oR-8hw" firstAttribute="centerX" secondItem="0A7-SH-Kxj" secondAttribute="centerX" id="TeU-i1-Wfg"/>
                                                     <constraint firstItem="Ayc-nq-DVV" firstAttribute="top" secondItem="8d7-Jc-JfV" secondAttribute="bottom" constant="4" id="TvH-Qo-6md"/>
                                                     <constraint firstItem="xmQ-4a-a3P" firstAttribute="top" secondItem="Ayc-nq-DVV" secondAttribute="bottom" constant="20" id="UQY-OH-Dc4"/>
                                                     <constraint firstItem="dGg-BF-W5c" firstAttribute="trailing" secondItem="Ayc-nq-DVV" secondAttribute="trailing" id="XEN-VM-h4Q"/>
@@ -2647,9 +2645,12 @@
                                                     <constraint firstItem="Ayc-nq-DVV" firstAttribute="leading" secondItem="8d7-Jc-JfV" secondAttribute="leading" id="j4t-27-fo9"/>
                                                     <constraint firstItem="wSc-eO-98M" firstAttribute="top" secondItem="RB4-54-CdT" secondAttribute="top" id="mPp-tf-40D"/>
                                                     <constraint firstItem="RB4-54-CdT" firstAttribute="leading" secondItem="mgK-8z-I7g" secondAttribute="leading" id="ocX-RE-lDD"/>
+                                                    <constraint firstAttribute="height" priority="1" constant="1500" id="pWT-Ku-OFY"/>
                                                     <constraint firstItem="PYt-Rh-PTM" firstAttribute="leading" secondItem="0A7-SH-Kxj" secondAttribute="leading" constant="25" id="qHM-TX-GfT"/>
                                                     <constraint firstItem="8d7-Jc-JfV" firstAttribute="leading" secondItem="PYt-Rh-PTM" secondAttribute="trailing" constant="13" id="r3W-GK-ST4"/>
                                                     <constraint firstItem="RB4-54-CdT" firstAttribute="top" secondItem="mgK-8z-I7g" secondAttribute="bottom" constant="10.5" id="vhl-ZR-NBu"/>
+                                                    <constraint firstItem="b7l-oR-8hw" firstAttribute="leading" secondItem="c99-LB-YHX" secondAttribute="leading" id="xpb-g5-fuF"/>
+                                                    <constraint firstItem="b7l-oR-8hw" firstAttribute="top" secondItem="dGg-BF-W5c" secondAttribute="bottom" constant="18.5" id="y2t-Ec-9JI"/>
                                                     <constraint firstItem="xmQ-4a-a3P" firstAttribute="leading" secondItem="PYt-Rh-PTM" secondAttribute="leading" id="yPH-U7-rtE"/>
                                                     <constraint firstItem="dGg-BF-W5c" firstAttribute="top" secondItem="p5R-aE-TbN" secondAttribute="bottom" constant="4" id="z2f-uI-tOW"/>
                                                 </constraints>
@@ -2701,16 +2702,11 @@
                         <outlet property="eventTimeLabel" destination="Ayc-nq-DVV" id="SOR-2g-F3n"/>
                         <outlet property="groupButton" destination="xWB-jv-snb" id="7G7-Vg-cL0"/>
                         <outlet property="likeButton" destination="ae9-sM-b3O" id="QLj-bz-DII"/>
+                        <outlet property="mapView" destination="b7l-oR-8hw" id="Ol6-eg-yxM"/>
                         <outlet property="numLikesLabel" destination="VGF-WU-iGV" id="CEo-fB-7tz"/>
-                        <segue destination="11j-rX-5mI" kind="presentation" identifier="mapSegue" id="EBI-9d-53A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PAp-W8-1vB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="nHU-5Y-Zzv">
-                    <connections>
-                        <action selector="didTapAddress:" destination="awX-v5-WsL" id="XeU-IR-VjA"/>
-                    </connections>
-                </tapGestureRecognizer>
                 <tapGestureRecognizer id="YsM-VM-AaK">
                     <connections>
                         <action selector="didTapTime:" destination="awX-v5-WsL" id="GaG-LN-TlI"/>
@@ -3199,7 +3195,7 @@
         <segue reference="vVA-Vw-9fQ"/>
         <segue reference="Jfi-X2-tcA"/>
         <segue reference="rff-eI-h6r"/>
-        <segue reference="EBI-9d-53A"/>
+        <segue reference="l9q-sS-em3"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bubble.left" catalog="system" width="128" height="110"/>

@@ -64,8 +64,20 @@ Loads the view controller's views to reflect the event it is representing
         self.likeButton.selected=YES;
         self.groupButton.alpha=SHOW_ALPHA;
     }
+    [self setupMap];
     [self performSelectorInBackground:@selector(getLikes) withObject:nil];
 
+}
+/**
+ Configures the map view for the location of this event
+ */
+-(void) setupMap{
+    CLLocationCoordinate2D coords= CLLocationCoordinate2DMake(self.event.location.latitude, self.event.location.longitude);
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:coords zoom:MAP_ZOOM];
+    self.mapView.camera=camera;
+    GMSMarker* marker= [GMSMarker markerWithPosition:coords];
+    marker.title=self.event.name;
+    marker.map=self.mapView;
 }
 /**
  calculates the number of friends that have liked this specific event
@@ -108,14 +120,6 @@ Triggered when the user (un)likes this event. Calls the Helper method didLikeEve
         [Helper didUnlikeEvent:self.event];
     }
 }
-/**
-Triggered when the user taps the address of the event and presents the MapViewController
-@param[in] sender the address that was tapped
-*/
-- (IBAction)didTapAddress:(id)sender {
-    [self performSegueWithIdentifier:@"mapSegue" sender:nil];
-}
-
 /**
 Triggered when the user taps the time of the event and creates a calander event and reminder
 @param[in] sender the time that was tapped
@@ -198,11 +202,6 @@ Triggered when the user taps the time of the event and creates a calander event 
         createPostVC.event=self.event;
         createPostVC.org=nil;
         createPostVC.isGroupPost=NO;
-    }
-    else if([segue.identifier isEqualToString:@"mapSegue"])//shows the user the map view of the event location
-    {
-        MapViewController *mapVC=segue.destinationViewController;
-        mapVC.objects=@[self.event];
     }
     else if([segue.identifier isEqualToString:@"eventGroupSegue"])//shows the user the map view of the event location
     {

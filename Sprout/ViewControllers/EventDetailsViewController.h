@@ -12,6 +12,7 @@ View Controller to display the details for a specified event
 #import "Event.h"
 #import <EventKit/EventKit.h>
 @import Parse;
+@import GoogleMaps;
 NS_ASSUME_NONNULL_BEGIN
 
 
@@ -26,9 +27,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) Event *event;
 @property (weak, nonatomic) IBOutlet UILabel *numLikesLabel;
 @property (weak, nonatomic) IBOutlet UIButton *groupButton;
+@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 
 -(void) loadEventDetails;
 -(void) getLikes;
+-(void) setupMap;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,7 +7,7 @@
 //
 
 #import "IncomingMessageCell.h"
-
+#import "Constants.h"
 @implementation IncomingMessageCell
 
 - (void)awakeFromNib {
@@ -19,6 +19,7 @@ Load incoming  message and image if applicable
 */
 -(void) loadMessage{
     self.messageLabel.text=self.message.messageText;
+    self.messageView.layer.cornerRadius=CELL_CORNER_RADIUS*0.8;
     if(self.message.image)
     {
         self.messageImage.hidden=NO;

@@ -7,7 +7,7 @@
 //
 
 #import "OutgoingMessageCell.h"
-
+#import "Constants.h"
 @implementation OutgoingMessageCell
 
 - (void)awakeFromNib {
@@ -18,6 +18,7 @@
  Load out going message and image if applicable
  */
 -(void) loadMessage{
+    self.messageView.layer.cornerRadius=CELL_CORNER_RADIUS*0.8;
     self.messageLabel.text=self.message.messageText;
     if(self.message.image)
     {

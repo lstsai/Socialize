@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OutgoingMessageCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+@property (weak, nonatomic) IBOutlet UIView *messageView;
 @property (strong, nonatomic) Message* message;
 @property (weak, nonatomic) IBOutlet UIStackView *stackView;
 @property (weak, nonatomic) IBOutlet PFImageView *messageImage;

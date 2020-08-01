@@ -33,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(void) setupDatePicker;
 -(void) didUpdateSDate:(id)sender;
 -(void) didUpdateEDate:(id)sender;
+-(void)keyboardOnScreen:(NSNotification *)notification;
+-(void)keyboardOffScreen:(NSNotification *)notification;
 
 @end
 

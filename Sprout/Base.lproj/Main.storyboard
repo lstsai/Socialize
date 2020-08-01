@@ -1152,14 +1152,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IncomingMessageCell" id="NGk-ad-N8s" customClass="IncomingMessageCell">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="38.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NGk-ad-N8s" id="pRv-56-unB">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="38.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G8j-aV-QNW">
-                                                    <rect key="frame" x="15" y="8" width="168" height="27.5"/>
+                                                    <rect key="frame" x="15" y="3" width="168" height="27.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incoming Message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IEE-wm-8Hx">
                                                             <rect key="frame" x="8" y="3" width="152" height="21.5"/>
@@ -1177,7 +1177,7 @@
                                                     </constraints>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SJL-yA-JYm">
-                                                    <rect key="frame" x="15" y="38.5" width="380" height="0.0"/>
+                                                    <rect key="frame" x="15" y="33.5" width="380" height="0.0"/>
                                                     <subviews>
                                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JJp-ZG-N8d" customClass="PFImageView">
                                                             <rect key="frame" x="2" y="0.0" width="380" height="253"/>
@@ -1197,7 +1197,7 @@
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="G8j-aV-QNW" secondAttribute="trailing" constant="25" id="Yc2-Ji-DCB"/>
                                                 <constraint firstItem="JJp-ZG-N8d" firstAttribute="centerX" secondItem="pRv-56-unB" secondAttribute="centerX" id="Z1F-yM-DrZ"/>
                                                 <constraint firstItem="G8j-aV-QNW" firstAttribute="leading" secondItem="pRv-56-unB" secondAttribute="leading" constant="15" id="Zcd-Yd-1gI"/>
-                                                <constraint firstItem="G8j-aV-QNW" firstAttribute="top" secondItem="pRv-56-unB" secondAttribute="top" constant="8" id="oF2-ll-HRQ"/>
+                                                <constraint firstItem="G8j-aV-QNW" firstAttribute="top" secondItem="pRv-56-unB" secondAttribute="top" constant="3" id="oF2-ll-HRQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1208,14 +1208,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OutgoingMessageCell" id="TTr-KA-fS1" customClass="OutgoingMessageCell">
-                                        <rect key="frame" x="0.0" y="71.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="66.5" width="414" height="38.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TTr-KA-fS1" id="dBb-jy-hpo">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="38.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvg-us-edk">
-                                                    <rect key="frame" x="230.5" y="8" width="168.5" height="27.5"/>
+                                                    <rect key="frame" x="230.5" y="3" width="168.5" height="27.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Outgoing Message" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xe1-jx-MOt">
                                                             <rect key="frame" x="8" y="3" width="152.5" height="21.5"/>
@@ -1233,7 +1233,7 @@
                                                     </constraints>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7PA-jU-snK">
-                                                    <rect key="frame" x="19" y="38.5" width="380" height="0.0"/>
+                                                    <rect key="frame" x="19" y="33.5" width="380" height="0.0"/>
                                                     <subviews>
                                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8P8-VA-1m9" customClass="PFImageView">
                                                             <rect key="frame" x="-2" y="0.0" width="380" height="253"/>
@@ -1246,7 +1246,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="7PA-jU-snK" firstAttribute="top" secondItem="cvg-us-edk" secondAttribute="bottom" constant="3" id="Omg-dh-dir"/>
-                                                <constraint firstItem="cvg-us-edk" firstAttribute="top" secondItem="dBb-jy-hpo" secondAttribute="top" constant="8" id="PYj-do-rZW"/>
+                                                <constraint firstItem="cvg-us-edk" firstAttribute="top" secondItem="dBb-jy-hpo" secondAttribute="top" constant="3" id="PYj-do-rZW"/>
                                                 <constraint firstAttribute="bottom" secondItem="7PA-jU-snK" secondAttribute="bottom" constant="5" id="Sey-LB-VoX"/>
                                                 <constraint firstItem="8P8-VA-1m9" firstAttribute="centerX" secondItem="dBb-jy-hpo" secondAttribute="centerX" id="ZT6-TX-fap"/>
                                                 <constraint firstAttribute="trailing" secondItem="cvg-us-edk" secondAttribute="trailing" constant="15" id="tvh-LK-B2Q"/>
@@ -1334,7 +1334,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X4c-8h-XFT" customClass="PFImageView">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X4c-8h-XFT" customClass="PFImageView">
                                                     <rect key="frame" x="20" y="11" width="56" height="56.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="56" id="NfW-ty-rof"/>

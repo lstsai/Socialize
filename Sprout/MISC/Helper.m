@@ -480,7 +480,7 @@ Updates the ordered message thread list in UserAccess for the 2 users messaging
     
     //remove the users from the current order
     [currMessageT removeObject:toUser.objectId];
-    [currMessageT removeObject:PFUser.currentUser.objectId];
+    [otherMessageT removeObject:PFUser.currentUser.objectId];
     //add the object id of both users to the beginning of the list
     [currMessageT insertObject:toUser.objectId atIndex:0];
     [otherMessageT insertObject:PFUser.currentUser.objectId atIndex:0];

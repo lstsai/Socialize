@@ -9,8 +9,10 @@
 #import "DMViewController.h"
 #import "DMCell.h"
 #import "Helper.h"
+#import "UIScrollView+EmptyDataSet.h"
 #import "MessagingViewController.h"
-@interface DMViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+#import "Constants.h"
+@interface DMViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @end
 
@@ -22,6 +24,9 @@
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.searchBar.delegate=self;
+    self.tableView.emptyDataSetSource=self;
+    self.tableView.emptyDataSetDelegate = self;
+    self.tableView.tableFooterView = [UIView new];
     self.isSearch=NO;
     self.messageThreads=[[NSMutableArray alloc] init];
     self.messageUsers=[[NSMutableArray alloc] init];
@@ -66,7 +71,7 @@ Triggered when the user presses thesearch button on the keyboard. Calls the fetc
     NSArray* friendsID=selfUserAccess[@"friends"];
     PFQuery* userQ=[PFQuery queryWithClassName:@"_User"];
     [userQ whereKey:@"objectId" containedIn:friendsID];
-    [userQ whereKey:@"username" containsString:self.searchBar.text];
+    [userQ whereKey:@"username" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchBar.text]];
     [userQ findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)
             [Helper displayAlert:@"Error getting friends" withMessage:error.localizedDescription on:self];
@@ -82,6 +87,7 @@ Triggered when the user presses thesearch button on the keyboard. Calls the fetc
     if(self.isSearch)
     {
         dmc.user=self.friends[indexPath.row];
+        dmc.latestMessage=nil;
         [dmc loadData];
     }
     else{
@@ -97,6 +103,59 @@ Triggered when the user presses thesearch button on the keyboard. Calls the fetc
         return self.friends.count;
     else
         return self.messageUsers.count;
+}
+/**
+Empty table view delegate method. Returns the image to be displayed when there are no posts
+@param[in] scrollView the table view that is empty
+@return the image to be shown
+*/
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"comment"];
+}
+/**
+Empty table view delegate method. Returns the title to be displayed when there are no posts
+@param[in] scrollView the table view that is empty
+@return the title to be shown
+*/
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"No Messages";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:EMPTY_TITLE_FONT_SIZE],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+/**
+Empty collection view delegate method. Returns the message to be displayed when there are no users
+@param[in] scrollView the collection view that is empty
+@return the message to be shown
+*/
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"Search for a friend to Message!";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:EMPTY_MESSAGE_FONT_SIZE],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+                                 
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+/**
+Empty table view delegate method. Returns if the empty view should be shown
+@param[in] scrollView the table view that is empty
+@return if the empty view shouls be shown
+ YES: if there are no posts
+ NO: there are posts
+*/
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    return self.messageThreads.count==0;
 }
 
 #pragma mark - Navigation

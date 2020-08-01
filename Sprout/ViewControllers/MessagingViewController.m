@@ -12,7 +12,8 @@
 #import "Message.h"
 #import "Helper.h"
 #import "Constants.h"
-@interface MessagingViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
+#import "UIScrollView+EmptyDataSet.h"
+@interface MessagingViewController ()<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UITextFieldDelegate>
 
 @end
 
@@ -24,8 +25,13 @@
     self.tableView.transform = CGAffineTransformMakeScale(1, -1);//flip the table view upside down
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    self.messageTextField.delegate=self;
     self.messages=[[NSArray alloc]init];
     self.pageNum=1;
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
+    [center addObserver:self selector:@selector(keyboardOffScreen:) name:UIKeyboardWillHideNotification object:nil];
+    self.navigationItem.title=self.user.username;
     [self setupLoadingIndicators];
     [self getMessages:nil];
 }
@@ -64,6 +70,38 @@
             self.messages=objects;
             [self.tableView reloadData];
         }
+    }];
+}
+/**
+ When the users presses return, send messages
+ @param[in] textField the textfield that pressed return
+ @return NO, dont return, just send the message
+ */
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.messageTextField resignFirstResponder];
+    [self didTapSend:textField];
+    return NO;
+}
+/**
+ Called when the keyboard appears on screen, moves the view up in order to show the text field
+ @param[in] notification the notification to alert the keyboard appeared
+ */
+-(void)keyboardOnScreen:(NSNotification *)notification{
+    NSDictionary *info = notification.userInfo;
+    NSValue *value = info[UIKeyboardFrameEndUserInfoKey];
+    CGRect rawFrame= [value CGRectValue];
+    CGRect keyboardFrame = [self.view convertRect:rawFrame fromView:nil];
+    [UIView animateWithDuration:ANIMATION_DURATION/3 animations:^{
+        self.view.transform=CGAffineTransformTranslate(CGAffineTransformIdentity, 0, -1*keyboardFrame.size.height + CELL_TOP_OFFSET*1.5);
+    }];
+}
+/**
+ Called when the keyboard will hide on screen, moves the view back down
+ @param[in] notification the notification to alert the keyboard will hide
+ */
+-(void)keyboardOffScreen:(NSNotification *)notification{
+    [UIView animateWithDuration:ANIMATION_DURATION/3 animations:^{
+        self.view.transform=CGAffineTransformIdentity;
     }];
 }
 /**
@@ -131,7 +169,8 @@ Table view delegate method. returns the number of sections that the table has. T
  @param[in] sender the button that was tapped
  */
 - (IBAction)didTapSend:(id)sender {
-    self.messageTextField.text=@"";
+    if([self.messageTextField.text isEqualToString:@""])
+        return;
     [Message sendMessage:self.messageTextField.text toUser:self.user withImage:nil withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(error)
             [Helper displayAlert:@"Error sending message" withMessage:error.localizedDescription on:self];
@@ -139,6 +178,7 @@ Table view delegate method. returns the number of sections that the table has. T
             [self getMessages:nil];
             [Helper performSelectorInBackground:@selector(updateMessageOrder:) withObject:self.user];
         }
+        self.messageTextField.text=@"";
     }];
 }
 /*

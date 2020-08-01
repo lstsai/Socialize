@@ -15,6 +15,8 @@
     // Initialization code
 }
 -(void) loadData{
+    self.profileImage.image=nil;
+    self.messageLabel.text=nil;
     self.profileImage.layer.masksToBounds=YES;
     self.profileImage.layer.cornerRadius=self.profileImage.bounds.size.width/2;
     

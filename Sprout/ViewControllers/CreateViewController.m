@@ -23,6 +23,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.detailsTextView.delegate=self;
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
+    [center addObserver:self selector:@selector(keyboardOffScreen:) name:UIKeyboardWillHideNotification object:nil];
     [self setupDatePicker];
     
 }
@@ -170,12 +173,25 @@ Triggered when the user presses the location field. Presents the GMSAutocomplete
     
 }
 /**
- Textview delegate method. Triggered when the user enters the textview
- @param[in] textView the textview that started editing
+ Called when the keyboard appears on screen, moves the view up in order to show the text field
+ @param[in] notification the notification to alert the keyboard appeared
  */
-- (void)textViewDidBeginEditing:(UITextView *)textView{
+-(void)keyboardOnScreen:(NSNotification *)notification{
+    NSDictionary *info = notification.userInfo;
+    NSValue *value = info[UIKeyboardFrameEndUserInfoKey];
+    CGRect rawFrame= [value CGRectValue];
+    CGRect keyboardFrame = [self.view convertRect:rawFrame fromView:nil];
     [UIView animateWithDuration:ANIMATION_DURATION/3 animations:^{
-        self.view.layer.transform= CATransform3DTranslate(CATransform3DIdentity, 0, -1*self.eventImage.frame.size.height, 0);
+        self.view.transform=CGAffineTransformTranslate(CGAffineTransformIdentity, 0, -1*keyboardFrame.size.height + CELL_TOP_OFFSET*1.5);
+    }];
+}
+/**
+ Called when the keyboard will hide on screen, moves the view back down
+ @param[in] notification the notification to alert the keyboard will hide
+ */
+-(void)keyboardOffScreen:(NSNotification *)notification{
+    [UIView animateWithDuration:ANIMATION_DURATION/3 animations:^{
+        self.view.transform=CGAffineTransformIdentity;
     }];
 }
 /**

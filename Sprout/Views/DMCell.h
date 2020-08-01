@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (strong,nonatomic) PFUser* user;
-@property (strong, nonatomic) Message *latestMessage;
+@property (strong, nonatomic) Message *_Nullable latestMessage;
 -(void) loadData;
 @end
 

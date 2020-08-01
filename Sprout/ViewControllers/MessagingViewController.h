@@ -21,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) InfiniteScrollActivityView* loadingMoreView;
 @property (nonatomic) BOOL isMoreDataLoading;
 -(void) getMessages:(UIRefreshControl* _Nullable)refreshControl;
+- (IBAction)didTapSend:(id)sender;
+-(void)keyboardOnScreen:(NSNotification *)notification;
+-(void)keyboardOffScreen:(NSNotification *)notification;
+
 @end
 
 NS_ASSUME_NONNULL_END

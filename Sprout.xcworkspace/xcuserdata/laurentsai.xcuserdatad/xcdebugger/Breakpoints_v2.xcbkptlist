@@ -358,8 +358,8 @@
             filePath = "Sprout/ViewControllers/OrgDetailsViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "-didPinchImage:"
             landmarkType = "7">
          </BreakpointContent>
@@ -502,8 +502,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "180"
             endingLineNumber = "180"
-            landmarkName = "CreateViewController"
-            landmarkType = "3">
+            landmarkName = "-textViewDidBeginEditing:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

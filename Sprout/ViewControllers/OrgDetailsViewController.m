@@ -14,7 +14,6 @@
 #import "UIImageView+AFNetworking.h"
 #import "CreatePostViewController.h"
 #import "Helper.h"
-#import "MapViewController.h"
 #import "Constants.h"
 @interface OrgDetailsViewController ()
 
@@ -97,17 +96,19 @@
         {
             self.coord=coords;
             self.gotCoords=YES;
+            [self setupMap];
         }
     }];
 }
 /**
-Triggered when the user taps the address of the org and presents the MapViewController
-@param[in] sender the address that was tapped
-*/
-- (IBAction)didTapAddress:(id)sender {
-    if(self.gotCoords){
-        [self performSegueWithIdentifier:@"mapSegue" sender:nil];
-    }
+ Configures the map view in the details controller according to the coords
+ */
+-(void) setupMap{
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithTarget:self.coord zoom:MAP_ZOOM];
+    self.mapView.camera=camera;
+    GMSMarker* marker= [GMSMarker markerWithPosition:self.coord];
+    marker.title=self.org.name;
+    marker.map=self.mapView;
 }
 /**
  Triggered when the user taps the link of the website and presents the webviewcontroller
@@ -179,11 +180,6 @@ Triggered when the user (un)likes this organization. Calls the Helper method did
         createPostVC.event=nil;
         createPostVC.isGroupPost=NO;
 
-    }
-    else if([segue.identifier isEqualToString:@"mapSegue"])//shows user the map view
-    {
-        MapViewController *mapVC=segue.destinationViewController;
-        mapVC.objects=@[self.org];
     }
 }
 

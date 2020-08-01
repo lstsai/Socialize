@@ -12,6 +12,7 @@
 #import "Organization.h"
 #import <Parse/Parse.h>
 #import <CoreLocation/CoreLocation.h>
+@import GoogleMaps;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OrgDetailsViewController : UIViewController
@@ -29,11 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CLLocationCoordinate2D coord;
 @property (nonatomic) BOOL gotCoords;
 @property (weak, nonatomic) IBOutlet UILabel *numLikesLabel;
+@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 
 
 -(void) loadOrgDetails;
 -(void) getCoords;
 -(void) getLikes;
+-(void) setupMap;
 @end
 
 NS_ASSUME_NONNULL_END

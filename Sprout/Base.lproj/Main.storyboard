@@ -434,11 +434,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ezj-HV-lhK">
-                                <rect key="frame" x="0.0" y="56" width="414" height="703"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ezj-HV-lhK">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RnK-fK-0Gt">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="706.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RnK-fK-0Gt">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="980.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JuS-JZ-pWI">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="280.5"/>
@@ -461,8 +461,8 @@
                                                     <constraint firstItem="mAG-bT-6og" firstAttribute="leading" secondItem="JuS-JZ-pWI" secondAttribute="leading" id="xi7-6P-X7w"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" horizontalHuggingPriority="1000" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zbs-dw-NFE">
-                                                <rect key="frame" x="0.0" y="280.5" width="414" height="426"/>
+                                            <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Zbs-dw-NFE">
+                                                <rect key="frame" x="0.0" y="280.5" width="414" height="700"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7D-Hw-8oR">
                                                         <rect key="frame" x="20" y="20" width="64.5" height="29"/>
@@ -495,35 +495,26 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UbA-yb-tQb">
-                                                        <rect key="frame" x="20" y="174" width="65" height="20.5"/>
+                                                        <rect key="frame" x="20" y="213.5" width="65" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOO-My-ft0">
-                                                        <rect key="frame" x="20" y="196" width="33" height="20.5"/>
+                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="blah" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOO-My-ft0">
+                                                        <rect key="frame" x="20" y="235.5" width="33" height="20.5"/>
                                                         <gestureRecognizers/>
-                                                        <attributedString key="attributedText">
-                                                            <fragment content="blah">
-                                                                <attributes>
-                                                                    <font key="NSFont" metaFont="system" size="17"/>
-                                                                    <integer key="NSUnderline" value="1"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                        </attributedString>
+                                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                                        <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
-                                                        <connections>
-                                                            <outletCollection property="gestureRecognizers" destination="aGV-Cv-FrJ" appends="YES" id="aTL-pb-9rZ"/>
-                                                        </connections>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBW-NR-xsL">
-                                                        <rect key="frame" x="20" y="223" width="64" height="20.5"/>
+                                                        <rect key="frame" x="20" y="186.5" width="64" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Rc-EU-Ybe">
-                                                        <rect key="frame" x="89.5" y="223" width="33" height="20.5"/>
+                                                        <rect key="frame" x="89.5" y="186.5" width="33" height="20.5"/>
                                                         <gestureRecognizers/>
                                                         <attributedString key="attributedText">
                                                             <fragment content="blah">
@@ -573,34 +564,45 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mgR-L7-PQb" customClass="GMSMapView">
+                                                        <rect key="frame" x="20" y="277" width="374" height="300"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="300" id="y3f-SV-oUW"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
+                                                    <constraint firstItem="mgR-L7-PQb" firstAttribute="top" secondItem="dOO-My-ft0" secondAttribute="bottom" constant="21" id="2XK-aD-56g"/>
                                                     <constraint firstItem="E3c-lC-Jkl" firstAttribute="top" secondItem="oVd-sG-uTL" secondAttribute="bottom" constant="1.5" id="3ep-ZA-Dgn"/>
                                                     <constraint firstItem="uBW-NR-xsL" firstAttribute="leading" secondItem="dOO-My-ft0" secondAttribute="leading" id="4nd-LY-aSH"/>
-                                                    <constraint firstItem="dOO-My-ft0" firstAttribute="trailing" secondItem="E3c-lC-Jkl" secondAttribute="trailing" id="76K-SX-wyH"/>
                                                     <constraint firstItem="Xfn-PE-NoV" firstAttribute="leading" secondItem="4Us-IR-t8d" secondAttribute="leading" id="AQq-Zr-1pO"/>
                                                     <constraint firstItem="Qob-Vb-0Iw" firstAttribute="trailing" secondItem="J4v-me-K4A" secondAttribute="trailing" id="F3A-QR-OjT"/>
                                                     <constraint firstItem="j7D-Hw-8oR" firstAttribute="leading" secondItem="Zbs-dw-NFE" secondAttribute="leading" constant="20" id="Fhd-UR-rKE"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0Rc-EU-Ybe" secondAttribute="trailing" constant="15" id="FlK-Kp-y4E"/>
+                                                    <constraint firstItem="UbA-yb-tQb" firstAttribute="top" secondItem="uBW-NR-xsL" secondAttribute="bottom" constant="6.5" id="N0s-ef-VyR"/>
+                                                    <constraint firstItem="uBW-NR-xsL" firstAttribute="top" secondItem="E3c-lC-Jkl" secondAttribute="bottom" constant="20" id="N6P-vp-txI"/>
                                                     <constraint firstAttribute="trailing" secondItem="J4v-me-K4A" secondAttribute="trailing" constant="21" id="NbM-Mv-VQ9"/>
                                                     <constraint firstItem="J4v-me-K4A" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="j7D-Hw-8oR" secondAttribute="trailing" constant="10" id="PYc-eR-HzZ"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dOO-My-ft0" secondAttribute="trailing" constant="10" id="Pen-0N-uVw"/>
+                                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mgR-L7-PQb" secondAttribute="bottom" constant="20" id="Pmw-pB-g6j"/>
                                                     <constraint firstItem="Qob-Vb-0Iw" firstAttribute="top" secondItem="J4v-me-K4A" secondAttribute="bottom" constant="-1.5" id="RiZ-O2-mdx"/>
+                                                    <constraint firstItem="mgR-L7-PQb" firstAttribute="centerX" secondItem="Zbs-dw-NFE" secondAttribute="centerX" id="RoQ-L0-X8r"/>
+                                                    <constraint firstItem="mgR-L7-PQb" firstAttribute="leading" secondItem="dOO-My-ft0" secondAttribute="leading" id="VVP-v0-PP2"/>
                                                     <constraint firstItem="4Us-IR-t8d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="E3c-lC-Jkl" secondAttribute="trailing" constant="20" id="YB6-Va-RUO"/>
                                                     <constraint firstItem="UbA-yb-tQb" firstAttribute="leading" secondItem="oVd-sG-uTL" secondAttribute="leading" id="Yt4-3X-zsu"/>
                                                     <constraint firstItem="6OH-0L-ABM" firstAttribute="leading" secondItem="1tD-iA-ka7" secondAttribute="leading" id="Z50-e5-LI6"/>
                                                     <constraint firstItem="0Rc-EU-Ybe" firstAttribute="leading" secondItem="uBW-NR-xsL" secondAttribute="trailing" constant="5.5" id="ZjF-Uc-pax"/>
                                                     <constraint firstItem="oVd-sG-uTL" firstAttribute="leading" secondItem="6OH-0L-ABM" secondAttribute="leading" id="aCg-YC-hng"/>
-                                                    <constraint firstItem="uBW-NR-xsL" firstAttribute="top" secondItem="dOO-My-ft0" secondAttribute="bottom" constant="6.5" id="aLU-jT-j6m"/>
                                                     <constraint firstItem="Xfn-PE-NoV" firstAttribute="top" secondItem="4Us-IR-t8d" secondAttribute="bottom" constant="1.5" id="ajd-Xp-NVi"/>
                                                     <constraint firstItem="6OH-0L-ABM" firstAttribute="top" secondItem="1tD-iA-ka7" secondAttribute="bottom" constant="8" id="bjv-0N-YFd"/>
+                                                    <constraint firstAttribute="height" priority="250" constant="700" id="cRS-9k-Yyj"/>
                                                     <constraint firstItem="E3c-lC-Jkl" firstAttribute="leading" secondItem="oVd-sG-uTL" secondAttribute="leading" id="fbg-B4-IB5"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6OH-0L-ABM" secondAttribute="trailing" constant="15" id="gyf-G9-Fzr"/>
                                                     <constraint firstItem="Qob-Vb-0Iw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1tD-iA-ka7" secondAttribute="trailing" constant="10" id="i0M-2c-r0f"/>
                                                     <constraint firstItem="dOO-My-ft0" firstAttribute="leading" secondItem="UbA-yb-tQb" secondAttribute="leading" id="mQJ-8M-bdt"/>
-                                                    <constraint firstItem="UbA-yb-tQb" firstAttribute="top" secondItem="E3c-lC-Jkl" secondAttribute="bottom" constant="7.5" id="nff-kV-G95"/>
                                                     <constraint firstItem="1tD-iA-ka7" firstAttribute="top" secondItem="j7D-Hw-8oR" secondAttribute="bottom" constant="7.5" id="nzg-2h-Fv2"/>
-                                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="uBW-NR-xsL" secondAttribute="bottom" constant="20" id="oHc-0d-66n"/>
                                                     <constraint firstItem="4Us-IR-t8d" firstAttribute="leading" secondItem="oVd-sG-uTL" secondAttribute="trailing" constant="104.5" id="pDm-K5-zP0"/>
                                                     <constraint firstItem="dOO-My-ft0" firstAttribute="top" secondItem="UbA-yb-tQb" secondAttribute="bottom" constant="1.5" id="psY-1J-VTR"/>
                                                     <constraint firstItem="0Rc-EU-Ybe" firstAttribute="centerY" secondItem="uBW-NR-xsL" secondAttribute="centerY" id="sRj-5u-tVj"/>
@@ -657,24 +659,19 @@
                         <outlet property="cause" destination="Xfn-PE-NoV" id="oKh-jV-B8a"/>
                         <outlet property="detailContainerView" destination="Zbs-dw-NFE" id="fgH-8h-Eew"/>
                         <outlet property="likeButton" destination="J4v-me-K4A" id="dcM-Us-qr3"/>
+                        <outlet property="mapView" destination="mgR-L7-PQb" id="WfT-wy-1N4"/>
                         <outlet property="mission" destination="6OH-0L-ABM" id="KB7-W3-Fdk"/>
                         <outlet property="name" destination="j7D-Hw-8oR" id="OMY-FG-1J7"/>
                         <outlet property="numLikesLabel" destination="Qob-Vb-0Iw" id="Gqa-sU-4zj"/>
                         <outlet property="tagLine" destination="1tD-iA-ka7" id="VzI-WM-w8y"/>
                         <outlet property="website" destination="0Rc-EU-Ybe" id="Vgn-Z8-8zk"/>
                         <segue destination="fm9-gw-6YN" kind="presentation" identifier="webSegue" id="i6a-EC-Dwr"/>
-                        <segue destination="11j-rX-5mI" kind="presentation" identifier="mapSegue" id="I4d-GF-en2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="St5-vH-rzg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="7Xs-A7-cOs">
                     <connections>
                         <action selector="didTapLink:" destination="Wv5-VZ-aSd" id="bwd-aY-L5z"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="aGV-Cv-FrJ">
-                    <connections>
-                        <action selector="didTapAddress:" destination="Wv5-VZ-aSd" id="jVC-T3-Cf0"/>
                     </connections>
                 </tapGestureRecognizer>
                 <pinchGestureRecognizer id="PrK-0e-FDb">

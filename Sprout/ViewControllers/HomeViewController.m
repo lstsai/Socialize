@@ -54,7 +54,7 @@
     if([(NSArray*)selfAccess[@"inRequests"] count]>0)//if the user has friend requests pending
         self.requestsButton.tintColor=[UIColor systemBlueColor];
     else
-        self.requestsButton.tintColor=[UIColor darkGrayColor];
+        self.requestsButton.tintColor=[UIColor whiteColor];
 }
 /**
  setup the refresh control and infinite scroll indicators

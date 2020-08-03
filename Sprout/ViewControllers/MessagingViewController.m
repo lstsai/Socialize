@@ -76,9 +76,9 @@
  @return NO, dont return, just send the message
  */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self.messageTextField resignFirstResponder];
+    //[self.messageTextField resignFirstResponder];
     [self didTapSend:textField];
-    return NO;
+    return YES;
 }
 /**
  Called when the keyboard appears on screen, moves the view up in order to show the text field

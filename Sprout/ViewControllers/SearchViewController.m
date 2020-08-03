@@ -29,6 +29,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.searchBar.delegate=self;
+   NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+    [UIFont boldSystemFontOfSize:EMPTY_MESSAGE_FONT_SIZE], NSFontAttributeName,
+    [UIColor whiteColor], NSForegroundColorAttributeName,
+    nil];
+    [self.searchControl setTitleTextAttributes:attributes forState:UIControlStateSelected];
     self.eventsVC=[self.childViewControllers objectAtIndex:EVENT_SEGMENT ];
     self.orgsVC=[self.childViewControllers objectAtIndex:ORG_SEGMENT];
     self.peopleVC=[self.childViewControllers objectAtIndex:PEOPLE_SEGMENT];

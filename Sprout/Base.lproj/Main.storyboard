@@ -1549,7 +1549,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date and time " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VoL-aP-ZJb">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Date and time " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VoL-aP-ZJb">
                                                             <rect key="frame" x="17" y="217.5" width="112" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1604,24 +1604,18 @@
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1TB-xP-Ff5">
-                                                    <rect key="frame" x="20" y="347.5" width="28" height="24"/>
+                                                    <rect key="frame" x="20" y="347.5" width="121" height="25"/>
                                                     <color key="tintColor" red="0.69803921570000005" green="0.52941176469999995" blue="0.52156862749999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <state key="normal" image="bubble.left" catalog="system">
+                                                    <state key="normal" title=" Comments" image="bubble.left" catalog="system">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="didTapComment:" destination="L8D-Tf-He8" eventType="touchUpInside" id="bph-Kx-4Cs"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Comments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ckq-Nx-Yxz">
-                                                    <rect key="frame" x="55.5" y="349" width="83.5" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Ckq-Nx-Yxz" secondAttribute="bottom" constant="10" id="3QO-h1-akt"/>
                                                 <constraint firstItem="U4a-o1-0RJ" firstAttribute="leading" secondItem="9jN-uV-AOx" secondAttribute="leading" constant="20" id="DtC-05-8zg"/>
                                                 <constraint firstItem="Cwf-Yb-Kdk" firstAttribute="top" secondItem="9jN-uV-AOx" secondAttribute="topMargin" constant="7" id="FO0-uL-Ix0"/>
                                                 <constraint firstItem="Hhn-Uk-2D4" firstAttribute="leading" secondItem="GDZ-sR-MZJ" secondAttribute="leading" id="Y2B-8g-ljk"/>
@@ -1629,13 +1623,12 @@
                                                 <constraint firstItem="Hhn-Uk-2D4" firstAttribute="top" secondItem="GDZ-sR-MZJ" secondAttribute="bottom" constant="4" id="fZ9-rW-EUR"/>
                                                 <constraint firstItem="jDZ-v9-6Je" firstAttribute="top" secondItem="U4a-o1-0RJ" secondAttribute="bottom" constant="8" id="hh8-Xs-xUI"/>
                                                 <constraint firstItem="U4a-o1-0RJ" firstAttribute="top" secondItem="GDZ-sR-MZJ" secondAttribute="bottom" constant="-28" id="iR2-wd-dQa"/>
-                                                <constraint firstItem="Ckq-Nx-Yxz" firstAttribute="centerY" secondItem="1TB-xP-Ff5" secondAttribute="centerY" id="jzg-rx-vke"/>
                                                 <constraint firstItem="1TB-xP-Ff5" firstAttribute="top" secondItem="jDZ-v9-6Je" secondAttribute="bottom" constant="14" id="lX7-Hx-ecD"/>
                                                 <constraint firstItem="1TB-xP-Ff5" firstAttribute="leading" secondItem="jDZ-v9-6Je" secondAttribute="leading" id="sZS-Cm-8v2"/>
-                                                <constraint firstItem="Ckq-Nx-Yxz" firstAttribute="leading" secondItem="1TB-xP-Ff5" secondAttribute="trailing" constant="7.5" id="sst-Up-iXE"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Cwf-Yb-Kdk" secondAttribute="trailing" constant="3" id="svP-D3-T5f"/>
                                                 <constraint firstItem="GDZ-sR-MZJ" firstAttribute="leading" secondItem="U4a-o1-0RJ" secondAttribute="trailing" constant="15" id="tWv-ZQ-aWS"/>
                                                 <constraint firstAttribute="trailing" secondItem="jDZ-v9-6Je" secondAttribute="trailing" constant="20" id="uJS-mf-AhZ"/>
+                                                <constraint firstAttribute="bottom" secondItem="1TB-xP-Ff5" secondAttribute="bottom" constant="10.5" id="v7C-GP-fdv"/>
                                                 <constraint firstItem="jDZ-v9-6Je" firstAttribute="leading" secondItem="U4a-o1-0RJ" secondAttribute="leading" id="ytR-uv-IJM"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1759,31 +1752,24 @@
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="slt-XA-rTg">
-                                                    <rect key="frame" x="20" y="194" width="28" height="25"/>
+                                                    <rect key="frame" x="20" y="194" width="121" height="25"/>
                                                     <color key="tintColor" red="0.69803921568627447" green="0.52941176470588236" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <state key="normal" image="bubble.left" catalog="system">
+                                                    <state key="normal" title=" Comments" image="bubble.left" catalog="system">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="didTapComment:" destination="f0G-XC-qe8" eventType="touchUpInside" id="jsZ-9X-0l6"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L7p-lY-owu">
-                                                    <rect key="frame" x="55.5" y="196.5" width="83.5" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="sRJ-2c-l90" firstAttribute="leading" secondItem="xKo-bX-4vZ" secondAttribute="trailing" constant="15" id="6FK-n5-IQu"/>
                                                 <constraint firstAttribute="bottom" secondItem="slt-XA-rTg" secondAttribute="bottom" constant="10" id="Iow-Gi-5LG"/>
-                                                <constraint firstItem="L7p-lY-owu" firstAttribute="centerY" secondItem="slt-XA-rTg" secondAttribute="centerY" id="LF4-wh-rMG"/>
                                                 <constraint firstItem="TCh-WK-9FS" firstAttribute="top" secondItem="sRJ-2c-l90" secondAttribute="bottom" constant="5" id="QDb-NV-UD2"/>
                                                 <constraint firstItem="uok-ZK-EL4" firstAttribute="top" secondItem="1kd-3W-hUm" secondAttribute="topMargin" id="QYF-eI-UrP"/>
                                                 <constraint firstItem="BQR-vN-6UT" firstAttribute="top" secondItem="xKo-bX-4vZ" secondAttribute="bottom" constant="8" id="RT4-HE-oy8"/>
                                                 <constraint firstItem="xKo-bX-4vZ" firstAttribute="leading" secondItem="1kd-3W-hUm" secondAttribute="leadingMargin" id="eas-l4-I2t"/>
-                                                <constraint firstItem="L7p-lY-owu" firstAttribute="leading" secondItem="slt-XA-rTg" secondAttribute="trailing" constant="7.5" id="hUq-IZ-Uzx"/>
                                                 <constraint firstAttribute="trailing" secondItem="BQR-vN-6UT" secondAttribute="trailing" constant="20" id="jdP-aH-zzB"/>
                                                 <constraint firstItem="TCh-WK-9FS" firstAttribute="leading" secondItem="sRJ-2c-l90" secondAttribute="leading" id="kag-JM-q4J"/>
                                                 <constraint firstItem="slt-XA-rTg" firstAttribute="top" secondItem="BQR-vN-6UT" secondAttribute="bottom" constant="10" id="p5G-YN-jBa"/>
@@ -3600,13 +3586,13 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="WSj-CW-WDh"/>
-        <segue reference="WTd-pV-B1j"/>
-        <segue reference="aJJ-mB-qx8"/>
+        <segue reference="LBG-0O-M7m"/>
+        <segue reference="ByB-WX-yAM"/>
+        <segue reference="n3j-lo-FYL"/>
         <segue reference="vVA-Vw-9fQ"/>
         <segue reference="GI8-BV-nN7"/>
         <segue reference="Jfi-X2-tcA"/>
-        <segue reference="rff-eI-h6r"/>
+        <segue reference="eOz-I0-ZcM"/>
         <segue reference="l9q-sS-em3"/>
     </inferredMetricsTieBreakers>
     <resources>

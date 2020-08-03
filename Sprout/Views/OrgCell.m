@@ -59,7 +59,10 @@ only shows the label if at least one friend has liked it
         {
             self.org.numFriendsLike=((NSArray*)userAccess[@"friendOrgs"][self.org.ein]).count;
             if(self.org.numFriendsLike>0){
-                self.numLikesLabel.text=[NSString stringWithFormat:@"%lu friends have liked this", self.org.numFriendsLike];
+                if(self.org.numFriendsLike==1)
+                    self.numLikesLabel.text=[NSString stringWithFormat:@"%lu friend has liked this", self.org.numFriendsLike];
+                else
+                    self.numLikesLabel.text=[NSString stringWithFormat:@"%lu friends have liked this", self.org.numFriendsLike];
                 self.numLikesLabel.alpha=SHOW_ALPHA;
             }
         }

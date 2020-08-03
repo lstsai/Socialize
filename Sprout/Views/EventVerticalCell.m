@@ -97,7 +97,10 @@ Loads the cell data from the event
         {
             self.event.numFriendsLike=((NSArray*)userAccess[@"friendEvents"][self.event.objectId]).count;
             if(self.event.numFriendsLike>0){
-                self.numLikesLabel.text=[NSString stringWithFormat:@"%lu friends have liked this", self.event.numFriendsLike];
+                if(self.event.numFriendsLike==1)
+                    self.numLikesLabel.text=[NSString stringWithFormat:@"%lu friend has liked this", self.event.numFriendsLike];
+                else
+                    self.numLikesLabel.text=[NSString stringWithFormat:@"%lu friends have liked this", self.event.numFriendsLike];
                 self.numLikesLabel.alpha=SHOW_ALPHA;
             }
         }

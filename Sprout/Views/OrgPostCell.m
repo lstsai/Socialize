@@ -76,7 +76,10 @@ Calculates the number of friends that have liked the organization the post is ab
         {
             self.org.numFriendsLike=((NSArray*)userAccess[@"friendOrgs"][self.org.ein]).count;
             if(self.org.numFriendsLike>0){
-                self.numLikeLabel.text=[NSString stringWithFormat:@"%lu friends have liked this", self.org.numFriendsLike];
+                if(self.org.numFriendsLike==1)
+                    self.numLikeLabel.text=[NSString stringWithFormat:@"%lu friend has liked this", self.org.numFriendsLike];
+                else
+                    self.numLikeLabel.text=[NSString stringWithFormat:@"%lu friends have liked this", self.org.numFriendsLike];
                 self.numLikeLabel.alpha=SHOW_ALPHA;
             }
         }

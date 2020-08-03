@@ -75,7 +75,10 @@ Calculates the number of friends that have liked the event the post is about
         {
             self.event.numFriendsLike=((NSArray*)userAccess[@"friendEvents"][self.event.objectId]).count;
             if(self.event.numFriendsLike>0){
-                self.numLikeLabel.text=[NSString stringWithFormat:@"%lu friends have liked this", self.event.numFriendsLike];
+                if(self.event.numFriendsLike==1)
+                    self.numLikeLabel.text=[NSString stringWithFormat:@"%lu friend has liked this", self.event.numFriendsLike];
+                else
+                    self.numLikeLabel.text=[NSString stringWithFormat:@"%lu friend has liked this", self.event.numFriendsLike];
                 self.numLikeLabel.alpha=SHOW_ALPHA;
             }
         }

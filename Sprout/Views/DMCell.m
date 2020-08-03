@@ -24,12 +24,24 @@
     self.profileImage.file=self.user[@"profilePic"];
     [self.profileImage loadInBackground];
     if(self.unread)
-        [self.messageLabel setFont:[UIFont boldSystemFontOfSize:EMPTY_MESSAGE_FONT_SIZE]];
+        [self markUnread];
     else
-        [self.messageLabel setFont:[UIFont systemFontOfSize:EMPTY_MESSAGE_FONT_SIZE]];
+        [self markRead];
     self.messageLabel.text=self.latestMessage.messageText;
     self.timeLabel.text=[self.latestMessage.createdAt shortTimeAgoSinceNow];
     self.nameLabel.text=self.user.username;
+}
+/**
+ Change message label to indicate readMessage
+ */
+-(void) markRead{
+    [self.messageLabel setFont:[UIFont systemFontOfSize:EMPTY_MESSAGE_FONT_SIZE]];
+}
+/**
+Change message label to indicate unreadMessage
+*/
+-(void) markUnread{
+    [self.messageLabel setFont:[UIFont boldSystemFontOfSize:EMPTY_MESSAGE_FONT_SIZE]];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

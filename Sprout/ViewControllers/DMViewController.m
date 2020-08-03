@@ -180,8 +180,11 @@ Empty table view delegate method. Returns if the empty view should be shown
         MessagingViewController* messageVC=segue.destinationViewController;
         if(self.isSearch)
             messageVC.user=self.friends[tappedIndex.row];
-        else
+        else{
             messageVC.user=self.messageUsers[tappedIndex.row];
+            //mark message as read now
+            [(DMCell*)tappedCell markRead];
+        }
         [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
     }
 }

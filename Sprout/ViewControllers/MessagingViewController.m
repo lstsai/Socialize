@@ -25,6 +25,7 @@
     self.tableView.transform = CGAffineTransformMakeScale(1, -1);//flip the table view upside down
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    self.tableView.keyboardDismissMode=UIScrollViewKeyboardDismissModeOnDrag;
     self.messageTextField.delegate=self;
     self.messages=[[NSArray alloc]init];
     self.pageNum=1;

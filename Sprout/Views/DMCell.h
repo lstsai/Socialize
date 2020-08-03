@@ -23,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL unread;
 
 -(void) loadData;
+-(void) markRead;
+-(void) markUnread;
+
 @end
 
 NS_ASSUME_NONNULL_END

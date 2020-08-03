@@ -86,8 +86,7 @@
         else{
             PFQuery *regpostsQ= [PFQuery queryWithClassName:@"Post"];
             [regpostsQ whereKey:@"groupPost" equalTo:@(NO)];
-            NSArray *friendsAndSelf=[friends arrayByAddingObject:PFUser.currentUser];
-            [regpostsQ whereKey:@"author" containedIn:friendsAndSelf];
+            [regpostsQ whereKey:@"author" containedIn:friends];
             PFQuery* groupPostQ=[PFQuery queryWithClassName:@"Post"];
             [groupPostQ whereKey:@"groupPost" equalTo:@(YES)];
             NSMutableArray* eventsList=[NSMutableArray new];

@@ -117,7 +117,7 @@
                 else
                     [self.loadingMoreView stopAnimating];
                 [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-
+                self.isMoreDataLoading=NO;
             }];
         }
     }];

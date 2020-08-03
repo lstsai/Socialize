@@ -54,6 +54,8 @@
     {
         [self.topButton setTitle:@"Edit" forState:UIControlStateNormal];
         [self.topButton setTitle:@"Save" forState:UIControlStateSelected];
+        [self.backgroundImage setUserInteractionEnabled:YES];
+        [self.profileImage setUserInteractionEnabled:YES];
         self.privateView.alpha=HIDE_ALPHA;
     }
     else{

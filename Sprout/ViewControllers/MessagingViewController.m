@@ -68,6 +68,7 @@
             [self.tableView reloadData];
         }
         [self.loadingMoreView stopAnimating];
+        self.isMoreDataLoading=NO;
     }];
 }
 /**

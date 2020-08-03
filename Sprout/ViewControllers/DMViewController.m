@@ -29,8 +29,9 @@
     self.tableView.emptyDataSetDelegate = self;
     self.tableView.tableFooterView = [UIView new];
     self.isSearch=NO;
-    self.messageThreads=[[NSMutableArray alloc] init];
-    self.messageUsers=[[NSMutableArray alloc] init];
+    UIRefreshControl *refreshControl= [[UIRefreshControl alloc] init];//initialize the refresh control
+    [refreshControl addTarget:self action:@selector(getMessageThreads:) forControlEvents:UIControlEventValueChanged];//add an event listener
+    [self.tableView insertSubview:refreshControl atIndex:0];//add into the storyboard
     [self getMessageThreads:nil];
 }
 /**
@@ -46,6 +47,8 @@ Triggered when the user presses thesearch button on the keyboard. Calls the fetc
 -(void) getMessageThreads:(UIRefreshControl* _Nullable)refreshControl{
     PFObject* selfUserAccess=[Helper getUserAccess:PFUser.currentUser];
     NSArray* messageThreads=selfUserAccess[@"messageThreads"];
+    self.messageThreads=[[NSMutableArray alloc] init];
+    self.messageUsers=[[NSMutableArray alloc] init];
     for(NSString* userID in messageThreads)
     {
         PFUser* user= [PFQuery getUserObjectWithId:userID];
@@ -58,6 +61,8 @@ Triggered when the user presses thesearch button on the keyboard. Calls the fetc
         [self.messageThreads addObject:[messageQ getFirstObject]];
         [self.messageUsers addObject:user];
     }
+    if(refreshControl)
+        [refreshControl endRefreshing];
     [self.tableView reloadData];
 }
 -(void) searchFriends{

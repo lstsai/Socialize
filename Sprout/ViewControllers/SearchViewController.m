@@ -137,6 +137,7 @@ Calls the correct method in the child view controllers depending on the type of 
     {
         self.eventsVC.searchText=self.searchBar.text;
         self.eventsVC.locationCoord=self.locationCoord;
+        [self.eventsVC getEvents:nil];
         [self.searchBar setPlaceholder:[EVENT_SEARCH_PLACEHOLDER mutableCopy]];
         [self.orgsView setHidden:YES];
         [self.peopleView setHidden:YES];

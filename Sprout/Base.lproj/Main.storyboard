@@ -2360,8 +2360,8 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="thin"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add friend to see thier liked organizations and events" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4w-Ao-VEI">
-                                        <rect key="frame" x="90" y="126" width="234" height="41"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add friend to see thier liked organizations and events" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="v4w-Ao-VEI">
+                                        <rect key="frame" x="80" y="126" width="254" height="41"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -2371,7 +2371,7 @@
                                 <constraints>
                                     <constraint firstItem="if4-Jb-zEL" firstAttribute="width" secondItem="ObE-0b-N90" secondAttribute="width" multiplier="0.246377" id="9dm-dk-fqA"/>
                                     <constraint firstItem="if4-Jb-zEL" firstAttribute="centerX" secondItem="ObE-0b-N90" secondAttribute="centerX" id="9iF-dI-l2P"/>
-                                    <constraint firstItem="v4w-Ao-VEI" firstAttribute="leading" secondItem="ObE-0b-N90" secondAttribute="leading" constant="90" id="TrR-Ky-LAx"/>
+                                    <constraint firstItem="v4w-Ao-VEI" firstAttribute="leading" secondItem="ObE-0b-N90" secondAttribute="leading" constant="80" id="TrR-Ky-LAx"/>
                                     <constraint firstItem="if4-Jb-zEL" firstAttribute="height" secondItem="ObE-0b-N90" secondAttribute="height" multiplier="0.224242" id="YNY-pT-jfi"/>
                                     <constraint firstItem="if4-Jb-zEL" firstAttribute="top" secondItem="ObE-0b-N90" secondAttribute="top" constant="26" id="lh2-IN-JhA"/>
                                     <constraint firstItem="v4w-Ao-VEI" firstAttribute="top" secondItem="if4-Jb-zEL" secondAttribute="bottom" constant="7.5" id="pb8-OE-TM0"/>

@@ -30,6 +30,12 @@
     self.tableView.tableFooterView=[UIView new];
 }
 /**
+ Refresh when the view appears
+ */
+-(void) viewWillAppear:(BOOL)animated{
+    [self getFriendRequests];
+}
+/**
 Makes a query to get all the friend requests the user has
 */
 -(void) getFriendRequests{

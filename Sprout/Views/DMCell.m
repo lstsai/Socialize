@@ -8,6 +8,7 @@
 
 #import "DMCell.h"
 #import "DateTools.h"
+#import "Constants.h"
 @implementation DMCell
 
 - (void)awakeFromNib {
@@ -22,7 +23,10 @@
     
     self.profileImage.file=self.user[@"profilePic"];
     [self.profileImage loadInBackground];
-    
+    if(self.unread)
+        [self.messageLabel setFont:[UIFont boldSystemFontOfSize:EMPTY_MESSAGE_FONT_SIZE]];
+    else
+        [self.messageLabel setFont:[UIFont systemFontOfSize:EMPTY_MESSAGE_FONT_SIZE]];
     self.messageLabel.text=self.latestMessage.messageText;
     self.timeLabel.text=[self.latestMessage.createdAt shortTimeAgoSinceNow];
     self.nameLabel.text=self.user.username;

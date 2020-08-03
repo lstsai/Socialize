@@ -47,6 +47,7 @@ Triggered when the user presses thesearch button on the keyboard. Calls the fetc
 -(void) getMessageThreads:(UIRefreshControl* _Nullable)refreshControl{
     PFObject* selfUserAccess=[Helper getUserAccess:PFUser.currentUser];
     NSArray* messageThreads=selfUserAccess[@"messageThreads"];
+    self.unreadMessages=selfUserAccess[@"unreadMessages"];
     self.messageThreads=[[NSMutableArray alloc] init];
     self.messageUsers=[[NSMutableArray alloc] init];
     for(NSString* userID in messageThreads)
@@ -99,6 +100,7 @@ Triggered when the user presses thesearch button on the keyboard. Calls the fetc
         DMCell* dmc=[tableView dequeueReusableCellWithIdentifier:@"DMCell" forIndexPath:indexPath];
         dmc.latestMessage=self.messageThreads[indexPath.row];;
         dmc.user=self.messageUsers[indexPath.row];
+        dmc.unread=[self.unreadMessages containsObject:((PFUser*)self.messageUsers[indexPath.row]).objectId];
         [dmc loadData];
         return dmc;
 

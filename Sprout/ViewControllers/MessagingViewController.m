@@ -37,6 +37,12 @@
     [self getMessages];
 }
 /**
+ Right before the user exits the screen, mark all the messages that the other user has sent as read.
+ */
+-(void) viewWillDisappear:(BOOL)animated{
+    [Helper performSelectorInBackground:@selector(removeUnreadMessage:) withObject:self.user];
+}
+/**
  setup the infinite scroll indicators
  */
 -(void) setupLoadingIndicators{
@@ -163,7 +169,7 @@ Table view delegate method. returns the number of sections that the table has. T
     return self.messages.count;
 }
 /**
- Triggered when the user sends the messages. Will post the message in chat
+ Triggered when the user sends the messages. Will post the message in chat and update message lists
  and clear the field
  @param[in] sender the button that was tapped
  */
@@ -175,7 +181,8 @@ Table view delegate method. returns the number of sections that the table has. T
             [Helper displayAlert:@"Error sending message" withMessage:error.localizedDescription on:self];
         else{
             [self getMessages];
-            [Helper performSelectorInBackground:@selector(updateMessageOrder:) withObject:self.user];
+            [Helper performSelectorInBackground:@selector(updateMessageOrder:) withObject:self.user];//current user's message to this person is the newest
+            [Helper performSelectorInBackground:@selector(addUnreadMessage:) withObject:self.user];//add current user to the person's list of unread messages
         }
         self.messageTextField.text=@"";
     }];

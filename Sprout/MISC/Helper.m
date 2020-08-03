@@ -473,10 +473,10 @@ Updates the ordered message thread list in UserAccess for the 2 users messaging
 */
 + (void) updateMessageOrder:(PFUser *)toUser{
     PFObject *currentUserAccess= [Helper getUserAccess:PFUser.currentUser];
-    PFObject *requestedUserAccess= [Helper getUserAccess:toUser];
+    PFObject *toUserAccess= [Helper getUserAccess:toUser];
     //access the messageThread list of the users
     NSMutableArray *currMessageT= currentUserAccess[@"messageThreads"];
-    NSMutableArray *otherMessageT= requestedUserAccess[@"messageThreads"];
+    NSMutableArray *otherMessageT= toUserAccess[@"messageThreads"];
     
     //remove the users from the current order
     [currMessageT removeObject:toUser.objectId];
@@ -487,10 +487,33 @@ Updates the ordered message thread list in UserAccess for the 2 users messaging
     
     //assign the attributes to new list
     currentUserAccess[@"messageThreads"]=currMessageT;
-    requestedUserAccess[@"messageThreads"]=otherMessageT;
+    toUserAccess[@"messageThreads"]=otherMessageT;
     //save
-    [PFObject saveAllInBackground:@[currentUserAccess, requestedUserAccess]];
+    [PFObject saveAllInBackground:@[currentUserAccess, toUserAccess]];
 }
+/**
+Add the unread message  list in UserAccess to indicate the message to this user is unread
+ @param[in] reciever the user that the message is to
+*/
++ (void) addUnreadMessage:(PFUser*) reciever{
+    PFObject *rUserAccess= [Helper getUserAccess:reciever];
+    NSMutableArray *rUserUnread= rUserAccess[@"unreadMessages"];
+    [rUserUnread addObject:PFUser.currentUser.objectId];
+    rUserAccess[@"unreadMessages"]=rUserUnread;
+    [rUserAccess saveInBackground];
+}
+/**
+Remove the unread message list in UserAccess to indicate the message from this user has been read
+ @param[in] sender  the user that sent the message
+*/
++ (void) removeUnreadMessage:(PFUser*) sender{
+    PFObject *selfAccess= [Helper getUserAccess:PFUser.currentUser];
+    NSMutableArray *selfUnread= selfAccess[@"unreadMessages"];
+    [selfUnread removeObject:sender.objectId];
+    selfAccess[@"unreadMessages"]=selfUnread;
+    [selfAccess saveInBackground];
+}
+
 
 
 

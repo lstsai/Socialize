@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray* messageThreads;
 @property (strong, nonatomic) NSMutableArray* messageUsers;
+@property (strong, nonatomic) NSArray* unreadMessages;
 @property (strong, nonatomic) NSArray* friends;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic) BOOL isSearch;

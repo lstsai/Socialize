@@ -38,7 +38,7 @@ const NSString* ORG_POST_TEXT_PLACEHOLDER =@"Share something about this organiza
 const NSString* EVENT_POST_TEXT_PLACEHOLDER=@"Share something about this event";
 
 const CGFloat EMPTY_TITLE_FONT_SIZE=18;
-const CGFloat EMPTY_MESSAGE_FONT_SIZE=14;
+const CGFloat EMPTY_MESSAGE_FONT_SIZE=15;
 
 const CGFloat PULL_REFRESH_HEIGHT=50;
 const int SEARCH_RADIUS=20;//miles

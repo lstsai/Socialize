@@ -11,6 +11,7 @@ View Controller to display the details for a specified event
 #import <UIKit/UIKit.h>
 #import "Event.h"
 #import <EventKit/EventKit.h>
+#import <ResponsiveLabel.h>
 @import Parse;
 @import GoogleMaps;
 NS_ASSUME_NONNULL_BEGIN
@@ -22,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *eventAuthorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventLocationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *eventDetailsLabel;
+@property (weak, nonatomic) IBOutlet ResponsiveLabel *eventDetailsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) Event *event;
 @property (weak, nonatomic) IBOutlet UILabel *numLikesLabel;

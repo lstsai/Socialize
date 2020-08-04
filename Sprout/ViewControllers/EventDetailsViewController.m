@@ -14,6 +14,7 @@
 #import "Constants.h"
 #import "EventGroupViewController.h"
 #import <UserNotifications/UserNotifications.h>
+#import "WebViewController.h"
 @interface EventDetailsViewController ()
 
 @end
@@ -35,6 +36,14 @@ Loads the view controller's views to reflect the event it is representing
     self.eventLocationLabel.text=self.event.streetAddress;
     
     self.eventDetailsLabel.text= self.event.details;
+    self.eventDetailsLabel.userInteractionEnabled = YES;
+    PatternTapResponder urlTapAction = ^(NSString *tappedString) {
+        [self performSegueWithIdentifier:@"webSegue" sender:tappedString];
+    };
+    [self.eventDetailsLabel enableURLDetectionWithAttributes:
+    @{NSForegroundColorAttributeName:[UIColor linkColor],NSUnderlineStyleAttributeName:[NSNumber
+    numberWithInt:1],RLTapResponderAttributeName:urlTapAction}];
+
     NSString *sdateString, *edateString;
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -210,6 +219,11 @@ Triggered when the user taps the time of the event and creates a calander event 
     {
         EventGroupViewController *eventgroupVC=segue.destinationViewController;
         eventgroupVC.event=self.event;
+    }
+    else if([segue.identifier isEqualToString:@"webSegue"])//shows the user the website
+    {
+        WebViewController *webVC=segue.destinationViewController;
+        webVC.link=[NSURL URLWithString:sender];
     }
 }
 

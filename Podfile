@@ -17,7 +17,7 @@ target 'Sprout' do
 	pod 'DZNEmptyDataSet'
 	pod 'HMSegmentedControl'
 	pod 'UITextView+Placeholder'
-	
+	pod 'ResponsiveLabel'
   target 'SproutTests' do
     inherit! :search_paths
     # Pods for testing

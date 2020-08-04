@@ -26,6 +26,13 @@
     [self.webView loadRequest:request];
     [self.webView reload];
 }
+/**
+ Triggered when the user taps the cancel button, dismisses the view controller
+ @param[in] sender the button that was pressed
+ */
+- (IBAction)didTapCancel:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 /*
 #pragma mark - Navigation

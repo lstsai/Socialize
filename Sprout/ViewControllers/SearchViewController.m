@@ -30,7 +30,7 @@
     // Do any additional setup after loading the view.
     self.searchBar.delegate=self;
    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-    [UIFont boldSystemFontOfSize:EMPTY_MESSAGE_FONT_SIZE], NSFontAttributeName,
+    [UIFont boldSystemFontOfSize:EMPTY_MESSAGE_FONT_SIZE-1], NSFontAttributeName,
     [UIColor whiteColor], NSForegroundColorAttributeName,
     nil];
     [self.searchControl setTitleTextAttributes:attributes forState:UIControlStateSelected];

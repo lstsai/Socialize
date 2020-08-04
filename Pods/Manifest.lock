@@ -33,6 +33,7 @@ PODS:
     - Bolts/Tasks (= 1.9.1)
   - Parse/UI (1.18.0):
     - Parse/Core
+  - ResponsiveLabel (1.0.11)
   - "UITextView+Placeholder (1.4.0)"
 
 DEPENDENCIES:
@@ -46,6 +47,7 @@ DEPENDENCIES:
   - MBProgressHUD
   - Parse
   - Parse/UI
+  - ResponsiveLabel
   - "UITextView+Placeholder"
 
 SPEC REPOS:
@@ -60,6 +62,7 @@ SPEC REPOS:
     - ListPlaceholder
     - MBProgressHUD
     - Parse
+    - ResponsiveLabel
     - "UITextView+Placeholder"
 
 SPEC CHECKSUMS:
@@ -73,8 +76,9 @@ SPEC CHECKSUMS:
   ListPlaceholder: 08ddaddf67520a20fc52cf37160fb56aa64d071d
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Parse: 79bdda34fdb7eb2a707a43a951c8aae236cb3e34
+  ResponsiveLabel: 9e31c425ed082481faf2360689243bb0ec8f8b22
   "UITextView+Placeholder": d7b0c400921f66523f3a85d74f774512e14f6502
 
-PODFILE CHECKSUM: 8f14da890c1ecd8c062b705e888a469e1f6c1123
+PODFILE CHECKSUM: 435e0f5033f500f98e6a415c9b7d3b25f8424b85
 
 COCOAPODS: 1.9.3

@@ -19,6 +19,7 @@
 @dynamic image;
 @dynamic address;//location object of the org
 @dynamic claimedBy;
+@dynamic seenUsers;
 
 /**
  Returns the name of the class in parse
@@ -38,6 +39,7 @@
     claimedOrg.website=website;
     claimedOrg.image=[Helper getPFFileFromImage:image withName:name];
     claimedOrg.claimedBy=PFUser.currentUser;
+    claimedOrg.seenUsers=@[];
     [claimedOrg saveInBackgroundWithBlock:completion];
 }
 

@@ -304,7 +304,6 @@ Triggered when the user scrolls on the table view. Determines if the program sho
         CommentsViewController *commentVC=segue.destinationViewController;
         commentVC.post=(Post*)sender;
     }
-    
 }
 
 

@@ -60,6 +60,7 @@
             self.orgNameLabel.text=self.claimedOrg.name;
             self.orgTaglineLabel.text=self.claimedOrg.tagLine;
             self.locationLabel.text=[self.org.location.city stringByAppendingFormat:@", %@", self.org.location.state];
+            [Helper performSelectorInBackground:@selector(addUserToSeenClaimedOrgList:) withObject:claimedOrg];
         }
     }];
 }

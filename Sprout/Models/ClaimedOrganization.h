@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) PFFileObject *image;
 @property (strong, nonatomic) NSString *address;//location object of the org
 @property (strong, nonatomic) PFUser *claimedBy;
+@property (strong, nonatomic) NSArray *seenUsers;
 
 
 + (void) claimOrganization:(NSString *)ein withName:(NSString *)name withCategory:(NSString*)category withCause:(NSString*)cause withMissionStatement:(NSString*)missionStatement withAddress:(NSString*)address withTagline:(NSString*)tagline withWebsite:(NSString*)website withImage:(UIImage*)image withCompletion: (PFBooleanResultBlock  _Nullable)completion;

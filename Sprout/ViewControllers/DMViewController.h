@@ -18,6 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSArray* friends;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic) BOOL isSearch;
+@property (nonatomic) BOOL isOrgMessages;
+@property (strong, nonatomic) NSArray* seenUsers;
+@property (weak, nonatomic) IBOutlet UIView *seenUsersView;
+
 -(void) getMessageThreads:(UIRefreshControl* _Nullable)refreshControl;
 -(void) searchFriends;
 

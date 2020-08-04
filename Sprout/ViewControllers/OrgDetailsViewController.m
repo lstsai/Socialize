@@ -18,6 +18,7 @@
 #import "ClaimedOrganization.h"
 #import "MBProgressHUD.h"
 #import "EditOrgViewController.h"
+#import "DMViewController.h"
 @interface OrgDetailsViewController ()
 
 @end
@@ -68,6 +69,7 @@
     {
         self.claimButton.alpha=HIDE_ALPHA;
         self.editButton.alpha=SHOW_ALPHA;
+        self.messageButton.alpha=SHOW_ALPHA;
     }
     [self performSelectorInBackground:@selector(getLikes) withObject:nil];
     [self checkClaimed];
@@ -88,6 +90,7 @@
             self.website.text=self.claimedOrg.website;
             self.backdropImage.file=self.claimedOrg.image;
             [self.backdropImage loadInBackground];
+            [Helper performSelectorInBackground:@selector(addUserToSeenClaimedOrgList:) withObject:claimedOrg];
         }
     }];
     
@@ -196,6 +199,14 @@ Triggered when the user (un)likes this organization. Calls the Helper method did
     }];
 }
 /**
+ Triggered when the user taps the message button,
+ fetches the users that have seen this org and presents the dm view*/
+- (IBAction)didTapMessage:(id)sender {
+    [Helper getClaimedOrgSeenUsers:self.claimedOrg withCompletion:^(NSArray * _Nonnull users, NSError * _Nonnull error) {
+        [self performSegueWithIdentifier:@"messageSegue" sender:users];
+    }];
+}
+/**
  Triggered when the user pinches to zoom on the image. Will animate back to original
  state when the user stops pinching.
  @param[in] sender the pinch gesture that was triggered
@@ -245,6 +256,12 @@ Triggered when the user (un)likes this organization. Calls the Helper method did
     {
         EditOrgViewController *editVC=segue.destinationViewController;
         editVC.claimedOrg=self.claimedOrg;
+    }
+    else if([segue.identifier isEqualToString:@"messageSegue"])//takes the user to the page to create a post about this org
+    {
+        DMViewController *dmVC=segue.destinationViewController;
+        dmVC.seenUsers=(NSArray*)sender;
+        dmVC.isOrgMessages=YES;
     }
 }
 

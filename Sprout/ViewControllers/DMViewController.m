@@ -32,7 +32,14 @@
     UIRefreshControl *refreshControl= [[UIRefreshControl alloc] init];//initialize the refresh control
     [refreshControl addTarget:self action:@selector(getMessageThreads:) forControlEvents:UIControlEventValueChanged];//add an event listener
     [self.tableView insertSubview:refreshControl atIndex:0];//add into the storyboard
-    [self getMessageThreads:nil];
+    if(self.isOrgMessages)
+    {
+        self.searchBar.hidden=YES;
+        [self.tableView reloadData];
+        self.seenUsersView.alpha=SHOW_ALPHA;
+    }
+    else
+        [self getMessageThreads:nil];
 }
 /**
 Triggered when the user presses thesearch button on the keyboard. Calls the fetchResults method to get
@@ -112,7 +119,13 @@ Table view delegate method. returns a FriendCell or DMCell to be shown.
 @return the cell that should be shown in the passed indexpath
 */
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    if(self.isSearch)
+    if(self.isOrgMessages){
+        FriendCell* friendc=[tableView dequeueReusableCellWithIdentifier:@"FriendCell" forIndexPath:indexPath];
+        friendc.user=self.seenUsers[indexPath.row];
+        [friendc loadDetails];
+        return friendc;
+    }
+    else if(self.isSearch)
     {
         FriendCell* friendc=[tableView dequeueReusableCellWithIdentifier:@"FriendCell" forIndexPath:indexPath];
         friendc.user=self.friends[indexPath.row];
@@ -137,7 +150,9 @@ Table view delegate method. returns the number of sections that the table has. T
 @return the number of friends/threads
 */
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(self.isSearch)
+    if(self.isOrgMessages)
+        return self.seenUsers.count;
+    else if(self.isSearch)
         return self.friends.count;
     else
         return self.messageUsers.count;
@@ -207,7 +222,9 @@ Empty table view delegate method. Returns if the empty view should be shown
         UITableViewCell* tappedCell=sender;
         NSIndexPath* tappedIndex=[self.tableView indexPathForCell:tappedCell];
         MessagingViewController* messageVC=segue.destinationViewController;
-        if(self.isSearch)
+        if(self.isOrgMessages)
+            messageVC.user=self.seenUsers[tappedIndex.row];
+        else if(self.isSearch)
             messageVC.user=self.friends[tappedIndex.row];
         else{
             messageVC.user=self.messageUsers[tappedIndex.row];

@@ -667,18 +667,32 @@
                         <viewLayoutGuide key="safeArea" id="JGG-J8-rPG"/>
                     </view>
                     <navigationItem key="navigationItem" title="Organization Details" id="fPz-Ib-d3l">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="DrU-vy-T5Y">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aFr-9D-8D3">
-                                <rect key="frame" x="368.5" y="15" width="25.5" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="square.and.pencil" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
-                                </state>
-                                <connections>
-                                    <segue destination="qgr-ec-JOc" kind="presentation" identifier="orgPostSegue" id="vmk-95-jLU"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" id="DrU-vy-T5Y">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aFr-9D-8D3">
+                                    <rect key="frame" x="368.5" y="15" width="25.5" height="26"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="square.and.pencil" catalog="system">
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                    </state>
+                                    <connections>
+                                        <segue destination="qgr-ec-JOc" kind="presentation" identifier="orgPostSegue" id="vmk-95-jLU"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                            <barButtonItem style="plain" id="EB9-5Z-0SP">
+                                <button key="customView" opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aFt-d1-Waj">
+                                    <rect key="frame" x="332.5" y="17" width="28" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="bubble.left.and.bubble.right" catalog="system">
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="didTapMessage:" destination="Wv5-VZ-aSd" eventType="touchUpInside" id="NwF-lO-b50"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="address" destination="dOO-My-ft0" id="Q9J-dS-kZK"/>
@@ -690,12 +704,14 @@
                         <outlet property="editButton" destination="3eI-uI-FwD" id="IwO-IM-KLZ"/>
                         <outlet property="likeButton" destination="J4v-me-K4A" id="dcM-Us-qr3"/>
                         <outlet property="mapView" destination="mgR-L7-PQb" id="WfT-wy-1N4"/>
+                        <outlet property="messageButton" destination="aFt-d1-Waj" id="pSj-HA-APK"/>
                         <outlet property="mission" destination="6OH-0L-ABM" id="KB7-W3-Fdk"/>
                         <outlet property="name" destination="j7D-Hw-8oR" id="OMY-FG-1J7"/>
                         <outlet property="numLikesLabel" destination="Qob-Vb-0Iw" id="Gqa-sU-4zj"/>
                         <outlet property="tagLine" destination="1tD-iA-ka7" id="VzI-WM-w8y"/>
                         <outlet property="website" destination="0Rc-EU-Ybe" id="Vgn-Z8-8zk"/>
                         <segue destination="fm9-gw-6YN" kind="presentation" identifier="webSegue" id="i6a-EC-Dwr"/>
+                        <segue destination="YtQ-Ka-zB3" kind="show" identifier="messageSegue" id="CWa-JH-3fE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="St5-vH-rzg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1494,14 +1510,34 @@
                                 <rect key="frame" x="0.0" y="56" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ahr-cJ-9b7">
+                                <rect key="frame" x="0.0" y="56" width="414" height="56"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Users that have seen your organization" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xNQ-Ir-VHB">
+                                        <rect key="frame" x="50" y="17.5" width="314.5" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="xNQ-Ir-VHB" firstAttribute="centerX" secondItem="ahr-cJ-9b7" secondAttribute="centerX" id="Fzv-r6-BT3"/>
+                                    <constraint firstItem="xNQ-Ir-VHB" firstAttribute="centerY" secondItem="ahr-cJ-9b7" secondAttribute="centerY" id="T0j-C3-adA"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="VT1-lL-RQ4" firstAttribute="bottom" secondItem="0lI-Gt-Bme" secondAttribute="bottom" id="47E-cG-mcU"/>
                             <constraint firstItem="s3g-lD-26y" firstAttribute="top" secondItem="0lI-Gt-Bme" secondAttribute="top" id="8pv-xC-MlN"/>
                             <constraint firstItem="VT1-lL-RQ4" firstAttribute="trailing" secondItem="0lI-Gt-Bme" secondAttribute="trailing" id="CZd-PI-ZKh"/>
+                            <constraint firstItem="ahr-cJ-9b7" firstAttribute="top" secondItem="s3g-lD-26y" secondAttribute="top" id="FQj-4n-7wz"/>
                             <constraint firstItem="VT1-lL-RQ4" firstAttribute="top" secondItem="s3g-lD-26y" secondAttribute="bottom" id="ea7-Rj-KGQ"/>
+                            <constraint firstItem="ahr-cJ-9b7" firstAttribute="width" secondItem="s3g-lD-26y" secondAttribute="width" id="fmB-au-sdW"/>
                             <constraint firstItem="s3g-lD-26y" firstAttribute="leading" secondItem="0lI-Gt-Bme" secondAttribute="leading" id="hpj-wF-HpV"/>
+                            <constraint firstItem="ahr-cJ-9b7" firstAttribute="height" secondItem="s3g-lD-26y" secondAttribute="height" id="iib-iV-TnM"/>
+                            <constraint firstItem="ahr-cJ-9b7" firstAttribute="leading" secondItem="s3g-lD-26y" secondAttribute="leading" id="j3e-Lj-GXB"/>
                             <constraint firstItem="VT1-lL-RQ4" firstAttribute="leading" secondItem="0lI-Gt-Bme" secondAttribute="leading" id="qrS-XV-ZUk"/>
                             <constraint firstItem="s3g-lD-26y" firstAttribute="trailing" secondItem="0lI-Gt-Bme" secondAttribute="trailing" id="zHb-PP-Zjj"/>
                         </constraints>
@@ -1510,6 +1546,7 @@
                     <navigationItem key="navigationItem" title="Messages" id="xTy-yD-76f"/>
                     <connections>
                         <outlet property="searchBar" destination="s3g-lD-26y" id="7HN-89-YSY"/>
+                        <outlet property="seenUsersView" destination="ahr-cJ-9b7" id="a8G-b3-bay"/>
                         <outlet property="tableView" destination="VT1-lL-RQ4" id="cQR-jQ-a7B"/>
                     </connections>
                 </viewController>
@@ -1851,7 +1888,7 @@
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                 </state>
                                 <connections>
-                                    <segue destination="YtQ-Ka-zB3" kind="show" id="frM-ZH-97S"/>
+                                    <segue destination="YtQ-Ka-zB3" kind="show" identifier="messageSegue" id="frM-ZH-97S"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -3803,6 +3840,7 @@
         <segue reference="WTd-pV-B1j"/>
         <segue reference="n3j-lo-FYL"/>
         <segue reference="vVA-Vw-9fQ"/>
+        <segue reference="CWa-JH-3fE"/>
         <segue reference="GI8-BV-nN7"/>
         <segue reference="vmk-95-jLU"/>
         <segue reference="rff-eI-h6r"/>

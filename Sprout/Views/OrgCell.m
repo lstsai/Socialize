@@ -45,7 +45,6 @@
     else
         self.likeButton.selected=NO;
     [self performSelectorInBackground:@selector(getLikes) withObject:nil];
-    
 }
 /**
 calculates the number of friends that have liked this specific organization
@@ -100,7 +99,8 @@ Triggered when the user (un)likes this organization. Calls the Helper method did
             self.nameLabel.text=self.claimedOrg.name;
             self.tagLineLabel.text=self.claimedOrg.tagLine;
             self.orgImage.file=self.claimedOrg.image;
-            [self.orgImage loadInBackground]; 
+            [self.orgImage loadInBackground];
+            [Helper performSelectorInBackground:@selector(addUserToSeenClaimedOrgList:) withObject:claimedOrg];
         }
     }];
 }

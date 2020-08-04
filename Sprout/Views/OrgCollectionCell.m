@@ -49,6 +49,7 @@ Loads the cell data from the Organization
             self.orgImage.file=self.claimedOrg.image;
             [self.orgImage loadInBackground];
             self.orgNameLabel.text=self.claimedOrg.name;
+            [Helper performSelectorInBackground:@selector(addUserToSeenClaimedOrgList:) withObject:claimedOrg];
         }
     }];
 }

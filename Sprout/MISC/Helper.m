@@ -543,6 +543,8 @@ Remove the unread message list in UserAccess to indicate the message from this u
 }
 /**
 Fetches the claimed orgainzation with this ein, nil if it doesnt exist
+ @param[in] ein the ein of the organizaiton
+@param[in] completion the block that will send the claimed org back to the caller
 */
 + (void) getClaimedOrgFromEin:(NSString*) ein withCompletion:(void(^)(PFObject *claimedOrg))completion{
     PFQuery* orgQ=[PFQuery queryWithClassName:@"ClaimedOrganization"];
@@ -554,9 +556,46 @@ Fetches the claimed orgainzation with this ein, nil if it doesnt exist
             completion([objects firstObject]);
     }];
 }
+/**
+ Adds the current user to the seen users of the claimed organization
+ @param[in] claimedOrg the org that this user has seen
+ */
++ (void) addUserToSeenClaimedOrgList:(ClaimedOrganization*)claimedOrg{
+    NSMutableArray* seenUsers=claimedOrg.seenUsers.mutableCopy;
+    //add only once and not the claimed user
+    [claimedOrg.claimedBy fetchIfNeeded];
+    if(PFUser.currentUser.username!=claimedOrg.claimedBy.username)
+    {
+        [seenUsers removeObject:PFUser.currentUser.objectId];
+        [seenUsers addObject:PFUser.currentUser.objectId];
+        claimedOrg.seenUsers=seenUsers;
+        [claimedOrg saveEventually];
+    }
+}
 
-
-
-
+/**
+fetches all the users that have seen this organization
+ @param[in] claimedOrg the org that this user has seen
+ */
++ (void) getClaimedOrgSeenUsers:(ClaimedOrganization*)claimedOrg withCompletion:(void(^)(NSArray *users, NSError *error))completion{
+    
+    PFQuery *userQ = [PFQuery queryWithClassName:@"_User"];
+    if(! [Helper connectedToInternet])
+        [userQ fromLocalDatastore];
+    [userQ whereKey:@"objectId" containedIn:claimedOrg.seenUsers];
+    [userQ includeKey:@"friendAccessible"];
+    [userQ findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if(error)
+            completion(nil, error);
+        else{
+            for(PFUser* user in objects)
+            {
+                [user[@"friendAccessible"] pinInBackground];
+            }
+            [PFObject pinAllInBackground:objects];
+            completion(objects, nil);
+        }
+    }];
+}
 
 @end

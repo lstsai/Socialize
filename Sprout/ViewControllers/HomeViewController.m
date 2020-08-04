@@ -18,6 +18,7 @@
 #import "ProfileViewController.h"
 #import "CommentsViewController.h"
 #import "MBProgressHUD.h"
+#import "Event.h"
 @interface HomeViewController ()<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, OrgPostCellDelegate, EventPostCellDelegate>
 
 @end
@@ -103,7 +104,9 @@
             //get all the events that the user has liked
             for(NSString* eventID in PFUser.currentUser[@"likedEvents"])
             {
-                [eventsList addObject:[eventQ getObjectWithId:eventID]];
+                Event* event=[eventQ getObjectWithId:eventID];
+                [eventsList addObject:event];
+                [event pinInBackground];
             }
             [groupPostQ whereKey:@"event" containedIn:eventsList];
             PFQuery* postsQ=[PFQuery orQueryWithSubqueries:@[regpostsQ, groupPostQ]];
@@ -127,7 +130,9 @@
                         [post.event pinInBackground];
                         [post.author pinInBackground];
                     }
-                    [PFObject pinAllInBackground:objects];
+                    //unpin and repin to keep only updated info
+                    [PFObject unpinAllObjectsWithName:@"Posts"];
+                    [PFObject pinAllInBackground:objects withName:@"Posts"];
                     [self.tableView reloadData];
                 }
                 if(refreshControl)

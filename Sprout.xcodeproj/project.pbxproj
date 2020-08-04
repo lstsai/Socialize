@@ -62,7 +62,6 @@
 		DCE4B9FF24D50EBA001FADAF /* OutgoingMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE4B9FE24D50EBA001FADAF /* OutgoingMessageCell.m */; };
 		DCE4BA0224D51207001FADAF /* DMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE4BA0124D51207001FADAF /* DMViewController.m */; };
 		DCE4BA0524D51210001FADAF /* MessagingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE4BA0424D51210001FADAF /* MessagingViewController.m */; };
-		DCE4BA0924D8D371001FADAF /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DCE4BA0724D8D371001FADAF /* Model.xcdatamodeld */; };
 		DCE4BA4F24D8E836001FADAF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCE4BA4E24D8E836001FADAF /* SystemConfiguration.framework */; };
 		DCE4BA5524D8EA0A001FADAF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE4BA5324D8EA0A001FADAF /* Reachability.m */; };
 		DCE6FA4B24BFA447008091A3 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE6FA4A24BFA447008091A3 /* EventDetailsViewController.m */; };
@@ -199,7 +198,6 @@
 		DCE4BA0124D51207001FADAF /* DMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DMViewController.m; sourceTree = "<group>"; };
 		DCE4BA0324D51210001FADAF /* MessagingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessagingViewController.h; sourceTree = "<group>"; };
 		DCE4BA0424D51210001FADAF /* MessagingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagingViewController.m; sourceTree = "<group>"; };
-		DCE4BA0824D8D371001FADAF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		DCE4BA4E24D8E836001FADAF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DCE4BA5324D8EA0A001FADAF /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		DCE4BA5424D8EA0A001FADAF /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -441,7 +439,6 @@
 				DC3CF1B924BE1D6100C482F8 /* LocationManager.m */,
 				DCB65C1B24C76201005A43A9 /* Helper.h */,
 				DCB65C1C24C76201005A43A9 /* Helper.m */,
-				DCE4BA0724D8D371001FADAF /* Model.xcdatamodeld */,
 				DCE4BA5424D8EA0A001FADAF /* Reachability.h */,
 				DCE4BA5324D8EA0A001FADAF /* Reachability.m */,
 			);
@@ -748,7 +745,6 @@
 				DCB65C2324C7C44C005A43A9 /* OrgPostCell.m in Sources */,
 				DCB629D924C1FBE100C42EFB /* EventVerticalCell.m in Sources */,
 				DC3CF1C024BF644100C482F8 /* OrgSearchViewController.m in Sources */,
-				DCE4BA0924D8D371001FADAF /* Model.xcdatamodeld in Sources */,
 				DC3CF15D24BCB27A00C482F8 /* main.m in Sources */,
 				DC91239E24CA6A38001A4022 /* RequestCell.m in Sources */,
 				DC3CF1BD24BE500C00C482F8 /* Event.m in Sources */,
@@ -1099,19 +1095,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		DCE4BA0724D8D371001FADAF /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				DCE4BA0824D8D371001FADAF /* Model.xcdatamodel */,
-			);
-			currentVersion = DCE4BA0824D8D371001FADAF /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = DC3CF13F24BCB27900C482F8 /* Project object */;
 }

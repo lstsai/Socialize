@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
-    <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class">
-        <attribute name="backgroundImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
-        <attribute name="eventImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
-        <attribute name="postPhoto" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
-        <attribute name="profileImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
-    </entity>
+    <entity name="Organization" representedClassName="Organization" syncable="YES" codeGenerationType="class"/>
     <elements>
-        <element name="Entity" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="Organization" positionX="-63" positionY="-18" width="128" height="43"/>
     </elements>
 </model>

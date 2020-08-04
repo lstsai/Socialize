@@ -80,6 +80,7 @@
          {
              [Helper displayAlert:@"Error getting organizations" withMessage:error.localizedDescription on:self];
              self.organizations=@[].mutableCopy;
+             [self.tableView reloadData];
          }
          else{
              self.organizations=[organizations mutableCopy];

@@ -44,6 +44,8 @@
 
 - (void) getPostComments{
     PFQuery *commentQuery= [PFQuery queryWithClassName:@"Comment"];
+    if(![Helper connectedToInternet])
+        [commentQuery fromLocalDatastore];
     [commentQuery orderByDescending:@"createdAt"];
     [commentQuery includeKey:@"post"];
     [commentQuery includeKey:@"author"];
@@ -58,6 +60,7 @@
         {
             NSLog(@"Success getting comments");
             self.comments=objects;
+            [PFObject pinAllInBackground:objects withName:@"comment"];
             [self.tableView reloadData];
         }
     }];
@@ -68,18 +71,17 @@
 
 - (IBAction)didTapPost:(id)sender {
     [Comment postComment:self.commentTextField.text forPost:self.post withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-            if(error)
-            {
-                NSLog(@"Error posting comment %@", error.localizedDescription);
-            }
-            else
-            {
-                NSLog(@"Success posting comment");
-                //increment comment count
-                self.commentTextField.text=@"";
-                [self.commentTextField endEditing:YES];
-                [self getPostComments];
-            }
+        if(error)
+        {
+            NSLog(@"Error posting comment %@", error.localizedDescription);
+        }
+        else
+        {
+            NSLog(@"Success posting comment");
+            self.commentTextField.text=@"";
+            [self.commentTextField endEditing:YES];
+            [self getPostComments];
+        }
     }];
 }
 

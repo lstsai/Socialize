@@ -13,7 +13,7 @@
 #import "MessagingViewController.h"
 #import "Constants.h"
 #import "FriendCell.h"
-@interface DMViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+@interface DMViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, FriendCellDelegate, DMCellDelegate>
 
 @end
 
@@ -122,6 +122,7 @@ Table view delegate method. returns a FriendCell or DMCell to be shown.
     if(self.isOrgMessages){
         FriendCell* friendc=[tableView dequeueReusableCellWithIdentifier:@"FriendCell" forIndexPath:indexPath];
         friendc.user=self.seenUsers[indexPath.row];
+        friendc.delegate=self;
         [friendc loadDetails];
         return friendc;
     }
@@ -129,6 +130,7 @@ Table view delegate method. returns a FriendCell or DMCell to be shown.
     {
         FriendCell* friendc=[tableView dequeueReusableCellWithIdentifier:@"FriendCell" forIndexPath:indexPath];
         friendc.user=self.friends[indexPath.row];
+        friendc.delegate=self;
         [friendc loadDetails];
         return friendc;
     }
@@ -136,6 +138,7 @@ Table view delegate method. returns a FriendCell or DMCell to be shown.
         DMCell* dmc=[tableView dequeueReusableCellWithIdentifier:@"DMCell" forIndexPath:indexPath];
         dmc.latestMessage=self.messageThreads[indexPath.row];;
         dmc.user=self.messageUsers[indexPath.row];
+        dmc.delegate=self;
         dmc.unread=[self.unreadMessages containsObject:((PFUser*)self.messageUsers[indexPath.row]).objectId];
         [dmc loadData];
         return dmc;
@@ -211,6 +214,15 @@ Empty table view delegate method. Returns if the empty view should be shown
     return self.messageThreads.count==0;
 }
 
+/**
+ Triggered when the user taps on a profile image on a post. Takes the user to the
+ tapped user's profile page
+ @param[in] user the user that was tapped
+ */
+-(void) didTapUser:(PFUser *)user{
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -232,6 +244,11 @@ Empty table view delegate method. Returns if the empty view should be shown
             [(DMCell*)tappedCell markRead];
         }
         [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
+    }
+    if([segue.identifier isEqualToString:@"profileSegue"])//takes the user to the profile page
+    {
+        ProfileViewController *profileVC= segue.destinationViewController;
+        profileVC.user=sender;
     }
 }
 

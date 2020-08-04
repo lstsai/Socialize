@@ -26,11 +26,21 @@
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
     self.profileImage.clipsToBounds = YES;
     self.profileImage.layer.masksToBounds=YES;
+    UIGestureRecognizer *profileTapGesture= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.profileImage setUserInteractionEnabled:YES];
+    [self.profileImage addGestureRecognizer:profileTapGesture];
     self.profileImage.file=self.user[@"profilePic"];
     [self.profileImage loadInBackground];
 
 }
-
+/**
+ Triggered when the user taps on the user profile image
+ @param[in] sender the gesture recognizer that was triggered
+ call the delegate method to segue to the profile page
+ */
+- (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
+    [self.delegate didTapUser:self.user];
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

@@ -1548,6 +1548,7 @@
                         <outlet property="searchBar" destination="s3g-lD-26y" id="7HN-89-YSY"/>
                         <outlet property="seenUsersView" destination="ahr-cJ-9b7" id="a8G-b3-bay"/>
                         <outlet property="tableView" destination="VT1-lL-RQ4" id="cQR-jQ-a7B"/>
+                        <segue destination="r4M-tQ-o4w" kind="show" identifier="profileSegue" id="Hzl-dj-A4M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZeF-JH-lSy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3837,13 +3838,13 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="LBG-0O-M7m"/>
-        <segue reference="WTd-pV-B1j"/>
-        <segue reference="n3j-lo-FYL"/>
+        <segue reference="ByB-WX-yAM"/>
+        <segue reference="Hzl-dj-A4M"/>
         <segue reference="vVA-Vw-9fQ"/>
-        <segue reference="CWa-JH-3fE"/>
+        <segue reference="frM-ZH-97S"/>
         <segue reference="GI8-BV-nN7"/>
         <segue reference="vmk-95-jLU"/>
-        <segue reference="rff-eI-h6r"/>
+        <segue reference="eOz-I0-ZcM"/>
         <segue reference="l9q-sS-em3"/>
     </inferredMetricsTieBreakers>
     <resources>

@@ -12,7 +12,7 @@
 #import "Constants.h"
 #import "ProfileViewController.h"
 #import "Helper.h"
-@interface FriendsViewController ()< DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface FriendsViewController ()< DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UITableViewDelegate, UITableViewDataSource, FriendCellDelegate>
 
 @end
 
@@ -52,6 +52,7 @@ Table view delegate method. returns a FriendCell to be shown.
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     FriendCell *friendCell=[tableView dequeueReusableCellWithIdentifier:@"FriendCell" forIndexPath:indexPath];
     friendCell.user=self.friends[indexPath.row];
+    friendCell.delegate=self;
     [friendCell loadDetails];
     return friendCell;
 }
@@ -119,6 +120,14 @@ Empty collection view delegate method. Returns if the empty view should be shown
     return self.friends.count==0;
 }
 
+/**
+ Triggered when the user taps on a profile image on a post. Takes the user to the
+ tapped user's profile page
+ @param[in] user the user that was tapped
+ */
+-(void) didTapUser:(PFUser *)user{
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
+}
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -128,10 +137,14 @@ Empty collection view delegate method. Returns if the empty view should be shown
     if([segue.identifier isEqualToString:@"profileSegue"])//takes the user to the profile page
     {
         ProfileViewController *profileVC= segue.destinationViewController;
-        UITableViewCell *tappedCell=sender;
-        NSIndexPath* tappedIndex= [self.tableView indexPathForCell:tappedCell];
-        profileVC.user=self.friends[tappedIndex.row];
-        [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
+        if([sender isKindOfClass:[PFUser class]])
+            profileVC.user=sender;
+        else{
+            UITableViewCell *tappedCell=sender;
+            NSIndexPath* tappedIndex= [self.tableView indexPathForCell:tappedCell];
+            profileVC.user=self.friends[tappedIndex.row];
+            [self.tableView deselectRowAtIndexPath:tappedIndex animated:YES];
+        }
     }
 }
 @end

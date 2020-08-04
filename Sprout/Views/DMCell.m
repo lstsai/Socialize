@@ -18,6 +18,10 @@
 -(void) loadData{
     self.profileImage.image=nil;
     self.messageLabel.text=nil;
+    //add a tap gesture recognizer so user can tap on the profile image and be taken to the profile page
+    UIGestureRecognizer *profileTapGesture= [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.profileImage setUserInteractionEnabled:YES];
+    [self.profileImage addGestureRecognizer:profileTapGesture];
     self.profileImage.layer.masksToBounds=YES;
     self.profileImage.layer.cornerRadius=self.profileImage.bounds.size.width/2;
     
@@ -42,6 +46,14 @@ Change message label to indicate unreadMessage
 */
 -(void) markUnread{
     [self.messageLabel setFont:[UIFont boldSystemFontOfSize:EMPTY_MESSAGE_FONT_SIZE]];
+}
+/**
+ Triggered when the user taps on the user profile image
+ @param[in] sender the gesture recognizer that was triggered
+ call the delegate method to segue to the profile page
+ */
+- (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
+    [self.delegate didTapUser:self.user];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

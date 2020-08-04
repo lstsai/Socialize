@@ -50,6 +50,8 @@
     
    [self.user fetch];
     PFObject *fAccess=[Helper getUserAccess:PFUser.currentUser];
+    PFObject *friendUserAccess=[Helper getUserAccess:self.user];
+
     if(self.user.username==PFUser.currentUser.username)
     {
         [self.topButton setTitle:@"Edit" forState:UIControlStateNormal];
@@ -98,7 +100,7 @@
         self.backgroundImage.file=self.user[@"backgroundPic"];
         [self.backgroundImage loadInBackground];
     }
-    self.friendCount.text=[NSString stringWithFormat:@"%lu", ((NSArray*)fAccess[@"friends"]).count];
+    self.friendCount.text=[NSString stringWithFormat:@"%lu", ((NSArray*)friendUserAccess[@"friends"]).count];
     self.orgCount.text=[NSString stringWithFormat:@"%lu",((NSArray*)self.user[@"likedOrgs"]).count];
     self.eventCount.text=[NSString stringWithFormat:@"%lu",((NSArray*)self.user[@"likedEvents"]).count];
     [self getLikedOrgInfo];

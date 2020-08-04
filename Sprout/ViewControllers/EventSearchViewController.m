@@ -100,7 +100,8 @@ Makes a query to get the events based on the search. Ordered by how close the ev
         else
         {
             self.events=[objects mutableCopy];
-            [PFObject pinAllInBackground:objects];
+            [PFObject unpinAllObjectsWithName:@"Event"];
+            [PFObject pinAllInBackground:objects withName:@"Event"];
             [self.collectionView reloadData];
         }
         if([refreshControl isKindOfClass:[UIRefreshControl class]])

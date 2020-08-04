@@ -61,6 +61,8 @@
  */
 -(void) getMessages{
     PFQuery* messageQ=[PFQuery queryWithClassName:@"Message"];
+    if(![Helper connectedToInternet])
+        [messageQ fromLocalDatastore];
     [messageQ includeKeys:@[@"sender", @"receiver"]];
     [messageQ whereKey:@"sender" containedIn:@[self.user, PFUser.currentUser]];
     [messageQ whereKey:@"receiver" containedIn:@[self.user, PFUser.currentUser]];
@@ -72,6 +74,7 @@
         else
         {
             self.messages=objects;
+            [PFObject pinAllInBackground:objects withName:@"Message"];
             [self.tableView reloadData];
         }
         [self.loadingMoreView stopAnimating];

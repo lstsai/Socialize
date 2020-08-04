@@ -54,12 +54,12 @@ Loads the cell data from the event
             }
 
         }];
-        [self performSelectorInBackground:@selector(getLikes) withObject:nil];
     }
     else{
         self.locationLabel.text=nil;
     }
     [self setupShadows];
+    [self performSelectorInBackground:@selector(getLikes) withObject:nil];
 }
 /**
  configure the shadow and rounded corners for the cell

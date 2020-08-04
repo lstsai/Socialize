@@ -48,6 +48,7 @@ Loads the views of the cell to represent the post
     [dateFormat setDateFormat:@"MM/dd/yy h:mm a"];
     self.eventDateTime.text = [dateFormat stringFromDate:self.event.startTime];
     [self performSelectorInBackground:@selector(getLikes) withObject:nil];
+
 }
 /**
 setup the shadoes and rounded cell corners

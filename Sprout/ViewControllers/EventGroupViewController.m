@@ -77,6 +77,8 @@ Fetches the posts from parse that is related to this group. Includes posts that 
 -(void) getPosts:(NSString*)search{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     PFQuery* postsQuery= [PFQuery queryWithClassName:@"Post"];
+    if(![Helper connectedToInternet])
+        [postsQuery fromLocalDatastore];
     [postsQuery whereKey:@"event" equalTo:self.event];
     [postsQuery whereKey:@"groupPost" equalTo:@(YES)];
     [postsQuery whereKey:@"postDescription" matchesRegex:[NSString stringWithFormat:@"(?i)%@",search]];
@@ -90,6 +92,7 @@ Fetches the posts from parse that is related to this group. Includes posts that 
         }
         else{
             self.posts=objects;
+            [PFObject pinAllInBackground:objects withName:@"Post"];
             [self.tableView reloadData];
         }
     }];

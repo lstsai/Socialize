@@ -50,22 +50,37 @@ Triggered when the user presses thesearch button on the keyboard. Calls the fetc
     self.unreadMessages=selfUserAccess[@"unreadMessages"];
     self.messageThreads=[[NSMutableArray alloc] init];
     self.messageUsers=[[NSMutableArray alloc] init];
+    
+    PFQuery* userQ= [PFQuery queryWithClassName:@"_User"];
+    PFQuery* messageQ=[PFQuery queryWithClassName:@"Message"];
+    if(![Helper connectedToInternet])
+    {
+        [userQ fromLocalDatastore];
+        [messageQ fromLocalDatastore];
+    }
     for(NSString* userID in messageThreads)
     {
-        PFUser* user= [PFQuery getUserObjectWithId:userID];
-        PFQuery* messageQ=[PFQuery queryWithClassName:@"Message"];
+        PFUser* user= [userQ getObjectWithId:userID];
+        
         [messageQ includeKey:@"sender"];
         [messageQ includeKey:@"receiver"];
         [messageQ whereKey:@"sender" containedIn:@[user, PFUser.currentUser]];
         [messageQ whereKey:@"receiver" containedIn:@[user, PFUser.currentUser]];
         [messageQ orderByDescending:@"createdAt"];
-        [self.messageThreads addObject:[messageQ getFirstObject]];
+        
+        PFObject* latestMessage=[messageQ getFirstObject];
+        [latestMessage pinInBackgroundWithName:@"Message"];
+        
+        [self.messageThreads addObject:latestMessage];
         [self.messageUsers addObject:user];
     }
     if(refreshControl)
         [refreshControl endRefreshing];
     [self.tableView reloadData];
 }
+/**
+ Allows the user to search for friends to message
+ */
 -(void) searchFriends{
     if([self.searchBar.text isEqualToString:@""])
     {
@@ -76,6 +91,8 @@ Triggered when the user presses thesearch button on the keyboard. Calls the fetc
     PFObject* selfUserAccess=[Helper getUserAccess:PFUser.currentUser];
     NSArray* friendsID=selfUserAccess[@"friends"];
     PFQuery* userQ=[PFQuery queryWithClassName:@"_User"];
+    if(![Helper connectedToInternet])
+        [userQ fromLocalDatastore];
     [userQ whereKey:@"objectId" containedIn:friendsID];
     [userQ whereKey:@"username" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchBar.text]];
     [userQ findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
@@ -83,11 +100,17 @@ Triggered when the user presses thesearch button on the keyboard. Calls the fetc
             [Helper displayAlert:@"Error getting friends" withMessage:error.localizedDescription on:self];
         else{
             self.friends=objects;
+            [PFObject pinAllInBackground:objects withName:@"User"];
             [self.tableView reloadData];
         }
     }];
 }
-
+/**
+Table view delegate method. returns a FriendCell or DMCell to be shown.
+@param[in] tableView the table that is calling this method
+@param[in] indexPath the path for the returned cell to be displayed
+@return the cell that should be shown in the passed indexpath
+*/
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     if(self.isSearch)
     {
@@ -106,7 +129,13 @@ Triggered when the user presses thesearch button on the keyboard. Calls the fetc
 
     }
 }
-
+/**
+Table view delegate method. returns the number of sections that the table has. This table only has
+ one section so it always returns the total number of message threads or searched friends
+@param[in] tableView the table that is calling this method
+@param[in] section the section in question
+@return the number of friends/threads
+*/
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(self.isSearch)
         return self.friends.count;
@@ -114,7 +143,7 @@ Triggered when the user presses thesearch button on the keyboard. Calls the fetc
         return self.messageUsers.count;
 }
 /**
-Empty table view delegate method. Returns the image to be displayed when there are no posts
+Empty table view delegate method. Returns the image to be displayed when there are no messages
 @param[in] scrollView the table view that is empty
 @return the image to be shown
 */
@@ -123,7 +152,7 @@ Empty table view delegate method. Returns the image to be displayed when there a
     return [UIImage imageNamed:@"comment"];
 }
 /**
-Empty table view delegate method. Returns the title to be displayed when there are no posts
+Empty table view delegate method. Returns the title to be displayed when there are no messages
 @param[in] scrollView the table view that is empty
 @return the title to be shown
 */
@@ -137,7 +166,7 @@ Empty table view delegate method. Returns the title to be displayed when there a
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 /**
-Empty collection view delegate method. Returns the message to be displayed when there are no users
+Empty collection view delegate method. Returns the message to be displayed when there are no messages
 @param[in] scrollView the collection view that is empty
 @return the message to be shown
 */
@@ -159,8 +188,8 @@ Empty collection view delegate method. Returns the message to be displayed when 
 Empty table view delegate method. Returns if the empty view should be shown
 @param[in] scrollView the table view that is empty
 @return if the empty view shouls be shown
- YES: if there are no posts
- NO: there are posts
+ YES: if there are no messages
+ NO: there are messages
 */
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
 {

@@ -106,7 +106,7 @@
             {
                 Event* event=[eventQ getObjectWithId:eventID];
                 [eventsList addObject:event];
-                [event pinInBackground];
+                [event pinInBackgroundWithName:@"Event"];
             }
             [groupPostQ whereKey:@"event" containedIn:eventsList];
             PFQuery* postsQ=[PFQuery orQueryWithSubqueries:@[regpostsQ, groupPostQ]];
@@ -131,8 +131,8 @@
                         [post.author pinInBackground];
                     }
                     //unpin and repin to keep only updated info
-                    [PFObject unpinAllObjectsWithName:@"Posts"];
-                    [PFObject pinAllInBackground:objects withName:@"Posts"];
+                    [PFObject unpinAllObjectsWithName:@"Post"];
+                    [PFObject pinAllInBackground:objects withName:@"Post"];
                     [self.tableView reloadData];
                 }
                 if(refreshControl)

@@ -58,7 +58,7 @@ Creates a a Post object to be saved in to Parse
     {
         newPost.org=[Organization dictionaryWithOrg:org];
     }
-    [newPost pinInBackground];
+    [newPost pinInBackgroundWithName:@"Post"];
     [newPost saveEventually:completion];
 }
 

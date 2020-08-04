@@ -56,7 +56,7 @@
     if(![Helper connectedToInternet])
         [accessQ fromLocalDatastore];
     [accessQ whereKey:@"username" equalTo:user.username];
-    [[accessQ getFirstObject] pinInBackground];
+    [[accessQ getFirstObject] pinInBackgroundWithName:@"UserAccessible"];
     return [accessQ getFirstObject];
 }
 /**
@@ -81,7 +81,8 @@
             {
                 [friend[@"friendAccessible"] pinInBackground];
             }
-            [PFObject pinAllInBackground:objects];
+            [PFObject unpinAllObjectsWithName:@"Friends"];
+            [PFObject pinAllInBackground:objects withName:@"Friends"];
             completion(objects, nil);
         }
     }];

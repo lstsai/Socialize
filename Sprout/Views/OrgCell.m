@@ -45,6 +45,7 @@
     else
         self.likeButton.selected=NO;
     [self performSelectorInBackground:@selector(getLikes) withObject:nil];
+    
 }
 /**
 calculates the number of friends that have liked this specific organization

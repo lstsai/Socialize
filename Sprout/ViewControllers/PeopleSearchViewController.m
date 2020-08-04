@@ -117,11 +117,19 @@ Makes a query to get the users whose username matches the search
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     PFQuery *nameQuery=[PFQuery queryWithClassName:@"_User"];
-    [nameQuery whereKey:@"username" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchText]];
     PFQuery *bioQuery=[PFQuery queryWithClassName:@"_User"];
+
+    if(![Helper connectedToInternet])
+    {
+        [nameQuery fromLocalDatastore];
+        [bioQuery fromLocalDatastore];
+    }
+    [nameQuery whereKey:@"username" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchText]];
     [bioQuery whereKey:@"bio" matchesRegex:[NSString stringWithFormat:@"(?i)%@",self.searchText]];
     
     PFQuery* userQuery=[PFQuery orQueryWithSubqueries:@[nameQuery, bioQuery]];
+    if(![Helper connectedToInternet])
+        [userQuery fromLocalDatastore];
     [userQuery setLimit:self.resultNum*RESULTS_SIZE];
     [userQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)
@@ -129,6 +137,8 @@ Makes a query to get the users whose username matches the search
         else
         {
             self.people=[objects mutableCopy];
+            [PFObject unpinAllObjectsWithName:@"User"];
+            [PFObject pinAllInBackground:objects withName:@"User"];
             [self.collectionView reloadData];
         }
         if([refreshControl isKindOfClass:[UIRefreshControl class]])

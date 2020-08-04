@@ -48,7 +48,22 @@
     self.likeButton.selected=[PFUser.currentUser[@"likedOrgs"] containsObject:self.org.ein];
     
     [self performSelectorInBackground:@selector(getLikes) withObject:nil];
+    [self checkClaimed];
 }
+-(void) checkClaimed{
+    [Helper getClaimedOrgFromEin:self.org.ein withCompletion:^(PFObject * _Nonnull claimedOrg) {
+        if(claimedOrg)
+        {
+            self.claimedOrg=(ClaimedOrganization*)claimedOrg;
+            self.orgImage.file=self.claimedOrg.image;
+            [self.orgImage loadInBackground];
+            self.orgNameLabel.text=self.claimedOrg.name;
+            self.orgTaglineLabel.text=self.claimedOrg.tagLine;
+            self.locationLabel.text=[self.org.location.city stringByAppendingFormat:@", %@", self.org.location.state];
+        }
+    }];
+}
+
 /**
  setup the shadoes and rounded cell corners
  */

@@ -15,6 +15,9 @@
 #import "CreatePostViewController.h"
 #import "Helper.h"
 #import "Constants.h"
+#import "ClaimedOrganization.h"
+#import "MBProgressHUD.h"
+#import "EditOrgViewController.h"
 @interface OrgDetailsViewController ()
 
 @end
@@ -25,6 +28,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+}
+-(void) viewWillAppear:(BOOL)animated{
     [self loadOrgDetails];
     [self getCoords];
 }
@@ -59,8 +64,33 @@
     }
     if([PFUser.currentUser[@"likedOrgs"] containsObject:self.org.ein])
         self.likeButton.selected=YES;
+    if([PFUser.currentUser[@"claimedOrgs"] containsObject:self.org.ein])
+    {
+        self.claimButton.alpha=HIDE_ALPHA;
+        self.editButton.alpha=SHOW_ALPHA;
+    }
     [self performSelectorInBackground:@selector(getLikes) withObject:nil];
+    [self checkClaimed];
+}
 
+-(void) checkClaimed{
+    [Helper getClaimedOrgFromEin:self.org.ein withCompletion:^(PFObject * _Nonnull claimedOrg) {
+        if(claimedOrg)
+        {
+            self.claimButton.alpha=HIDE_ALPHA;
+            self.claimedOrg=(ClaimedOrganization*)claimedOrg;
+            self.name.text=self.claimedOrg.name;
+            self.category.text=self.claimedOrg.category;
+            self.cause.text=self.claimedOrg.cause;
+            self.address.text=self.claimedOrg.address;
+            self.tagLine.text=self.claimedOrg.tagLine;
+            self.mission.text=self.claimedOrg.missionStatement;
+            self.website.text=self.claimedOrg.website;
+            self.backdropImage.file=self.claimedOrg.image;
+            [self.backdropImage loadInBackground];
+        }
+    }];
+    
 }
 /**
  calculates the number of friends that have liked this specific org
@@ -88,6 +118,9 @@
         }
     }];
 }
+/**
+Gets the coordinates of the organization
+*/
 -(void) getCoords{
     [[APIManager shared] getCoordsFromAddress:[Location  addressFromLocation:self.org.location] completion:^(CLLocationCoordinate2D coords, NSError * _Nullable error) {
         if(error)
@@ -139,6 +172,30 @@ Triggered when the user (un)likes this organization. Calls the Helper method did
     }
 }
 /**
+ Triggered when the user presses the claim button
+ */
+- (IBAction)didClaimOrg:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [ClaimedOrganization claimOrganization:self.org.ein withName:self.org.name withCategory:self.org.category withCause:self.org.cause withMissionStatement:self.org.missionStatement withAddress:self.address.text withTagline:self.org.tagLine withWebsite:self.org.website.absoluteString withImage:self.backdropImage.image withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if(error)
+            [Helper displayAlert:@"Error Claiming Organization" withMessage:error.localizedDescription on:self];
+        else{
+            NSMutableArray* claimed=PFUser.currentUser[@"claimedOrgs"];
+            [claimed addObject:self.org.ein];
+            PFUser.currentUser[@"claimedOrgs"]=claimed;
+            [PFUser.currentUser saveInBackground];
+            self.claimButton.alpha=HIDE_ALPHA;
+            self.editButton.alpha=SHOW_ALPHA;
+            [Helper getClaimedOrgFromEin:self.org.ein withCompletion:^(PFObject * _Nonnull claimedOrg) {
+                if(claimedOrg)
+                    self.claimedOrg=(ClaimedOrganization*) claimedOrg;
+            }];
+            [Helper displayAlert:@"Successfully Claimed Organization" withMessage:@"You have claimed this organization, now you can edit this organization's information" on:self];
+        }
+    }];
+}
+/**
  Triggered when the user pinches to zoom on the image. Will animate back to original
  state when the user stops pinching.
  @param[in] sender the pinch gesture that was triggered
@@ -183,6 +240,11 @@ Triggered when the user (un)likes this organization. Calls the Helper method did
         createPostVC.event=nil;
         createPostVC.isGroupPost=NO;
 
+    }
+    else if([segue.identifier isEqualToString:@"editSegue"])//takes the user to the page to create a post about this org
+    {
+        EditOrgViewController *editVC=segue.destinationViewController;
+        editVC.claimedOrg=self.claimedOrg;
     }
 }
 

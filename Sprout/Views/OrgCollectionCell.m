@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "UIImageView+AFNetworking.h"
 #import "APIManager.h"
+#import "Helper.h"
 @implementation OrgCollectionCell
 /**
 Loads the cell data from the Organization
@@ -38,5 +39,18 @@ Loads the cell data from the Organization
     self.layer.shadowRadius = SHADOW_RADIUS;
     self.layer.shadowOpacity = SHADOW_OPACITY;
     self.layer.masksToBounds = NO;
+    [self checkClaimed:org];
 }
+-(void) checkClaimed:(Organization*)org{
+    [Helper getClaimedOrgFromEin:org.ein withCompletion:^(PFObject * _Nonnull claimedOrg) {
+        if(claimedOrg)
+        {
+            self.claimedOrg=(ClaimedOrganization*)claimedOrg;
+            self.orgImage.file=self.claimedOrg.image;
+            [self.orgImage loadInBackground];
+            self.orgNameLabel.text=self.claimedOrg.name;
+        }
+    }];
+}
+
 @end

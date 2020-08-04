@@ -44,6 +44,8 @@
 		DC47330424D1DE27006DAE01 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC47330324D1DE27006DAE01 /* CommentCell.m */; };
 		DC47330724D1E074006DAE01 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = DC47330624D1E074006DAE01 /* Comment.m */; };
 		DC47330A24D1EA16006DAE01 /* CommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC47330924D1EA16006DAE01 /* CommentsViewController.m */; };
+		DC6A2F5624D9D9D800593EEF /* ClaimedOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6A2F5524D9D9D800593EEF /* ClaimedOrganization.m */; };
+		DC6A2F5924D9E2B800593EEF /* EditOrgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6A2F5824D9E2B800593EEF /* EditOrgViewController.m */; };
 		DC89989324C9FD00005B2DB9 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC89989224C9FD00005B2DB9 /* SignUpViewController.m */; };
 		DC91239B24CA693F001A4022 /* RequestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC91239A24CA693F001A4022 /* RequestsViewController.m */; };
 		DC91239E24CA6A38001A4022 /* RequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC91239D24CA6A38001A4022 /* RequestCell.m */; };
@@ -163,6 +165,10 @@
 		DC47330624D1E074006DAE01 /* Comment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		DC47330824D1EA16006DAE01 /* CommentsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentsViewController.h; sourceTree = "<group>"; };
 		DC47330924D1EA16006DAE01 /* CommentsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentsViewController.m; sourceTree = "<group>"; };
+		DC6A2F5424D9D9D800593EEF /* ClaimedOrganization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClaimedOrganization.h; sourceTree = "<group>"; };
+		DC6A2F5524D9D9D800593EEF /* ClaimedOrganization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClaimedOrganization.m; sourceTree = "<group>"; };
+		DC6A2F5724D9E2B800593EEF /* EditOrgViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditOrgViewController.h; sourceTree = "<group>"; };
+		DC6A2F5824D9E2B800593EEF /* EditOrgViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditOrgViewController.m; sourceTree = "<group>"; };
 		DC89989124C9FD00005B2DB9 /* SignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		DC89989224C9FD00005B2DB9 /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		DC91239924CA693F001A4022 /* RequestsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestsViewController.h; sourceTree = "<group>"; };
@@ -367,6 +373,8 @@
 				DCE4BA0124D51207001FADAF /* DMViewController.m */,
 				DCE4BA0324D51210001FADAF /* MessagingViewController.h */,
 				DCE4BA0424D51210001FADAF /* MessagingViewController.m */,
+				DC6A2F5724D9E2B800593EEF /* EditOrgViewController.h */,
+				DC6A2F5824D9E2B800593EEF /* EditOrgViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -423,6 +431,8 @@
 				DC47330624D1E074006DAE01 /* Comment.m */,
 				DC27437224D501FD00B6B077 /* Message.h */,
 				DC27437324D501FD00B6B077 /* Message.m */,
+				DC6A2F5424D9D9D800593EEF /* ClaimedOrganization.h */,
+				DC6A2F5524D9D9D800593EEF /* ClaimedOrganization.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -726,6 +736,7 @@
 				DC3CF1AD24BD590D00C482F8 /* InfiniteScrollActivityView.m in Sources */,
 				DCE4BA5524D8EA0A001FADAF /* Reachability.m in Sources */,
 				DC47330424D1DE27006DAE01 /* CommentCell.m in Sources */,
+				DC6A2F5624D9D9D800593EEF /* ClaimedOrganization.m in Sources */,
 				DC3CF14C24BCB27900C482F8 /* AppDelegate.m in Sources */,
 				DCB65C2C24C8BA08005A43A9 /* CreatePostViewController.m in Sources */,
 				DC91239B24CA693F001A4022 /* RequestsViewController.m in Sources */,
@@ -735,6 +746,7 @@
 				DCE4B9FF24D50EBA001FADAF /* OutgoingMessageCell.m in Sources */,
 				DC89989324C9FD00005B2DB9 /* SignUpViewController.m in Sources */,
 				DC27437424D501FD00B6B077 /* Message.m in Sources */,
+				DC6A2F5924D9E2B800593EEF /* EditOrgViewController.m in Sources */,
 				DCE6FA5124C0AA66008091A3 /* EventCollectionCell.m in Sources */,
 				DC4732FB24D09F3B006DAE01 /* FriendCell.m in Sources */,
 				DCB65C1D24C76201005A43A9 /* Helper.m in Sources */,

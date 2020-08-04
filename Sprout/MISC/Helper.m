@@ -541,7 +541,19 @@ Remove the unread message list in UserAccess to indicate the message from this u
     NetworkStatus networkStatus = [reachability currentReachabilityStatus];
     return networkStatus != NotReachable;
 }
-
+/**
+Fetches the claimed orgainzation with this ein, nil if it doesnt exist
+*/
++ (void) getClaimedOrgFromEin:(NSString*) ein withCompletion:(void(^)(PFObject *claimedOrg))completion{
+    PFQuery* orgQ=[PFQuery queryWithClassName:@"ClaimedOrganization"];
+    [orgQ whereKey:@"ein" equalTo:ein];
+    [orgQ findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if(error || objects.count==0)
+            completion(nil);
+        else
+            completion([objects firstObject]);
+    }];
+}
 
 
 

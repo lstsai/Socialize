@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void) removeUnreadMessage:(PFUser*) sender;
 
 + (BOOL)connectedToInternet;
-
++ (void) getClaimedOrgFromEin:(NSString*) ein withCompletion:(void(^)(PFObject *claimedOrg))completion;
 
 @end
 

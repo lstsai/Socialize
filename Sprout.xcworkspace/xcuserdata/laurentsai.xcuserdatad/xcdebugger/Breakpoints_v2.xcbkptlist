@@ -358,8 +358,8 @@
             filePath = "Sprout/ViewControllers/OrgDetailsViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "-didPinchImage:"
             landmarkType = "7">
          </BreakpointContent>
@@ -381,7 +381,7 @@
             <Locations>
                <Location
                   uuid = "F1A582FE-8404-4341-925C-0DD0403235EE - d72581c54642c626"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[APIManager getOrgsWithEIN:completion:]"
@@ -396,7 +396,7 @@
                </Location>
                <Location
                   uuid = "F1A582FE-8404-4341-925C-0DD0403235EE - bd69ecb8bef29ae"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__40-[APIManager getOrgsWithEIN:completion:]_block_invoke"
@@ -411,7 +411,7 @@
                </Location>
                <Location
                   uuid = "F1A582FE-8404-4341-925C-0DD0403235EE - 4a0c63239df39291"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__copy_helper_block_e8_32s40s48b"
@@ -426,7 +426,7 @@
                </Location>
                <Location
                   uuid = "F1A582FE-8404-4341-925C-0DD0403235EE - 355756544202730f"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__40-[APIManager getOrgsWithEIN:completion:]_block_invoke.59"
@@ -859,7 +859,7 @@
             <Locations>
                <Location
                   uuid = "6A6136B4-7B83-4D38-B14E-0432169C0CDA - cab4609dfbeb2f9c"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[EventSearchViewController getEvents:]"
@@ -874,7 +874,7 @@
                </Location>
                <Location
                   uuid = "6A6136B4-7B83-4D38-B14E-0432169C0CDA - 58a24cac56cc406c"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__39-[EventSearchViewController getEvents:]_block_invoke"
@@ -900,9 +900,57 @@
             filePath = "Sprout/Views/OrgPostCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "-setShadow"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "-getLikes"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DF64CD3A-90CD-43F8-BA5E-DEBDC8542DA7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sprout/ViewControllers/OrgDetailsViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "-didClaimOrg:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A3883BA1-ABAC-4645-A21E-B1ECEC573474"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sprout/ViewControllers/OrgDetailsViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "-loadOrgDetails"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "90146EF4-FE05-48B4-B6C5-AE5BE12B1069"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sprout/Views/OrgPostCell.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "-checkClaimed"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -92,6 +92,18 @@ Triggered when the user (un)likes this organization. Calls the Helper method did
 
     }
 }
+-(void) checkClaimed{
+    [Helper getClaimedOrgFromEin:self.org.ein withCompletion:^(PFObject * _Nonnull claimedOrg) {
+        if(claimedOrg)
+        {
+            self.claimedOrg=(ClaimedOrganization*)claimedOrg;
+            self.nameLabel.text=self.claimedOrg.name;
+            self.tagLineLabel.text=self.claimedOrg.tagLine;
+            self.orgImage.file=self.claimedOrg.image;
+            [self.orgImage loadInBackground]; 
+        }
+    }];
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

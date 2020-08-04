@@ -11,6 +11,7 @@
 #import <UIKit/UIKit.h>
 #import "Organization.h"
 #import "Post.h"
+#import "ClaimedOrganization.h"
 @import Parse;
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,8 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *numLikeLabel;
 @property (weak, nonatomic) IBOutlet UIView *orgContainer;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
-@property (weak, nonatomic) IBOutlet UIImageView *orgImage;
+@property (weak, nonatomic) IBOutlet PFImageView *orgImage;
 @property (strong, nonatomic) Organization* org;
+@property (strong, nonatomic) ClaimedOrganization *_Nullable claimedOrg;
 @property (strong, nonatomic) Post* post;
 @property (nonatomic, weak) id<OrgPostCellDelegate> delegate;
 
@@ -39,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)loadData;
 -(void) getLikes;
 -(void) setShadow;
+-(void) checkClaimed;
 - (void) didTapUserProfile:(UITapGestureRecognizer *)sender;
 @end
 

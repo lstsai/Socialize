@@ -12,13 +12,16 @@
 #import "Organization.h"
 #import <Parse/Parse.h>
 #import <CoreLocation/CoreLocation.h>
+#import "ClaimedOrganization.h"
 @import GoogleMaps;
+@import Parse;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OrgDetailsViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) Organization *org;
-@property (weak, nonatomic) IBOutlet UIImageView *backdropImage;
+@property (strong, nonatomic) ClaimedOrganization *claimedOrg;
+@property (weak, nonatomic) IBOutlet PFImageView *backdropImage;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *tagLine;
 @property (weak, nonatomic) IBOutlet UILabel *mission;
@@ -31,9 +34,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL gotCoords;
 @property (weak, nonatomic) IBOutlet UILabel *numLikesLabel;
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
+@property (weak, nonatomic) IBOutlet UIButton *claimButton;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
 
 
 -(void) loadOrgDetails;
+-(void) checkClaimed;
 -(void) getCoords;
 -(void) getLikes;
 -(void) setupMap;

@@ -24,9 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PFFileObject *_Nullable image;
 @property (nonatomic) BOOL groupPost;
 
++ (void) createPostWithDescription:(NSString *)description withEvent:(Event* _Nullable)event withOrg:(NSObject* _Nullable)org groupPost:(BOOL)groupPost withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 
-+ (void) createPost:(UIImage * _Nullable )image withDescription:(NSString *)description withEvent:(Event* _Nullable)event withOrg:(NSObject* _Nullable)org groupPost:(BOOL)groupPost withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) createPostWithImage:(UIImage * _Nullable )image withDescription:(NSString *)description withEvent:(Event* _Nullable)event withOrg:(NSObject* _Nullable)org groupPost:(BOOL)groupPost withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 

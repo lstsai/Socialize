@@ -39,24 +39,27 @@ Loads the cell data from the event
     [self.eventImage loadInBackground];
     
     //Use the google maps geocoder to find the city of the event using the coordinates of the event
-    GMSGeocoder *geocoder= [GMSGeocoder geocoder];
-    CLLocationCoordinate2D cllocation= CLLocationCoordinate2DMake(self.event.location.latitude, self.event.location.longitude);
-    [geocoder reverseGeocodeCoordinate:cllocation completionHandler:^(GMSReverseGeocodeResponse * _Nullable address, NSError * _Nullable error) {
-        if(error)
-            NSLog(@"Error getting location of event %@", error.localizedDescription);
-        else{
-            self.locationLabel.text=[[address firstResult] locality];
-            self.event.streetAddress =[[[address firstResult] lines] componentsJoinedByString:@"\n"];
-            [self.event saveInBackground];
-        }
+    
+    if([Helper connectedToInternet])
+    {
+        GMSGeocoder *geocoder= [GMSGeocoder geocoder];
+        CLLocationCoordinate2D cllocation= CLLocationCoordinate2DMake(self.event.location.latitude, self.event.location.longitude);
+        [geocoder reverseGeocodeCoordinate:cllocation completionHandler:^(GMSReverseGeocodeResponse * _Nullable address, NSError * _Nullable error) {
+            if(error)
+                NSLog(@"Error getting location of event %@", error.localizedDescription);
+            else{
+                self.locationLabel.text=[[address firstResult] locality];
+                self.event.streetAddress =[[[address firstResult] lines] componentsJoinedByString:@"\n"];
+                [self.event saveInBackground];
+            }
 
-    }];
-    
-    
+        }];
+        [self performSelectorInBackground:@selector(getLikes) withObject:nil];
+    }
+    else{
+        self.locationLabel.text=nil;
+    }
     [self setupShadows];
-    [self performSelectorInBackground:@selector(getLikes) withObject:nil];
-    
-
 }
 /**
  configure the shadow and rounded corners for the cell

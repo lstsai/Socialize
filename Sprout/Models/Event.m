@@ -9,7 +9,8 @@
 #import "Event.h"
 #import "Post.h"
 #import "Helper.h"
-
+#import <CoreData/CoreData.h>
+#import "AppDelegate.h"
 @implementation Event
 
 @dynamic postID;
@@ -45,16 +46,28 @@ Creates a an event object to be saved in to Parse
 + (void) postEvent:(UIImage * _Nullable )image withName:(NSString *)name withSTime:(NSDate*)stime withETime:(NSDate*)etime withLocation:(PFGeoPoint*)location withStreetAdress:(NSString*)streetAddress withDetails:(NSString*)details withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Event *newEvent= [Event new];
     newEvent.name=name;
-    newEvent.image= [Helper getPFFileFromImage:image withName:name];
     newEvent.details=details;
     newEvent.author=[PFUser currentUser];
     newEvent.location=location;
     newEvent.startTime=stime;
     newEvent.endTime=etime;
     newEvent.streetAddress=streetAddress;
-    [newEvent saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if(succeeded)
-            [Post createPost:nil withDescription:@"Created an event" withEvent:newEvent withOrg:nil groupPost:NO withCompletion:completion];
+    NSData *eventImage = [NSData dataWithData:UIImagePNGRepresentation(image)];
+    AppDelegate* appDelegate =(AppDelegate*)[UIApplication sharedApplication].delegate;
+    NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
+    NSManagedObject *entityObject =[NSEntityDescription insertNewObjectForEntityForName:@"Entity" inManagedObjectContext:context];
+    [entityObject setValue:eventImage forKey:@"eventImage"];
+    [newEvent saveEventually:^(BOOL succeeded, NSError * _Nullable error) {
+        AppDelegate* appDelegate =(AppDelegate*)[UIApplication sharedApplication].delegate;
+        NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
+        NSManagedObject *entityObject =[NSEntityDescription insertNewObjectForEntityForName:@"Entity" inManagedObjectContext:context];
+        if(succeeded){
+            newEvent.image=[Helper getPFFileFromImage:[UIImage imageWithData:[entityObject valueForKey:@"eventImage"]] withName:newEvent.name];
+            [newEvent saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if(succeeded)
+                    [Post createPostWithDescription:@"Created an event" withEvent:newEvent withOrg:nil groupPost:NO withCompletion:completion];
+            }];
+        }
     }];
 }
 

@@ -61,7 +61,7 @@ Triggered when the user presses the pst button, calls the helper method to creat
  */
 - (IBAction)didTapPost:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Post createPost:self.attachedImage.image withDescription:self.postTextView.text withEvent:self.event withOrg:self.org groupPost:self.isGroupPost withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Post createPostWithImage:self.attachedImage.image withDescription:self.postTextView.text withEvent:self.event withOrg:self.org groupPost:self.isGroupPost withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self dismissViewControllerAnimated:YES completion:nil];
         [self.delegate didCreatePost];

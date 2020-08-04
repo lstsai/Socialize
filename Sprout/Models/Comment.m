@@ -32,7 +32,7 @@ Creates and saves a comment in parse.
     newComment.commentText= comment;
     newComment.author=[PFUser currentUser];
     newComment.post= post;
-    [newComment saveInBackgroundWithBlock:completion];
+    [newComment saveEventually:completion];
 }
 
 @end

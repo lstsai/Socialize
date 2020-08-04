@@ -79,10 +79,19 @@ Makes a query to get the events based on the search. Ordered by how close the ev
 
     PFQuery *eventsNameQuery=[PFQuery queryWithClassName:@"Event"];
     PFQuery *eventsDetailsQuery=[PFQuery queryWithClassName:@"Event"];
+   
+    if(![Helper connectedToInternet])
+    {
+        [eventsNameQuery fromLocalDatastore];
+        [eventsDetailsQuery fromLocalDatastore];
+    }
     [eventsNameQuery whereKey:@"name" matchesRegex:regexString];
     [eventsDetailsQuery whereKey:@"details" matchesRegex:regexString];
 
     PFQuery *eventsQuery=[PFQuery orQueryWithSubqueries:@[eventsNameQuery,eventsDetailsQuery]];
+    if(![Helper connectedToInternet])
+       [eventsQuery fromLocalDatastore];
+
     [eventsQuery includeKey:@"author"];
     [eventsQuery whereKey:@"location" nearGeoPoint:[PFGeoPoint geoPointWithLatitude:self.locationCoord.latitude longitude:self.locationCoord.longitude]];
     [eventsQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
@@ -91,6 +100,7 @@ Makes a query to get the events based on the search. Ordered by how close the ev
         else
         {
             self.events=[objects mutableCopy];
+            [PFObject pinAllInBackground:objects];
             [self.collectionView reloadData];
         }
         if([refreshControl isKindOfClass:[UIRefreshControl class]])

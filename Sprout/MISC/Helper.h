@@ -46,6 +46,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (void) addUnreadMessage:(PFUser*) reciever;
 + (void) removeUnreadMessage:(PFUser*) sender;
 
++ (BOOL)connectedToInternet;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

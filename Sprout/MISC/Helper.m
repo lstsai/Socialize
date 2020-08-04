@@ -8,6 +8,8 @@
 
 #import "Helper.h"
 #import <UIKit/UIKit.h>
+#import "Reachability.h"
+
 @implementation Helper
 + (instancetype)shared
 {
@@ -51,7 +53,10 @@
 + (PFObject *) getUserAccess:(PFUser*) user{
 
     PFQuery *accessQ= [PFQuery queryWithClassName:@"UserAccessible"];
+    if(![Helper connectedToInternet])
+        [accessQ fromLocalDatastore];
     [accessQ whereKey:@"username" equalTo:user.username];
+    [[accessQ getFirstObject] pinInBackground];
     return [accessQ getFirstObject];
 }
 /**
@@ -64,13 +69,21 @@
     PFObject *friendAccess=[Helper getUserAccess:PFUser.currentUser];
     NSArray *friendList=friendAccess[@"friends"];
     PFQuery *friendQuery = [PFQuery queryWithClassName:@"_User"];
+    if(! [Helper connectedToInternet])
+        [friendQuery fromLocalDatastore];
     [friendQuery whereKey:@"objectId" containedIn:friendList];
     [friendQuery includeKey:@"friendAccessible"];
     [friendQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(error)
             completion(nil, error);
-        else
+        else{
+            for(PFUser* friend in objects)
+            {
+                [friend[@"friendAccessible"] pinInBackground];
+            }
+            [PFObject pinAllInBackground:objects];
             completion(objects, nil);
+        }
     }];
     
 }
@@ -88,11 +101,11 @@
     [likedOrgs addObject:likedOrg.ein];
     [Helper performSelectorInBackground:@selector(addObjectToFriendsList:) withObject:@[likedOrg.ein, @"friendOrgs"]];//add to list in background
     PFUser.currentUser[@"likedOrgs"]=likedOrgs;
-    [PFUser.currentUser saveInBackground];
+    [PFUser.currentUser saveEventually];
     [[Helper shared].currProfVC performSelectorInBackground:@selector(loadProfile) withObject:nil];
-    [Post createPost:nil withDescription:@"Liked an Organization" withEvent:nil withOrg:likedOrg groupPost:NO withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Post createPostWithDescription:@"Liked an Organization" withEvent:nil withOrg:likedOrg groupPost:NO withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(error)
-        [Helper displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
+            [Helper displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
     }];
 }
 /**
@@ -109,7 +122,7 @@ friends's list.
     [likedOrgs removeObject:unlikedOrg.ein];
     [Helper performSelectorInBackground:@selector(deleteObjectFromFriendsList:) withObject:@[unlikedOrg.ein, @"friendOrgs"]];//add to list in background
     PFUser.currentUser[@"likedOrgs"]=likedOrgs;
-    [PFUser.currentUser saveInBackground];
+    [PFUser.currentUser saveEventually];
     [[Helper shared].currProfVC performSelectorInBackground:@selector(loadProfile) withObject:nil];
 }
 /**
@@ -128,9 +141,9 @@ friends's list. Also creates a post to signal the user has liked this event
     [Helper performSelectorInBackground:@selector(addObjectToFriendsList:) withObject:@[likedEvent.objectId, @"friendEvents"]];
 
     PFUser.currentUser[@"likedEvents"]=likedEvents;
-    [PFUser.currentUser saveInBackground];
+    [PFUser.currentUser saveEventually];
     [[Helper shared].currProfVC performSelectorInBackground:@selector(loadProfile) withObject:nil];
-    [Post createPost:nil withDescription:@"Liked an Event" withEvent:likedEvent withOrg:nil groupPost:NO withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Post createPostWithDescription:@"Liked an Event" withEvent:likedEvent withOrg:nil groupPost:NO withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
            if(error)
            [Helper displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
        }];
@@ -150,7 +163,7 @@ friends's list.
     [self performSelectorInBackground:@selector(deleteObjectFromFriendsList:) withObject:@[unlikedEvent.objectId, @"friendEvents"]];
     
     PFUser.currentUser[@"likedEvents"]=likedEvents;
-    [PFUser.currentUser saveInBackground];
+    [PFUser.currentUser saveEventually];
     [[Helper shared].currProfVC performSelectorInBackground:@selector(loadProfile) withObject:nil];
 }
 /**
@@ -195,7 +208,7 @@ so that Parse will actually save this change.
                    friendAccess[listName]= friendObj;
                }
                //save each friend
-               [friendAccess saveInBackground];
+               [friendAccess saveEventually];
            }
        }];
 }
@@ -233,7 +246,7 @@ so that Parse will actually save this change.
                 friendAccess[listName]= friendObj;
             }
                //save each friend
-            [friendAccess saveInBackground];
+            [friendAccess saveEventually];
         }
     }];
 }
@@ -290,7 +303,7 @@ so that Parse will actually save this change.
     NSMutableArray *friendsArray=friendsAccess[@"friends"];
     [friendsArray addObject:to.objectId];
     friendsAccess[@"friends"]=friendsArray;
-    [friendsAccess saveInBackground];
+    [friendsAccess saveEventually];
     
     [self performSelectorInBackground:@selector(addFriendLikes:) withObject:@[from, to]];
 }
@@ -306,7 +319,7 @@ so that Parse will actually save this change.
     NSMutableArray *friendsArray=friendsAccess[@"friends"];
     [friendsArray removeObject:to.objectId];
     friendsAccess[@"friends"]=friendsArray;
-    [friendsAccess saveInBackground];
+    [friendsAccess saveEventually];
     [self performSelectorInBackground:@selector(deleteFriendLikes:) withObject:@[from, to]];
 
 }
@@ -340,7 +353,7 @@ so that Parse will actually save this change.
             }
         }
         selfAccess[@"friendOrgs"]=friendLikes;
-        [selfAccess saveInBackground];
+        [selfAccess saveEventually];
 
 
         friendLikes=selfAccess[@"friendEvents"];
@@ -359,7 +372,7 @@ so that Parse will actually save this change.
             }
         }
         selfAccess[@"friendEvents"]=friendLikes;
-        [selfAccess saveInBackground];
+        [selfAccess saveEventually];
     
     }];
 }
@@ -393,7 +406,7 @@ so that Parse will actually save this change.
             }
         }
         selfAccess[@"friendOrgs"]=friendLikes;
-        [selfAccess saveInBackground];
+        [selfAccess saveEventually];
 
         friendLikes=selfAccess[@"friendEvents"];
         //for each of the events that the friend has liked, remove the friend's username from the list
@@ -411,7 +424,7 @@ so that Parse will actually save this change.
             }
         }
         selfAccess[@"friendEvents"]=friendLikes;
-        [selfAccess saveInBackground];
+        [selfAccess saveEventually];
     
     }];
 }
@@ -438,7 +451,9 @@ so that Parse will actually save this change.
     requesterUserAccess[@"outRequests"]=outRequests;
     
     //save
-    [PFObject saveAllInBackground:@[currentUserAccess, requesterUserAccess]];
+    [currentUserAccess saveEventually];
+    [requesterUserAccess saveEventually];
+
 }
 /**
  Adds a friend request
@@ -464,7 +479,8 @@ so that Parse will actually save this change.
     requestedUserAccess[@"inRequests"]=inRequests;
     
     //save
-    [PFObject saveAllInBackground:@[currentUserAccess, requestedUserAccess]];
+    [currentUserAccess saveEventually];
+    [requestedUserAccess saveEventually];
 }
 /**
 Updates the ordered message thread list in UserAccess for the 2 users messaging
@@ -489,7 +505,8 @@ Updates the ordered message thread list in UserAccess for the 2 users messaging
     currentUserAccess[@"messageThreads"]=currMessageT;
     toUserAccess[@"messageThreads"]=otherMessageT;
     //save
-    [PFObject saveAllInBackground:@[currentUserAccess, toUserAccess]];
+    [currentUserAccess saveEventually];
+    [toUserAccess saveEventually];
 }
 /**
 Add the unread message  list in UserAccess to indicate the message to this user is unread
@@ -500,7 +517,7 @@ Add the unread message  list in UserAccess to indicate the message to this user 
     NSMutableArray *rUserUnread= rUserAccess[@"unreadMessages"];
     [rUserUnread addObject:PFUser.currentUser.objectId];
     rUserAccess[@"unreadMessages"]=rUserUnread;
-    [rUserAccess saveInBackground];
+    [rUserAccess saveEventually];
 }
 /**
 Remove the unread message list in UserAccess to indicate the message from this user has been read
@@ -511,7 +528,17 @@ Remove the unread message list in UserAccess to indicate the message from this u
     NSMutableArray *selfUnread= selfAccess[@"unreadMessages"];
     [selfUnread removeObject:sender.objectId];
     selfAccess[@"unreadMessages"]=selfUnread;
-    [selfAccess saveInBackground];
+    [selfAccess saveEventually];
+}
+/**
+ Checks if the app is connected to the internet
+ @return YES: the app is conencted to internet
+        NO, the app is not connected to internet
+ */
++ (BOOL)connectedToInternet{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
 }
 
 

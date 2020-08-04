@@ -8,6 +8,7 @@
 //
 
 #import "Post.h"
+#import <CoreData/CoreData.h>
 
 @implementation Post
 @dynamic postID;
@@ -36,7 +37,20 @@ Creates a a Post object to be saved in to Parse
 + (void) createPost:(UIImage * _Nullable )image withDescription:(NSString *)description withEvent:(Event* _Nullable)event withOrg:(NSObject* _Nullable)org groupPost:(BOOL)groupPost withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Post *newPost= [Post new];
     newPost.author=PFUser.currentUser;
+    newPost.postDescription=description;
+    newPost.event=event;
+    newPost.groupPost=groupPost;
     newPost.image=[Helper getPFFileFromImage:image withName:@"postImage"];
+    if(org)
+    {
+        newPost.org=[Organization dictionaryWithOrg:org];
+    }
+    [newPost saveInBackgroundWithBlock:completion];
+}
+
++ (void) createPostWithDescription:(NSString *)description withEvent:(Event* _Nullable)event withOrg:(NSObject* _Nullable)org groupPost:(BOOL)groupPost withCompletion: (PFBooleanResultBlock  _Nullable)completion{
+    Post *newPost= [Post new];
+    newPost.author=PFUser.currentUser;
     newPost.postDescription=description;
     newPost.event=event;
     newPost.groupPost=groupPost;
@@ -44,7 +58,8 @@ Creates a a Post object to be saved in to Parse
     {
         newPost.org=[Organization dictionaryWithOrg:org];
     }
-    [newPost saveInBackgroundWithBlock:completion];
+    [newPost pinInBackground];
+    [newPost saveEventually:completion];
 }
 
 @end

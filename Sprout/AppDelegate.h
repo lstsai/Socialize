@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import <CoreData/CoreData.h>
 #import "ProfileViewController.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) ProfileViewController* currProfileVC;
+@property (readonly, strong) NSPersistentContainer *persistentContainer;
+
+- (void)saveContext;
 @end
 

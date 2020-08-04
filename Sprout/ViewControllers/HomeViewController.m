@@ -79,25 +79,37 @@
  Orders the posts by time creates (top is newest post).
  @param[in] refreshControl the refresh control that is animating if there is one
  */
--(void) getPosts:( UIRefreshControl * _Nullable )refreshControl{
+-(void) getPosts:(UIRefreshControl * _Nullable )refreshControl{
     [Helper getFriends:^(NSArray * _Nonnull friends, NSError * _Nonnull error) {
         if(error)
             [Helper displayAlert:@"Error getting friends" withMessage:error.localizedDescription on:self];
         else{
             PFQuery *regpostsQ= [PFQuery queryWithClassName:@"Post"];
+            PFQuery* groupPostQ=[PFQuery queryWithClassName:@"Post"];
+            PFQuery* eventQ=[PFQuery queryWithClassName:@"Event"];
+
+            if(! [Helper connectedToInternet])//if no internet, get from local
+            {
+                [regpostsQ fromLocalDatastore];
+                [groupPostQ fromLocalDatastore];
+                [eventQ fromLocalDatastore];
+            }
             [regpostsQ whereKey:@"groupPost" equalTo:@(NO)];
             NSArray* friendsAndSelf=[friends arrayByAddingObject:PFUser.currentUser];
             [regpostsQ whereKey:@"author" containedIn:friendsAndSelf];
-            PFQuery* groupPostQ=[PFQuery queryWithClassName:@"Post"];
+           
             [groupPostQ whereKey:@"groupPost" equalTo:@(YES)];
             NSMutableArray* eventsList=[NSMutableArray new];
             //get all the events that the user has liked
             for(NSString* eventID in PFUser.currentUser[@"likedEvents"])
             {
-                [eventsList addObject:[PFQuery getObjectOfClass:@"Event" objectId:eventID]];
+                [eventsList addObject:[eventQ getObjectWithId:eventID]];
             }
             [groupPostQ whereKey:@"event" containedIn:eventsList];
             PFQuery* postsQ=[PFQuery orQueryWithSubqueries:@[regpostsQ, groupPostQ]];
+            if(! [Helper connectedToInternet])//if no internet, get from local
+                [postsQ fromLocalDatastore];
+
             [postsQ includeKey:@"event"];
             [postsQ includeKey:@"author"];
             [postsQ orderByDescending:@"createdAt"];
@@ -110,6 +122,12 @@
                 }
                 else{
                     self.posts=[objects mutableCopy];
+                    for(Post* post in objects)
+                    {
+                        [post.event pinInBackground];
+                        [post.author pinInBackground];
+                    }
+                    [PFObject pinAllInBackground:objects];
                     [self.tableView reloadData];
                 }
                 if(refreshControl)

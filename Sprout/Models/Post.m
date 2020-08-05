@@ -34,7 +34,8 @@ Creates a a Post object to be saved in to Parse
 @param[in] org associated organization (if applicable)
 @param[in] completion the block to be called when the event is finised being saved
 */
-+ (void) createPost:(UIImage * _Nullable )image withDescription:(NSString *)description withEvent:(Event* _Nullable)event withOrg:(NSObject* _Nullable)org groupPost:(BOOL)groupPost withCompletion: (PFBooleanResultBlock  _Nullable)completion{
+
++ (void) createPostWithImage:(UIImage * _Nullable )image withDescription:(NSString *)description withEvent:(Event* _Nullable)event withOrg:(NSObject* _Nullable)org groupPost:(BOOL)groupPost withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Post *newPost= [Post new];
     newPost.author=PFUser.currentUser;
     newPost.postDescription=description;
@@ -45,6 +46,7 @@ Creates a a Post object to be saved in to Parse
     {
         newPost.org=[Organization dictionaryWithOrg:org];
     }
+    [newPost pinInBackgroundWithName:@"Post"];
     [newPost saveInBackgroundWithBlock:completion];
 }
 

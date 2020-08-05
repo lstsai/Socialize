@@ -102,8 +102,9 @@
     [likedOrgs addObject:likedOrg.ein];
     [Helper performSelectorInBackground:@selector(addObjectToFriendsList:) withObject:@[likedOrg.ein, @"friendOrgs"]];//add to list in background
     PFUser.currentUser[@"likedOrgs"]=likedOrgs;
+    [PFUser.currentUser pinInBackground];
     [PFUser.currentUser saveEventually];
-    [[Helper shared].currProfVC performSelectorInBackground:@selector(loadProfile) withObject:nil];
+    [[Helper shared].currProfVC performSelectorInBackground:@selector(getLikedOrgInfo) withObject:nil];
     [Post createPostWithDescription:@"Liked an Organization" withEvent:nil withOrg:likedOrg groupPost:NO withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(error)
             [Helper displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
@@ -123,8 +124,9 @@ friends's list.
     [likedOrgs removeObject:unlikedOrg.ein];
     [Helper performSelectorInBackground:@selector(deleteObjectFromFriendsList:) withObject:@[unlikedOrg.ein, @"friendOrgs"]];//add to list in background
     PFUser.currentUser[@"likedOrgs"]=likedOrgs;
+    [PFUser.currentUser pinInBackground];
     [PFUser.currentUser saveEventually];
-    [[Helper shared].currProfVC performSelectorInBackground:@selector(loadProfile) withObject:nil];
+    [[Helper shared].currProfVC performSelectorInBackground:@selector(getLikedOrgInfo) withObject:nil];
 }
 /**
 Called when the user has liked an event from any view controller.
@@ -142,8 +144,9 @@ friends's list. Also creates a post to signal the user has liked this event
     [Helper performSelectorInBackground:@selector(addObjectToFriendsList:) withObject:@[likedEvent.objectId, @"friendEvents"]];
 
     PFUser.currentUser[@"likedEvents"]=likedEvents;
+    [PFUser.currentUser pinInBackground];
     [PFUser.currentUser saveEventually];
-    [[Helper shared].currProfVC performSelectorInBackground:@selector(loadProfile) withObject:nil];
+    [[Helper shared].currProfVC performSelectorInBackground:@selector(getLikedEventInfo) withObject:nil];
     [Post createPostWithDescription:@"Liked an Event" withEvent:likedEvent withOrg:nil groupPost:NO withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
            if(error)
            [Helper displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
@@ -164,8 +167,9 @@ friends's list.
     [self performSelectorInBackground:@selector(deleteObjectFromFriendsList:) withObject:@[unlikedEvent.objectId, @"friendEvents"]];
     
     PFUser.currentUser[@"likedEvents"]=likedEvents;
+    [PFUser.currentUser pinInBackground];
     [PFUser.currentUser saveEventually];
-    [[Helper shared].currProfVC performSelectorInBackground:@selector(loadProfile) withObject:nil];
+    [[Helper shared].currProfVC performSelectorInBackground:@selector(getLikedEventInfo) withObject:nil];
 }
 /**
 This method adds the liked org/event to every friend's list. The objKey is the identifier

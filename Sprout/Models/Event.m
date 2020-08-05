@@ -52,22 +52,11 @@ Creates a an event object to be saved in to Parse
     newEvent.startTime=stime;
     newEvent.endTime=etime;
     newEvent.streetAddress=streetAddress;
-    NSData *eventImage = [NSData dataWithData:UIImagePNGRepresentation(image)];
-    AppDelegate* appDelegate =(AppDelegate*)[UIApplication sharedApplication].delegate;
-    NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
-    NSManagedObject *entityObject =[NSEntityDescription insertNewObjectForEntityForName:@"Entity" inManagedObjectContext:context];
-    [entityObject setValue:eventImage forKey:@"eventImage"];
-    [newEvent saveEventually:^(BOOL succeeded, NSError * _Nullable error) {
-        AppDelegate* appDelegate =(AppDelegate*)[UIApplication sharedApplication].delegate;
-        NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
-        NSManagedObject *entityObject =[NSEntityDescription insertNewObjectForEntityForName:@"Entity" inManagedObjectContext:context];
-        if(succeeded){
-            newEvent.image=[Helper getPFFileFromImage:[UIImage imageWithData:[entityObject valueForKey:@"eventImage"]] withName:newEvent.name];
-            [newEvent saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if(succeeded)
-                    [Post createPostWithDescription:@"Created an event" withEvent:newEvent withOrg:nil groupPost:NO withCompletion:completion];
-            }];
-        }
+    newEvent.image=[Helper getPFFileFromImage:image withName:@"event"];
+
+    [newEvent saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if(succeeded)
+            [Post createPostWithDescription:@"Created an event" withEvent:newEvent withOrg:nil groupPost:NO withCompletion:completion];
     }];
 }
 

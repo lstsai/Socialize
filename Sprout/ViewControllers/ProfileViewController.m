@@ -41,6 +41,10 @@
         self.user=PFUser.currentUser;
     }
     [self setupImagePicker];
+    [self getLikedOrgInfo];
+    [self getLikedEventInfo];
+}
+-(void) viewWillAppear:(BOOL)animated{
     [self loadProfile];
 }
 /**
@@ -103,14 +107,11 @@
     self.friendCount.text=[NSString stringWithFormat:@"%lu", ((NSArray*)friendUserAccess[@"friends"]).count];
     self.orgCount.text=[NSString stringWithFormat:@"%lu",((NSArray*)self.user[@"likedOrgs"]).count];
     self.eventCount.text=[NSString stringWithFormat:@"%lu",((NSArray*)self.user[@"likedEvents"]).count];
-    [self getLikedOrgInfo];
-    [self getLikedEventInfo];
 }
 /**
  Calls the helper method to fetch the organizations teh user has liked
  */
 -(void)getLikedOrgInfo{
-    
     self.likedOrgs=@[].mutableCopy;
     if(((NSArray*)self.user[@"likedOrgs"]).count!=0)
     {

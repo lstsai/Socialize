@@ -86,8 +86,8 @@
             filePath = "Sprout/MISC/Helper.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "460"
-            endingLineNumber = "460"
+            startingLineNumber = "464"
+            endingLineNumber = "464"
             landmarkName = "Helper"
             landmarkType = "3">
          </BreakpointContent>
@@ -628,8 +628,8 @@
             filePath = "Sprout/MISC/Helper.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "457"
-            endingLineNumber = "457"
+            startingLineNumber = "461"
+            endingLineNumber = "461"
             landmarkName = "+removeRequest:forUser:"
             landmarkType = "7">
          </BreakpointContent>
@@ -916,9 +916,121 @@
             filePath = "Sprout/MISC/Helper.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "567"
-            endingLineNumber = "567"
+            startingLineNumber = "571"
+            endingLineNumber = "571"
             landmarkName = "+addUserToSeenClaimedOrgList:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "550F4491-CC4F-436A-9C7C-C2EE98E13647"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sprout/Models/Post.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "+createPostWithDescription:withEvent:withOrg:groupPost:withCompletion:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9235C465-BDB7-4217-A7A7-7DBD4D1C0BAD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sprout/Models/Event.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "+postEvent:withName:withSTime:withETime:withLocation:withStreetAdress:withDetails:withCompletion:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F21CF11E-85FD-4F07-9D6F-CE73EA216235"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sprout/Models/Event.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "+postEvent:withName:withSTime:withETime:withLocation:withStreetAdress:withDetails:withCompletion:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F21CF11E-85FD-4F07-9D6F-CE73EA216235 - 3dbf616756e4c57a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[Event postEvent:withName:withSTime:withETime:withLocation:withStreetAdress:withDetails:withCompletion:]"
+                  moduleName = "Sprout"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/laurentsai/Desktop/Sprout/Sprout/Models/Event.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "940">
+               </Location>
+               <Location
+                  uuid = "F21CF11E-85FD-4F07-9D6F-CE73EA216235 - 7b580f99b1be19e6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__105+[Event postEvent:withName:withSTime:withETime:withLocation:withStreetAdress:withDetails:withCompletion:]_block_invoke"
+                  moduleName = "Sprout"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/laurentsai/Desktop/Sprout/Sprout/Models/Event.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "72">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4C15663E-08EC-4A23-9307-7E982F34AB10"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sprout/Models/Event.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "+postEvent:withName:withSTime:withETime:withLocation:withStreetAdress:withDetails:withCompletion:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1F2A779E-8922-4163-9998-9F28287DD273"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sprout/ViewControllers/CreateViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "-didTapCreate:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

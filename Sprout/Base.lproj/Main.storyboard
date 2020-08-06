@@ -1924,6 +1924,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="messageButton" destination="df9-Vb-MLO" id="Ua6-bf-Rv2"/>
                         <outlet property="requestsButton" destination="iZa-qw-nT7" id="T4N-DZ-aUT"/>
                         <outlet property="tableView" destination="i1R-qH-E8j" id="qpD-VO-TR1"/>
                         <segue destination="r4M-tQ-o4w" kind="show" identifier="profileSegue" id="n3j-lo-FYL"/>
@@ -3876,14 +3877,14 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="LBG-0O-M7m"/>
-        <segue reference="ByB-WX-yAM"/>
+        <segue reference="WTd-pV-B1j"/>
         <segue reference="n3j-lo-FYL"/>
         <segue reference="vVA-Vw-9fQ"/>
         <segue reference="frM-ZH-97S"/>
         <segue reference="GI8-BV-nN7"/>
         <segue reference="Jfi-X2-tcA"/>
         <segue reference="BA4-06-jDR"/>
-        <segue reference="eOz-I0-ZcM"/>
+        <segue reference="rff-eI-h6r"/>
         <segue reference="l9q-sS-em3"/>
     </inferredMetricsTieBreakers>
     <resources>

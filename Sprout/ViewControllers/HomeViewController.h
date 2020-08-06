@@ -19,9 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) InfiniteScrollActivityView* loadingMoreView;
 @property (nonatomic) BOOL isMoreDataLoading;
 @property (weak, nonatomic) IBOutlet UIButton *requestsButton;
+@property (weak, nonatomic) IBOutlet UIButton *messageButton;
 -(void) getPosts:( UIRefreshControl * _Nullable )refreshControl;
 -(void) setupLoadingIndicators;
--(void) getRequest;
+-(void) getRequestAndMessages;
 @end
 
 NS_ASSUME_NONNULL_END

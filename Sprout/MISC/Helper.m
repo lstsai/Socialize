@@ -104,7 +104,8 @@
     PFUser.currentUser[@"likedOrgs"]=likedOrgs;
     [PFUser.currentUser pinInBackground];
     [PFUser.currentUser saveEventually];
-    [[Helper shared].currProfVC performSelectorInBackground:@selector(getLikedOrgInfo) withObject:nil];
+    if([Helper connectedToInternet])
+        [[Helper shared].currProfVC performSelectorInBackground:@selector(getLikedOrgInfo) withObject:nil];
     [Post createPostWithDescription:@"Liked an Organization" withEvent:nil withOrg:likedOrg groupPost:NO withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(error)
             [Helper displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
@@ -126,7 +127,8 @@ friends's list.
     PFUser.currentUser[@"likedOrgs"]=likedOrgs;
     [PFUser.currentUser pinInBackground];
     [PFUser.currentUser saveEventually];
-    [[Helper shared].currProfVC performSelectorInBackground:@selector(getLikedOrgInfo) withObject:nil];
+    if([Helper connectedToInternet])
+        [[Helper shared].currProfVC performSelectorInBackground:@selector(getLikedOrgInfo) withObject:nil];
 }
 /**
 Called when the user has liked an event from any view controller.
@@ -146,7 +148,8 @@ friends's list. Also creates a post to signal the user has liked this event
     PFUser.currentUser[@"likedEvents"]=likedEvents;
     [PFUser.currentUser pinInBackground];
     [PFUser.currentUser saveEventually];
-    [[Helper shared].currProfVC performSelectorInBackground:@selector(getLikedEventInfo) withObject:nil];
+    if([Helper connectedToInternet])
+        [[Helper shared].currProfVC performSelectorInBackground:@selector(getLikedEventInfo) withObject:nil];
     [Post createPostWithDescription:@"Liked an Event" withEvent:likedEvent withOrg:nil groupPost:NO withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
            if(error)
            [Helper displayAlert:@"Error Posting" withMessage:error.localizedDescription on:viewC];
@@ -169,7 +172,8 @@ friends's list.
     PFUser.currentUser[@"likedEvents"]=likedEvents;
     [PFUser.currentUser pinInBackground];
     [PFUser.currentUser saveEventually];
-    [[Helper shared].currProfVC performSelectorInBackground:@selector(getLikedEventInfo) withObject:nil];
+    if([Helper connectedToInternet])
+        [[Helper shared].currProfVC performSelectorInBackground:@selector(getLikedEventInfo) withObject:nil];
 }
 /**
 This method adds the liked org/event to every friend's list. The objKey is the identifier

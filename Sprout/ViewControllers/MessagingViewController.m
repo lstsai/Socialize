@@ -30,7 +30,6 @@
     self.messages=[[NSArray alloc]init];
     self.pageNum=1;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [NSTimer scheduledTimerWithTimeInterval:CHAT_RELOAD target:self selector:@selector(getMessages) userInfo:nil repeats:true];//schedule reload every second
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardOffScreen:) name:UIKeyboardWillHideNotification object:nil];
     self.navigationItem.title=self.user.username;
@@ -38,10 +37,17 @@
     [self getMessages];
 }
 /**
+ Start the time when the messages show
+ */
+-(void) viewDidAppear:(BOOL)animated{
+    self.messageTimer=[NSTimer scheduledTimerWithTimeInterval:CHAT_RELOAD target:self selector:@selector(getMessages) userInfo:nil repeats:true];//schedule reload every second
+}
+/**
  Right before the user exits the screen, mark all the messages that the other user has sent as read.
  */
 -(void) viewWillDisappear:(BOOL)animated{
     [Helper performSelectorInBackground:@selector(removeUnreadMessage:) withObject:self.user];
+    [self.messageTimer invalidate];
 }
 /**
  setup the infinite scroll indicators

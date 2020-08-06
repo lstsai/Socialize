@@ -45,17 +45,22 @@
 -(void) viewWillAppear:(BOOL)animated{
     [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     [self performSelectorInBackground:@selector(getPosts:) withObject:nil];
-    [self getRequest];
+    [self getRequestAndMessages];
 }
 /**
- Gets the friend requests for the user
+ Gets the friend requests for the user and messages
  */
--(void) getRequest{
+-(void) getRequestAndMessages{
     PFObject* selfAccess= [Helper getUserAccess:PFUser.currentUser];
     if([(NSArray*)selfAccess[@"inRequests"] count]>0)//if the user has friend requests pending
         self.requestsButton.tintColor=[UIColor systemBlueColor];
     else
         self.requestsButton.tintColor=[UIColor whiteColor];
+    
+    if([(NSArray*)selfAccess[@"unreadMessages"] count]>0)//if the user has unread messages
+        self.messageButton.tintColor=[UIColor systemBlueColor];
+    else
+        self.messageButton.tintColor=[UIColor whiteColor];
 }
 /**
  setup the refresh control and infinite scroll indicators

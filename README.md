@@ -108,7 +108,7 @@ This app lets users more easily find ways to engage with social causes in their 
 <img src="wireframe.png" width=600>
 
 ## Demo
-<img src="ezgif.com-optimize.gif" width=600>
+<img src="ezgif.com-optimize.gif" width=300>
 
 
 ## Schema 
@@ -252,7 +252,6 @@ This app lets users more easily find ways to engage with social causes in their 
     ```
 - Search Page
     - Get the events/orgs that the user or his/her friends have starred
-        - ??????
 - Profile page
     - GET current user's profile information
     ``` objective c

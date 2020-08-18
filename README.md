@@ -6,7 +6,6 @@
 1. [Overview](#Overview)
 1. [Product Spec](#Product-Spec)
 1. [Wireframes](#Wireframes)
-1. [Demo](#Demo)
 2. [Schema](#Schema)
 
 ## Overview
@@ -106,10 +105,6 @@ This app lets users more easily find ways to engage with social causes in their 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
 <img src="wireframe.png" width=600>
-
-## Demo
-<img src="ezgif.com-optimize.gif" width=300>
-
 
 ## Schema 
 [This section will be completed in Unit 9]
